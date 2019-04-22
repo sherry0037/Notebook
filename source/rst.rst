@@ -1,38 +1,62 @@
-=============
-Restructed Text Syntax
-=============
+==========================
+Restructed Text
+==========================
 
-File syntax
-A simple example of the file syntax:
-.. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment
 
-.. =========================================================
-Main titles are written using equals signs over and under
-.. =========================================================
+----------------------------------
+Comment
+----------------------------------
 
-Note that there must be as many equals signs as title characters.
+.. code-block:: RST
 
-Title are underlined with equals signs too
-.. ==========================================
+    .. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment
 
-Subtitles with dashes
-.. ---------------------
+
+----------------------------------
+Text
+----------------------------------
 
 You can  put text in *italic* or in **bold**, you can "mark" text as code with double backquote ``print()``.
 
+.. code-block:: RST
+
+    *italic* 
+    **bold**
+    ``print()``
+
+----------------------------------
+List
+----------------------------------
+
 Lists are as simple as in Markdown:
 
-- First item
-- Second item
-    - Sub item
 
-or
+.. code-block:: RST
 
-* First item
-* Second item
-    * Sub item
+    - First item
+    - Second item
+        - Sub item
+
+    or
+
+    * First item
+    * Second item
+        * Sub item
+
+----------------------------------
+Table
+----------------------------------
 
 Tables are really easy to write:
+
+.. code-block:: RST
+
+    =========== ========
+    Country     Capital
+    =========== ========
+    France      Paris
+    Japan       Tokyo
+    =========== ========
 
 =========== ========
 Country     Capital
@@ -42,6 +66,20 @@ Japan       Tokyo
 =========== ========
 
 More complex tables can be done easily (merged columns and/or rows) but I suggest you to read the complete doc for this :)
+
+.. code-block:: RST
+
+    +------------+------------+-----------+ 
+    | Header 1   | Header 2   | Header 3  | 
+    +============+============+===========+ 
+    | body row 1 | column 2   | column 3  | 
+    +------------+------------+-----------+ 
+    | body row 2 | Cells may span columns.| 
+    +------------+------------+-----------+ 
+    | body row 3 | Cells may  | - Cells   | 
+    +------------+ span rows. | - contain | 
+    | body row 4 |            | - blocks. | 
+    +------------+------------+-----------+
 
 +------------+------------+-----------+ 
 | Header 1   | Header 2   | Header 3  | 
@@ -55,12 +93,58 @@ More complex tables can be done easily (merged columns and/or rows) but I sugges
 | body row 4 |            | - blocks. | 
 +------------+------------+-----------+
 
+----------------------------------
+Hyperlink
+----------------------------------
+
 There are multiple ways to make links:
 
 - By adding an underscore after a word : Github_ and by adding the target URL after the text (this way has the advantage to not insert unnecessary URLs inside readable text).
 - By typing a full comprehensible URL : https://github.com/ (will be automatically converted to a link)
 - By making a more Markdown-like link: `Github <https://github.com/>`_ .
 
-http://docutils.sourceforge.net/docs/user/rst/quickref.html
 
-.. _Github https://github.com/
+.. code-block:: RST
+
+    Github_ 
+    https://github.com/
+    `Github <https://github.com/>`_ 
+
+----------------------------------
+Latex
+----------------------------------
+
+How to write Latex:
+
+.. code-block:: RST
+
+    .. math::
+
+       \frac{ \sum_{t=0}^{N}f(t,k) }{N}
+
+.. math::
+
+   \frac{ \sum_{t=0}^{N}f(t,k) }{N}
+
+Or a simpler way:
+
+.. code-block:: RST
+
+    :math:`\frac{\sum_{t=0}^{N}f(t,k) }{N}`
+
+:math:`\frac{\sum_{t=0}^{N}f(t,k) }{N}`
+
+
+----------------------------------
+Documentation and Sources
+----------------------------------
+
+Other useful links:
+
+`reStructuredText Directives <http://docutils.sourceforge.net/docs/ref/rst/directives.html#table>`_
+
+`Quick reStructuredText <http://docutils.sourceforge.net/docs/user/rst/quickref.html>`_
+
+`Restructured Text and Sphinx CheatSheet <http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html#restructured-text-rest-and-sphinx-cheatsheet>`_
+
+

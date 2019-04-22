@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Welcome to 2019’s documentation! &#8212; Notebook  documentation</title>
+    <title>Latex &#8212; Notebook  documentation</title>
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -15,7 +15,7 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Restructed Text" href="rst.html" />
+    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -31,9 +31,9 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="rst.html" title="Restructed Text"
-             accesskey="N">next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Notebook  documentation</a> &#187;</li> 
+          <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
     </div>  
 
@@ -42,23 +42,66 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="welcome-to-2019-s-documentation">
-<h1>Welcome to 2019’s documentation!<a class="headerlink" href="#welcome-to-2019-s-documentation" title="Permalink to this headline">¶</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="rst.html">Restructed Text</a></li>
-<li class="toctree-l1"><a class="reference internal" href="hoare_logic.html">Hoare Logic</a></li>
-<li class="toctree-l1"><a class="reference internal" href="latex.html">Latex</a></li>
-</ul>
+  <div class="section" id="latex">
+<h1>Latex<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="most-frequently-used">
+<h2>Most Frequently Used<a class="headerlink" href="#most-frequently-used" title="Permalink to this headline">¶</a></h2>
+<p><strong>Math equation (with alignment)</strong></p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="cp">.. Math:</span>
+\begin{equation*}
+\begin{split}
+
+\end{split}
+\end{equation*}
+</pre></div>
+</div>
+<p><strong>Code listing</strong></p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{lstlisting}[language=R]
+\end{lstlisting}
+</pre></div>
+</div>
+<p><strong>Figures</strong></p>
+<p>Single figure</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{figure}{}
+  \centering
+  \includegraphics[width=0.7\linewidth]{Q2_b.png}
+  \caption{ }
+\caption{Histogram approximation for Q2b.}
+\label{fig:Q2_b}
+\end{figure}
+</pre></div>
+</div>
+<p>Multiple figures</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{figure}
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{Q3_a.png}
+  \caption{ }
+  \label{fig:Q3_a}
+\end{subfigure} \newline
+\begin{subfigure}{\textwidth}
+  \centering
+  \includegraphics[width=0.7\linewidth]{Q3_b.png}
+  \caption{ }
+  \label{fig:Q3_b}
+\end{subfigure}
+\caption{Histogram approximation to the mixture densities in Q3.}
+\label{fig:Q3}
+\end{figure}
+</pre></div>
+</div>
+<p><strong>Table</strong></p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{table}[]
+\begin{tabular}{lll}
+Summary            &amp; Using formula &amp; Using MC \\
+$E[\mu]$           &amp;               &amp;          \\
+$Var[\mu]$         &amp;               &amp;          \\
+$P[\mu \leq 10.0]$ &amp;               &amp;
+\end{tabular}
+\end{table}
+</pre></div>
 </div>
 </div>
-<div class="section" id="indices-and-tables">
-<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
-<ul class="simple">
-<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
-<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
-<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
-</ul>
 </div>
 
 
@@ -67,19 +110,21 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="#">Table of Contents</a></h3>
+  <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Welcome to 2019’s documentation!</a></li>
-<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+<li><a class="reference internal" href="#">Latex</a><ul>
+<li><a class="reference internal" href="#most-frequently-used">Most Frequently Used</a></li>
+</ul>
+</li>
 </ul>
 
-  <h4>Next topic</h4>
-  <p class="topless"><a href="rst.html"
-                        title="next chapter">Restructed Text</a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="previous chapter">Hoare Logic</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/index.rst.txt"
+      <li><a href="_sources/latex.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -104,9 +149,9 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="rst.html" title="Restructed Text"
-             >next</a> |</li>
-        <li class="nav-item nav-item-0"><a href="#">Notebook  documentation</a> &#187;</li> 
+          <a href="hoare_logic.html" title="Hoare Logic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">

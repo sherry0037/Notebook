@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Restructed Text Syntax &#8212; Notebook  documentation</title>
+    <title>Restructed Text &#8212; Notebook  documentation</title>
     <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -12,6 +12,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Hoare Logic" href="hoare_logic.html" />
@@ -45,42 +46,49 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="restructed-text-syntax">
-<h1>Restructed Text Syntax<a class="headerlink" href="#restructed-text-syntax" title="Permalink to this headline">¶</a></h1>
-<p>File syntax
-A simple example of the file syntax:
-.. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment</p>
-<p>Main titles are written using equals signs over and under
-.. =========================================================</p>
-<p>Note that there must be as many equals signs as title characters.</p>
-<p>Title are underlined with equals signs too
-.. ==========================================</p>
-<p>Subtitles with dashes
-.. ———————</p>
+  <div class="section" id="restructed-text">
+<h1>Restructed Text<a class="headerlink" href="#restructed-text" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="comment">
+<h2>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="cp">.. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="text">
+<h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
 <p>You can  put text in <em>italic</em> or in <strong>bold</strong>, you can “mark” text as code with double backquote <code class="docutils literal notranslate"><span class="pre">print()</span></code>.</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="ge">*italic*</span>
+<span class="gs">**bold**</span>
+<span class="s">``print()``</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="list">
+<h2>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
 <p>Lists are as simple as in Markdown:</p>
-<ul class="simple">
-<li><p>First item</p></li>
-<li><dl class="simple">
-<dt>Second item</dt><dd><ul>
-<li><p>Sub item</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<p>or</p>
-<ul class="simple">
-<li><p>First item</p></li>
-<li><dl class="simple">
-<dt>Second item</dt><dd><ul>
-<li><p>Sub item</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="m">-</span> First item
+<span class="m">-</span> Second item
+    <span class="m">-</span> Sub item
+
+or
+
+<span class="m">*</span> First item
+<span class="m">*</span> Second item
+    <span class="m">*</span> Sub item
+</pre></div>
+</div>
+</div>
+<div class="section" id="table">
+<h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
 <p>Tables are really easy to write:</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>=========== ========
+Country     Capital
+=========== ========
+France      Paris
+Japan       Tokyo
+=========== ========
+</pre></div>
+</div>
 <table class="docutils align-center">
 <colgroup>
 <col style="width: 58%" />
@@ -101,6 +109,19 @@ A simple example of the file syntax:
 </tbody>
 </table>
 <p>More complex tables can be done easily (merged columns and/or rows) but I suggest you to read the complete doc for this :)</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>+------------+------------+-----------+
+<span class="o">|</span> Header 1   | Header 2   | Header 3  |
++============+============+===========+
+<span class="o">|</span> body row 1 | column 2   | column 3  |
++------------+------------+-----------+
+<span class="o">|</span> body row 2 | Cells may span columns.|
++------------+------------+-----------+
+<span class="o">|</span> body row 3 | Cells may  | - Cells   |
++------------+ span rows. | - contain |
+<span class="o">|</span> body row 4 |            | - blocks. |
++------------+------------+-----------+
+</pre></div>
+</div>
 <table class="docutils align-center">
 <colgroup>
 <col style="width: 34%" />
@@ -135,13 +156,44 @@ span rows.</p></td>
 </tr>
 </tbody>
 </table>
+</div>
+<div class="section" id="hyperlink">
+<h2>Hyperlink<a class="headerlink" href="#hyperlink" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple ways to make links:</p>
 <ul class="simple">
 <li><p>By adding an underscore after a word : <a class="reference external" href="https://github.com/">Github</a> and by adding the target URL after the text (this way has the advantage to not insert unnecessary URLs inside readable text).</p></li>
 <li><p>By typing a full comprehensible URL : <a class="reference external" href="https://github.com/">https://github.com/</a> (will be automatically converted to a link)</p></li>
 <li><p>By making a more Markdown-like link: <a class="reference external" href="https://github.com/">Github</a> .</p></li>
 </ul>
-<p><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">http://docutils.sourceforge.net/docs/user/rst/quickref.html</a></p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>Github_
+https://github.com/
+<span class="s">`Github </span><span class="si">&lt;https://github.com/&gt;</span><span class="s">`_</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="latex">
+<h2>Latex<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h2>
+<p>How to write Latex:</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">math</span><span class="p">::</span>
+
+   \frac{ \sum_{t=0}^{N}f(t,k) }{N}
+</pre></div>
+</div>
+<div class="math notranslate nohighlight">
+\[\frac{ \sum_{t=0}^{N}f(t,k) }{N}\]</div>
+<p>Or a simpler way:</p>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="na">:math:</span><span class="nv">`\frac{\sum_{t=0}^{N}f(t,k) }{N}`</span>
+</pre></div>
+</div>
+<p><span class="math notranslate nohighlight">\(\frac{\sum_{t=0}^{N}f(t,k) }{N}\)</span></p>
+</div>
+<div class="section" id="documentation-and-sources">
+<h2>Documentation and Sources<a class="headerlink" href="#documentation-and-sources" title="Permalink to this headline">¶</a></h2>
+<p>Other useful links:</p>
+<p><a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html#table">reStructuredText Directives</a></p>
+<p><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">Quick reStructuredText</a></p>
+<p><a class="reference external" href="http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html#restructured-text-rest-and-sphinx-cheatsheet">Restructured Text and Sphinx CheatSheet</a></p>
+</div>
 </div>
 
 
@@ -150,6 +202,20 @@ span rows.</p></td>
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Restructed Text</a><ul>
+<li><a class="reference internal" href="#comment">Comment</a></li>
+<li><a class="reference internal" href="#text">Text</a></li>
+<li><a class="reference internal" href="#list">List</a></li>
+<li><a class="reference internal" href="#table">Table</a></li>
+<li><a class="reference internal" href="#hyperlink">Hyperlink</a></li>
+<li><a class="reference internal" href="#latex">Latex</a></li>
+<li><a class="reference internal" href="#documentation-and-sources">Documentation and Sources</a></li>
+</ul>
+</li>
+</ul>
+
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
                         title="previous chapter">Welcome to 2019’s documentation!</a></p>

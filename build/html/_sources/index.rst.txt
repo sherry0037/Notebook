@@ -11,6 +11,7 @@ Welcome to 2019's documentation!
 
    rst.rst
    hoare_logic.rst
+   latex.rst
 
 
 
