@@ -1,0 +1,219 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hoare Logic &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Restructed Text Syntax" href="rst.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text Syntax"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hoare-logic">
+<span id="hoare-rst"></span><h1>Hoare Logic<a class="headerlink" href="#hoare-logic" title="Permalink to this headline">¶</a></h1>
+<p>A summary of the <a class="reference external" href="https://d1b10bmlvqabco.cloudfront.net/attach/jr59i2jepb42au/hwwp1awd4r52zc/jud9gj29h04g/HoareLogicNotes.pdf">notes</a>.</p>
+<hr class="docutils" />
+<ul class="simple">
+<li><dl class="simple">
+<dt>Contents</dt><dd><ul>
+<li><p>Program Specification</p></li>
+<li><p>Hoare Logic</p></li>
+<li><p>Program Verification</p></li>
+<li><p>Soundness and Completeness</p></li>
+<li><p>Total Correctness</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<hr class="docutils" />
+<div class="section" id="chapter-1-program-specification">
+<h2>Chapter 1: Program Specification<a class="headerlink" href="#chapter-1-program-specification" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Syntax and Semantics</p></li>
+</ul>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 49%" />
+<col style="width: 24%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"></th>
+<th class="head"><p>Syntax</p></th>
+<th class="head"><p>Semantics</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Assignment</p></td>
+<td><p>V:=E</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Sequences</p></td>
+<td><p>C1;…;C_n</p></td>
+<td><p>.</p></td>
+</tr>
+<tr class="row-even"><td><p>Conditions</p></td>
+<td><p>IF S THEN C_1 ELSE C_2</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>WHILE</p></td>
+<td><p>WHILE S DO C.</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Hoare’s notation</dt><dd><p>Hoare triple: <span class="math notranslate nohighlight">\(\{P\}C\{Q\}\)</span></p>
+<ul>
+<li><p>C: program</p></li>
+<li><p>P, Q: conditions written in mathematical notations and logical operators</p></li>
+<li><dl class="simple">
+<dt>True</dt><dd><ol class="arabic simple">
+<li><p>if C is executed ina state satistying P</p></li>
+<li><p>if the execution of C terminates</p></li>
+<li><p>then the state in which C’s execution terminates satisfies Q</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><p><strong>Example</strong>: <span class="math notranslate nohighlight">\(\{X=1\} X:=X+1 \{X=2\}\)</span></p></li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(\{P\}C\{Q\}\)</span> is <em>partial correctness specification</em></dt><dd><ul>
+<li><p>not ncessary for the executin of C to terminate</p></li>
+<li><p><em>if</em> C terminates, <em>then</em> Q holds</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\([P]C[Q]\)</span> is <em>Total crrectness specification</em></dt><dd><ol class="arabic simple">
+<li><p>if C is executed ina state satisfying P, then C terminates</p></li>
+<li><p>After termination Q holds.</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="chapter-2-hoare-logic">
+<h2>Chapter 2: Hoare Logic<a class="headerlink" href="#chapter-2-hoare-logic" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl>
+<dt>Axioms and rules</dt><dd><table class="docutils align-center">
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Assignment axiom</strong></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vdash \{P[E/V]\} V:= E\{P\}\)</span></p></td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(P[E/V]\)</span>: substituting the term E for all occurrences of the variable V in the statement P</p></li>
+<li><p><em>Note</em> only works for this little programming language</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hoare Logic</a><ul>
+<li><a class="reference internal" href="#chapter-1-program-specification">Chapter 1: Program Specification</a></li>
+<li><a class="reference internal" href="#chapter-2-hoare-logic">Chapter 2: Hoare Logic</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="rst.html"
+                        title="previous chapter">Restructed Text Syntax</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/hoare_logic.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text Syntax"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Sherry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

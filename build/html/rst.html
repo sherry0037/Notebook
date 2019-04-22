@@ -1,0 +1,200 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Restructed Text Syntax &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Hoare Logic" href="hoare_logic.html" />
+    <link rel="prev" title="Welcome to 2019’s documentation!" href="index.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to 2019’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="restructed-text-syntax">
+<h1>Restructed Text Syntax<a class="headerlink" href="#restructed-text-syntax" title="Permalink to this headline">¶</a></h1>
+<p>File syntax
+A simple example of the file syntax:
+.. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment</p>
+<p>Main titles are written using equals signs over and under
+.. =========================================================</p>
+<p>Note that there must be as many equals signs as title characters.</p>
+<p>Title are underlined with equals signs too
+.. ==========================================</p>
+<p>Subtitles with dashes
+.. ———————</p>
+<p>You can  put text in <em>italic</em> or in <strong>bold</strong>, you can “mark” text as code with double backquote <code class="docutils literal notranslate"><span class="pre">print()</span></code>.</p>
+<p>Lists are as simple as in Markdown:</p>
+<ul class="simple">
+<li><p>First item</p></li>
+<li><dl class="simple">
+<dt>Second item</dt><dd><ul>
+<li><p>Sub item</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>or</p>
+<ul class="simple">
+<li><p>First item</p></li>
+<li><dl class="simple">
+<dt>Second item</dt><dd><ul>
+<li><p>Sub item</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Tables are really easy to write:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 58%" />
+<col style="width: 42%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Country</p></th>
+<th class="head"><p>Capital</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>France</p></td>
+<td><p>Paris</p></td>
+</tr>
+<tr class="row-odd"><td><p>Japan</p></td>
+<td><p>Tokyo</p></td>
+</tr>
+</tbody>
+</table>
+<p>More complex tables can be done easily (merged columns and/or rows) but I suggest you to read the complete doc for this :)</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 34%" />
+<col style="width: 34%" />
+<col style="width: 31%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Header 1</p></th>
+<th class="head"><p>Header 2</p></th>
+<th class="head"><p>Header 3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>body row 1</p></td>
+<td><p>column 2</p></td>
+<td><p>column 3</p></td>
+</tr>
+<tr class="row-odd"><td><p>body row 2</p></td>
+<td colspan="2"><p>Cells may span columns.</p></td>
+</tr>
+<tr class="row-even"><td><p>body row 3</p></td>
+<td rowspan="2"><p>Cells may
+span rows.</p></td>
+<td rowspan="2"><ul class="simple">
+<li><p>Cells</p></li>
+<li><p>contain</p></li>
+<li><p>blocks.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>body row 4</p></td>
+</tr>
+</tbody>
+</table>
+<p>There are multiple ways to make links:</p>
+<ul class="simple">
+<li><p>By adding an underscore after a word : <a class="reference external" href="https://github.com/">Github</a> and by adding the target URL after the text (this way has the advantage to not insert unnecessary URLs inside readable text).</p></li>
+<li><p>By typing a full comprehensible URL : <a class="reference external" href="https://github.com/">https://github.com/</a> (will be automatically converted to a link)</p></li>
+<li><p>By making a more Markdown-like link: <a class="reference external" href="https://github.com/">Github</a> .</p></li>
+</ul>
+<p><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">http://docutils.sourceforge.net/docs/user/rst/quickref.html</a></p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Welcome to 2019’s documentation!</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="next chapter">Hoare Logic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/rst.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to 2019’s documentation!"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Sherry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>
