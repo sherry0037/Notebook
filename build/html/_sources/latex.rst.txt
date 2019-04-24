@@ -61,6 +61,16 @@ Multiple figures
     \label{fig:Q3}
     \end{figure}
 
+Add figure in-place
+
+.. code-block:: RST
+
+    \usepackage{float}
+
+    \begin{figure}[H]
+    ...
+    \end{figure}
+
 
 **Table**
 
@@ -74,3 +84,13 @@ Multiple figures
     $P[\mu \leq 10.0]$ &               &         
     \end{tabular}
     \end{table}
+
+
+**Appendix**
+
+.. code-block:: RST
+
+    \begin{appendices}
+    \chapter{Some Appendix}
+    The contents...
+    \end{appendices}
