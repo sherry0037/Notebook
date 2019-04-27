@@ -15,7 +15,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Restructed Text Syntax" href="rst.html" />
+    <link rel="next" title="Latex" href="latex.html" />
+    <link rel="prev" title="Restructed Text" href="rst.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -31,7 +32,10 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="rst.html" title="Restructed Text Syntax"
+          <a href="latex.html" title="Latex"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
@@ -44,32 +48,17 @@
             
   <div class="section" id="hoare-logic">
 <span id="hoare-rst"></span><h1>Hoare Logic<a class="headerlink" href="#hoare-logic" title="Permalink to this headline">¶</a></h1>
-<p>A summary of the <a class="reference external" href="https://d1b10bmlvqabco.cloudfront.net/attach/jr59i2jepb42au/hwwp1awd4r52zc/jud9gj29h04g/HoareLogicNotes.pdf">notes</a>.</p>
-<hr class="docutils" />
-<ul class="simple">
-<li><dl class="simple">
-<dt>Contents</dt><dd><ul>
-<li><p>Program Specification</p></li>
-<li><p>Hoare Logic</p></li>
-<li><p>Program Verification</p></li>
-<li><p>Soundness and Completeness</p></li>
-<li><p>Total Correctness</p></li>
-</ul>
-</dd>
-</dl>
-</li>
-</ul>
-<hr class="docutils" />
-<div class="section" id="chapter-1-program-specification">
-<h2>Chapter 1: Program Specification<a class="headerlink" href="#chapter-1-program-specification" title="Permalink to this headline">¶</a></h2>
+<p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>.-Automated Logical Reasoning and <a class="reference external" href="https://d1b10bmlvqabco.cloudfront.net/attach/jr59i2jepb42au/hwwp1awd4r52zc/jud9gj29h04g/HoareLogicNotes.pdf">notes</a>.</p>
+<div class="section" id="program-specification">
+<h2>Program Specification<a class="headerlink" href="#program-specification" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Syntax and Semantics</p></li>
 </ul>
 <table class="docutils align-center">
 <colgroup>
-<col style="width: 27%" />
-<col style="width: 49%" />
-<col style="width: 24%" />
+<col style="width: 18%" />
+<col style="width: 66%" />
+<col style="width: 16%" />
 </colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
@@ -79,19 +68,19 @@
 </thead>
 <tbody>
 <tr class="row-even"><td><p>Assignment</p></td>
-<td><p>V:=E</p></td>
+<td><p><span class="math notranslate nohighlight">\(V:=E\)</span></p></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p>Sequences</p></td>
-<td><p>C1;…;C_n</p></td>
-<td><p>.</p></td>
+<td><p><span class="math notranslate nohighlight">\(C1;...;C_n\)</span></p></td>
+<td></td>
 </tr>
 <tr class="row-even"><td><p>Conditions</p></td>
-<td><p>IF S THEN C_1 ELSE C_2</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{IF S THEN $C_1$ ELSE $C_2$}\)</span></p></td>
 <td></td>
 </tr>
 <tr class="row-odd"><td><p>WHILE</p></td>
-<td><p>WHILE S DO C.</p></td>
+<td><p><span class="math notranslate nohighlight">\(\text{WHILE S DO C}\)</span></p></td>
 <td></td>
 </tr>
 </tbody>
@@ -134,29 +123,57 @@
 </li>
 </ul>
 </div>
-<div class="section" id="chapter-2-hoare-logic">
-<h2>Chapter 2: Hoare Logic<a class="headerlink" href="#chapter-2-hoare-logic" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="hoare-logic-syntax-and-semantics">
+<h2>Hoare Logic - Syntax and Semantics<a class="headerlink" href="#hoare-logic-syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="axioms-and-rules">
+<h2>Axioms and Rules<a class="headerlink" href="#axioms-and-rules" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><dl>
-<dt>Axioms and rules</dt><dd><table class="docutils align-center">
-<colgroup>
-<col style="width: 36%" />
-<col style="width: 64%" />
-</colgroup>
-<tbody>
-<tr class="row-odd"><td><p><strong>Assignment axiom</strong></p></td>
-<td><p><span class="math notranslate nohighlight">\(\vdash \{P[E/V]\} V:= E\{P\}\)</span></p></td>
-</tr>
-</tbody>
-</table>
-<ul class="simple">
+<li><p>Assignment</p>
+<blockquote>
+<div><ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(P[E/V]\)</span>: substituting the term E for all occurrences of the variable V in the statement P</p></li>
 <li><p><em>Note</em> only works for this little programming language</p></li>
 </ul>
-</dd>
-</dl>
+</div></blockquote>
 </li>
 </ul>
+<div class="math notranslate nohighlight">
+\[\vdash \{P[E/V]\} V:= E\{P\}\]</div>
+<ul class="simple">
+<li><p>Pre-condition Strenghthening</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\vdash \{P'\} S \{Q\}  \qquad P \implies P' } {\vdash \{P\} S \{Q\} }\]</div>
+<ul class="simple">
+<li><p>Post-condition Weakening</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\vdash \{P\} S \{Q'\}  \qquad Q' \implies Q } {\vdash \{P\} S \{Q\} }\]</div>
+<ul class="simple">
+<li><p>Composition/Sequential</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\vdash \{P\} C_1 \{Q\}  \qquad \vdash \{P\} C_2 \{Q\}  } {\vdash \{P\} C_1; C_2 \{Q\} }\]</div>
+<ul class="simple">
+<li><p>If</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\vdash \{P \land C\} S_1 \{Q\}  \qquad \vdash \{P \land \lnot C\} S_2 \{Q\} } {\vdash \{P\} \text{if C then $S_1$ else $S_2$ }\{Q\} }\]</div>
+<ul class="simple">
+<li><p>While:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\frac{\vdash \{P \land C\} S \{P\} } {\vdash \{P\} \text{while C do S} \{P \land \lnot C\} }\]</div>
+</div>
+<div class="section" id="soundness-and-completeness">
+<h2>Soundness and Completeness<a class="headerlink" href="#soundness-and-completeness" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="automated-reasoning">
+<h2>Automated Reasoning<a class="headerlink" href="#automated-reasoning" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="abstract-interpretation">
+<h2>Abstract Interpretation<a class="headerlink" href="#abstract-interpretation" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -169,15 +186,22 @@
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Hoare Logic</a><ul>
-<li><a class="reference internal" href="#chapter-1-program-specification">Chapter 1: Program Specification</a></li>
-<li><a class="reference internal" href="#chapter-2-hoare-logic">Chapter 2: Hoare Logic</a></li>
+<li><a class="reference internal" href="#program-specification">Program Specification</a></li>
+<li><a class="reference internal" href="#hoare-logic-syntax-and-semantics">Hoare Logic - Syntax and Semantics</a></li>
+<li><a class="reference internal" href="#axioms-and-rules">Axioms and Rules</a></li>
+<li><a class="reference internal" href="#soundness-and-completeness">Soundness and Completeness</a></li>
+<li><a class="reference internal" href="#automated-reasoning">Automated Reasoning</a></li>
+<li><a class="reference internal" href="#abstract-interpretation">Abstract Interpretation</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="rst.html"
-                        title="previous chapter">Restructed Text Syntax</a></p>
+                        title="previous chapter">Restructed Text</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="latex.html"
+                        title="next chapter">Latex</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -206,7 +230,10 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="rst.html" title="Restructed Text Syntax"
+          <a href="latex.html" title="Latex"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
