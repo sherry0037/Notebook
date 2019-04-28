@@ -15,7 +15,8 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" />
+    <link rel="next" title="Hoare Logic" href="hoare_logic.html" />
+    <link rel="prev" title="Restructed Text" href="rst.html" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
 <!--[if lte IE 6]>
@@ -32,6 +33,9 @@
              accesskey="I">index</a></li>
         <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
@@ -44,24 +48,26 @@
             
   <div class="section" id="latex">
 <h1>Latex<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="most-frequently-used">
-<h2>Most Frequently Used<a class="headerlink" href="#most-frequently-used" title="Permalink to this headline">¶</a></h2>
-<p><strong>Math equation (with alignment)</strong></p>
-<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="cp">.. Math:</span>
-\begin{equation*}
+<div class="section" id="math-equation-with-alignment">
+<h2>Math equation (with alignment)<a class="headerlink" href="#math-equation-with-alignment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{equation*}
 \begin{split}
 
 \end{split}
 \end{equation*}
 </pre></div>
 </div>
-<p><strong>Code listing</strong></p>
+</div>
+<div class="section" id="code-listing">
+<h2>Code listing<a class="headerlink" href="#code-listing" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{lstlisting}[language=R]
 \end{lstlisting}
 </pre></div>
 </div>
-<p><strong>Figures</strong></p>
-<p>Single figure</p>
+</div>
+<div class="section" id="figures">
+<h2>Figures<a class="headerlink" href="#figures" title="Permalink to this headline">¶</a></h2>
+<p><strong>Single figure</strong></p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{figure}{}
   \centering
   \includegraphics[width=0.7\linewidth]{Q2_b.png}
@@ -71,7 +77,7 @@
 \end{figure}
 </pre></div>
 </div>
-<p>Multiple figures</p>
+<p><strong>Multiple figures</strong></p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{figure}
 \begin{subfigure}{\textwidth}
   \centering
@@ -90,7 +96,7 @@
 \end{figure}
 </pre></div>
 </div>
-<p>Add figure in-place</p>
+<p><strong>Add figure in-place</strong></p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{float}
 
 <span class="gh">\begin{figure}[H]</span>
@@ -98,7 +104,9 @@
 \end{figure}
 </pre></div>
 </div>
-<p><strong>Table</strong></p>
+</div>
+<div class="section" id="table">
+<h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{table}[]
 \begin{tabular}{lll}
 Summary            &amp; Using formula &amp; Using MC \\
@@ -109,7 +117,9 @@ $P[\mu \leq 10.0]$ &amp;               &amp;
 \end{table}
 </pre></div>
 </div>
-<p><strong>Appendix</strong></p>
+</div>
+<div class="section" id="appendix">
+<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\begin{appendices}
 \chapter{Some Appendix}
 The contents...
@@ -128,14 +138,21 @@ The contents...
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Latex</a><ul>
-<li><a class="reference internal" href="#most-frequently-used">Most Frequently Used</a></li>
+<li><a class="reference internal" href="#math-equation-with-alignment">Math equation (with alignment)</a></li>
+<li><a class="reference internal" href="#code-listing">Code listing</a></li>
+<li><a class="reference internal" href="#figures">Figures</a></li>
+<li><a class="reference internal" href="#table">Table</a></li>
+<li><a class="reference internal" href="#appendix">Appendix</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
+  <p class="topless"><a href="rst.html"
+                        title="previous chapter">Restructed Text</a></p>
+  <h4>Next topic</h4>
   <p class="topless"><a href="hoare_logic.html"
-                        title="previous chapter">Hoare Logic</a></p>
+                        title="next chapter">Hoare Logic</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -165,6 +182,9 @@ The contents...
              >index</a></li>
         <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="rst.html" title="Restructed Text"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>

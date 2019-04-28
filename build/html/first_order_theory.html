@@ -1,0 +1,332 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>First Order Theroies &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
+<!--[if lte IE 6]>
+<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
+<![endif]-->
+
+  </head><body>
+
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="first-order-theroies">
+<h1><a class="toc-backref" href="#id2">First Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
+<p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>.-Automated Logical Reasoning.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#first-order-theroies" id="id2">First Order Theroies</a></p>
+<ul>
+<li><p><a class="reference internal" href="#syntax-and-semantics" id="id3">Syntax and Semantics</a></p></li>
+<li><p><a class="reference internal" href="#commonly-used-first-order-theories" id="id4">Commonly-Used First-Order Theories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#theory-of-equality-t" id="id5">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></p></li>
+<li><p><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition" id="id6">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></p></li>
+<li><p><a class="reference internal" href="#presburger-arithmetric-natural-addition" id="id7">Presburger Arithmetric (natural, addition)</a></p></li>
+<li><p><a class="reference internal" href="#theory-of-integers" id="id8">Theory of integers</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#theory-of-equality" id="id9">Theory of Equality</a></p></li>
+<li><p><a class="reference internal" href="#theory-of-rationals" id="id10">Theory of Rationals</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id11">Theory of Integers</a></p></li>
+<li><p><a class="reference internal" href="#decision-procedures-for-combined-theories" id="id12">Decision Procedures for Combined Theories</a></p></li>
+<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id13">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="syntax-and-semantics">
+<h2><a class="toc-backref" href="#id3">Syntax and Semantics</a><a class="headerlink" href="#syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>A first-order theory T consists of</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Signature <span class="math notranslate nohighlight">\(\Sigma_T\)</span></dt><dd><p>set of constants, functions, and predicate symbols</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Axioms <span class="math notranslate nohighlight">\(A_T\)</span></dt><dd><ul>
+<li><p>set of FOL sentences over <span class="math notranslate nohighlight">\(\Sigma_T\)</span></p></li>
+<li><p>provide the meaning of symbols in <span class="math notranslate nohighlight">\(\Sigma_T\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> <span class="math notranslate nohighlight">\(\Sigma_T\)</span> formula</dt><dd><p>Formula constructed from symbols of <span class="math notranslate nohighlight">\(\Sigma_T\)</span> and variables, logival connectives and quantifiers.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> T-Model</dt><dd><p>A structure <span class="math notranslate nohighlight">\(M = &lt;U, I&gt;\)</span> is a model of theory T, or T-model, if <span class="math notranslate nohighlight">\(M \vDash A\)</span> for every <span class="math notranslate nohighlight">\(A \in A_T\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> Satistiable modulo T</dt><dd><p>Formula F is satistiable modulo T if <em>there exists</em> a T-model M and variable assignment <span class="math notranslate nohighlight">\(\sigma\)</span>
+such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Valid modulo T</dt><dd><p>Formula F is valid modulo T if <em>for all</em> a T-models M and variable assignments <span class="math notranslate nohighlight">\(\sigma\)</span>, we have <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</span>.</p>
+<p>Write as: <span class="math notranslate nohighlight">\(T \vDash F\)</span>.</p>
+<ul class="simple">
+<li><p>if a formula is valid in FOL, it is also valid module T</p></li>
+<li><p>if a formula is valid modulo T, it is <em>not</em> necessarily valid in FOL.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Equivalence modulo T</dt><dd><p>Two formulas <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> are euivalent module theory T if for every T-model M and for every variable assignment
+<span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[M, \sigma \vDash F_1 \text{ iff } M, \sigma \vDash F_2\]</div>
+<p>Or write as:</p>
+<div class="math notranslate nohighlight">
+\[T \vDash F_1 \leftrightarrow F_2\]</div>
+<ul class="simple">
+<li><p><em>Example:</em> <span class="math notranslate nohighlight">\(x = y\)</span> and <span class="math notranslate nohighlight">\(y = x\)</span> are equivalent modulo <span class="math notranslate nohighlight">\(T_=\)</span>, but not equivalent in FOL</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Completeness of Theory</dt><dd><p>A theory T is complete if for every <em>sentence</em> (no free variable) F, if T entails F or its negation:</p>
+<div class="math notranslate nohighlight">
+\[T \vDash F \text{ or } T \vDash \lnot F\]</div>
+<ul class="simple">
+<li><p>FOL is <em>not</em> complete: neither <span class="math notranslate nohighlight">\(p(a)\)</span> nor <span class="math notranslate nohighlight">\(\lnot p(a)\)</span> is valid.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="commonly-used-first-order-theories">
+<h2><a class="toc-backref" href="#id4">Commonly-Used First-Order Theories</a><a class="headerlink" href="#commonly-used-first-order-theories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="theory-of-equality-t">
+<h3><a class="toc-backref" href="#id5">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a><a class="headerlink" href="#theory-of-equality-t" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_= : \{=, a, b, c, ..., f, g, h, ..., p, q, r, ...\}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(=\)</span>: binary predicate</p></li>
+<li><p>all constants, functions and predicate symbols</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Reflexivity: <span class="math notranslate nohighlight">\(\forall x. x=x\)</span></p></li>
+<li><p>Symmetrix: <span class="math notranslate nohighlight">\(\forall x, y. (x=y \to y=x)\)</span></p></li>
+<li><p>Transitivity <span class="math notranslate nohighlight">\(\forall x, y, z. (x=y \land y=z \to x=z)\)</span></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Axiom Schemata</strong></dt><dd><p><strong>Definition:</strong> A set of axioms instantiated for each function and predicate symbol.</p>
+<ul>
+<li><dl>
+<dt>Function congruence:</dt><dd><p>For any n-ary <em>function</em> f, two terms <span class="math notranslate nohighlight">\(f(\overrightarrow{x})\)</span> and <span class="math notranslate nohighlight">\(f(\overrightarrow{y})\)</span> are equal if <span class="math notranslate nohighlight">\(\overrightarrow{x}\)</span> and <span class="math notranslate nohighlight">\(\overrightarrow{y}\)</span> are equal:</p>
+<div class="math notranslate nohighlight">
+\[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (f(x_1, ... x_n) = f(y_1, ..., y_n))\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Predicate congruence:</dt><dd><p>For any n-ary <em>predicate</em> p, two formulas <span class="math notranslate nohighlight">\(p(\overrightarrow{x})\)</span> and <span class="math notranslate nohighlight">\(p(\overrightarrow{y})\)</span> are equivalent if <span class="math notranslate nohighlight">\(\overrightarrow{x}\)</span> and <span class="math notranslate nohighlight">\(\overrightarrow{y}\)</span> are equal:</p>
+<div class="math notranslate nohighlight">
+\[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (p(x_1, ... x_n) \leftrightarrow p(y_1, ..., y_n))\]</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Decidability and Completeness</p>
+<blockquote>
+<div><ul>
+<li><p><em>Not</em> decidable (wether a <span class="math notranslate nohighlight">\(T_=\)</span> formula is provable)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>FOL is not decidable.</p></li>
+<li><p>Quantifier-free fragment is decidable but <em>NP-complete</em>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>Not</em> complete</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="peano-arithmetric-t-pa-natural-multiplication-addition">
+<h3><a class="toc-backref" href="#id6">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a><a class="headerlink" href="#peano-arithmetric-t-pa-natural-multiplication-addition" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{PA} : \{0, 1, +, \cdot, =\}\]</div>
+<ul class="simple">
+<li><p>0, 1 are constants</p></li>
+<li><p>+, <span class="math notranslate nohighlight">\(\cdot\)</span> are binary functions</p></li>
+<li><p>= is a binary predicate</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><p>Equality axioms, reflexivity, symmety, transitivity, and the following:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Zero: <span class="math notranslate nohighlight">\(\forall x. \lnot(x+1 = 0))\)</span></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0\)</span> is the minimal element of <span class="math notranslate nohighlight">\(\mathbb{N}\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="admonition-todo admonition">
+<p class="admonition-title">todo</p>
+<p>add axioms</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="presburger-arithmetric-natural-addition">
+<h3><a class="toc-backref" href="#id7">Presburger Arithmetric (natural, addition)</a><a class="headerlink" href="#presburger-arithmetric-natural-addition" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="theory-of-integers">
+<h3><a class="toc-backref" href="#id8">Theory of integers</a><a class="headerlink" href="#theory-of-integers" title="Permalink to this headline">¶</a></h3>
+</div>
+</div>
+<div class="section" id="theory-of-equality">
+<h2><a class="toc-backref" href="#id9">Theory of Equality</a><a class="headerlink" href="#theory-of-equality" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="theory-of-rationals">
+<h2><a class="toc-backref" href="#id10">Theory of Rationals</a><a class="headerlink" href="#theory-of-rationals" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id11">Theory of Integers</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="decision-procedures-for-combined-theories">
+<h2><a class="toc-backref" href="#id12">Decision Procedures for Combined Theories</a><a class="headerlink" href="#decision-procedures-for-combined-theories" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="smt-solvers-and-dppl-tau-framework">
+<h2><a class="toc-backref" href="#id13">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">First Order Theroies</a><ul>
+<li><a class="reference internal" href="#syntax-and-semantics">Syntax and Semantics</a></li>
+<li><a class="reference internal" href="#commonly-used-first-order-theories">Commonly-Used First-Order Theories</a><ul>
+<li><a class="reference internal" href="#theory-of-equality-t">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></li>
+<li><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></li>
+<li><a class="reference internal" href="#presburger-arithmetric-natural-addition">Presburger Arithmetric (natural, addition)</a></li>
+<li><a class="reference internal" href="#theory-of-integers">Theory of integers</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#theory-of-equality">Theory of Equality</a></li>
+<li><a class="reference internal" href="#theory-of-rationals">Theory of Rationals</a></li>
+<li><a class="reference internal" href="#id1">Theory of Integers</a></li>
+<li><a class="reference internal" href="#decision-procedures-for-combined-theories">Decision Procedures for Combined Theories</a></li>
+<li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="previous chapter">Hoare Logic</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/first_order_theory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Sherry.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+  </body>
+</html>

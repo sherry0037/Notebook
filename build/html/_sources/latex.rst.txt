@@ -2,15 +2,13 @@
 Latex
 ==========================
 
-----------------------------------
-Most Frequently Used
-----------------------------------
 
-**Math equation (with alignment)**
+--------------------------------
+Math equation (with alignment)
+--------------------------------
 
 .. code-block:: RST
 
-    .. Math:
     \begin{equation*}
     \begin{split}
 
@@ -18,7 +16,10 @@ Most Frequently Used
     \end{equation*}
 
 
-**Code listing**
+--------------------------------
+Code listing
+--------------------------------
+
 
 .. code-block:: RST
 
@@ -26,9 +27,11 @@ Most Frequently Used
     \end{lstlisting}
 
 
-**Figures**
+--------------------------------
+Figures
+--------------------------------
 
-Single figure
+**Single figure**
 
 .. code-block:: RST
 
@@ -40,7 +43,8 @@ Single figure
     \label{fig:Q2_b}
     \end{figure}
 
-Multiple figures
+
+**Multiple figures**
 
 .. code-block:: RST
 
@@ -61,7 +65,7 @@ Multiple figures
     \label{fig:Q3}
     \end{figure}
 
-Add figure in-place
+**Add figure in-place**
 
 .. code-block:: RST
 
@@ -72,7 +76,9 @@ Add figure in-place
     \end{figure}
 
 
-**Table**
+--------------------------------
+Table
+--------------------------------
 
 .. code-block:: RST
 
@@ -86,7 +92,9 @@ Add figure in-place
     \end{table}
 
 
-**Appendix**
+--------------------------------
+Appendix
+--------------------------------
 
 .. code-block:: RST
 
