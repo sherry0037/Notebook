@@ -16,10 +16,11 @@ Welcome to Yixuan's documentation!
 
 
 
+.. Indices and tables
+.. ==================
 
-Indices and tables
-==================
+.. * :ref:`genindex`
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. * :ref:`modindex`
+
+.. * :ref:`search`
