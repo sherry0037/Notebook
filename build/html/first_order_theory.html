@@ -1,11 +1,13 @@
 
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
     <title>First Order Theroies &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="_static/pyramid.css" type="text/css" />
+    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script type="text/javascript" src="_static/jquery.js"></script>
@@ -15,15 +17,9 @@
     <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Neuton&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nobile:regular,italic,bold,bolditalic&amp;subset=latin" type="text/css" media="screen" charset="utf-8" />
-<!--[if lte IE 6]>
-<link rel="stylesheet" href="_static/ie6.css" type="text/css" media="screen" charset="utf-8" />
-<![endif]-->
-
+    <link rel="next" title="Reading Log and Quotes" href="reading.html" />
+    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" /> 
   </head><body>
-
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
       <ul>
@@ -31,11 +27,64 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
+          <a href="reading.html" title="Reading Log and Quotes"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">First Order Theroies</a><ul>
+<li><a class="reference internal" href="#syntax-and-semantics">Syntax and Semantics</a></li>
+<li><a class="reference internal" href="#commonly-used-first-order-theories">Commonly-Used First-Order Theories</a><ul>
+<li><a class="reference internal" href="#theory-of-equality-t">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></li>
+<li><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></li>
+<li><a class="reference internal" href="#presburger-arithmetric-natural-addition">Presburger Arithmetric (natural, addition)</a></li>
+<li><a class="reference internal" href="#theory-of-integers">Theory of integers</a></li>
+<li><a class="reference internal" href="#theory-of-rationals">Theory of rationals</a></li>
+<li><a class="reference internal" href="#theory-of-arrays">Theory of arrays</a></li>
+<li><a class="reference internal" href="#combined-theories">Combined Theories</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-equality">Decision Procedure: Theory of Equality</a></li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-rationals">Decision Procedure: Theory of Rationals</a></li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-integers">Decision Procedure: Theory of Integers</a></li>
+<li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a></li>
+<li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="previous chapter">Hoare Logic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="reading.html"
+                        title="next chapter">Reading Log and Quotes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/first_order_theory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -543,53 +592,6 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">First Order Theroies</a><ul>
-<li><a class="reference internal" href="#syntax-and-semantics">Syntax and Semantics</a></li>
-<li><a class="reference internal" href="#commonly-used-first-order-theories">Commonly-Used First-Order Theories</a><ul>
-<li><a class="reference internal" href="#theory-of-equality-t">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></li>
-<li><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></li>
-<li><a class="reference internal" href="#presburger-arithmetric-natural-addition">Presburger Arithmetric (natural, addition)</a></li>
-<li><a class="reference internal" href="#theory-of-integers">Theory of integers</a></li>
-<li><a class="reference internal" href="#theory-of-rationals">Theory of rationals</a></li>
-<li><a class="reference internal" href="#theory-of-arrays">Theory of arrays</a></li>
-<li><a class="reference internal" href="#combined-theories">Combined Theories</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#decision-procedure-theory-of-equality">Decision Procedure: Theory of Equality</a></li>
-<li><a class="reference internal" href="#decision-procedure-theory-of-rationals">Decision Procedure: Theory of Rationals</a></li>
-<li><a class="reference internal" href="#decision-procedure-theory-of-integers">Decision Procedure: Theory of Integers</a></li>
-<li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a></li>
-<li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
-</ul>
-</li>
-</ul>
-
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hoare_logic.html"
-                        title="previous chapter">Hoare Logic</a></p>
-  <div role="note" aria-label="source link">
-    <h3>This Page</h3>
-    <ul class="this-page-menu">
-      <li><a href="_sources/first_order_theory.rst.txt"
-            rel="nofollow">Show Source</a></li>
-    </ul>
-   </div>
-<div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
-    <div class="searchformwrapper">
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
-      <input type="submit" value="Go" />
-    </form>
-    </div>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -599,14 +601,20 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
+          <a href="reading.html" title="Reading Log and Quotes"
+             >next</a> |</li>
+        <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
     </div>
+    
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Sherry.
       Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     </div>
+    
+
   </body>
 </html>
