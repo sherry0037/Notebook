@@ -293,23 +293,116 @@ Given two theories :math:`T_1` and :math:`T_2` that have the :math:`=` predicate
 - **Axioms** :math:`A_1 \cup A_2`
 
 
-----------------------------------
-Theory of Equality
-----------------------------------
+---------------------------------------
+Decision Procedure: Theory of Equality
+---------------------------------------
+
+- **Congruence Closure Algorithm** is the decision procedure for theory of equality. It is used to decide the satisfiability in the quantifier-free fragment of :math:`T_=`.
+
+    The algorithm computes the congruence closure of the binary relation defined by formula.
+
+- Restrictions:
+    - formula only contains conjunctions of literals
+    - allow functions, but no predicates
+
+    - eliminating predicates: tranform to *equisatisfiable* formula with only functions
+        for each relation constant :math:`p`
+            1. introduce a fresh function constant :math:`f_p`
+            2. rewrite :math:`p(x_1, ... , x_n)` as :math:`f_p(x_1, ... , x_n) = t`, where :math:`t` is a fresh object constant
 
 
-----------------------------------
-Theory of Rationals
-----------------------------------
+- **Definition:** Equivalence relation
+    A binary relation :math:`R` over a set :math:`S` is an equivalence relation if it is
+
+    1. reflexive: :math:`\forall s\in S. sRs`
+    2. symmetric: :math:`\forall s_1, s_2 \in S. s_1Rs_2 \to s_2Rs_1`
+    3. transitive: :math:`\forall s_1, s_2, s_3 \in S. s_1Rs_2 \land s_2Rs_3 \to s_1Rs_3`
+
+- **Definition:** Congruence relation
+    Consider set :math:`S` equipped with functions :math:`F = \{ f_1, ... ,f_n\}`
+
+    A relation :math:`R` over :math:`S` is a congruence relation if it is an *equilalence relation* and for every n'ary function :math:`f \in F`:
+
+    .. math::
+
+        \forall \overrightarrow{s}, \overrightarrow{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\overrightarrow{s})Rf(\overrightarrow{t})
+
+- **Definition** Equivalence/congruence class
+    For a given equivalence relation :math:`R` over :math:`S`, the equivalence class of :math:`s \in S` under :math:`R` is the set:
+
+    .. math::
+
+        [s]_R := \{s' \in S: sRs' \}.
+
+    If :math:`R` is a congruence relation, the set is called congruence class.
+
+- **Definition:** Equivalence closure
+    The equivalence closure :math:`R^E` of a binary relation :math:`R` over :math:`S` is the equivalence relation such that:
+
+    1. :math:`R \subseteq R^E`
+    2. for all other equivalence relations :math:`R'` s.t :math:`R \subseteq R'`, we have :math:`R^E \subseteq R'` 
 
 
-----------------------------------
-Theory of Integers
-----------------------------------
+    i.e. the smallest equivalence relation that includes :math:`R`.
+
+- **Definition:** Congruence closure
+    Similarly, the congruence closure :math:`R^C` is the smallest congruence relation that includes :math:`R`.
+
+    
+    *Example:* Consider :math:`S=\{a, b, c\}` and function :math:`f` such that:
+
+    .. math::
+
+        f(a) = b, \quad f(b)=c, \quad f(c)=c
+
+
+    The conguence closure of relation :math:`\{ \langle a, b\rangle \}` is:
+
+    .. math::
+
+        R^C = \{ \langle a, b\rangle, \langle a, a\rangle, \langle b, b\rangle, \langle c, c\rangle, \langle b, a\rangle, \langle b, c\rangle, \langle c, b\rangle, \langle a, c\rangle, \langle c, a\rangle\}
+
+
+- **Theorem:** Satisfiability of a :math:`\Sigma_=` formula
+    Consider formula F 
+
+    .. math::
+
+        F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)
+
+    Let :math:`R_F = \{ \langle x, y \rangle | x=s_i, y=t_i, i\in [1, m]\}`
+
+    F is satisfiable if the congruence closure :math:`\sim` of :math:`R_F` satisfies :math:`s_i \not\sim t_i` for all :math:`i\in[m+1, n]`
+
+
+.. topic:: Congruence Closure Algorithm (Basic Idea)
+    
+    Congruence closure algorithm decide satisfiability of 
+
+    .. math::
+        
+        F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)
+
+    Steps:
+
+    1. Construct the *congruence closure* :math:`\sim` of :math:`R_F` over the subterm set :math:`S_F`
+    
+    2. If :math:`s_i \sim s_t` for any i in :math:`[m+1, n]`, :math:`F` is unsatisfiable
+
+    3. Otherwise, :math:`F` is satisfiable.
+
+----------------------------------------
+Decision Procedure: Theory of Rationals
+----------------------------------------
+
+
+--------------------------------------
+Decision Procedure: Theory of Integers
+--------------------------------------
 
 
 -------------------------------------------
-Decision Procedures for Combined Theories
+Decision Procedure: Combined Theories
 -------------------------------------------
 
 
@@ -317,3 +410,4 @@ Decision Procedures for Combined Theories
 -----------------------------------------------
 SMT Solvers and DPPL(:math:`\tau`) Framework
 -----------------------------------------------
+
