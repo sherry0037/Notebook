@@ -52,7 +52,11 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#decision-procedure-theory-of-equality">Decision Procedure: Theory of Equality</a></li>
-<li><a class="reference internal" href="#decision-procedure-theory-of-rationals">Decision Procedure: Theory of Rationals</a></li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-rationals">Decision Procedure: Theory of Rationals</a><ul>
+<li><a class="reference internal" href="#linear-programming">Linear programming</a></li>
+<li><a class="reference internal" href="#simplex-algorithm">Simplex algorithm</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#decision-procedure-theory-of-integers">Decision Procedure: Theory of Integers</a></li>
 <li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a></li>
 <li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
@@ -112,10 +116,15 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#decision-procedure-theory-of-equality" id="id11">Decision Procedure: Theory of Equality</a></p></li>
-<li><p><a class="reference internal" href="#decision-procedure-theory-of-rationals" id="id12">Decision Procedure: Theory of Rationals</a></p></li>
-<li><p><a class="reference internal" href="#decision-procedure-theory-of-integers" id="id13">Decision Procedure: Theory of Integers</a></p></li>
-<li><p><a class="reference internal" href="#decision-procedure-combined-theories" id="id14">Decision Procedure: Combined Theories</a></p></li>
-<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id15">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
+<li><p><a class="reference internal" href="#decision-procedure-theory-of-rationals" id="id12">Decision Procedure: Theory of Rationals</a></p>
+<ul>
+<li><p><a class="reference internal" href="#linear-programming" id="id13">Linear programming</a></p></li>
+<li><p><a class="reference internal" href="#simplex-algorithm" id="id14">Simplex algorithm</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#decision-procedure-theory-of-integers" id="id15">Decision Procedure: Theory of Integers</a></p></li>
+<li><p><a class="reference internal" href="#decision-procedure-combined-theories" id="id16">Decision Procedure: Combined Theories</a></p></li>
+<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id17">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
 </ul>
 </li>
 </ul>
@@ -222,14 +231,14 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 <dt><strong>Axiom Schemata</strong></dt><dd><p><strong>Definition:</strong> A set of axioms instantiated for each function and predicate symbol.</p>
 <ul>
 <li><dl>
-<dt>Function congruence:</dt><dd><p>For any n-ary <em>function</em> f, two terms <span class="math notranslate nohighlight">\(f(\overrightarrow{x})\)</span> and <span class="math notranslate nohighlight">\(f(\overrightarrow{y})\)</span> are equal if <span class="math notranslate nohighlight">\(\overrightarrow{x}\)</span> and <span class="math notranslate nohighlight">\(\overrightarrow{y}\)</span> are equal:</p>
+<dt>Function congruence:</dt><dd><p>For any n-ary <em>function</em> f, two terms <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> and <span class="math notranslate nohighlight">\(f(\vec{y})\)</span> are equal if <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{y}\)</span> are equal:</p>
 <div class="math notranslate nohighlight">
 \[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (f(x_1, ... x_n) = f(y_1, ..., y_n))\]</div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt>Predicate congruence:</dt><dd><p>For any n-ary <em>predicate</em> p, two formulas <span class="math notranslate nohighlight">\(p(\overrightarrow{x})\)</span> and <span class="math notranslate nohighlight">\(p(\overrightarrow{y})\)</span> are equivalent if <span class="math notranslate nohighlight">\(\overrightarrow{x}\)</span> and <span class="math notranslate nohighlight">\(\overrightarrow{y}\)</span> are equal:</p>
+<dt>Predicate congruence:</dt><dd><p>For any n-ary <em>predicate</em> p, two formulas <span class="math notranslate nohighlight">\(p(\vec{x})\)</span> and <span class="math notranslate nohighlight">\(p(\vec{y})\)</span> are equivalent if <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{y}\)</span> are equal:</p>
 <div class="math notranslate nohighlight">
 \[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (p(x_1, ... x_n) \leftrightarrow p(y_1, ..., y_n))\]</div>
 </dd>
@@ -480,14 +489,14 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 <div class="section" id="decision-procedure-theory-of-equality">
 <h2><a class="toc-backref" href="#id11">Decision Procedure: Theory of Equality</a><a class="headerlink" href="#decision-procedure-theory-of-equality" title="Permalink to this headline">¶</a></h2>
 <ul>
-<li><p><strong>Congruence Closure Algorithm</strong> is the decision procedure for theory of equality. It is used to decide the satisfiability in the quantifier-free fragment of <span class="math notranslate nohighlight">\(T_=\)</span>.</p>
+<li><p><strong>Congruence Closure Algorithm</strong> is the decision procedure for theory of equality. It is used to decide the satisfiability in the <em>quantifier-free</em> fragment of <span class="math notranslate nohighlight">\(T_=\)</span>.</p>
 <blockquote>
 <div><p>The algorithm computes the congruence closure of the binary relation defined by formula.</p>
 </div></blockquote>
 </li>
 <li><dl class="simple">
 <dt>Restrictions:</dt><dd><ul class="simple">
-<li><p>formula only contains conjunctions of literals</p></li>
+<li><p>formula only contains <em>conjunctions</em> of literals</p></li>
 <li><p>allow functions, but no predicates</p></li>
 <li><dl class="simple">
 <dt>eliminating predicates: tranform to <em>equisatisfiable</em> formula with only functions</dt><dd><dl class="simple">
@@ -518,7 +527,7 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 <dt><strong>Definition:</strong> Congruence relation</dt><dd><p>Consider set <span class="math notranslate nohighlight">\(S\)</span> equipped with functions <span class="math notranslate nohighlight">\(F = \{ f_1, ... ,f_n\}\)</span></p>
 <p>A relation <span class="math notranslate nohighlight">\(R\)</span> over <span class="math notranslate nohighlight">\(S\)</span> is a congruence relation if it is an <em>equilalence relation</em> and for every n’ary function <span class="math notranslate nohighlight">\(f \in F\)</span>:</p>
 <div class="math notranslate nohighlight">
-\[\forall \overrightarrow{s}, \overrightarrow{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\overrightarrow{s})Rf(\overrightarrow{t})\]</div>
+\[\forall \vec{s}, \vec{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\vec{s})Rf(\vec{t})\]</div>
 </dd>
 </dl>
 </li>
@@ -563,7 +572,7 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </ul>
 <div class="topic">
 <p class="topic-title first">Congruence Closure Algorithm (Basic Idea)</p>
-<p>Congruence closure algorithm decide satisfiability of</p>
+<p>Congruence closure algorithm decides satisfiability of</p>
 <div class="math notranslate nohighlight">
 \[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
 <p>Steps:</p>
@@ -573,18 +582,285 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 <li><p>Otherwise, <span class="math notranslate nohighlight">\(F\)</span> is satisfiable.</p></li>
 </ol>
 </div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><dl>
+<dt>Computing congruence closure</dt><dd><p>To compute congruence closure efficiently, we’ll represent the subterm set of the formula as a DAG:</p>
+<ul class="simple">
+<li><p>Node: a subterm and a unique id</p></li>
+<li><p>Edges: point from function symbol to arguments</p></li>
+</ul>
+<p>We need to merge congruence classes:</p>
+<ul class="simple">
+<li><p>Each class has a <em>representative</em>, each subterm (node) has a <em>find</em> pointer that eventually leads to the representative of its congruence class.</p></li>
+<li><p>Each representative node has <em>parents</em>: pointer from representative to parents of all subterms in the class.</p></li>
+</ul>
+<p>How to merge congruence classes of two terms <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Find representatives of <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span></p></li>
+<li><p>Change <em>find</em> field of <span class="math notranslate nohighlight">\(Rep(t_1)\)</span> to point to <span class="math notranslate nohighlight">\(Rep(t_2)\)</span></p></li>
+<li><p>Update parents: move parents of <span class="math notranslate nohighlight">\(Rep(t_1)\)</span> to <span class="math notranslate nohighlight">\(Rep(t_2\)</span>)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Process equalities</dt><dd><p>To process <span class="math notranslate nohighlight">\(t_1 = t_2\)</span>:</p>
+<ol class="arabic">
+<li><p>Find representatives of <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span></p></li>
+<li><p>Merge equivalence classes</p></li>
+<li><p>Retrieve the set of parents <span class="math notranslate nohighlight">\(P_1\)</span>, <span class="math notranslate nohighlight">\(P_2\)</span> stored in <span class="math notranslate nohighlight">\(Rep(t_1)\)</span>, <span class="math notranslate nohighlight">\(Rep(t_2\)</span>)</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\((p_i, p_j) \in P_1 \times P_2\)</span>, if <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are <em>congruent</em>, process equality <span class="math notranslate nohighlight">\(p_i = p_j\)</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Note:</em> at this step, new equalities may be generated.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Congruence Closure Algorithm (Full Version)</p>
+<p>Congruence closure algorithm decides satisfiability of</p>
+<div class="math notranslate nohighlight">
+\[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
+<p>Steps:</p>
+<ol class="arabic">
+<li><p>Compute subterms and construct initial DAG (each node’s representative is itself)</p></li>
+<li><p>For each  <span class="math notranslate nohighlight">\(i \in [i, m]\)</span>, process equality <span class="math notranslate nohighlight">\(s_i = t_i\)</span></p></li>
+<li><p>For each  <span class="math notranslate nohighlight">\(i \in [i, m]\)</span>, process inequality <span class="math notranslate nohighlight">\(s_i \neq t_i\)</span>:</p>
+<blockquote>
+<div><ol class="lowerroman simple">
+<li><p>if <span class="math notranslate nohighlight">\(\exists i. Rep(s_i) = Rep(t_i)\)</span>: return UNSAT</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(\forall i. Rep(s_i) \neq Rep(t_i)\)</span>: return SAT</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Time complexity</dt><dd><p>This algorithm is <span class="math notranslate nohighlight">\(O(e^2)\)</span>. Can be solved in <span class="math notranslate nohighlight">\(O(elog(e))\)</span>.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div>
 <div class="section" id="decision-procedure-theory-of-rationals">
 <h2><a class="toc-backref" href="#id12">Decision Procedure: Theory of Rationals</a><a class="headerlink" href="#decision-procedure-theory-of-rationals" title="Permalink to this headline">¶</a></h2>
+<p>We only consider <em>quantifier-free</em> <em>conjuctive</em> <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}\)</span> formulas. Deciding satistiability of qff conjuctive formulas is a special case of <em>linear programming</em>, which can be solved by the <em>Simplex</em> algorithm.</p>
+<div class="section" id="linear-programming">
+<h3><a class="toc-backref" href="#id13">Linear programming</a><a class="headerlink" href="#linear-programming" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">Linear Programming</p>
+<p>In a <strong>linear programming</strong> problem, we have an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>, and an <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{c}\)</span></p>
+<p>We want to solve the problem:</p>
+<div class="math notranslate nohighlight">
+\[max_{\vec{x}} \vec{c}^T \vec{x}\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[A\vec{x} \leq \vec{b}\]</div>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Geometric formulation and LP lingo</p>
+<ul class="simple">
+<li><p>feasible solution</p></li>
+<li><p>optimal solution</p></li>
+<li><p>bounded</p></li>
+</ul>
+</div>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(T_\mathbb{Q}\)</span> as LP problem</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Convert a <span class="math notranslate nohighlight">\(T_\mathbb{Q}\)</span> formula to NNF</p></li>
+<li><p>Rewrite it as <em>equisatisfiable</em> formula containing only <span class="math notranslate nohighlight">\(\leq\)</span> and <span class="math notranslate nohighlight">\(&gt;0\)</span>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{a}^T \vec{x} \geq c \quad&amp;\Rightarrow\quad -\vec{a}^T \vec{x} \leq -c\\
+\vec{a}^T \vec{x} &lt; c    \quad&amp;\Rightarrow\quad \vec{a}^T \vec{x} + c \leq c \land y &gt; 0\\
+\vec{a}^T \vec{x} = c    \quad&amp;\Rightarrow\quad \vec{a}^T \vec{x} \leq c \land -\vec{a}^T \vec{x} \leq -c\\
+\vec{a}^T \vec{x} \neq c \quad&amp;\Rightarrow\quad (\vec{a}^T \vec{x} + y \leq c \land y &gt;0) \lor (-\vec{a}^T \vec{x} + y \leq -c \land y &gt;0)\end{split}\]</div>
+<p>3. Conver to DNF. F is satisfiable iff any of the clauses satisfiable.
+Each clause is of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i\\
+\land \quad &amp;\bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i\\
+\land \quad &amp;y&gt;0\end{split}\]</div>
+<p>This constraint is satisfiable iff the opitmal solution of the following LP problem is <strong>strictly positive</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\text{Maximize      } \quad y \\
+&amp;\text{Subject to} \quad\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i \\
+&amp;\qquad\quad\land \quad \bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i\end{split}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="simplex-algorithm">
+<h3><a class="toc-backref" href="#id14">Simplex algorithm</a><a class="headerlink" href="#simplex-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>To apply Simplex, a linear inequality system needs to be converted into <em>standard form</em>, and then into <em>slack form</em>.</p>
+<ul class="simple">
+<li><p><strong>Standard form</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize      } &amp;\quad\vec{C}^T\vec{x} \\
+    \text{Subject to} &amp;\quad A\vec{x} \leq \vec{b}\\
+                        &amp;\quad\vec{x} \geq 0\end{split}\]</div>
+<ul>
+<li><dl class="simple">
+<dt>We can convert every LP problem into an <em>equisatisfiable</em> standard form representation.</dt><dd><ul class="simple">
+<li><p>Equisatisfiable: original problem has optimal objective value c iff problem in standard form has optimal objective value c</p></li>
+<li><dl class="simple">
+<dt>If <span class="math notranslate nohighlight">\(x_i\)</span> does not have non-negativity constraint</dt><dd><ul>
+<li><p>introduce <span class="math notranslate nohighlight">\(x_i'\)</span> and <span class="math notranslate nohighlight">\(x_i''\)</span></p></li>
+<li><p>replace <span class="math notranslate nohighlight">\(x_i\)</span> with <span class="math notranslate nohighlight">\(x_i' - x_i''\)</span></p></li>
+<li><p>add two constraints <span class="math notranslate nohighlight">\(x_i' \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_i'' \geq 0\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Slack form</strong></p>
+<blockquote>
+<div><p>In slack form, we only have equalities; the only inequality allowed is non-negativity constraints</p>
+<ul class="simple">
+<li><p>For each inequality <span class="math notranslate nohighlight">\(A_i\vec{x} \leq b_i\)</span>, introduce a <em>slack variable</em> <span class="math notranslate nohighlight">\(s_i\)</span>.</p></li>
+<li><p>Rewrite inequality as equality <span class="math notranslate nohighlight">\(s_i = b_i - A_ix\)</span> and introduce non-negativity constraint <span class="math notranslate nohighlight">\(s_i \geq 0\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Example</strong></p>
+<blockquote>
+<div><p>Consider the following linear program:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2 \\
+\text{Subject to} &amp;\quad x_1 + x_2 \leq 7 \\
+                  &amp;\quad -x_1 - x_2 \leq -7 \\
+                  &amp;\quad x_1 - 2 x_2 \leq 4 \\
+                  &amp;\quad x_1 \geq 0\\\end{split}\]</div>
+<p>Equisatisfiable system in standard form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2  + 3x_3\\
+\text{Subject to} &amp;\quad x_1 + x_2 - x_3 \leq 7 \\
+                  &amp;\quad -x_1 - x_2 + x_3 \leq -7 \\
+                  &amp;\quad x_1 - 2 x_2 + 2x_3 \leq 4 \\
+                  &amp;\quad x_1, x_2, x_3\geq 0\\\end{split}\]</div>
+<p>In slack form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2  + 3x_3\\
+\text{Subject to} &amp;\quad x_4 = 7 - x_1 - x_2 + x_3 \\
+                  &amp;\quad x_5 = -7 + x_1 + x_2 - x_3  \\
+                  &amp;\quad x_6 = 4 - x_1 + 2 x_2 - 2x_3 \\
+                  &amp;\quad x_1, x_2, x_3, x_4, x_5, x_6 \geq 0\\\end{split}\]</div>
+</div></blockquote>
+</li>
+<li><p><strong>Slack form</strong></p>
+<blockquote>
+<div><ul>
+<li><p>variables on the left-hand side are <em>basic variables</em>, denoted by <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p>variables on the right-hand side are <em>non-basic variables</em>, denoted by <span class="math notranslate nohighlight">\(N\)</span></p></li>
+<li><p><strong>Invariant:</strong> only non-basic variables can appear in the objective function</p></li>
+<li><p>write the slack form as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}z &amp;= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)\end{split}\]</div>
+<ul class="simple">
+<li><p>the non-negativity constraints are omitted</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>The Simplex Algorithm</dt><dd><p>The algorithm has two phases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><em>Phase 1:</em> Compute a feasible basic solution, if one exists</p></li>
+<li><p><em>Phase 2:</em> Optimiza value of objective function</p></li>
+</ol>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Simplex Phase 1</p>
+<p>In phase 1, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.</p>
+<p>We have the problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}z &amp;= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)\end{split}\]</div>
+<p>Step 1: given term <span class="math notranslate nohighlight">\(c_jx_j\)</span> with positive <span class="math notranslate nohighlight">\(c_j\)</span> in objective function, we want to increase <span class="math notranslate nohighlight">\(x_j\)</span> as much as possible.</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Find the most restricting equality for <span class="math notranslate nohighlight">\(x_j\)</span>:</dt><dd><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x_j\)</span>’s coefficient <span class="math notranslate nohighlight">\(a_{ij}\)</span> is positive</p></li>
+<li><p>has smallest value of <span class="math notranslate nohighlight">\(\frac{b_i}{a_{ij}}\)</span></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Step 2: pivot operation</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Suppose the equality with basic var <span class="math notranslate nohighlight">\(x_i\)</span> is the most restrictive for <span class="math notranslate nohighlight">\(x_j\)</span></p></li>
+<li><p>Rewrite <span class="math notranslate nohighlight">\(x_j\)</span> in terms of <span class="math notranslate nohighlight">\(x_i\)</span> and plug into other equations</p></li>
+<li><p>Now <span class="math notranslate nohighlight">\(x_j\)</span> is basic, <span class="math notranslate nohighlight">\(x_i\)</span> is non-basic. <span class="math notranslate nohighlight">\(x_j\)</span>’s value increased from 0 to <span class="math notranslate nohighlight">\(\frac{b_i}{a_{ij}}\)</span> (also the objective value)</p></li>
+</ul>
+</div></blockquote>
+<p>Repeats this operation until one of the two conditions hold:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt><em>ALL</em> coefficients in objective function are <em>nagative</em></dt><dd><ul class="simple">
+<li><p>found optimal solution</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>There exists a non-basic variable <span class="math notranslate nohighlight">\(x_j\)</span> with positive coefficient <span class="math notranslate nohighlight">\(c_j\)</span> in objective functon, but all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> are negative</dt><dd><ul class="simple">
+<li><p>optimal solution = <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+</div>
 </div>
 <div class="section" id="decision-procedure-theory-of-integers">
-<h2><a class="toc-backref" href="#id13">Decision Procedure: Theory of Integers</a><a class="headerlink" href="#decision-procedure-theory-of-integers" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id15">Decision Procedure: Theory of Integers</a><a class="headerlink" href="#decision-procedure-theory-of-integers" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="decision-procedure-combined-theories">
-<h2><a class="toc-backref" href="#id14">Decision Procedure: Combined Theories</a><a class="headerlink" href="#decision-procedure-combined-theories" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id16">Decision Procedure: Combined Theories</a><a class="headerlink" href="#decision-procedure-combined-theories" title="Permalink to this headline">¶</a></h2>
 </div>
 <div class="section" id="smt-solvers-and-dppl-tau-framework">
-<h2><a class="toc-backref" href="#id15">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id17">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 

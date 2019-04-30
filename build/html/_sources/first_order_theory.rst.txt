@@ -96,7 +96,7 @@ Theory of Equality :math:`T_=`
     **Definition:** A set of axioms instantiated for each function and predicate symbol.
 
     - Function congruence:
-        For any n-ary *function* f, two terms :math:`f(\overrightarrow{x})` and :math:`f(\overrightarrow{y})` are equal if :math:`\overrightarrow{x}` and :math:`\overrightarrow{y}` are equal:
+        For any n-ary *function* f, two terms :math:`f(\vec{x})` and :math:`f(\vec{y})` are equal if :math:`\vec{x}` and :math:`\vec{y}` are equal:
 
         .. math::
 
@@ -104,7 +104,7 @@ Theory of Equality :math:`T_=`
 
 
     - Predicate congruence:
-        For any n-ary *predicate* p, two formulas :math:`p(\overrightarrow{x})` and :math:`p(\overrightarrow{y})` are equivalent if :math:`\overrightarrow{x}` and :math:`\overrightarrow{y}` are equal:
+        For any n-ary *predicate* p, two formulas :math:`p(\vec{x})` and :math:`p(\vec{y})` are equivalent if :math:`\vec{x}` and :math:`\vec{y}` are equal:
 
         .. math::
 
@@ -297,12 +297,12 @@ Given two theories :math:`T_1` and :math:`T_2` that have the :math:`=` predicate
 Decision Procedure: Theory of Equality
 ---------------------------------------
 
-- **Congruence Closure Algorithm** is the decision procedure for theory of equality. It is used to decide the satisfiability in the quantifier-free fragment of :math:`T_=`.
+- **Congruence Closure Algorithm** is the decision procedure for theory of equality. It is used to decide the satisfiability in the *quantifier-free* fragment of :math:`T_=`.
 
     The algorithm computes the congruence closure of the binary relation defined by formula.
 
 - Restrictions:
-    - formula only contains conjunctions of literals
+    - formula only contains *conjunctions* of literals
     - allow functions, but no predicates
 
     - eliminating predicates: tranform to *equisatisfiable* formula with only functions
@@ -325,7 +325,7 @@ Decision Procedure: Theory of Equality
 
     .. math::
 
-        \forall \overrightarrow{s}, \overrightarrow{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\overrightarrow{s})Rf(\overrightarrow{t})
+        \forall \vec{s}, \vec{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\vec{s})Rf(\vec{t})
 
 - **Definition** Equivalence/congruence class
     For a given equivalence relation :math:`R` over :math:`S`, the equivalence class of :math:`s \in S` under :math:`R` is the set:
@@ -377,7 +377,7 @@ Decision Procedure: Theory of Equality
 
 .. topic:: Congruence Closure Algorithm (Basic Idea)
     
-    Congruence closure algorithm decide satisfiability of 
+    Congruence closure algorithm decides satisfiability of 
 
     .. math::
         
@@ -391,9 +391,270 @@ Decision Procedure: Theory of Equality
 
     3. Otherwise, :math:`F` is satisfiable.
 
+
+.. admonition:: TODO
+
+    add example
+
+
+- Computing congruence closure
+    To compute congruence closure efficiently, we'll represent the subterm set of the formula as a DAG:
+
+    - Node: a subterm and a unique id
+
+    - Edges: point from function symbol to arguments
+
+    We need to merge congruence classes:
+
+    - Each class has a *representative*, each subterm (node) has a *find* pointer that eventually leads to the representative of its congruence class.
+
+    - Each representative node has *parents*: pointer from representative to parents of all subterms in the class.
+
+    How to merge congruence classes of two terms :math:`t_1` and :math:`t_2`:
+
+    1. Find representatives of :math:`t_1` and :math:`t_2`
+
+    2. Change *find* field of :math:`Rep(t_1)` to point to :math:`Rep(t_2)`
+
+    3. Update parents: move parents of :math:`Rep(t_1)` to :math:`Rep(t_2`)
+
+- Process equalities
+    To process :math:`t_1 = t_2`:
+
+    1. Find representatives of :math:`t_1` and :math:`t_2`
+
+    2. Merge equivalence classes
+
+    3. Retrieve the set of parents :math:`P_1`, :math:`P_2` stored in :math:`Rep(t_1)`, :math:`Rep(t_2`)
+
+    4. For each :math:`(p_i, p_j) \in P_1 \times P_2`, if :math:`p_1` and :math:`p_2` are *congruent*, process equality :math:`p_i = p_j`
+
+        - *Note:* at this step, new equalities may be generated.
+
+
+.. topic:: Congruence Closure Algorithm (Full Version)
+    
+    Congruence closure algorithm decides satisfiability of 
+
+    .. math::
+        
+        F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)
+
+    Steps:
+
+    1. Compute subterms and construct initial DAG (each node's representative is itself)
+
+    2. For each  :math:`i \in [i, m]`, process equality :math:`s_i = t_i`
+
+    3. For each  :math:`i \in [i, m]`, process inequality :math:`s_i \neq t_i`:
+
+        (i) if :math:`\exists i. Rep(s_i) = Rep(t_i)`: return UNSAT
+
+        (ii) if :math:`\forall i. Rep(s_i) \neq Rep(t_i)`: return SAT
+
+
+.. admonition:: TODO
+
+    add example
+
+
+- Time complexity
+    This algorithm is :math:`O(e^2)`. Can be solved in :math:`O(elog(e))`.
+
+
 ----------------------------------------
 Decision Procedure: Theory of Rationals
 ----------------------------------------
+We only consider *quantifier-free* *conjuctive* :math:`T_{\mathbb{Q}}` formulas. Deciding satistiability of qff conjuctive formulas is a special case of *linear programming*, which can be solved by the *Simplex* algorithm.
+
+
+Linear programming
+----------------------------------------
+
+.. topic:: Linear Programming
+
+    In a **linear programming** problem, we have an :math:`m \times n` matrix :math:`A`, an :math:`m`-dimensional vector :math:`\vec{b}`, and an :math:`n`-dimensional vector :math:`\vec{c}`
+
+    We want to solve the problem:
+
+    .. math::
+
+        max_{\vec{x}} \vec{c}^T \vec{x}
+
+    subject to 
+
+    .. math ::
+        A\vec{x} \leq \vec{b}
+
+
+.. admonition:: TODO
+
+    Geometric formulation and LP lingo
+
+    - feasible solution
+    - optimal solution
+    - bounded
+
+
+- :math:`T_\mathbb{Q}` as LP problem
+
+    1. Convert a :math:`T_\mathbb{Q}` formula to NNF
+
+    2. Rewrite it as *equisatisfiable* formula containing only :math:`\leq` and :math:`>0`:
+
+    .. math::
+
+        \vec{a}^T \vec{x} \geq c \quad&\Rightarrow\quad -\vec{a}^T \vec{x} \leq -c\\
+        \vec{a}^T \vec{x} < c    \quad&\Rightarrow\quad \vec{a}^T \vec{x} + c \leq c \land y > 0\\
+        \vec{a}^T \vec{x} = c    \quad&\Rightarrow\quad \vec{a}^T \vec{x} \leq c \land -\vec{a}^T \vec{x} \leq -c\\
+        \vec{a}^T \vec{x} \neq c \quad&\Rightarrow\quad (\vec{a}^T \vec{x} + y \leq c \land y >0) \lor (-\vec{a}^T \vec{x} + y \leq -c \land y >0)
+
+    3. Conver to DNF. F is satisfiable iff any of the clauses satisfiable.
+    Each clause is of the following form:
+
+    .. math::
+
+        &\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i\\
+        \land \quad &\bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i\\
+        \land \quad &y>0
+
+    This constraint is satisfiable iff the opitmal solution of the following LP problem is **strictly positive**:
+
+    .. math::
+
+        &\text{Maximize      } \quad y \\
+        &\text{Subject to} \quad\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i \\
+        &\qquad\quad\land \quad \bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i
+
+
+Simplex algorithm
+----------------------------------------
+To apply Simplex, a linear inequality system needs to be converted into *standard form*, and then into *slack form*.
+
+- **Standard form**
+
+.. math::
+
+    \text{Maximize      } &\quad\vec{C}^T\vec{x} \\
+        \text{Subject to} &\quad A\vec{x} \leq \vec{b}\\
+                            &\quad\vec{x} \geq 0
+
+
+- We can convert every LP problem into an *equisatisfiable* standard form representation.
+    - Equisatisfiable: original problem has optimal objective value c iff problem in standard form has optimal objective value c
+
+    - If :math:`x_i` does not have non-negativity constraint
+        - introduce :math:`x_i'` and :math:`x_i''`
+        - replace :math:`x_i` with :math:`x_i' - x_i''`
+        - add two constraints :math:`x_i' \geq 0` and :math:`x_i'' \geq 0`.
+
+
+- **Slack form**
+
+    In slack form, we only have equalities; the only inequality allowed is non-negativity constraints
+
+    - For each inequality :math:`A_i\vec{x} \leq b_i`, introduce a *slack variable* :math:`s_i`.
+
+    - Rewrite inequality as equality :math:`s_i = b_i - A_ix` and introduce non-negativity constraint :math:`s_i \geq 0`
+
+
+- **Example**
+
+    Consider the following linear program:
+
+    .. math::
+
+        \text{Maximize}   &\quad 2x_1 - 3x_2 \\
+        \text{Subject to} &\quad x_1 + x_2 \leq 7 \\
+                          &\quad -x_1 - x_2 \leq -7 \\
+                          &\quad x_1 - 2 x_2 \leq 4 \\
+                          &\quad x_1 \geq 0\\
+
+    Equisatisfiable system in standard form:
+
+    .. math::
+
+        \text{Maximize}   &\quad 2x_1 - 3x_2  + 3x_3\\
+        \text{Subject to} &\quad x_1 + x_2 - x_3 \leq 7 \\
+                          &\quad -x_1 - x_2 + x_3 \leq -7 \\
+                          &\quad x_1 - 2 x_2 + 2x_3 \leq 4 \\
+                          &\quad x_1, x_2, x_3\geq 0\\
+
+
+    In slack form:
+
+    .. math::
+
+        \text{Maximize}   &\quad 2x_1 - 3x_2  + 3x_3\\
+        \text{Subject to} &\quad x_4 = 7 - x_1 - x_2 + x_3 \\
+                          &\quad x_5 = -7 + x_1 + x_2 - x_3  \\
+                          &\quad x_6 = 4 - x_1 + 2 x_2 - 2x_3 \\
+                          &\quad x_1, x_2, x_3, x_4, x_5, x_6 \geq 0\\
+
+
+- **Slack form**
+
+    - variables on the left-hand side are *basic variables*, denoted by :math:`B`
+
+    - variables on the right-hand side are *non-basic variables*, denoted by :math:`N`
+
+    - **Invariant:** only non-basic variables can appear in the objective function
+
+    - write the slack form as:
+
+        .. math::
+
+            z &= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+            x_i &= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)
+
+
+        - the non-negativity constraints are omitted
+
+- The Simplex Algorithm
+    The algorithm has two phases:
+
+        1. *Phase 1:* Compute a feasible basic solution, if one exists
+        2. *Phase 2:* Optimiza value of objective function
+
+
+.. topic:: Simplex Phase 1
+
+    In phase 1, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.
+
+    We have the problem:
+
+    .. math::
+
+            z &= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+            x_i &= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)
+
+    Step 1: given term :math:`c_jx_j` with positive :math:`c_j` in objective function, we want to increase :math:`x_j` as much as possible.
+
+        - Find the most restricting equality for :math:`x_j`:
+            1. :math:`x_j`'s coefficient :math:`a_{ij}` is positive
+            2. has smallest value of :math:`\frac{b_i}{a_{ij}}`
+
+    Step 2: pivot operation
+
+        - Suppose the equality with basic var :math:`x_i` is the most restrictive for :math:`x_j`
+
+        - Rewrite :math:`x_j` in terms of :math:`x_i` and plug into other equations
+
+        - Now :math:`x_j` is basic, :math:`x_i` is non-basic. :math:`x_j`'s value increased from 0 to :math:`\frac{b_i}{a_{ij}}` (also the objective value) 
+
+    Repeats this operation until one of the two conditions hold:
+
+        1. *ALL* coefficients in objective function are *nagative*
+            - found optimal solution
+
+        2. There exists a non-basic variable :math:`x_j` with positive coefficient :math:`c_j` in objective functon, but all coefficients :math:`a_{ij}` are negative
+            - optimal solution = :math:`\infty`
+
+
+.. admonition:: TODO
+
+    add example
+
 
 
 --------------------------------------
