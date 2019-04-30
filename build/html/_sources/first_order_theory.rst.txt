@@ -655,7 +655,22 @@ To apply Simplex, a linear inequality system needs to be converted into *standar
 
     add example
 
+- Degenerate problems
+    The objective value can stay the same after pivoting. For degenerate problems, Simplex might not terminate.
 
+    There are pivot selection strategies for which Simplex is guaranteed to terminate.
+
+        - **Bland's Rule** if there are multiple variables with positive coeeficients in objective funtion, always choose the variable with the *smallest* index
+
+.. topic:: Simplex Phase 2
+    
+    In phase 2, we want to find a feasible basic solution if it exists.
+
+    To do this, we construct an *auxiliary linear program* :math:`L_{aux}`, which has the properties:
+
+        - we can find a feasible basic solution for it after at most one pivot operation
+
+        - the original LP has a feasible solution iff the optimal objective value for :math:`L_{aux}` is zero
 
 --------------------------------------
 Decision Procedure: Theory of Integers

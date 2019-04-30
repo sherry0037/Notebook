@@ -851,6 +851,30 @@ x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i 
 <p class="admonition-title">TODO</p>
 <p>add example</p>
 </div>
+<ul>
+<li><dl>
+<dt>Degenerate problems</dt><dd><p>The objective value can stay the same after pivoting. For degenerate problems, Simplex might not terminate.</p>
+<p>There are pivot selection strategies for which Simplex is guaranteed to terminate.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Bland’s Rule</strong> if there are multiple variables with positive coeeficients in objective funtion, always choose the variable with the <em>smallest</em> index</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Simplex Phase 2</p>
+<p>In phase 2, we want to find a feasible basic solution if it exists.</p>
+<p>To do this, we construct an <em>auxiliary linear program</em> <span class="math notranslate nohighlight">\(L_{aux}\)</span>, which has the properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>we can find a feasible basic solution for it after at most one pivot operation</p></li>
+<li><p>the original LP has a feasible solution iff the optimal objective value for <span class="math notranslate nohighlight">\(L_{aux}\)</span> is zero</p></li>
+</ul>
+</div></blockquote>
+</div>
 </div>
 </div>
 <div class="section" id="decision-procedure-theory-of-integers">

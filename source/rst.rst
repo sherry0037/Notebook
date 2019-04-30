@@ -1,5 +1,5 @@
 ==========================
-Restructed Text
+reStructuredText
 ==========================
 
 
