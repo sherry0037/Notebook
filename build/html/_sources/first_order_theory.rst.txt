@@ -374,6 +374,8 @@ Decision Procedure: Theory of Equality
 
     F is satisfiable if the congruence closure :math:`\sim` of :math:`R_F` satisfies :math:`s_i \not\sim t_i` for all :math:`i\in[m+1, n]`
 
+Congruence Closure Algorithm
+---------------------------------
 
 .. topic:: Congruence Closure Algorithm (Basic Idea)
     
@@ -505,11 +507,12 @@ Linear programming
     .. math::
 
         \vec{a}^T \vec{x} \geq c \quad&\Rightarrow\quad -\vec{a}^T \vec{x} \leq -c\\
-        \vec{a}^T \vec{x} < c    \quad&\Rightarrow\quad \vec{a}^T \vec{x} + c \leq c \land y > 0\\
+        \vec{a}^T \vec{x} < c    \quad&\Rightarrow\quad \vec{a}^T \vec{x} + y \leq c \land y > 0\\
         \vec{a}^T \vec{x} = c    \quad&\Rightarrow\quad \vec{a}^T \vec{x} \leq c \land -\vec{a}^T \vec{x} \leq -c\\
         \vec{a}^T \vec{x} \neq c \quad&\Rightarrow\quad (\vec{a}^T \vec{x} + y \leq c \land y >0) \lor (-\vec{a}^T \vec{x} + y \leq -c \land y >0)
 
-    3. Conver to DNF. F is satisfiable iff any of the clauses satisfiable.
+    
+    3. Convert to DNF. F is satisfiable iff any of the clauses satisfiable.
     Each clause is of the following form:
 
     .. math::
@@ -614,12 +617,12 @@ To apply Simplex, a linear inequality system needs to be converted into *standar
     The algorithm has two phases:
 
         1. *Phase 1:* Compute a feasible basic solution, if one exists
-        2. *Phase 2:* Optimiza value of objective function
+        2. *Phase 2:* Optimize value of objective function (by pivoting)
 
 
-.. topic:: Simplex Phase 1
+.. topic:: Simplex Phase 2
 
-    In phase 1, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.
+    In phase 2, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.
 
     We have the problem:
 
@@ -662,19 +665,208 @@ To apply Simplex, a linear inequality system needs to be converted into *standar
 
         - **Bland's Rule** if there are multiple variables with positive coeeficients in objective funtion, always choose the variable with the *smallest* index
 
-.. topic:: Simplex Phase 2
+.. topic:: Simplex Phase 1
     
-    In phase 2, we want to find a feasible basic solution if it exists.
+    In phase 1, we want to find a feasible basic solution if it exists.
 
     To do this, we construct an *auxiliary linear program* :math:`L_{aux}`, which has the properties:
 
         - we can find a feasible basic solution for it after at most one pivot operation
 
-        - the original LP has a feasible solution iff the optimal objective value for :math:`L_{aux}` is zero
+        - **the original LP has a feasible solution iff the optimal objective value for** :math:`L_{aux}` **is zero**
 
---------------------------------------
+    Consider the original LP problem:
+
+    .. math::
+        
+        \text{Maximize}   &\quad \sum\limits_{j=1}^{n}c_jx_j\\
+        \text{Subject to} &\quad \sum\limits_{j=1}^{n}a_{ij}x_j \leq b_j \quad(i \in [i, m])\\
+                          &\quad   x_j \geq 0 \quad(j \in [1, n])\\
+
+    The corresponding auxiliary linear problem is: 
+
+
+    .. math::
+        
+        \text{Maximize}   &\quad -x_0\\
+        \text{Subject to} &\quad \sum\limits_{j=1}^{n}a_{ij}x_j - x_0 \leq b_j \quad(i \in [i, m])\\
+                          &\quad   x_j \geq 0 \quad(j \in [0, n])\\
+
+    In slack form:
+
+    .. math::
+
+        z &= -x_0\\
+        x_i &= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j
+
+    If all :math:`b_i`'s are positive, basic solution already feasible. Otherwise:
+        - find the equality :math:`x_i` with most negative :math`b_i`
+        - make :math:`x_0` new basic variable, and :math`x_i` non-basic
+
+    After this one pivot operation, all :math`b_i`'s are non-negative; thus the basic solution is feasible.
+
+
+.. admonition:: TODO
+
+    add example
+
+
+---------------------------------------
 Decision Procedure: Theory of Integers
---------------------------------------
+---------------------------------------
+Similarly as before, we only consider *quantifier-free* :math:`T_{\mathbb{Z}}` formulas without disjunctions. We want to solve the following problem:
+
+Given an :math:`m \times n` matrix :math:`A` with only integer coefficients and a vector :math:`\vec{b}` in :math:`\mathbb{Z}^n`, does
+
+.. math::
+    
+    A\vec{x} \leq \vec{b}
+
+has **integer** solutions?
+
+*Note:* Finding rational solution is poly-time, but integer problem is NP-complete (without disjunctions).
+
+Omega Test
+-------------------------------------------
+
+.. admonition:: TODO
+
+    Historical perspective: array dependence analysis
+
+    - the problem of determine wether the same element is both read and written to at the same time during the execution of a program
+
+    .. math::
+
+        w_i = r_i \land w_j = r_j
+
+The main idea of Omega test is to eleminate variables one by one from the initial system :math:`A\vec{x} \leq \vec{b}`. Geometrically it corresponds to computing a projection of a polytope in n-dimensional space to an n-1-dimensional space.
+
+- **Omega Test:** Work Flow
+    
+    1. Real shadow (overapproximation)
+        - if no solution: return **UNSAT**
+        - otherwise continue
+
+    2. Dard shadow (underapproximation)
+        - if has solution: return **SAT**
+        - otherwise continue
+
+    3. Gray shadows
+        - any subproblem has solution: **SAT**
+        - otherwise UNSAT
+
+.. topic:: Real Shadow (Fourier-Motzkin technique)
+
+    We ignore requirement that solution must be integer.
+
+    .. admonition:: TODO
+
+        add formal definition
+
+- **Example** for real shadow
+
+    Consider the set of inequalities:
+
+    .. math::
+
+        x \leq y+10 \quad y \leq 15 \quad -x+20 \leq y
+
+    - First rearrange the inequalities to isolate y on one side:
+
+    .. math::
+
+        &(1) \quad x-10\leq y\\
+        &(2) \quad y \leq 15 \\
+        &(3) \quad -x+20 \leq y
+
+    - From (1) and (2), we have :math:`x-10 \leq 15 \equiv x\leq 25`
+
+    - From (2) and (3), we have :math:`-x +20 \leq 15 \equiv x\geq 5`
+
+    - The real shadow on x-axis is :math:`5 \leq x \leq 25`
+
+.. topic:: Dark Shadow
+
+    Dark shadow only projects those parts of polytope that are *at least one unit thick* in the x-dimension; thus we are guaranteed to have an interger solution for x if dark shadow has integer solution.
+
+    Consider a pair of inequalities corresponding to lower and upper bounds on :math:`x`:
+
+    .. math::
+
+        L \leq ax \quad bx \leq U \\
+        \equiv \frac{L}{a} \leq x \leq \frac{U}{b}
+
+    Then to guarantee there is an integer value for :math:`x`, we have the constraint:
+
+    .. math::
+
+        aU - bL > ab-a-b
+
+    .. admonition:: TODO
+
+        add derivations of the formula
+
+
+- **Example** for dark shadow
+
+     Consider the set of inequalities:
+
+    .. math::
+
+        &(1) \quad 4y \geq x \\
+        &(2) \quad 2y \geq 6-3x \\
+        &(3) \quad 3y \leq 7-x
+
+    - From (1) and (3), we have :math:`a=4, L=x, b=3, U=7-x`:
+
+    .. math::
+
+        4(7-x) -3x > 12 -4 -3 \implies x<\frac{23}{7}
+
+    - From (2) and (3), we have :math:`a=2, L=6-3x, b=3, U=7-x`:
+
+    .. math::
+
+        2(7-x) -3(6-3x) > 6-3-2 \implies x<\frac{5}{7}
+
+    - The real shadow on x-axis is :math:`\frac{5}{7}<x<\frac{23}{7}`
+
+
+.. topic:: Gray Shadows
+
+    If real shadow has integer solutions, but dark shadow does not, we still cannot conclude about the original problem. In this case, we construct the gray shadows, which look for integers *outside* the dark shadow, but *inside* the real shadow.
+
+    By construction, points inside the real shadow satisfies:
+
+    .. math::
+
+        bL \leq abx \leq aU
+
+    And points outside the dark shadow satisfies:
+
+    .. math::
+
+        aU-bL \leq ab-a-b
+
+    Combining these two, points in the gray shadow must satisfy:
+
+    .. math::
+
+        L \leq ax \leq L + \frac{ab -a-b}{b}
+
+    Observe that :math:`ax` must be integer. We then construct each gray shadow by adding the equality:
+
+    .. math::
+
+        ax = L +i
+
+    for :math:`i` in :math:`[0, \frac{ab-a-b}{b}]`.
+
+    - **If any subproblem has integer solution, then so does original problem**
+
+    - **If no subproblem has integer solution, original problem is UNSAT**
+
+
 
 
 -------------------------------------------
