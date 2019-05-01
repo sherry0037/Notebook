@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>First Order Theroies &#8212; Notebook  documentation</title>
+    <title>First-Order Theroies &#8212; Notebook  documentation</title>
     <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -39,7 +39,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">First Order Theroies</a><ul>
+<li><a class="reference internal" href="#">First-Order Theroies</a><ul>
 <li><a class="reference internal" href="#syntax-and-semantics">Syntax and Semantics</a></li>
 <li><a class="reference internal" href="#commonly-used-first-order-theories">Commonly-Used First-Order Theories</a><ul>
 <li><a class="reference internal" href="#theory-of-equality-t">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></li>
@@ -68,7 +68,7 @@
 <li><a class="reference internal" href="#nelson-oppen-method">Nelson-Oppen Method</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
+<li><a class="reference internal" href="#smt-solvers-and-dppl-mathcal-t-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a></li>
 </ul>
 </li>
 </ul>
@@ -105,12 +105,12 @@
           <div class="body" role="main">
             
   <div class="section" id="first-order-theroies">
-<h1><a class="toc-backref" href="#id1">First Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id1">First-Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
 <p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>-Automated Logical Reasoning (lecture 10-15, first-order theories and their decision procedures).</p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#first-order-theroies" id="id1">First Order Theroies</a></p>
+<li><p><a class="reference internal" href="#first-order-theroies" id="id1">First-Order Theroies</a></p>
 <ul>
 <li><p><a class="reference internal" href="#syntax-and-semantics" id="id2">Syntax and Semantics</a></p></li>
 <li><p><a class="reference internal" href="#commonly-used-first-order-theories" id="id3">Commonly-Used First-Order Theories</a></p>
@@ -145,7 +145,7 @@
 <li><p><a class="reference internal" href="#nelson-oppen-method" id="id19">Nelson-Oppen Method</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
+<li><p><a class="reference internal" href="#smt-solvers-and-dppl-mathcal-t-framework" id="id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1266,8 +1266,70 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </ul>
 </div>
 </div>
-<div class="section" id="smt-solvers-and-dppl-tau-framework">
-<h2><a class="toc-backref" href="#id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="smt-solvers-and-dppl-mathcal-t-framework">
+<h2><a class="toc-backref" href="#id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-mathcal-t-framework" title="Permalink to this headline">¶</a></h2>
+<p>Previous sections talk about decision procedures for conjunctive formulas in various first-order theories. However, converting a formula to DNF is not feasible because its size can blow-up exponentially. In this section, we want to decide satisfiability in first-order theories without converting to DNF. More specifically, we want to handle <strong>boolean structure</strong> when deciding satisfiability modulo theories.</p>
+<blockquote>
+<div><p>We will combine SAT (satisfiability modulo theory) solvers with thoery solvers:</p>
+<ul class="simple">
+<li><p>theory solver is decision procedure for checking satisfiability in conjunctive fragment</p></li>
+<li><p><strong>theory solver</strong> handles theory-specific reasoning</p></li>
+<li><p><strong>SAT solver</strong> handles boolean structure</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Basic idea</p>
+<blockquote>
+<div><p>Given a formula <span class="math notranslate nohighlight">\(F\)</span>, we construct a propositional formula <span class="math notranslate nohighlight">\(B(F)\)</span> (called <strong>boolean abstraction</strong>).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(B(F)\)</span> overapproximates satisfiability: if <span class="math notranslate nohighlight">\(B(F)\)</span> if UNSAT, <span class="math notranslate nohighlight">\(F\)</span> is UNSAT.</p></li>
+<li><dl class="simple">
+<dt>if <span class="math notranslate nohighlight">\(B(F)\)</span> SAT</dt><dd><ul>
+<li><p>get assignment returned by SAT</p></li>
+<li><p>use theory solver to check if <span class="math notranslate nohighlight">\(F\)</span> SAT</p></li>
+<li><p>if not, add additional boolean constraints (<strong>theory conflict clauses</strong>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Boolean abstraction</dt><dd><p>A boolean abstraction (or boolean skeleton) function mathcal{B} is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.</p>
+<p>SMT formula in theory <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> has the form:</p>
+<div class="math notranslate nohighlight">
+\[F := a_\mathcal{T} | F_1 \land F_2 | F_1 \lor F_2 | \lnot F\]</div>
+<p>Function mathcal{B} is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{B}(a_\mathcal{T}) &amp;= b \quad\text{(b is fresh)} \\
+\mathcal{B}(F_1 \land F_2) &amp;= \mathcal{B}(F_1) \land \mathcal{B}(F_2)\\
+\mathcal{B}(F_1 \lor F_2) &amp;= \mathcal{B}(F_1) \lor \mathcal{B}(F_2) \\
+\mathcal{B}(\lnot F) &amp;= \lnot \mathcal{B}(F)\end{split}\]</div>
+</dd>
+</dl>
+</li>
+<li><p><em>Example:</em> Boolean abstraction</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}F: &amp;\quad x=z \land ((y=z \land x &lt; z) \lor \lnot (x=z))\\
+\mathcal{B}(F): &amp;\quad b_1 \land ((b_2 \land b_3) \lor \lnot b_1)\\
+\text{where we define:} \\
+\mathcal{B}(b_1) : &amp;\quad x=z\\
+\mathcal{B}(b_2) : &amp;\quad y=z\\
+\mathcal{B}(b_3) : &amp;\quad x&lt;z\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathcal{B}(F)\)</span> is SAT. An satisfiable assignment is:</p>
+<div class="math notranslate nohighlight">
+\[A = b_1 \land b_2 \land b_3 \quad (\text{meaning: all set to true})\]</div>
+<p>However,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{B}^{-1}(A): \quad x=y \land y=z \land x&lt;z\]</div>
+<p>is <strong>not satisfiable</strong>. Therefore the boolean abstraction <em>overapproximates</em> satisfiability (If UNSAT, then original UNSAT. Not the other way around).</p>
+</div></blockquote>
+</li>
+</ul>
 </div>
 </div>
 
