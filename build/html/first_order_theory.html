@@ -106,7 +106,7 @@
             
   <div class="section" id="first-order-theroies">
 <h1><a class="toc-backref" href="#id1">First Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
-<p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>-Automated Logical Reasoning.</p>
+<p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>-Automated Logical Reasoning (lecture 10-15, first-order theories and their decision procedures).</p>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
@@ -881,7 +881,7 @@ x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i 
 <p>There are pivot selection strategies for which Simplex is guaranteed to terminate.</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Bland’s Rule</strong> if there are multiple variables with positive coeeficients in objective funtion, always choose the variable with the <em>smallest</em> index</p></li>
+<li><p><strong>Bland’s Rule</strong> if there are multiple variables with positive coefficients in objective funtion, always choose the variable with the <em>smallest</em> index</p></li>
 </ul>
 </div></blockquote>
 </dd>
@@ -1132,9 +1132,134 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </dl>
 </li>
 </ol>
+<div class="topic">
+<p class="topic-title first">Purification</p>
+<p>Given formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span>, goal is to seperate it into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> such that:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1\)</span> belongs only to <span class="math notranslate nohighlight">\(T_1\)</span> (‘pure’)</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_2\)</span> belongs only to <span class="math notranslate nohighlight">\(T_2\)</span> (‘pure’)</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_1 \land F_2\)</span> is <strong>equisatisfiable</strong> as <span class="math notranslate nohighlight">\(F\)</span></p></li>
+</ol>
+</div></blockquote>
+<p>To purify <span class="math notranslate nohighlight">\(F\)</span>, exhaustively apply the following:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Consider term <span class="math notranslate nohighlight">\(f(..., t_i, ...)\)</span>.</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(f \in \Sigma_i\)</span> but <span class="math notranslate nohighlight">\(t_i\)</span> is not a term in <span class="math notranslate nohighlight">\(T_i\)</span>, replace <span class="math notranslate nohighlight">\(t_i\)</span> with freash variable <span class="math notranslate nohighlight">\(z\)</span> and conjoin <span class="math notranslate nohighlight">\(z=t_i\)</span></p>
+</div></blockquote>
+</li>
+<li><p>Consider predicate <span class="math notranslate nohighlight">\(p(..., t_i, ...)\)</span>.</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(p \in \Sigma_i\)</span> but <span class="math notranslate nohighlight">\(t_i\)</span> is not a term in <span class="math notranslate nohighlight">\(T_i\)</span>, replace <span class="math notranslate nohighlight">\(t_i\)</span> with freash variable <span class="math notranslate nohighlight">\(w\)</span> and conjoin <span class="math notranslate nohighlight">\(w=t_i\)</span></p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>After this procedure, we have <span class="math notranslate nohighlight">\(F_1 \land F_2\)</span> as required.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p><strong>Definition:</strong> Shared/Unshared Variables</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x\)</span> occurs in both <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span>, it is called <em>shared</em> variable</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y\)</span> occurs only in <span class="math notranslate nohighlight">\(F_1\)</span> or <span class="math notranslate nohighlight">\(F_2\)</span>, it is called <em>unshared</em> variable</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Convex Theories</dt><dd><p>A theory T is convex if for every conjunctive formula <span class="math notranslate nohighlight">\(F\)</span>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(F \to \bigvee\limits_{i=1}^{n} x_i = y_i\)</span> for finite n</p></li>
+<li><p>then <span class="math notranslate nohighlight">\(F \to x_i = y_i\)</span> for some <span class="math notranslate nohighlight">\(i \in [1, n]\)</span></p></li>
+</ul>
+</div></blockquote>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>Purification</strong></dt><dd><p>Given formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span> into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> in <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> in <span class="math notranslate nohighlight">\(T_2\)</span></p>
+<dt><em>Example:</em>  <span class="math notranslate nohighlight">\(T_{\mathbb{Z}}\)</span> is non-convex:</dt><dd><ul>
+<li><p>consider <span class="math notranslate nohighlight">\(1 \leq x \land x \leq 2 \to x=1 \lor x=2\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>Example:</em>  <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}, T_=\)</span> are convex</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Equality propagation (Convex)</p>
+<p>After purification, if either <span class="math notranslate nohighlight">\(F_1\)</span> or <span class="math notranslate nohighlight">\(F_2\)</span> is UNSAT, <span class="math notranslate nohighlight">\(F\)</span> is UNSAT. Otherwise, we need equality propagation. First consider only convex theories.</p>
+<dl class="simple">
+<dt>For each pair of <em>shared</em> variables <span class="math notranslate nohighlight">\(x, y\)</span>, determine if</dt><dd><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1 \to x=y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_2 \to x=y\)</span></p></li>
+</ol>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>If (1) holds but not (2), conjoin <span class="math notranslate nohighlight">\(x=y\)</span> with <span class="math notranslate nohighlight">\(F_2\)</span></p></li>
+<li><p>If (2) holds but not (1), conjoin <span class="math notranslate nohighlight">\(x=y\)</span> with <span class="math notranslate nohighlight">\(F_1\)</span></p></li>
+</ul>
+<p>Then check the satisfiability of the new formulas. Repeat until either formula is UNSAT or no new equalities can be inferred.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p><em>Example:</em> The technique above does not apply to non-convex theories:</p>
+<blockquote>
+<div><p>Consider the following <span class="math notranslate nohighlight">\(T_{\mathbb{Z}} \cup T_=\)</span> formula:</p>
+<div class="math notranslate nohighlight">
+\[1 \leq x \land x \leq 2 \land f(x) \neq f(1) \land f(x) \neq f(2)\]</div>
+<p>After purifying, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div>
+<p>By the previous technique, these return SAT, although the formula is UNSAT.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Equality propagation (Non-Convex)</p>
+<p>Probelm involving non-convex theories is that a formula might not imply an equality, but imply a <em>disjunction</em> of equalities. However, we can only deal with conjunctions.</p>
+<p>If any of the formula implies <span class="math notranslate nohighlight">\(\bigvee\limits_{i=1}^n x_i = y_i\)</span>, we create n subproblems where we propagate <span class="math notranslate nohighlight">\(x_i = y_i\)</span> in <span class="math notranslate nohighlight">\(i\)</span>’th subproblem.</p>
+<ul class="simple">
+<li><p>If <em>any</em> subproblem is SAT, the original formula is SAT.</p></li>
+<li><p>If <em>every</em> subproblems are UNSAT, the original formula is UNSAT.</p></li>
+</ul>
+</div>
+<ul>
+<li><p><em>Example:</em> Consider the same problem:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div>
+<p>We have the following implication of a disjunction of equalities:</p>
+<div class="math notranslate nohighlight">
+\[F_2 \to x=w_1 \lor x=w_2\]</div>
+<p>Now generate two subproblems:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1' = F_1 \land x=w_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_1' = F_1 \land x=w_2\)</span></p></li>
+</ol>
+<p>Both are UNSAT; hence the original formula is UNSAT.</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Remarks: Nelson-Oppen is</dt><dd><ul class="simple">
+<li><p>poly-time for convex theories (if <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> are poly-time)</p></li>
+<li><p>NP-time for non-convex theories (if <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> are NP-time)</p></li>
+<li><p><strong>sound and complete</strong></p></li>
+</ul>
 </dd>
 </dl>
 </li>

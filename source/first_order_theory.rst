@@ -1,7 +1,7 @@
 ====================================
 First Order Theroies
 ====================================
-A summary of the lecture notes of `CS389L <http://www.cs.utexas.edu/~isil/cs389L/>`_-Automated Logical Reasoning.
+A summary of the lecture notes of `CS389L <http://www.cs.utexas.edu/~isil/cs389L/>`_-Automated Logical Reasoning (lecture 10-15, first-order theories and their decision procedures).
 
 
 .. contents::
@@ -663,7 +663,7 @@ To apply Simplex, a linear inequality system needs to be converted into *standar
 
     There are pivot selection strategies for which Simplex is guaranteed to terminate.
 
-        - **Bland's Rule** if there are multiple variables with positive coeeficients in objective funtion, always choose the variable with the *smallest* index
+        - **Bland's Rule** if there are multiple variables with positive coefficients in objective funtion, always choose the variable with the *smallest* index
 
 .. topic:: Simplex Phase 1
     
@@ -928,10 +928,12 @@ Nelson-Oppen method has two phases:
 
     To purify :math:`F`, exhaustively apply the following:
 
-        1. Consider term :math:`f(..., t_i, ...). 
+        1. Consider term :math:`f(..., t_i, ...)`. 
+
             If :math:`f \in \Sigma_i` but :math:`t_i` is not a term in :math:`T_i`, replace :math:`t_i` with freash variable :math:`z` and conjoin :math:`z=t_i`
 
-        2. Consider predicate :math:`p(..., t_i, ...). 
+        2. Consider predicate :math:`p(..., t_i, ...)`. 
+
             If :math:`p \in \Sigma_i` but :math:`t_i` is not a term in :math:`T_i`, replace :math:`t_i` with freash variable :math:`w` and conjoin :math:`w=t_i`
 
     After this procedure, we have :math:`F_1 \land F_2` as required.
@@ -940,6 +942,99 @@ Nelson-Oppen method has two phases:
 .. admonition:: TODO
 
     add example
+
+
+- **Definition:** Shared/Unshared Variables
+
+    - If :math:`x` occurs in both :math:`F_1` and :math:`F_2`, it is called *shared* variable
+
+    - If :math:`y` occurs only in :math:`F_1` or :math:`F_2`, it is called *unshared* variable
+
+
+- **Definition:** Convex Theories
+    A theory T is convex if for every conjunctive formula :math:`F`:
+
+        - if :math:`F \to \bigvee\limits_{i=1}^{n} x_i = y_i` for finite n
+        - then :math:`F \to x_i = y_i` for some :math:`i \in [1, n]`
+
+
+    - *Example:*  :math:`T_{\mathbb{Z}}` is non-convex:
+        - consider :math:`1 \leq x \land x \leq 2 \to x=1 \lor x=2`
+
+
+    - *Example:*  :math:`T_{\mathbb{Q}}, T_=` are convex
+
+
+.. topic:: Equality propagation (Convex)
+    
+    After purification, if either :math:`F_1` or :math:`F_2` is UNSAT, :math:`F` is UNSAT. Otherwise, we need equality propagation. First consider only convex theories.
+    
+    For each pair of *shared* variables :math:`x, y`, determine if
+        1. :math:`F_1 \to x=y`
+        2. :math:`F_2 \to x=y`
+
+    - If (1) holds but not (2), conjoin :math:`x=y` with :math:`F_2`
+
+    - If (2) holds but not (1), conjoin :math:`x=y` with :math:`F_1`
+
+    Then check the satisfiability of the new formulas. Repeat until either formula is UNSAT or no new equalities can be inferred.
+
+.. admonition:: TODO
+
+    add example
+
+- *Example:* The technique above does not apply to non-convex theories:
+
+    Consider the following :math:`T_{\mathbb{Z}} \cup T_=` formula:
+
+    .. math::
+
+        1 \leq x \land x \leq 2 \land f(x) \neq f(1) \land f(x) \neq f(2)
+
+    After purifying, we have:
+
+    .. math::
+
+        F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+        F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2
+
+    By the previous technique, these return SAT, although the formula is UNSAT.
+
+.. topic:: Equality propagation (Non-Convex)
+
+    Probelm involving non-convex theories is that a formula might not imply an equality, but imply a *disjunction* of equalities. However, we can only deal with conjunctions.
+
+    If any of the formula implies :math:`\bigvee\limits_{i=1}^n x_i = y_i`, we create n subproblems where we propagate :math:`x_i = y_i` in :math:`i`'th subproblem.
+
+    - If *any* subproblem is SAT, the original formula is SAT.
+
+    - If *every* subproblems are UNSAT, the original formula is UNSAT.
+
+- *Example:* Consider the same problem:
+
+    .. math::
+
+        F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+        F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2
+
+    We have the following implication of a disjunction of equalities:
+
+    .. math::
+
+        F_2 \to x=w_1 \lor x=w_2
+
+    Now generate two subproblems:
+
+    1. :math:`F_1' = F_1 \land x=w_1`
+
+    2. :math:`F_1' = F_1 \land x=w_2` 
+
+    Both are UNSAT; hence the original formula is UNSAT.
+
+- Remarks: Nelson-Oppen is 
+    - poly-time for convex theories (if :math:`T_1` and :math:`T_2` are poly-time)
+    - NP-time for non-convex theories (if :math:`T_1` and :math:`T_2` are NP-time)
+    - **sound and complete**
 
 
 
