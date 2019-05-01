@@ -573,7 +573,7 @@ To apply Simplex, a linear inequality system needs to be converted into *standar
                           &\quad x_1 - 2 x_2 \leq 4 \\
                           &\quad x_1 \geq 0\\
 
-    Equisatisfiable system in standard form:
+    Equisatisfiable system in standard form (replace :math:`x_1` with :math:`x_2 - x_3`):
 
     .. math::
 
@@ -867,11 +867,80 @@ The main idea of Omega test is to eleminate variables one by one from the initia
     - **If no subproblem has integer solution, original problem is UNSAT**
 
 
+.. admonition:: TODO
+
+    add example
+
+- Remarks
+
+    - If there are :math:`n` integers between :math:`0` and :math:`\frac{ab-a-b}{b}`, Omega test constructs :math:`n` gray shadows
+
+    - Thus it is very sensitive to coefficients: the larger :math:`a` is, the more gray shadows we must consider
+
 
 
 -------------------------------------------
 Decision Procedure: Combined Theories
 -------------------------------------------
+Given decision procedures for quantifier-free :math:`T_1` and :math:`T_2`, we want a decision procedure to decide satisfiability of formulas in qff :math:`T_1 \cup T_2`.
+
+We use the Nelson-Oppen method. It has the following restrictions:
+
+1. Only allows combining *quantifier-free* fragments
+
+2. Only allows combining formulas *without disjunctions* (Note: can convert to DNF)
+
+3. Signatures can only share equality: :math:`\Sigma_1 \cap \Sigma_2 = \{=\}`
+
+4. :math:`T_1` and :math:`T_2` must be **stably infinite**
+
+- **Definition:** Stably infinite
+    Theory T is stably infinite iff every *satisfiable* qff formula is satisfiable in a universe of discourse with infinite cardinality
+
+    - *Example:* non-stably infinite theory:
+        .. math::
+
+            \text{Signature:}\quad &\{a, b, =\}\\
+            \text{Axiom:} \quad &\forall x. x=a \lor x=b
+
+    - *Example:* stably infinite theories:
+        :math:`T_=, T_\mathbb{Q}, T_\mathbb{Z}, T_A` 
+
+
+Nelson-Oppen Method
+-----------------------------------------------
+Nelson-Oppen method has two phases:
+
+1. Purification
+    Seperate formula :math:`F` in :math:`T_1 \cap T_2` into two formulas :math:`F_1` in :math:`T_1` and :math:`F_2` in :math:`T_2`
+
+2. Equality propagation
+    Propagate all relevant equalities between theories (different for convex & non-convex)
+
+
+.. topic:: Purification
+
+    Given formula :math:`F` in :math:`T_1 \cap T_2`, goal is to seperate it into two formulas :math:`F_1` and :math:`F_2` such that:
+
+        1. :math:`F_1` belongs only to :math:`T_1` ('pure')
+        2. :math:`F_2` belongs only to :math:`T_2` ('pure')
+        3. :math:`F_1 \land F_2` is **equisatisfiable** as :math:`F`
+
+    To purify :math:`F`, exhaustively apply the following:
+
+        1. Consider term :math:`f(..., t_i, ...). 
+            If :math:`f \in \Sigma_i` but :math:`t_i` is not a term in :math:`T_i`, replace :math:`t_i` with freash variable :math:`z` and conjoin :math:`z=t_i`
+
+        2. Consider predicate :math:`p(..., t_i, ...). 
+            If :math:`p \in \Sigma_i` but :math:`t_i` is not a term in :math:`T_i`, replace :math:`t_i` with freash variable :math:`w` and conjoin :math:`w=t_i`
+
+    After this procedure, we have :math:`F_1 \land F_2` as required.
+
+
+.. admonition:: TODO
+
+    add example
+
 
 
 

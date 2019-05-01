@@ -64,7 +64,10 @@
 <li><a class="reference internal" href="#omega-test">Omega Test</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a></li>
+<li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a><ul>
+<li><a class="reference internal" href="#nelson-oppen-method">Nelson-Oppen Method</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></li>
 </ul>
 </li>
@@ -137,8 +140,12 @@
 <li><p><a class="reference internal" href="#omega-test" id="id17">Omega Test</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#decision-procedure-combined-theories" id="id18">Decision Procedure: Combined Theories</a></p></li>
-<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id19">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
+<li><p><a class="reference internal" href="#decision-procedure-combined-theories" id="id18">Decision Procedure: Combined Theories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nelson-oppen-method" id="id19">Nelson-Oppen Method</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#smt-solvers-and-dppl-tau-framework" id="id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a></p></li>
 </ul>
 </li>
 </ul>
@@ -769,7 +776,7 @@ Each clause is of the following form:</p>
                   &amp;\quad -x_1 - x_2 \leq -7 \\
                   &amp;\quad x_1 - 2 x_2 \leq 4 \\
                   &amp;\quad x_1 \geq 0\\\end{split}\]</div>
-<p>Equisatisfiable system in standard form:</p>
+<p>Equisatisfiable system in standard form (replace <span class="math notranslate nohighlight">\(x_1\)</span> with <span class="math notranslate nohighlight">\(x_2 - x_3\)</span>):</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2  + 3x_3\\
 \text{Subject to} &amp;\quad x_1 + x_2 - x_3 \leq 7 \\
@@ -1063,13 +1070,79 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 <li><p><strong>If no subproblem has integer solution, original problem is UNSAT</strong></p></li>
 </ul>
 </div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p>Remarks</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If there are <span class="math notranslate nohighlight">\(n\)</span> integers between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(\frac{ab-a-b}{b}\)</span>, Omega test constructs <span class="math notranslate nohighlight">\(n\)</span> gray shadows</p></li>
+<li><p>Thus it is very sensitive to coefficients: the larger <span class="math notranslate nohighlight">\(a\)</span> is, the more gray shadows we must consider</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
 </div>
 </div>
 <div class="section" id="decision-procedure-combined-theories">
 <h2><a class="toc-backref" href="#id18">Decision Procedure: Combined Theories</a><a class="headerlink" href="#decision-procedure-combined-theories" title="Permalink to this headline">¶</a></h2>
+<p>Given decision procedures for quantifier-free <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span>, we want a decision procedure to decide satisfiability of formulas in qff <span class="math notranslate nohighlight">\(T_1 \cup T_2\)</span>.</p>
+<p>We use the Nelson-Oppen method. It has the following restrictions:</p>
+<ol class="arabic simple">
+<li><p>Only allows combining <em>quantifier-free</em> fragments</p></li>
+<li><p>Only allows combining formulas <em>without disjunctions</em> (Note: can convert to DNF)</p></li>
+<li><p>Signatures can only share equality: <span class="math notranslate nohighlight">\(\Sigma_1 \cap \Sigma_2 = \{=\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> must be <strong>stably infinite</strong></p></li>
+</ol>
+<ul>
+<li><dl>
+<dt><strong>Definition:</strong> Stably infinite</dt><dd><p>Theory T is stably infinite iff every <em>satisfiable</em> qff formula is satisfiable in a universe of discourse with infinite cardinality</p>
+<ul>
+<li><dl>
+<dt><em>Example:</em> non-stably infinite theory:</dt><dd><div class="math notranslate nohighlight">
+\[\begin{split}\text{Signature:}\quad &amp;\{a, b, =\}\\
+\text{Axiom:} \quad &amp;\forall x. x=a \lor x=b\end{split}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>Example:</em> stably infinite theories:</dt><dd><p><span class="math notranslate nohighlight">\(T_=, T_\mathbb{Q}, T_\mathbb{Z}, T_A\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="nelson-oppen-method">
+<h3><a class="toc-backref" href="#id19">Nelson-Oppen Method</a><a class="headerlink" href="#nelson-oppen-method" title="Permalink to this headline">¶</a></h3>
+<p>Nelson-Oppen method has two phases:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Purification</dt><dd><p>Seperate formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span> into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> in <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> in <span class="math notranslate nohighlight">\(T_2\)</span></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Equality propagation</dt><dd><p>Propagate all relevant equalities between theories (different for convex &amp; non-convex)</p>
+</dd>
+</dl>
+</li>
+</ol>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Purification</strong></dt><dd><p>Given formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span> into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> in <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> in <span class="math notranslate nohighlight">\(T_2\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
 </div>
 <div class="section" id="smt-solvers-and-dppl-tau-framework">
-<h2><a class="toc-backref" href="#id19">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id20">SMT Solvers and DPPL(<span class="math notranslate nohighlight">\(\tau\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dppl-tau-framework" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
