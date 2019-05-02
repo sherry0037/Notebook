@@ -888,7 +888,7 @@ We use the Nelson-Oppen method. It has the following restrictions:
 
 1. Only allows combining *quantifier-free* fragments
 
-2. Only allows combining formulas *without disjunctions* (Note: can convert to DNF)
+2. Only allows combining formulas *without disjunctions* (Note: we can convert formula to DNF in order to use this method) 
 
 3. Signatures can only share equality: :math:`\Sigma_1 \cap \Sigma_2 = \{=\}`
 
@@ -903,7 +903,7 @@ We use the Nelson-Oppen method. It has the following restrictions:
             \text{Signature:}\quad &\{a, b, =\}\\
             \text{Axiom:} \quad &\forall x. x=a \lor x=b
 
-    - *Example:* stably infinite theories:
+    - *Example:* some stably infinite theories are
         :math:`T_=, T_\mathbb{Q}, T_\mathbb{Z}, T_A` 
 
 
@@ -1040,7 +1040,7 @@ Nelson-Oppen method has two phases:
 
 
 -----------------------------------------------------
-SMT Solvers and DPPL(:math:`\mathcal{T}`) Framework
+SMT Solvers and DPLL(:math:`\mathcal{T}`) Framework
 -----------------------------------------------------
 Previous sections talk about decision procedures for conjunctive formulas in various first-order theories. However, converting a formula to DNF is not feasible because its size can blow-up exponentially. In this section, we want to decide satisfiability in first-order theories without converting to DNF. More specifically, we want to handle **boolean structure** when deciding satisfiability modulo theories. 
 
@@ -1082,7 +1082,7 @@ Previous sections talk about decision procedures for conjunctive formulas in var
         \mathcal{B}(F_1 \lor F_2) &= \mathcal{B}(F_1) \lor \mathcal{B}(F_2) \\
         \mathcal{B}(\lnot F) &= \lnot \mathcal{B}(F)
 
-- *Example:* Boolean abstraction
+- *Example:* Boolean abstraction is an overapproximation
 
     .. math::
 
@@ -1108,6 +1108,86 @@ Previous sections talk about decision procedures for conjunctive formulas in var
 
     is **not satisfiable**. Therefore the boolean abstraction *overapproximates* satisfiability (If UNSAT, then original UNSAT. Not the other way around).
 
+- Theory Conflict Clauses
+    SAT solver may yield assignments that are not sat module T, hence we need to learn theory conflict clauses.
+
+    There are two approaches:
+
+    1. Off-line (eager): use SAT solver as black-box
+
+    2. On-line (lazy): integrate theory solver into the CDCL loop
+
+Off-line SMT Solver
+------------------------
+
+- **First approach**
+    Adding the negation of current assignment as theory conflict clauses
+
+.. image:: _static/first_order_theory/OfflineSMT.png
+    :scale: 47 %
+
+.. admonition:: TODO
+
+    add example
+  
+- Problem: conflict clauses too weak
+    - only prevents exact same assignment (imagine 1000 literals where first two are conflict to each other)
+
+    - Improvement: add *unsatisfiable core* of :math:`\mathcal{B}^{-1}(A)`
+
+- **Definition:** (Minimal) unsatisfiable core
+    Given a set :math:`S` of clauses, an UNSAT core of :math:`S'` is a subset :math:`S'` such that :math:`S'` is also UNSAT.
+
+    Minimal unsatisfiable core :math:`C^*` has property that if you drop any single atom of :math:`C^*`, result is satisfiable
+
+- **Second Approach**
+    Adding the negation of the minimal unsat core as theory conflict clauses
+
+.. image:: _static/first_order_theory/OfflineSMT_improved.png
+    :scale: 50 %
 
 
+- **UnsatCore(**:math:`\mathcal{B}^{-1}(A)`)
+    Given an UNSAT conjunctive :math:`\mathcal{T}` formula :math:`\phi`, try dropping each atom from :math:`\phi'` and check satisfiabiliy. If :math:`\phi` becomes SAT, keep this atom.
+
+
+On-line SMT Solver (DPLL(:math:`\mathcal{T}`) Framework)
+------------------------------------------------------------------------
+Instead of using SMT solver as "blackbox", the online version integrates theory solver into the CDCL. The combination of DPLL-based SAT solver and decision procedure for conjunctive :math:`\mathcal{T}` formula is called DPLL(:math:`\mathcal{T}`) framework.
+
+.. image:: _static/first_order_theory/DPLL(T).png
+    :scale: 50 %
+
+- DPLL(:math:`\mathcal{T}`) framework Explanation
+    - Suppose :math:`A` is the current partial assignment after the Decide and BCP step
+
+    - Use theory solver to decide if :math:`\mathcal{B}^{-1}(A)` is UNSAT
+
+        - if so, add :math:`\lnot A` to clause database
+
+            - or add :math:`\lnot UnsatCore(A)`
+
+    - continue doing BCP to detect conflict if exists
+
+- Theory Propagation
+    Suppose original formula contains literals :math:`x=y, y=z, x<z`, corresponding to :math:`b_1, b_2, b_3`.
+
+    Suppose the partial assignment is :math:`b_1: T, b_2: T`. Assigning :math:`b_3: T` would cause conflict. 
+
+    To avoid this, we can add :math:`b_1 \land b_2 \implies \lnot b3` to clauses database.
+
+    These clauses are called **theory propagation lemmas**.
+
+- Inferring theory propagation lemmas
+    We have two options to find theory propagation lemmas:
+
+    1. Treat theory solver as blackbox. Test for each literal :math:`a` wether it is implied by current partial assignment
+
+    2. Modify theory solver (need to be specific for each theory)
+
+    We also have two options to decide which theory propagation lemmas to keep:
+
+    1. Add all possible implications (*exhaustive theory propagation*)
+
+    2. Only figure out the obvious ones
 
