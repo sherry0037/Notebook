@@ -1065,7 +1065,7 @@ Previous sections talk about decision procedures for conjunctive formulas in var
 
 
 - **Definition:** Boolean abstraction
-    A boolean abstraction (or boolean skeleton) function \mathcal{B} is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.
+    A boolean abstraction (or boolean skeleton) function :math:`\mathcal{B}` is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.
  
     SMT formula in theory :math:`\mathcal{T}` has the form:
 
@@ -1073,7 +1073,7 @@ Previous sections talk about decision procedures for conjunctive formulas in var
 
         F := a_\mathcal{T} | F_1 \land F_2 | F_1 \lor F_2 | \lnot F
 
-    Function \mathcal{B} is defined as follows:
+    Function :math:`\mathcal{B}` is defined as follows:
 
     .. math::
 
@@ -1089,9 +1089,9 @@ Previous sections talk about decision procedures for conjunctive formulas in var
         F: &\quad x=z \land ((y=z \land x < z) \lor \lnot (x=z))\\
         \mathcal{B}(F): &\quad b_1 \land ((b_2 \land b_3) \lor \lnot b_1)\\
         \text{where we define:} \\
-        \mathcal{B}(b_1) : &\quad x=z\\
-        \mathcal{B}(b_2) : &\quad y=z\\
-        \mathcal{B}(b_3) : &\quad x<z
+        \mathcal{B}(x=z) : &\quad b_1\\
+        \mathcal{B}(y=z) : &\quad b_2\\
+        \mathcal{B}(x<z) : &\quad b_3
 
     :math:`\mathcal{B}(F)` is SAT. An satisfiable assignment is:
 
@@ -1136,7 +1136,7 @@ Off-line SMT Solver
     - Improvement: add *unsatisfiable core* of :math:`\mathcal{B}^{-1}(A)`
 
 - **Definition:** (Minimal) unsatisfiable core
-    Given a set :math:`S` of clauses, an UNSAT core of :math:`S'` is a subset :math:`S'` such that :math:`S'` is also UNSAT.
+    Given a set :math:`S` of clauses, an UNSAT core of :math:`S` is a subset :math:`S'` such that :math:`S'` is also UNSAT.
 
     Minimal unsatisfiable core :math:`C^*` has property that if you drop any single atom of :math:`C^*`, result is satisfiable
 
@@ -1148,7 +1148,7 @@ Off-line SMT Solver
 
 
 - **UnsatCore(**:math:`\mathcal{B}^{-1}(A)`)
-    Given an UNSAT conjunctive :math:`\mathcal{T}` formula :math:`\phi`, try dropping each atom from :math:`\phi'` and check satisfiabiliy. If :math:`\phi` becomes SAT, keep this atom.
+    Given an UNSAT conjunctive :math:`\mathcal{T}` formula :math:`\phi`, try dropping each atom from :math:`\phi` and check satisfiabiliy. If :math:`\phi` becomes SAT, keep this atom.
 
 
 On-line SMT Solver (DPLL(:math:`\mathcal{T}`) Framework)
@@ -1174,7 +1174,7 @@ Instead of using SMT solver as "blackbox", the online version integrates theory 
 
     Suppose the partial assignment is :math:`b_1: T, b_2: T`. Assigning :math:`b_3: T` would cause conflict. 
 
-    To avoid this, we can add :math:`b_1 \land b_2 \implies \lnot b3` to clauses database.
+    To avoid this, we can add :math:`b_1 \land b_2 \implies \lnot b_3` to clauses database.
 
     These clauses are called **theory propagation lemmas**.
 

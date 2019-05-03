@@ -1307,11 +1307,11 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </div></blockquote>
 </li>
 <li><dl>
-<dt><strong>Definition:</strong> Boolean abstraction</dt><dd><p>A boolean abstraction (or boolean skeleton) function mathcal{B} is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.</p>
+<dt><strong>Definition:</strong> Boolean abstraction</dt><dd><p>A boolean abstraction (or boolean skeleton) function <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.</p>
 <p>SMT formula in theory <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> has the form:</p>
 <div class="math notranslate nohighlight">
 \[F := a_\mathcal{T} | F_1 \land F_2 | F_1 \lor F_2 | \lnot F\]</div>
-<p>Function mathcal{B} is defined as follows:</p>
+<p>Function <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> is defined as follows:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mathcal{B}(a_\mathcal{T}) &amp;= b \quad\text{(b is fresh)} \\
 \mathcal{B}(F_1 \land F_2) &amp;= \mathcal{B}(F_1) \land \mathcal{B}(F_2)\\
@@ -1326,9 +1326,9 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 \[\begin{split}F: &amp;\quad x=z \land ((y=z \land x &lt; z) \lor \lnot (x=z))\\
 \mathcal{B}(F): &amp;\quad b_1 \land ((b_2 \land b_3) \lor \lnot b_1)\\
 \text{where we define:} \\
-\mathcal{B}(b_1) : &amp;\quad x=z\\
-\mathcal{B}(b_2) : &amp;\quad y=z\\
-\mathcal{B}(b_3) : &amp;\quad x&lt;z\end{split}\]</div>
+\mathcal{B}(x=z) : &amp;\quad b_1\\
+\mathcal{B}(y=z) : &amp;\quad b_2\\
+\mathcal{B}(x&lt;z) : &amp;\quad b_3\end{split}\]</div>
 <p><span class="math notranslate nohighlight">\(\mathcal{B}(F)\)</span> is SAT. An satisfiable assignment is:</p>
 <div class="math notranslate nohighlight">
 \[A = b_1 \land b_2 \land b_3 \quad (\text{meaning: all set to true})\]</div>
@@ -1373,7 +1373,7 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </dl>
 </li>
 <li><dl>
-<dt><strong>Definition:</strong> (Minimal) unsatisfiable core</dt><dd><p>Given a set <span class="math notranslate nohighlight">\(S\)</span> of clauses, an UNSAT core of <span class="math notranslate nohighlight">\(S'\)</span> is a subset <span class="math notranslate nohighlight">\(S'\)</span> such that <span class="math notranslate nohighlight">\(S'\)</span> is also UNSAT.</p>
+<dt><strong>Definition:</strong> (Minimal) unsatisfiable core</dt><dd><p>Given a set <span class="math notranslate nohighlight">\(S\)</span> of clauses, an UNSAT core of <span class="math notranslate nohighlight">\(S\)</span> is a subset <span class="math notranslate nohighlight">\(S'\)</span> such that <span class="math notranslate nohighlight">\(S'\)</span> is also UNSAT.</p>
 <p>Minimal unsatisfiable core <span class="math notranslate nohighlight">\(C^*\)</span> has property that if you drop any single atom of <span class="math notranslate nohighlight">\(C^*\)</span>, result is satisfiable</p>
 </dd>
 </dl>
@@ -1387,7 +1387,7 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 <a class="reference internal image-reference" href="_images/OfflineSMT_improved.png"><img alt="_images/OfflineSMT_improved.png" src="_images/OfflineSMT_improved.png" style="width: 451.0px; height: 250.0px;" /></a>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>UnsatCore(</strong><span class="math notranslate nohighlight">\(\mathcal{B}^{-1}(A)\)</span>)</dt><dd><p>Given an UNSAT conjunctive <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> formula <span class="math notranslate nohighlight">\(\phi\)</span>, try dropping each atom from <span class="math notranslate nohighlight">\(\phi'\)</span> and check satisfiabiliy. If <span class="math notranslate nohighlight">\(\phi\)</span> becomes SAT, keep this atom.</p>
+<dt><strong>UnsatCore(</strong><span class="math notranslate nohighlight">\(\mathcal{B}^{-1}(A)\)</span>)</dt><dd><p>Given an UNSAT conjunctive <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> formula <span class="math notranslate nohighlight">\(\phi\)</span>, try dropping each atom from <span class="math notranslate nohighlight">\(\phi\)</span> and check satisfiabiliy. If <span class="math notranslate nohighlight">\(\phi\)</span> becomes SAT, keep this atom.</p>
 </dd>
 </dl>
 </li>
@@ -1422,7 +1422,7 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 <li><dl>
 <dt>Theory Propagation</dt><dd><p>Suppose original formula contains literals <span class="math notranslate nohighlight">\(x=y, y=z, x&lt;z\)</span>, corresponding to <span class="math notranslate nohighlight">\(b_1, b_2, b_3\)</span>.</p>
 <p>Suppose the partial assignment is <span class="math notranslate nohighlight">\(b_1: T, b_2: T\)</span>. Assigning <span class="math notranslate nohighlight">\(b_3: T\)</span> would cause conflict.</p>
-<p>To avoid this, we can add <span class="math notranslate nohighlight">\(b_1 \land b_2 \implies \lnot b3\)</span> to clauses database.</p>
+<p>To avoid this, we can add <span class="math notranslate nohighlight">\(b_1 \land b_2 \implies \lnot b_3\)</span> to clauses database.</p>
 <p>These clauses are called <strong>theory propagation lemmas</strong>.</p>
 </dd>
 </dl>
