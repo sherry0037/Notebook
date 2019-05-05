@@ -60,3 +60,11 @@ html_theme = 'yeen'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+# Use for refering figures 
+# https://stackoverflow.com/questions/2686310/referencing-figures-with-numbers-in-sphinx-and-restructuredtext
+numfig = True
+
+
+# https://stackoverflow.com/questions/50631942/how-does-equation-numbering-work-for-sphinx
+math_eqref_format = "Eq.{number}"

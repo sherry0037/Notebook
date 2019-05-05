@@ -46,7 +46,12 @@
 <li><a class="reference internal" href="#latent-variables">Latent variables</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#id1">Hidden Markov Models</a></li>
+<li><a class="reference internal" href="#id1">Hidden Markov Models</a><ul>
+<li><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram">Specification - Transition probabilities, matrix and diagram</a></li>
+<li><a class="reference internal" href="#specification-emission-probabilities">Specification - Emission probabilities</a></li>
+<li><a class="reference internal" href="#specification-joint-probability">Specification - Joint probability</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -97,7 +102,13 @@
 <li><p><a class="reference internal" href="#latent-variables" id="id6">Latent variables</a></p></li>
 </ul>
 </li>
-<li><p><a class="reference internal" href="#id1" id="id7">Hidden Markov Models</a></p></li>
+<li><p><a class="reference internal" href="#id1" id="id7">Hidden Markov Models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram" id="id8">Specification - Transition probabilities, matrix and diagram</a></p></li>
+<li><p><a class="reference internal" href="#specification-emission-probabilities" id="id9">Specification - Emission probabilities</a></p></li>
+<li><p><a class="reference internal" href="#specification-joint-probability" id="id10">Specification - Joint probability</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -112,7 +123,7 @@
 <h3><a class="toc-backref" href="#id4">First-order Markov chain</a><a class="headerlink" href="#first-order-markov-chain" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>Definition:</strong> first-order Markov chain</dt><dd><p>If we assume that each of the conditional distributions on the RHS is independent of all previousobservations except the most recent (the Markov Property), we obtain the <em>first-order Markov chain</em>:</p>
+<dt><strong>Definition:</strong> First-Order Markov Chain</dt><dd><p>If we assume that each of the conditional distributions on the RHS is independent of all previousobservations except the most recent (the Markov Property), we obtain the <em>first-order Markov chain</em>:</p>
 </dd>
 </dl>
 </li>
@@ -121,7 +132,7 @@
 \[\begin{split}p(x_1, ..., x_N) &amp;= p(x_1)\prod\limits_{n=2}^N p(x_n|x_{n-1})\\
                  &amp;= p(x_1) p(x_2|x_1) p(x_3|x_2) ...\end{split}\]</div>
 <div class="topic">
-<p class="topic-title first">Illustration of first-order Markov chain</p>
+<p class="topic-title first">Illustration of First-Order Markov Chain</p>
 <div class="figure align-center">
 <img alt="_images/first_order_markov_chain.png" src="_images/first_order_markov_chain.png" />
 </div>
@@ -132,7 +143,7 @@
 <p>If we use this model to predict the next observation in a sequence, the distribution of predictions will only depend on the value of the immediately preceding observation, and will be independent of all earlier observations.</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>Definiton:</strong> homogeneous Markov chain</dt><dd><p>A markov chain is <em>homogeneous</em> when we assume a stationary time series, i.e. conditional distributions <span class="math notranslate nohighlight">\(p(x_n|x_{n-1})\)</span> are equal.</p>
+<dt><strong>Definiton:</strong> Homogeneous Markov Chain</dt><dd><p>A markov chain is <em>homogeneous</em> when we assume a stationary time series, i.e. conditional distributions <span class="math notranslate nohighlight">\(p(x_n|x_{n-1})\)</span> are equal.</p>
 </dd>
 </dl>
 </li>
@@ -146,7 +157,7 @@
 \[\begin{split}p(x_1, ..., x_N) &amp;= p(x_1)p(x_2|x_1)\prod\limits_{n=3}^N p(x_n|x_{n-1}, x_{n-2})\\
              &amp;= p(x_1) p(x_2|x_1) p(x_3|x_2, x_1) p(x_4|x_3, x_2) ...\end{split}\]</div>
 <div class="topic">
-<p class="topic-title first">Illustration of second-order Markov chain</p>
+<p class="topic-title first">Illustration of Second-Order Markov Chain</p>
 <div class="figure align-center">
 <img alt="_images/second_order_markov_chain.png" src="_images/second_order_markov_chain.png" />
 </div>
@@ -163,25 +174,114 @@
 <p>Suppose we do not want to limit our model to the Markov assumption and yet can be specified using a limited number of free parameters, we can introduce <em>latent variables</em> to permit a rich class of models to be constructed out of simple components. (Similar approach: mixture distributions, continuous latent variable models, etc.)</p>
 <ul class="simple">
 <li><dl class="simple">
-<dt><strong>Definition</strong> state space model</dt><dd><p>For each observation <span class="math notranslate nohighlight">\(x_n\)</span>, we introduce a corresponding latent variable <span class="math notranslate nohighlight">\(z_n\)</span> (can have different dimentionality/type). If we assume that the latent variables form a Markov chain, we have a graphical structure called <em>state space model</em>.</p>
+<dt><strong>Definition</strong> State Space Model</dt><dd><p>For each observation <span class="math notranslate nohighlight">\(x_n\)</span>, we introduce a corresponding latent variable <span class="math notranslate nohighlight">\(z_n\)</span> (can have different dimentionality/type). If we assume that the latent variables form a Markov chain, we have a graphical structure called <em>state space model</em>.</p>
 </dd>
 </dl>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">State space model</p>
-<div class="figure align-center">
+<p class="topic-title first">State Space Model</p>
+<div class="figure align-center" id="figure-13-5">
 <img alt="_images/markov_chain_latent.png" src="_images/markov_chain_latent.png" />
 </div>
 </div>
 <p>It satisfies the key conditional independence property that <span class="math notranslate nohighlight">\(z_{n-1}\)</span> and <span class="math notranslate nohighlight">\(z_{n+1}\)</span> are <strong>independent</strong> given <span class="math notranslate nohighlight">\(z_n\)</span>, and the joint distribution of the model is given by:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}p(x_1, ..., x_N, z_1, ... z_N) &amp;= p(z_1) (\prod\limits_{n=2}^N p(z_n|z_{n-1})) (\prod\limits_{n=1}^N p(x_n|z_n))\\
+<div class="math notranslate nohighlight" id="equation-equ1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ1" title="Permalink to this equation">¶</a></span>\[\begin{split}p(x_1, ..., x_N, z_1, ... z_N) &amp;= p(z_1) (\prod\limits_{n=2}^N p(z_n|z_{n-1})) (\prod\limits_{n=1}^N p(x_n|z_n))\\
                                &amp;= p(z_1)p(z_2|z_1)p(z_3|z_2)...p(x_1|z_1)p(x_2|z_2)p(x_3|z_3)...\end{split}\]</div>
+<p>Using the d-separation criterion, we see that there is always a path connecting any two observed variables <span class="math notranslate nohighlight">\(x_n\)</span> and <span class="math notranslate nohighlight">\(x_m\)</span> voa tje ;atemt variables, and that this path is never blocked.</p>
+<p>In this model, the predictions for <span class="math notranslate nohighlight">\(x_{n+1}\)</span> depends on all previous observations, because <span class="math notranslate nohighlight">\(p(x_{n+1}|x_1, ..., x_n)\)</span> does not exhibit any conditional independence properties.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>d-separation</p>
+</div>
+<p>There are two models described by this graph:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><em>Hidden Markov model</em> if the latent variables are discrete;</p></li>
+<li><p><em>Linear dynamical system</em> if both the latent and the observed variables are Gaussian.</p></li>
+</ol>
+</div></blockquote>
+<p><em>Note:</em> the observed variables in an HMM may be discrete or continuous, and a variety of different conditional distributions can be used to model them.</p>
 </div>
 </div>
 <div class="section" id="id1">
 <h2><a class="toc-backref" href="#id7">Hidden Markov Models</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The hidden Markov model is a specific instance of the state space model in which the latent variables are discrete. If we examine a single time slice of the model, we see that it corresponds to a mixture distribution, with component densities given by <span class="math notranslate nohighlight">\(p(\mathbf{x}|\mathbf{z})\)</span>.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Mixture model</p>
+</div>
+<p>The discrete multinomial variables <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span> represent the latent variables, and <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> the corresponding observation. We use a 1-of-K coding scheme.</p>
+<div class="section" id="specification-transition-probabilities-matrix-and-diagram">
+<h3><a class="toc-backref" href="#id8">Specification - Transition probabilities, matrix and diagram</a><a class="headerlink" href="#specification-transition-probabilities-matrix-and-diagram" title="Permalink to this headline">¶</a></h3>
+<p>The latent variable <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span> depends on the previous latent ariable <span class="math notranslate nohighlight">\(\mathbf{z}_{n-1}\)</span>, and the conditional distribution <span class="math notranslate nohighlight">\(p (\mathbf{z}_n|\mathbf{z}_{n-1})\)</span> is stored in the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. The elements of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are referred to as <strong>transition probabilities</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A_{jk} := p(z_k^n = 1|z^{n-1}_j = 1), \\\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}0 \leq A_{jk} &amp;\leq 1\\
+\sum_k A_{jk} &amp;= 1\end{split}\]</div>
+<dl class="simple">
+<dt><em>Note:</em></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A_{jk}\)</span> is the probabitliy of the latent variable transiting from state j to state k.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has <span class="math notranslate nohighlight">\(K(K-1)\)</span> independent parameters (-1 because the probabilities sum to one)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The conditional distribution can then be explicitly written as:</p>
+<div class="math notranslate nohighlight">
+\[p (\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A}) = \prod\limits_{k=1}^K \prod\limits_{j=1}^K A_{jk}^{z^{n-1}_j z^n_k}\]</div>
+<p>The initial latent node <span class="math notranslate nohighlight">\(\mathbf{z_1}\)</span> has a marginal distribution <span class="math notranslate nohighlight">\(p(\mathbf{z_1})\)</span> represented by a vector of probabilities <span class="math notranslate nohighlight">\(\mathbf{\pi}\)</span> with <span class="math notranslate nohighlight">\(\pi_k := p(z^1_k = 1)\)</span>, so that</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{z_1}|\mathbf{\pi}) = \prod\limits_{k=1}^K \pi_k^{z_k^1},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sum_k \pi_k = 1\)</span>.</p>
+<p>If we unfold a state transition diagram over time, we have an alternative representation of the transitions, known as <em>lattive</em> or <em>trellis</em> diagram.</p>
+<div class="topic">
+<p class="topic-title first">Example of Transition Diagram</p>
+<div class="figure align-center">
+<img alt="_images/transition_diagram_1.png" src="_images/transition_diagram_1.png" />
+</div>
+<div class="figure align-center">
+<img alt="_images/transition_diagram_2.png" src="_images/transition_diagram_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specification-emission-probabilities">
+<h3><a class="toc-backref" href="#id9">Specification - Emission probabilities</a><a class="headerlink" href="#specification-emission-probabilities" title="Permalink to this headline">¶</a></h3>
+<p>We now define the conditional distributions of the observed variables <span class="math notranslate nohighlight">\(p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi})\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span> is a set of parameters governing the distribution.</p>
+<p>These emission probabilities can be given by:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Gaussians if the elements of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are coninuous variables,</p></li>
+<li><p>or conditional probability tables if <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is discrete.</p></li>
+</ol>
+</div></blockquote>
+<p>Because <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> is observed, given <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span>, <span class="math notranslate nohighlight">\(p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi})\)</span> consists of a vector of K numbers, corresponding to the K possible states of the binary vector <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi}) = \prod\limits_{k=1}^K p(\mathbf{x}_n | \mathbf{\phi})^{z^n_k}.\]</div>
+<p><em>Note:</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>We will assume a <em>homogeneous</em> model, where the parameters <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span> are shared.</p></li>
+<li><dl class="simple">
+<dt>A mixture model for an i.i.d. data set corresponds to the case where <span class="math notranslate nohighlight">\(A_{jk}\)</span> are the same for all j. The conditional distribution <span class="math notranslate nohighlight">\(p(\mathbf{z}_n | \mathbf{z}_{n-1})\)</span> is independent of <span class="math notranslate nohighlight">\(\mathbf{z}_{n-1}\)</span>.</dt><dd><ul>
+<li><p>corresponds to deleting the horizontal links in <a class="reference internal" href="#figure-13-5"><span class="std std-numref">Fig. 1</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="specification-joint-probability">
+<h3><a class="toc-backref" href="#id10">Specification - Joint probability</a><a class="headerlink" href="#specification-joint-probability" title="Permalink to this headline">¶</a></h3>
+<p>The joint probability distribution over both latent and observed variables is given by:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}) = p(\mathbf{z_1}|\mathbf{\pi}) \Big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1} \mathbf{A} ) \Big]  \prod\limits_{m=1}^N p(\mathbf{x}|\mathbf{z}, \mathbf{\phi}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{X} = \{ \mathbf{x}_1, ...,  \mathbf{x}_N \}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{Z} = \{ \mathbf{z}_1, ...,  \mathbf{z}_N \}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}\)</span> is the set of parameters.</p>
+<p><em>Note:</em> more general form: <a class="reference internal" href="#equation-equ1">Eq.1</a></p>
+</div>
 </div>
 </div>
 
