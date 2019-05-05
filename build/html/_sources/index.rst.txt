@@ -13,6 +13,7 @@ Welcome to Yixuan's documentation!
    latex.rst
    hoare_logic.rst
    first_order_theory.rst
+   hmm.rst
    reading.rst
 
 
