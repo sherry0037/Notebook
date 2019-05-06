@@ -201,9 +201,116 @@ Specification - Joint probability
 The joint probability distribution over both latent and observed variables is given by:
 
 .. math::
+    :label: equ_joint_prob
     
-    p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}) = p(\mathbf{z_1}|\mathbf{\pi}) \Big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1} \mathbf{A} ) \Big]  \prod\limits_{m=1}^N p(\mathbf{x}|\mathbf{z}, \mathbf{\phi}),
+    p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}) = p(\mathbf{z_1}|\mathbf{\pi}) \Big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \Big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}),
 
 where :math:`\mathbf{X} = \{ \mathbf{x}_1, ...,  \mathbf{x}_N \}`, :math:`\mathbf{Z} = \{ \mathbf{z}_1, ...,  \mathbf{z}_N \}`, and :math:`\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}` is the set of parameters.
 
 *Note:* more general form: :eq:`equ1`
+
+
+Expectation maximization algorithm
+------------------------------------------------
+If we have observed a dataset :math:`\mathbf{X} = {\mathbf{x_1}, ... \mathbf{x_N}}`, we can determine the parameters of the HMM model using maximum likelihood. The likelihood function is:
+
+.. math::
+
+    p(\mathbf{X}|\mathbf{\theta}) = \sum\limits_\mathbf{Z}  p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}),
+
+where we marginalize over the latent variables in :eq:`equ_joint_prob`.
+
+We use the **expectation maximization algorithm** to maximize the likelihood function efficiently. The EM algorithm starts with some initial selection for the model parameters, denoted as :math:`\mathbf{\theta}^{old}`.
+
+- **E step**:
+
+    - first find the posterior distribution of the latent variables :math:`p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})`.
+
+    - then we evaluate the expectation of the logarithm of the complete-data likelihood function:
+
+    .. math::
+        :label: equ_expect_likelihood
+
+        Q(\mathbf{\theta}, \mathbf{\theta}^{old}) = \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}).
+
+.. topic:: Quantities to evaluate
+
+    We introduce some new notations for convenience.
+
+        - the marginal posterior distribution of a latent variable :math:`\mathbf{z}_n`:
+
+        .. math::
+
+            \gamma(\mathbf{z}_n) = p(\mathbf{z}_n| \mathbf{X}, \mathbf{\theta}^{old})
+
+        - the joint posterior distribution of two successive latent variables:
+
+        .. math::
+
+            \xi(\mathbf{z}_{n-1}, \mathbf{z}_n) = p(\mathbf{z}_{n-1}, \mathbf{z}_n | \mathbf{X}, \mathbf{\theta}^{old}).
+
+
+For each value of :math:`n`, we store 
+    - :math:`\gamma(\mathbf{z}_n)` using a set of K nonnegative numbers (sum to 1)
+    - :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n) ` using a :math:`K\times K` matrix of nonnegative numbers (sum to 1)
+
+**The goal of the E step is to evaluate these quantities efficiently.** See details in later sections.
+
+We use :math:`\gamma(z_k^n)` to denote the conditional probability of :math:`z^n_k = 1` and similar for :math:`\xi(z^{n-1}_j, z^n_k)`. We have the following equations:
+
+.. math::
+
+    \gamma(z^n_{k}) &= p(z^n_{k} = 1| \mathbf{X}, \mathbf{\theta}^{old})\\
+                    &= \mathbb{E}[z^n_{k}] = \sum_\mathbf{z}\gamma(\mathbf{z}) z^n_{k}\\
+    \xi(z^{n-1}_{j}, z^n_k) &= p(z^{n-1}_{j} = 1 , z^n_k = 1| \mathbf{X}, \mathbf{\theta}^{old})\\
+                    &= \mathbb{E}[z^{n-1}_{j}z^n_k] = \sum_\mathbf{z}\gamma(\mathbf{z}) z^{n-1}_{j}z^n_k.
+
+Now we substitute :eq:`equ_joint_prob` into :eq:`equ_expect_likelihood`, and use the above notations, we have:
+
+.. math::
+    :label: equ_expect_likelihood_2
+
+     Q(\mathbf{\theta}, \mathbf{\theta}^{old}) 
+     &= \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} 
+     \Big[ p(\mathbf{z_1}|\mathbf{\pi}) \big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}) \Big]\\
+     &= \sum\limits_{k=1}^K  \gamma(z^1_{k}) \text{ln} \pi_k + \sum\limits_{n=2}^K \sum\limits_{j=1}^K \sum\limits_{k=1}^K \xi(z^{n-1}_{j}, z^n_k) \text{ln} A_{jk} + \sum\limits_{n=1}^N \sum\limits_{k=1}^K \gamma(z^n_{k}) \text{ln} p(\mathbf{x}_n |\phi_k).
+
+--------------------------------
+
+- **M step**:
+    In the M step, we maximize :math:`Q(\mathbf{\theta}, \mathbf{\theta}^{old})` with respect to the parameters :math:`\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}`, where we treat :math:`\gamma(\mathbf{z}_n)` and :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)` as constant.
+
+
+.. topic:: Parameters Updates
+    
+    Using appropriate Lagrange multipliers, we get the optimal values of :math:`\pi` and :math:`\mathbf{A}`:
+
+    .. math::
+        \pi_k &= \frac{\gamma(z_k^1)}{\sum\limits_{j=1}^K \gamma(z^1_j)}\\
+        A_{jk} &= \frac{\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_k)}{\sum\limits_{l=1}^K\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_l)}
+
+*Note:* if any element of :math:`\pi` and :math:`\mathbf{A}` are set to zero initially, it will remain zero in subsequent EM updates.
+
+For maximizing :math:`Q(\mathbf{\theta}, \mathbf{\theta}^{old})` with respect to :math:`\mathbf{\phi}_k`, we notice that only the final term in :eq:`equ_expect_likelihood_2` depends on :math:`\mathbf{\phi}_k`. The calculations depend on the emission densities we choose.
+
+.. topic:: Parameters Updates
+
+    Suppose we have Gaussian emission densities :math:`p(\mathbf{x}_n |\phi_k) = \mathcal{N}(\mathbf{x}| \mathbf{\mu}_k, \mathbf{\Sigma}_k)`:
+
+    .. math::
+
+        \mathbf{\mu}_k &= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)\mathbf{x}_n}{\sum\limits_{n=1}^N  \gamma(z^n_k)}\\
+        \mathbf{\Sigma}_k &= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)(\mathbf{x}_n - \mathbf{\mu}_n)(\mathbf{x}_n - \mathbf{\mu}_n)^T }{\sum\limits_{n=1}^N  \gamma(z^n_k)}\\
+
+
+    Suppose we have discrete multinomial observed variables, where
+
+    .. math::
+
+        p(\mathbf{x}|\mathbf{z}) = \prod\limits^D_{i=1}\prod\limits^K_{k=1} \mu_{ik}^{x_iz_k}
+
+    then the M-step equations are:
+
+    .. math::
+
+        \mu_{ik} &= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)x^n_i}{\sum\limits_{n=1}^N \gamma(z^n_k)}\\
