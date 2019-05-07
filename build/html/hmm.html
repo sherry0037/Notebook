@@ -50,7 +50,12 @@
 <li><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram">Specification - Transition probabilities, matrix and diagram</a></li>
 <li><a class="reference internal" href="#specification-emission-probabilities">Specification - Emission probabilities</a></li>
 <li><a class="reference internal" href="#specification-joint-probability">Specification - Joint probability</a></li>
-<li><a class="reference internal" href="#expectation-maximization-algorithm">Expectation maximization algorithm</a></li>
+<li><a class="reference internal" href="#expectation-maximization-algorithm">Expectation-Maximization algorithm</a><ul>
+<li><a class="reference internal" href="#the-e-step">The E step</a></li>
+<li><a class="reference internal" href="#the-m-step">The M step</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-forward-backward-algorithm">The forward-backward algorithm</a></li>
 </ul>
 </li>
 </ul>
@@ -108,7 +113,13 @@
 <li><p><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram" id="id8">Specification - Transition probabilities, matrix and diagram</a></p></li>
 <li><p><a class="reference internal" href="#specification-emission-probabilities" id="id9">Specification - Emission probabilities</a></p></li>
 <li><p><a class="reference internal" href="#specification-joint-probability" id="id10">Specification - Joint probability</a></p></li>
-<li><p><a class="reference internal" href="#expectation-maximization-algorithm" id="id11">Expectation maximization algorithm</a></p></li>
+<li><p><a class="reference internal" href="#expectation-maximization-algorithm" id="id11">Expectation-Maximization algorithm</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-e-step" id="id12">The E step</a></p></li>
+<li><p><a class="reference internal" href="#the-m-step" id="id13">The M step</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#the-forward-backward-algorithm" id="id14">The forward-backward algorithm</a></p></li>
 </ul>
 </li>
 </ul>
@@ -285,24 +296,20 @@
 <p><em>Note:</em> more general form: <a class="reference internal" href="#equation-equ1">Eq.1</a></p>
 </div>
 <div class="section" id="expectation-maximization-algorithm">
-<h3><a class="toc-backref" href="#id11">Expectation maximization algorithm</a><a class="headerlink" href="#expectation-maximization-algorithm" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id11">Expectation-Maximization algorithm</a><a class="headerlink" href="#expectation-maximization-algorithm" title="Permalink to this headline">¶</a></h3>
 <p>If we have observed a dataset <span class="math notranslate nohighlight">\(\mathbf{X} = {\mathbf{x_1}, ... \mathbf{x_N}}\)</span>, we can determine the parameters of the HMM model using maximum likelihood. The likelihood function is:</p>
 <div class="math notranslate nohighlight">
 \[p(\mathbf{X}|\mathbf{\theta}) = \sum\limits_\mathbf{Z}  p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}),\]</div>
 <p>where we marginalize over the latent variables in <a class="reference internal" href="#equation-equ-joint-prob">Eq.2</a>.</p>
 <p>We use the <strong>expectation maximization algorithm</strong> to maximize the likelihood function efficiently. The EM algorithm starts with some initial selection for the model parameters, denoted as <span class="math notranslate nohighlight">\(\mathbf{\theta}^{old}\)</span>.</p>
-<ul>
-<li><p><strong>E step</strong>:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>first find the posterior distribution of the latent variables <span class="math notranslate nohighlight">\(p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})\)</span>.</p></li>
-<li><p>then we evaluate the expectation of the logarithm of the complete-data likelihood function:</p></li>
+<div class="section" id="the-e-step">
+<h4><a class="toc-backref" href="#id12">The E step</a><a class="headerlink" href="#the-e-step" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>First find the posterior distribution of the latent variables <span class="math notranslate nohighlight">\(p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})\)</span>.</p></li>
+<li><p>Then we evaluate the expectation of the logarithm of the complete-data likelihood function:</p></li>
 </ul>
 <div class="math notranslate nohighlight" id="equation-equ-expect-likelihood">
 <span class="eqno">(3)<a class="headerlink" href="#equation-equ-expect-likelihood" title="Permalink to this equation">¶</a></span>\[Q(\mathbf{\theta}, \mathbf{\theta}^{old}) = \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}).\]</div>
-</div></blockquote>
-</li>
-</ul>
 <div class="topic">
 <p class="topic-title first">Quantities to evaluate</p>
 <p>We introduce some new notations for convenience.</p>
@@ -339,14 +346,10 @@
  &amp;= \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln}
  \Big[ p(\mathbf{z_1}|\mathbf{\pi}) \big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}) \Big]\\
  &amp;= \sum\limits_{k=1}^K  \gamma(z^1_{k}) \text{ln} \pi_k + \sum\limits_{n=2}^K \sum\limits_{j=1}^K \sum\limits_{k=1}^K \xi(z^{n-1}_{j}, z^n_k) \text{ln} A_{jk} + \sum\limits_{n=1}^N \sum\limits_{k=1}^K \gamma(z^n_{k}) \text{ln} p(\mathbf{x}_n |\phi_k).\end{split}\]</div>
-<hr class="docutils" />
-<ul class="simple">
-<li><dl class="simple">
-<dt><strong>M step</strong>:</dt><dd><p>In the M step, we maximize <span class="math notranslate nohighlight">\(Q(\mathbf{\theta}, \mathbf{\theta}^{old})\)</span> with respect to the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}\)</span>, where we treat <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> and <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span> as constant.</p>
-</dd>
-</dl>
-</li>
-</ul>
+</div>
+<div class="section" id="the-m-step">
+<h4><a class="toc-backref" href="#id13">The M step</a><a class="headerlink" href="#the-m-step" title="Permalink to this headline">¶</a></h4>
+<p>In the M step, we maximize <span class="math notranslate nohighlight">\(Q(\mathbf{\theta}, \mathbf{\theta}^{old})\)</span> with respect to the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}\)</span>, where we treat <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> and <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span> as constant.</p>
 <div class="topic">
 <p class="topic-title first">Parameters Updates</p>
 <p>Using appropriate Lagrange multipliers, we get the optimal values of <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
@@ -368,6 +371,63 @@ A_{jk} &amp;= \frac{\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_k)}{\sum\limits_{l=1}
 <p>then the M-step equations are:</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}\mu_{ik} &amp;= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)x^n_i}{\sum\limits_{n=1}^N \gamma(z^n_k)}\\\end{split}\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-forward-backward-algorithm">
+<h3><a class="toc-backref" href="#id14">The forward-backward algorithm</a><a class="headerlink" href="#the-forward-backward-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>For the E step of the EM algorithm, we want to find a efficient way to evaluate <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> and <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>. The posterior distribution of the latent variables can be obtained efficiently using a two-stage message passing algorithm. In this context, it is the <em>forward-backward algotirhm</em>, or the <em>Baum-Welch algorithm</em>.</p>
+<p>From now on, we will emit the dependence on the model parameter <span class="math notranslate nohighlight">\(\theta^{old}\)</span> as they are fixed.</p>
+<p>Let’s start with <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span>. Using Bayes’ theorem and conditional independence property, we have:</p>
+<div class="math notranslate nohighlight" id="equation-equ-forward-backward">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-forward-backward" title="Permalink to this equation">¶</a></span>\[\begin{split}\gamma(\mathbf{z}_n) &amp;= p(\mathbf{z}|\mathbf{X}) = \frac{p(\mathbf{X}|\mathbf{z}_n)p(\mathbf{z}_n)}{p(\mathbf{X})} \\
+&amp;= \frac{p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)p(\mathbf{x}_{n+1}, ..., \mathbf{N}|\mathbf{z}_n)}{p(\mathbf{x}_N)} \\
+&amp;= \frac{\alpha(\mathbf{z}_n)\beta(\mathbf{z}_n)}{p(\mathbf{X})},\end{split}\]</div>
+<p>where we define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha(\mathbf{z}_n) &amp;:= p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)\\
+\beta(\mathbf{z}_n) &amp;:= p(\mathbf{x}_{n+1}, ..., \mathbf{x}_N|\mathbf{z}_n)\end{split}\]</div>
+<p><em>Note:</em>  Given <span class="math notranslate nohighlight">\(\mathbf{X} = \{\mathbf{x}_1, ..., \mathbf{x}_N \}\)</span>, every path from any one of the nodes <span class="math notranslate nohighlight">\(\mathbf{x}_1, ... \mathbf{x}_{n-1}\)</span> to the node <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> passes through the node <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>, which is observed. All such path are head-to-tail. Check topics on <em>Graphical Models</em> for proving conditional independence properties.</p>
+<div class="topic">
+<p class="topic-title first">Forward Recursion for <span class="math notranslate nohighlight">\(\alpha(\mathbf{z}_n)\)</span></p>
+<p>We can evaluate <span class="math notranslate nohighlight">\(\alpha(\mathbf{z}_n)\)</span> recursively in the forward direction:</p>
+<div class="math notranslate nohighlight">
+\[\alpha(\mathbf{z}_n) := p(\mathbf{x}_n|\mathbf{z}_n)\sum\limits_{\mathbf{z}_{n-1}}\alpha(\mathbf{z}_{n-1})p(\mathbf{z}_n|\mathbf{z}_{n-1}).\]</div>
+<p><em>Note:</em> There are K terms in the summation for each of the K values of <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>, which gives a cost of <span class="math notranslate nohighlight">\(O(K^2)\)</span>. The overall cost of evaluating the whole chain is of <span class="math notranslate nohighlight">\(O(K^2N)\)</span>.</p>
+<p>The initial condition is given by:</p>
+<div class="math notranslate nohighlight">
+\[\alpha(\mathbf{z}_1) := p(\mathbf{x}_1, \mathbf{z}_1) = p(\mathbf{z}_1)p(\mathbf{x}_1|\mathbf{z}_1) = \prod\limits_{k=1}^K(\pi_k p(\mathbf{x}_1|\mathbf{\phi}_k))^{z_k^1},\]</div>
+<p>which means that for <span class="math notranslate nohighlight">\(k = 1, ... K\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\alpha(z^1_k) = \pi_k p(\mathbf{x}_1|\mathbf{\phi}_k).\]</div>
+</div>
+<div class="figure align-center">
+<img alt="_images/forward.png" src="_images/forward.png" />
+</div>
+<div class="topic">
+<p class="topic-title first">Backward Resursion for <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span></p>
+<p>Similarly we can find the recursive relation for <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span>. In this case, we have a backward message passing algorithm that evaluate <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span> in terms of <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_{n+1})\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\beta(\mathbf{z}_n) &amp;:= \beta(\mathbf{z}_{n+1})p(\mathbf{x}_{n+1}|\mathbf{z}_{n+1})p(\mathbf{z}_{n+1}|\mathbf{z}_{n})\\\end{split}\]</div>
+<p>To obtain the initial value, we set <span class="math notranslate nohighlight">\(n = N\)</span> in <a class="reference internal" href="#equation-equ-forward-backward">Eq.5</a> and get:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{z}_N|\mathbf{X}) = \frac{p(\mathbf{X}, \mathbf{z}_N)\beta(\mathbf{z}_N)}{p(X)}.\]</div>
+<p>which is correct if we take <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_N) = 1\)</span> for all settings of <span class="math notranslate nohighlight">\(\mathbf{z}_N\)</span>.</p>
+</div>
+<div class="figure align-center">
+<img alt="_images/backward.png" src="_images/backward.png" />
+</div>
+<p>It is useful to monitor the likelihood function <span class="math notranslate nohighlight">\(p(\mathbf{X})\)</span> during the EM optimization. From <a class="reference internal" href="#equation-equ-forward-backward">Eq.5</a>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(\mathbf{X}) &amp;= \sum\limits_{\mathbf{z}_n} \alpha(\mathbf{z}_n)\beta(\mathbf{z}_n) \\
+            &amp;=  \sum\limits_{\mathbf{z}_N} \alpha(\mathbf{z}_N).\end{split}\]</div>
+<p>Now consider <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>, which correspond to the value of the conditional probablities <span class="math notranslate nohighlight">\(p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X})\)</span> for each of the <span class="math notranslate nohighlight">\(K\times K\)</span> settings for <span class="math notranslate nohighlight">\((\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>. Use Bayes’ theorem, we have:</p>
+<div class="math notranslate nohighlight" id="equation-equ-forward-backward-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-forward-backward-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\xi(\mathbf{z}_{n-1}, \mathbf{z}_n) &amp;= p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X}) \\
+&amp;= \frac{\alpha(\mathbf{z}_{n-1})p(\mathbf{x}_{n}|\mathbf{z}_n)p(\mathbf{z}_{n}| \mathbf{z}_{n-1})\beta(\mathbf{z}_n)}{p(\mathbf{X})}\end{split}\]</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Add a summary for the EM algorithm.</p>
 </div>
 </div>
 </div>

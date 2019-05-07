@@ -210,7 +210,7 @@ where :math:`\mathbf{X} = \{ \mathbf{x}_1, ...,  \mathbf{x}_N \}`, :math:`\mathb
 *Note:* more general form: :eq:`equ1`
 
 
-Expectation maximization algorithm
+Expectation-Maximization algorithm
 ------------------------------------------------
 If we have observed a dataset :math:`\mathbf{X} = {\mathbf{x_1}, ... \mathbf{x_N}}`, we can determine the parameters of the HMM model using maximum likelihood. The likelihood function is:
 
@@ -222,16 +222,18 @@ where we marginalize over the latent variables in :eq:`equ_joint_prob`.
 
 We use the **expectation maximization algorithm** to maximize the likelihood function efficiently. The EM algorithm starts with some initial selection for the model parameters, denoted as :math:`\mathbf{\theta}^{old}`.
 
-- **E step**:
 
-    - first find the posterior distribution of the latent variables :math:`p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})`.
+The E step
+***********
 
-    - then we evaluate the expectation of the logarithm of the complete-data likelihood function:
+- First find the posterior distribution of the latent variables :math:`p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})`.
 
-    .. math::
-        :label: equ_expect_likelihood
+- Then we evaluate the expectation of the logarithm of the complete-data likelihood function:
 
-        Q(\mathbf{\theta}, \mathbf{\theta}^{old}) = \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}).
+.. math::
+    :label: equ_expect_likelihood
+
+    Q(\mathbf{\theta}, \mathbf{\theta}^{old}) = \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}).
 
 .. topic:: Quantities to evaluate
 
@@ -275,10 +277,9 @@ Now we substitute :eq:`equ_joint_prob` into :eq:`equ_expect_likelihood`, and use
      \Big[ p(\mathbf{z_1}|\mathbf{\pi}) \big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}) \Big]\\
      &= \sum\limits_{k=1}^K  \gamma(z^1_{k}) \text{ln} \pi_k + \sum\limits_{n=2}^K \sum\limits_{j=1}^K \sum\limits_{k=1}^K \xi(z^{n-1}_{j}, z^n_k) \text{ln} A_{jk} + \sum\limits_{n=1}^N \sum\limits_{k=1}^K \gamma(z^n_{k}) \text{ln} p(\mathbf{x}_n |\phi_k).
 
---------------------------------
-
-- **M step**:
-    In the M step, we maximize :math:`Q(\mathbf{\theta}, \mathbf{\theta}^{old})` with respect to the parameters :math:`\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}`, where we treat :math:`\gamma(\mathbf{z}_n)` and :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)` as constant.
+The M step
+************
+In the M step, we maximize :math:`Q(\mathbf{\theta}, \mathbf{\theta}^{old})` with respect to the parameters :math:`\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}`, where we treat :math:`\gamma(\mathbf{z}_n)` and :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)` as constant.
 
 
 .. topic:: Parameters Updates
@@ -314,3 +315,102 @@ For maximizing :math:`Q(\mathbf{\theta}, \mathbf{\theta}^{old})` with respect to
     .. math::
 
         \mu_{ik} &= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)x^n_i}{\sum\limits_{n=1}^N \gamma(z^n_k)}\\
+
+
+
+
+The forward-backward algorithm
+------------------------------------------------
+For the E step of the EM algorithm, we want to find a efficient way to evaluate :math:`\gamma(\mathbf{z}_n)` and :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)`. The posterior distribution of the latent variables can be obtained efficiently using a two-stage message passing algorithm. In this context, it is the *forward-backward algotirhm*, or the *Baum-Welch algorithm*.
+
+From now on, we will emit the dependence on the model parameter :math:`\theta^{old}` as they are fixed.
+
+Let's start with :math:`\gamma(\mathbf{z}_n)`. Using Bayes' theorem and conditional independence property, we have:
+
+.. math::
+    :label: equ_forward_backward
+    
+    \gamma(\mathbf{z}_n) &= p(\mathbf{z}|\mathbf{X}) = \frac{p(\mathbf{X}|\mathbf{z}_n)p(\mathbf{z}_n)}{p(\mathbf{X})} \\
+    &= \frac{p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)p(\mathbf{x}_{n+1}, ..., \mathbf{N}|\mathbf{z}_n)}{p(\mathbf{x}_N)} \\
+    &= \frac{\alpha(\mathbf{z}_n)\beta(\mathbf{z}_n)}{p(\mathbf{X})},
+
+where we define
+
+.. math::
+
+    \alpha(\mathbf{z}_n) &:= p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)\\
+    \beta(\mathbf{z}_n) &:= p(\mathbf{x}_{n+1}, ..., \mathbf{x}_N|\mathbf{z}_n)
+
+*Note:*  Given :math:`\mathbf{X} = \{\mathbf{x}_1, ..., \mathbf{x}_N \}`, every path from any one of the nodes :math:`\mathbf{x}_1, ... \mathbf{x}_{n-1}` to the node :math:`\mathbf{x}_n` passes through the node :math:`\mathbf{z}_n`, which is observed. All such path are head-to-tail. Check topics on *Graphical Models* for proving conditional independence properties.
+
+.. topic:: Forward Recursion for :math:`\alpha(\mathbf{z}_n)` 
+
+    We can evaluate :math:`\alpha(\mathbf{z}_n)` recursively in the forward direction:
+
+    .. math::
+    
+        \alpha(\mathbf{z}_n) := p(\mathbf{x}_n|\mathbf{z}_n)\sum\limits_{\mathbf{z}_{n-1}}\alpha(\mathbf{z}_{n-1})p(\mathbf{z}_n|\mathbf{z}_{n-1}).
+
+    *Note:* There are K terms in the summation for each of the K values of :math:`\mathbf{z}_n`, which gives a cost of :math:`O(K^2)`. The overall cost of evaluating the whole chain is of :math:`O(K^2N)`.
+
+    The initial condition is given by:
+
+    .. math::
+
+        \alpha(\mathbf{z}_1) := p(\mathbf{x}_1, \mathbf{z}_1) = p(\mathbf{z}_1)p(\mathbf{x}_1|\mathbf{z}_1) = \prod\limits_{k=1}^K(\pi_k p(\mathbf{x}_1|\mathbf{\phi}_k))^{z_k^1},
+
+    which means that for :math:`k = 1, ... K`,
+
+    .. math::
+
+        \alpha(z^1_k) = \pi_k p(\mathbf{x}_1|\mathbf{\phi}_k).
+
+
+
+
+
+.. figure:: _static/hidden_markov_models/forward.png     
+
+
+
+
+.. topic :: Backward Resursion for :math:`\beta(\mathbf{z}_n)`
+
+    Similarly we can find the recursive relation for :math:`\beta(\mathbf{z}_n)`. In this case, we have a backward message passing algorithm that evaluate :math:`\beta(\mathbf{z}_n)` in terms of :math:`\beta(\mathbf{z}_{n+1})`.
+
+    .. math::
+
+        \beta(\mathbf{z}_n) &:= \beta(\mathbf{z}_{n+1})p(\mathbf{x}_{n+1}|\mathbf{z}_{n+1})p(\mathbf{z}_{n+1}|\mathbf{z}_{n})\\
+
+
+    To obtain the initial value, we set :math:`n = N` in :eq:`equ_forward_backward` and get:
+
+    .. math::
+
+        p(\mathbf{z}_N|\mathbf{X}) = \frac{p(\mathbf{X}, \mathbf{z}_N)\beta(\mathbf{z}_N)}{p(X)}.
+
+    which is correct if we take :math:`\beta(\mathbf{z}_N) = 1` for all settings of :math:`\mathbf{z}_N`.
+
+
+.. figure:: _static/hidden_markov_models/backward.png    
+
+
+It is useful to monitor the likelihood function :math:`p(\mathbf{X})` during the EM optimization. From :eq:`equ_forward_backward`, we have:
+
+.. math:: 
+    
+    p(\mathbf{X}) &= \sum\limits_{\mathbf{z}_n} \alpha(\mathbf{z}_n)\beta(\mathbf{z}_n) \\
+                &=  \sum\limits_{\mathbf{z}_N} \alpha(\mathbf{z}_N).
+
+
+Now consider :math:`\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)`, which correspond to the value of the conditional probablities :math:`p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X})` for each of the :math:`K\times K` settings for :math:`(\mathbf{z}_{n-1}, \mathbf{z}_n)`. Use Bayes' theorem, we have:
+
+.. math::
+    :label: equ_forward_backward_2
+
+    \xi(\mathbf{z}_{n-1}, \mathbf{z}_n) &= p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X}) \\
+    &= \frac{\alpha(\mathbf{z}_{n-1})p(\mathbf{x}_{n}|\mathbf{z}_n)p(\mathbf{z}_{n}| \mathbf{z}_{n-1})\beta(\mathbf{z}_n)}{p(\mathbf{X})} 
+
+.. admonition:: TODO
+
+    Add a summary for the EM algorithm.
