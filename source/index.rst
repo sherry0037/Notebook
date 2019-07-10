@@ -15,6 +15,7 @@ Welcome to Yixuan's documentation!
    first_order_theory.rst
    hmm.rst
    reading.rst
+   jsp.rst
 
 
 
