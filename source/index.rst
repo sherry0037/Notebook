@@ -16,6 +16,8 @@ Welcome to Yixuan's documentation!
    hmm.rst
    reading.rst
    jsp.rst
+   spring_in_action.rst
+   git.rst
 
 
 
