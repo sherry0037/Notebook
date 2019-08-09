@@ -36,5 +36,20 @@ How to modify commits?
     Do any change normally. After editing, type
 
     `git rebase --continue`
+    
+     to return back to HEAD.
 
-    to return back to HEAD.
+----------------------------------
+Different ways to do `git pull`
+----------------------------------
+- `git pull` does a `git fetch` to pull down data from the specified remote, and then calls `git merge` to join the changes received with your current branch’s work. 
+
+- use `git pull --rebase` to reapply your work on top of the incoming changes.
+    `git pull --rebase <remote name> <branch name>`
+
+----------------------------------
+Stash the changes
+----------------------------------
+- use `git stash` to save all the changes.
+
+- use `git stash apply` to get the latest stashed changes back.
