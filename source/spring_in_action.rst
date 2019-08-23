@@ -146,4 +146,3 @@ Autowiring beans
 ==============================================
 Autowiring is a means of letting Spring automatically satisfy a bean's dependencies by finding other beans in the application context that are a match to the bean's needs. ``@Autowired`` annotation is used for this case.
 
->>>>>>> Add Spring in Action note
