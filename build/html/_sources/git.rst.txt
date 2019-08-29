@@ -1,7 +1,7 @@
 ================================
-Git Commends Reference
+Git Commands Reference
 ================================
-Some useful git commends.
+Some useful git commands.
 
 ----------------------------------
 How to undo commits/add?
