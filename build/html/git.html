@@ -1,0 +1,172 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Git Commends Reference &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Spring in Action - Notes" href="spring_in_action.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="spring_in_action.html" title="Spring in Action - Notes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Git Commends Reference</a><ul>
+<li><a class="reference internal" href="#how-to-undo-commits-add">How to undo commits/add?</a></li>
+<li><a class="reference internal" href="#how-to-modify-commits">How to modify commits?</a></li>
+<li><a class="reference internal" href="#different-ways-to-do-git-pull">Different ways to do <cite>git pull</cite></a></li>
+<li><a class="reference internal" href="#stash-the-changes">Stash the changes</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="spring_in_action.html"
+                        title="previous chapter">Spring in Action - Notes</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/git.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="git-commends-reference">
+<h1>Git Commends Reference<a class="headerlink" href="#git-commends-reference" title="Permalink to this headline">¶</a></h1>
+<p>Some useful git commends.</p>
+<div class="section" id="how-to-undo-commits-add">
+<h2>How to undo commits/add?<a class="headerlink" href="#how-to-undo-commits-add" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Undo the latest commit and keep changed files:</dt><dd><p><cite>git reset –soft HEAD~1</cite></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Undo the latest commit and discard all changes:</dt><dd><p><cite>git reset –hard HEAD~1</cite></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Undo adding a file:</dt><dd><p><cite>git reset [filename]</cite></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Undo adding all files:</dt><dd><p><cite>git reset</cite></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="how-to-modify-commits">
+<h2>How to modify commits?<a class="headerlink" href="#how-to-modify-commits" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>Modify most recent commit:</dt><dd><p><cite>git commit –amend</cite></p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Modify older commits:</dt><dd><p>For example, if you want to modify commit bbc643cd, run</p>
+<p><cite>git rebase –interactive ‘bbc643cd^’</cite></p>
+<p>to rebase back to the commit before the one you wish to modify.</p>
+<p>In the default editor, modify pick to edit in the line mentioning ‘bbc643cd’.</p>
+<p>Do any change normally. After editing, type</p>
+<p><cite>git rebase –continue</cite></p>
+<blockquote>
+<div><p>to return back to HEAD.</p>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="different-ways-to-do-git-pull">
+<h2>Different ways to do <cite>git pull</cite><a class="headerlink" href="#different-ways-to-do-git-pull" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><cite>git pull</cite> does a <cite>git fetch</cite> to pull down data from the specified remote, and then calls <cite>git merge</cite> to join the changes received with your current branch’s work.</p></li>
+<li><dl class="simple">
+<dt>use <cite>git pull –rebase</cite> to reapply your work on top of the incoming changes.</dt><dd><p><cite>git pull –rebase &lt;remote name&gt; &lt;branch name&gt;</cite></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="stash-the-changes">
+<h2>Stash the changes<a class="headerlink" href="#stash-the-changes" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>use <cite>git stash</cite> to save all the changes.</p></li>
+<li><p>use <cite>git stash apply</cite> to get the latest stashed changes back.</p></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="spring_in_action.html" title="Spring in Action - Notes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

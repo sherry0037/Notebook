@@ -1,0 +1,200 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Useful Commands &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Useful Commands</a><ul>
+<li><a class="reference internal" href="#code-review">Code Review</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#cloud-desktop">Cloud Desktop</a></li>
+<li><a class="reference internal" href="#dynamodb-local">DynamoDB Local</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/amazon/commands.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="useful-commands">
+<h1>Useful Commands<a class="headerlink" href="#useful-commands" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="code-review">
+<h2>Code Review<a class="headerlink" href="#code-review" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Update code review:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">cr</span> <span class="pre">--update-review</span> <span class="pre">CR-</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Include multiple packages:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">cr</span> <span class="pre">-i</span> <span class="pre">[pk1]</span> <span class="pre">-i</span> <span class="pre">[pk2]</span></code>
+<code class="docutils literal notranslate"><span class="pre">cr</span> <span class="pre">--include</span> <span class="pre">[pk1],</span> <span class="pre">[pk2]</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Include only the latest commit</dt><dd><p><code class="docutils literal notranslate"><span class="pre">cr</span> <span class="pre">-i</span> <span class="pre">[pk1][HEAD^]</span></code></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dry run build:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">brazil</span> <span class="pre">workspace</span> <span class="pre">--dryrun</span></code></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Show lines includ “ERROR”</dt><dd><p>cat BusinessAccountConsole.2019-07-12-20 | grep “ERROR” | wc -l
+cat BusinessAccountConsole.2019-07-12-20 | grep “ERROR” | less</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Go inside RDE and check logs</dt><dd><p>Rde stack exec BusinessAccountConsole
+cd /apollo/env/BusinessAccountConsole/var/output/logs/
+find . | grep log</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="cloud-desktop">
+<h2>Cloud Desktop<a class="headerlink" href="#cloud-desktop" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Your Cloud Desktop host type</dt><dd><ul>
+<li><p>M4-2xlarge</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>The correct fleet</dt><dd><ul>
+<li><p>Dev-dsk</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Hose name</dt><dd><p>dev-dsk-niyixuan-1d-8344f87b.us-east-1.amazon.com</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Group</dt><dd><p>ab-identity-dev</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>CNAME (Alias)</dt><dd><p>niyixuan-clouddesk.aka.corp.amazon.com
+niyixuan.aka.corp.amazon.com</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Test after build:</dt><dd><p><a class="reference external" href="http://dev-dsk-niyixuan-1d-8344f87b.us-east-1.amazon.com:2222/explorer/index.html">http://dev-dsk-niyixuan-1d-8344f87b.us-east-1.amazon.com:2222/explorer/index.html</a></p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="dynamodb-local">
+<h2>DynamoDB Local<a class="headerlink" href="#dynamodb-local" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://w.amazon.com/index.php/RDE/Marketplace/AWS_Resources">https://w.amazon.com/index.php/RDE/Marketplace/AWS_Resources</a></p>
+<p>brazil ws create -n rde -vs live
+cd rde
+brazil ws use -p RDE-DynamoDBLocal
+cd src/RDE-DynamoDBLocal
+rde wflow run provision
+rde wflow run
+rde stack show -a</p>
+<p>When rde wflow run under application package,
+Do <cite>rde stack provision</cite>
+Need to add version set [<a class="reference external" href="https://builderhub.corp.amazon.com/blog/easier-rde-stack-provisioning-through-dedicated-step-and-command/#howcaniusethisnewfunctionality">https://builderhub.corp.amazon.com/blog/easier-rde-stack-provisioning-through-dedicated-step-and-command/#howcaniusethisnewfunctionality</a>]</p>
+<dl class="simple">
+<dt>DynamoDBLocal:</dt><dd><p>…
+apolloShimURI: ../../../rde/src/RDE-DynamoDBLocal/apollo-shim/DynamoDBLocal.json
+versionSet: DynamoDBLocal/transactions
+…</p>
+</dd>
+</dl>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>
