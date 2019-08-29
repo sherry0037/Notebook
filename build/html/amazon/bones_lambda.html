@@ -1,0 +1,278 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Bones Lambda (API Gateway and Coral Clients) &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Bones Lambda (API Gateway and Coral Clients)</a><ul>
+<li><a class="reference internal" href="#bones-environment">Bones Environment</a></li>
+<li><a class="reference internal" href="#generate-packages">Generate Packages</a></li>
+<li><a class="reference internal" href="#generate-pipeline">Generate Pipeline</a></li>
+<li><a class="reference internal" href="#clean-up">Clean up</a></li>
+<li><a class="reference internal" href="#begin-developing">Begin Developing</a></li>
+<li><a class="reference internal" href="#pull-from-remote">Pull from remote</a></li>
+<li><a class="reference internal" href="#invoke-local-endpoint">Invoke local endpoint</a></li>
+<li><a class="reference internal" href="#pipeline-approval-workflow-error">Pipeline Approval Workflow Error</a></li>
+<li><a class="reference internal" href="#hydra-test">Hydra Test</a></li>
+<li><a class="reference internal" href="#debugging">Debugging</a></li>
+<li><a class="reference internal" href="#aws">AWS</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/amazon/bones_lambda.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bones-lambda-api-gateway-and-coral-clients">
+<h1>Bones Lambda (API Gateway and Coral Clients)<a class="headerlink" href="#bones-lambda-api-gateway-and-coral-clients" title="Permalink to this headline">¶</a></h1>
+<p>Follow this <a class="reference external" href="https://builderhub.corp.amazon.com/docs/bones/user-guide/manual-lambda.html">guide</a> to set up API Gateway and corresponding Java clients. Internally, some lambda functions will be generated for managing a DynamoDB table.</p>
+<p>Following is the detailed procedure and bugs I met &amp; fixed.</p>
+<div class="section" id="bones-environment">
+<h2>Bones Environment<a class="headerlink" href="#bones-environment" title="Permalink to this headline">¶</a></h2>
+<p>Bindle: <a class="reference external" href="https://bindles.amazon.com/software_app/B2BIdentity">https://bindles.amazon.com/software_app/B2BIdentity</a>
+Posix: b2b-identity-dev</p>
+<p>export BINDLE_ID=amzn1.bindle.resource.q62encgmejylnchp5aaq
+export BINDLE_NAME=B2BIdentity
+export <a class="reference external" href="mailto:MAIL_LIST=b2b-identity-dev&#37;&#52;&#48;amazon&#46;com">MAIL_LIST=b2b-identity-dev<span>&#64;</span>amazon<span>&#46;</span>com</a>
+export POSIX_TEAM=ab-identity-dev
+export PREFIX=AddLEGReq
+export ORGANIZATION=retail
+export ACCT_DATA_ARG=”–account_id=863944306515”</p>
+</div>
+<div class="section" id="generate-packages">
+<h2>Generate Packages<a class="headerlink" href="#generate-packages" title="Permalink to this headline">¶</a></h2>
+<p>export NAME=”AddLegalEntityRequest”
+brazil ws create -name ${PREFIX}
+cd ${PREFIX}
+export LAMBDA_RUNTIME=java_coral</p>
+<dl class="simple">
+<dt>/apollo/env/OctaneBrazilTools/bin/brazil-octane pkg generate BONES </dt><dd><p>–bindle_guid “${BINDLE_ID}” –org_prefix “${PREFIX}” –organization “${ORGANIZATION}” –mail_list “${MAIL_LIST}” –name “${NAME}” –posix_team “${POSIX_TEAM}” ${ACCT_DATA_ARG}  –lambda_runtime_type “${LAMBDA_RUNTIME}” –create_lambda_pipeline –metrics</p>
+</dd>
+</dl>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>Some git operations failed Command ‘/apollo/env/SDETools/bin/git commit -a -m commitbyOctane’ failed!</p>
+</div>
+</div>
+<div class="section" id="generate-pipeline">
+<h2>Generate Pipeline<a class="headerlink" href="#generate-pipeline" title="Permalink to this headline">¶</a></h2>
+<p>cd src
+/apollo/env/OctaneBrazilTools/bin/brazil-octane ws promote –mailingList “${MAIL_LIST}” –push –bindleName “${BINDLE_NAME}”
+brazil ws use -vs BONESLPT/release
+cd “${NAME}LambdaLpt”
+./configuration/bin/create_pipelines.sh</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>Failed to promote the following packages: AddLegalEntityRequestLambdaModel
+[2019-06-17 21:07:22.586477]: Please use ‘brazil-octane package promote’ individually on these packages to promote them if they are workspace local packages</p>
+<p>Dependent service error: ‘Coul not create the Software Package Bindles resource: 2 policies exist for actor amzn1.bindle.actor-type.tedam amzn1.abacus.team.lo56kanu22wz2y633ria and resourceId amzn1.bindle.resource.gekedzo3webkak5iyy3q. Unable to choose one to update. If you receive this error, please cut us a ticket to resolve this issue.’. Please cut an issue to Octane at <a class="reference external" href="http://tiny.amazon.com/swjji9ay">http://tiny.amazon.com/swjji9ay</a></p>
+<p><strong>Solution</strong> Manually promote the package:</p>
+<blockquote>
+<div><p>cd AddLegalEntityRequestLambdaModel/apollo/env/OctaneBrazilTools/bin/brazil-octane package promote –mailingList “${MAIL_LIST}” –push –bindleName “${BINDLE_NAME}”</p>
+</div></blockquote>
+</div>
+<p>cd “../${PREFIX}BaseLpt”
+brazil-build
+cd “../${NAME}LambdaLpt”</p>
+<p>brazil-build synthesize-cloud-formation
+brazil-build synthesize-hydra</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>FAILED EXECUTING ‘rake’ FOR Ruby23x-1.0! (411.234669382s)
+FAILED BUILDING FOR Ruby23x-1.0! (411.235836803s)
+FAILED BUILDING PACKAGE! (411.235933231s)
+Executing ‘rake’ under Ruby23x-1.0 exited with status 1!</p>
+<blockquote>
+<div><p>BUILD FAILED</p>
+</div></blockquote>
+<p><strong>Solution</strong> Build succeeded after retrying synthesizing pipeline
+Note: This error also occurs when runing rde on Mac</p>
+</div>
+<p>brazil-build synthesize-pipeline</p>
+</div>
+<div class="section" id="clean-up">
+<h2>Clean up<a class="headerlink" href="#clean-up" title="Permalink to this headline">¶</a></h2>
+<p>cd ../${PREFIX}BaseLpt
+git add .
+git commit -m “Adds pipeline IDs”
+git push –set-upstream origin mainline
+brazil vs addtargets -vs “${NAME}Lambda/development” -mv “${NAME}Lambda-1.0”</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>brazil versionset addtargets failed because of an error (Com::Amazon::Devtools::Bmds::Generated::InvalidRequestException) in a downstream service.
+Please try again; if the error persists, follow the troubleshooting guide:</p>
+<p><a class="reference external" href="http://w?BrazilCLI_2.0/Troubleshooting">http://w?BrazilCLI_2.0/Troubleshooting</a></p>
+<p>Exception details: The package [AddLegalEntityRequestLambda-1.0] does not exist in the version set [AddLegalEntityRequestLambda/development]. <cite>(Com::Amazon::Devtools::Bmds::Generated::InvalidRequestException)</cite>
+from: $ENVROOT/ruby2.1.x/lib/ruby/site_ruby/2.1.0/coral/call.rb:52:in <cite>call</cite></p>
+<p><strong>Solution</strong> [This may because previously,*Model was not promoted correctly]</p>
+<p>At <a class="reference external" href="https://build.amazon.com/">https://build.amazon.com/</a>, build AddLegalEntityRequestLambdaModel
+Then build AddLegalEntityRequestLambda</p>
+</div>
+</div>
+<div class="section" id="begin-developing">
+<h2>Begin Developing<a class="headerlink" href="#begin-developing" title="Permalink to this headline">¶</a></h2>
+<p>cd ../${NAME}Lambda
+brazil ws use -vs ${NAME}Lambda/development
+brazil-build</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>2019-06-18 16:22:34 INFO [AddLegalEntityRequestLambdaModel-1.0/runtime] Rebuilding environment because it doesn’t exist at /home/niyixuan/workplace/AddLEGReq/env/AddLegalEntityRequestLambdaModel-1.0/runtime
+WARNING: Duplicate key “Jackson-core” in scope [package.AddLegalEntityRequestLambdaTests, resolves-conflict-dependencies, 1.0]
+WARNING: Duplicate key “Jackson-core” in scope [package.AddLegalEntityRequestLambdaTests, resolves-conflict-dependencies, 1.0]
+2019-06-18 16:22:35 INFO [AddLegalEntityRequestLambdaModel-1.0/runtime] Resolving dependencies
+2019-06-18 16:22:35 INFO [AddLegalEntityRequestLambdaModel-1.0/runtime] Building symlink farm of 1 packages from package cache
+2019-06-18 16:22:35 INFO [AddLegalEntityRequestLambdaModel-1.0/runtime] Caching runtime components of dependencies
+2019-06-18 16:22:35 SEVERE Couldn’t find a build directory at /home/niyixuan/workplace/AddLEGReq/build/AddLegalEntityRequestLambdaModel/AddLegalEntityRequestLambdaModel-1.0/RHEL5_64/DEV.STD.PTHREAD/build; perhaps you need to build it in your workspace?
+Failed to bootstrap /home/niyixuan/workplace/AddLEGReq/env/AddLegalEntityRequestLambdaModel-1.0/runtime</p>
+<p><strong>Solution</strong></p>
+<p>dev-dsk-niyixuan-1d-8344f87b % brazil-recursive-cmd –allPackages brazil-build build</p>
+<p>Or bb under AddLegalEntityRequestLambdaModel first, then bb normally.</p>
+</div>
+</div>
+<div class="section" id="pull-from-remote">
+<h2>Pull from remote<a class="headerlink" href="#pull-from-remote" title="Permalink to this headline">¶</a></h2>
+<p>export NAME=AddLegalEntityRequest
+ws create –root ~/workplace/${NAME} –versionset ${NAME}Lambda/development
+brazil ws use –package ${NAME}Lambda –package ${NAME}LambdaClientConfig –package ${NAME}LambdaJavaClient –package ${NAME}LambdaLpt –package ${NAME}LambdaModel –package ${NAME}LambdaTests</p>
+<p>rde wflow run</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>[14:41:44-E] 1 job(s) execution failed
+Details
+the build job failed
+failed to fetch the package list for workspace “/Users/niyixuan/workplace/AddLegalEntityRequest”
+failed to load a new list of topologically ordered packages for workspace “/Users/niyixuan/workplace/AddLegalEntityRequest”
+failed to get checked out dependencies for package “AddLegalEntityRequestLambdaTests” in workspace “/Users/niyixuan/workplace/AddLegalEntityRequest”
+exit status 1</p>
+<p><strong>Solution</strong></p>
+<p>[Failed because some dependencies are not added to the version set.]
+Run <cite>brazil-recursive-cmd –allPackages brazil-build build</cite>
+Update the version sets [can do it beforehand at <a class="reference external" href="https://build.amazon.com/merge">https://build.amazon.com/merge</a>]
+Then <cite>brazil ws –sync –md</cite>
+[Check config to add all dependencies at once]</p>
+</div>
+</div>
+<div class="section" id="invoke-local-endpoint">
+<h2>Invoke local endpoint<a class="headerlink" href="#invoke-local-endpoint" title="Permalink to this headline">¶</a></h2>
+<p>curl <a class="reference external" href="http://localhost:1180/requests">http://localhost:1180/requests</a>
+curl <a class="reference external" href="http://localhost:1180/requests">http://localhost:1180/requests</a>?businessId=1 -X POST
+curl <a class="reference external" href="http://localhost:1180/requests">http://localhost:1180/requests</a>?requestId=&amp;businessId= -X DELETE
+curl <a class="reference external" href="http://localhost:1180/requests">http://localhost:1180/requests</a>?limit=1
+curl <a class="reference external" href="http://localhost:1180/requests">http://localhost:1180/requests</a>?limit=1&amp;nextToken=</p>
+<p>curl <a class="reference external" href="http://localhost:1180/view-requests">http://localhost:1180/view-requests</a>
+curl <a class="reference external" href="http://localhost:1180/view-requests">http://localhost:1180/view-requests</a>?limit=1
+curl <a class="reference external" href="http://localhost:1180/view-requests">http://localhost:1180/view-requests</a>?limit=1&amp;nextToken=
+curl <a class="reference external" href="http://localhost:1180/view-request">http://localhost:1180/view-request</a>?businessId=1&amp;requestId=
+curl <a class="reference external" href="http://localhost:1180/manage-request">http://localhost:1180/manage-request</a>?businessId=1 -X POST
+curl <a class="reference external" href="http://localhost:1180/manage-request">http://localhost:1180/manage-request</a>?businessId=1&amp;requestId= &amp;name=test -X PUT
+curl <a class="reference external" href="http://localhost:1180/manage-request">http://localhost:1180/manage-request</a>?businessId=1&amp;requestId= -X DELETE</p>
+<p>scp -r niyixuan.aka.corp.amazon.com:/workplace/niyixuan/AddLegalEntityRequest/build/AddLegalEntityRequestLambda/AddLegalEntityRequestLambda-1.0/RHEL5_64/DEV.STD.PTHREAD/build/brazil-unit-tests ./</p>
+</div>
+<div class="section" id="pipeline-approval-workflow-error">
+<h2>Pipeline Approval Workflow Error<a class="headerlink" href="#pipeline-approval-workflow-error" title="Permalink to this headline">¶</a></h2>
+<p>Pipeline Approval workflow failed at beta stage</p>
+<p>Hydra Integ Tests in us-west-2 beta
+Failed
+[Consider running ‘bb synthesize-hydra’ in your service LPT package.] BATS transform info: exception: bats_workflow.exceptions.BootstrapFailed cause: “Failed to bootstrap package AddLegalEntityRequestLambdaTests-1.0” in file “/apollo/env/BATSWorkflow2/lib/python3.6/site-packages/bats_workflow/utils.py”, line 128, in run_process: raise exception(message) from e transform_type: AWSLambda-1.0 transform_id: df09c239-eb34-410b-908d-b253873a9561 versionset: AddLegalEntityRequestLambda/development event_id: 5820692578 name: AddLegalEntityRequestLambdaTests major_version: 1.0 closure: test-runtime platform: RHEL5_64 Test package build status is failed .</p>
+</div>
+<div class="section" id="hydra-test">
+<h2>Hydra Test<a class="headerlink" href="#hydra-test" title="Permalink to this headline">¶</a></h2>
+<p>rde wflow run
+rde wflow run -s run-hydra-tests</p>
+<div class="topic">
+<p class="topic-title first">Error</p>
+<p>Approval Workflow failed</p>
+<p>That change set could not be found - or you don’t have permission to view it.
+Something unexpected happened 😞. Message: User is not allowed to see details for this event.</p>
+<p><strong>This is not solved yet</strong>. Modified the approval procedure to accept all the changes.</p>
+</div>
+</div>
+<div class="section" id="debugging">
+<h2>Debugging<a class="headerlink" href="#debugging" title="Permalink to this headline">¶</a></h2>
+<p>View log:</p>
+<p>rde stack exec AddLegalEntityRequestLambda
+cd rde/logs/
+less api-gateway.log</p>
+</div>
+<div class="section" id="aws">
+<h2>AWS<a class="headerlink" href="#aws" title="Permalink to this headline">¶</a></h2>
+<p>AWS credentials:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">~/.aws/credentials</span></code></p>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

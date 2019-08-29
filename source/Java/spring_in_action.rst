@@ -2,8 +2,9 @@
 Spring in Action - Notes
 ================================
 Reading notes of the book Spring in Action - 4th edition by Craig Walls.
-<<<<<<< HEAD
-=======
+
+.. contents::
+
 
 ----------------------
 Basic concepts
@@ -109,9 +110,12 @@ Now we can write a simple JUnit test that creates a Spring application context a
     }
 
 Note:
+
 - ``SpringJUnit4ClassRunner`` automatically creates a Spring application context when the test starts.
 - ``@ContextCOnfiguration`` tells it to load configuration from ``CDPlayerConfig`` class.
+
     - The configuration class includes @ComponentScan, so the application context will include the ``CompactDisc`` bean.
+
 - The test has a property of type ``CompactDisc``, annotated with ``@Autowired``, to inject the bean into the test.
 - All classes in or under the ``soundsystem`` package that are annotated with ``@Component`` will be created as beans.
 

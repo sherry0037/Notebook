@@ -1,0 +1,465 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Hidden Markov Models &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="JavaServer Pages (JSP) Tutorial" href="../Java/jsp.html" />
+    <link rel="prev" title="First-Order Theroies" href="first_order_theory.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Java/jsp.html" title="JavaServer Pages (JSP) Tutorial"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="first_order_theory.html" title="First-Order Theroies"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Hidden Markov Models</a><ul>
+<li><a class="reference internal" href="#markov-models">Markov Models</a><ul>
+<li><a class="reference internal" href="#first-order-markov-chain">First-order Markov chain</a></li>
+<li><a class="reference internal" href="#higher-order-markov-chain">Higher-order Markov chain</a></li>
+<li><a class="reference internal" href="#latent-variables">Latent variables</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id1">Hidden Markov Models</a><ul>
+<li><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram">Specification - Transition probabilities, matrix and diagram</a></li>
+<li><a class="reference internal" href="#specification-emission-probabilities">Specification - Emission probabilities</a></li>
+<li><a class="reference internal" href="#specification-joint-probability">Specification - Joint probability</a></li>
+<li><a class="reference internal" href="#expectation-maximization-algorithm">Expectation-Maximization algorithm</a><ul>
+<li><a class="reference internal" href="#the-e-step">The E step</a></li>
+<li><a class="reference internal" href="#the-m-step">The M step</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-forward-backward-algorithm">The forward-backward algorithm</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="first_order_theory.html"
+                        title="previous chapter">First-Order Theroies</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Java/jsp.html"
+                        title="next chapter">JavaServer Pages (JSP) Tutorial</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Lecture/hmm.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hidden-markov-models">
+<h1><a class="toc-backref" href="#id2">Hidden Markov Models</a><a class="headerlink" href="#hidden-markov-models" title="Permalink to this headline">¶</a></h1>
+<p>A summary of Chapter 13 Sequential Data of <em>Pattern Recognition and Machine Learning - Springer 2006</em>.</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#hidden-markov-models" id="id2">Hidden Markov Models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#markov-models" id="id3">Markov Models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#first-order-markov-chain" id="id4">First-order Markov chain</a></p></li>
+<li><p><a class="reference internal" href="#higher-order-markov-chain" id="id5">Higher-order Markov chain</a></p></li>
+<li><p><a class="reference internal" href="#latent-variables" id="id6">Latent variables</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#id1" id="id7">Hidden Markov Models</a></p>
+<ul>
+<li><p><a class="reference internal" href="#specification-transition-probabilities-matrix-and-diagram" id="id8">Specification - Transition probabilities, matrix and diagram</a></p></li>
+<li><p><a class="reference internal" href="#specification-emission-probabilities" id="id9">Specification - Emission probabilities</a></p></li>
+<li><p><a class="reference internal" href="#specification-joint-probability" id="id10">Specification - Joint probability</a></p></li>
+<li><p><a class="reference internal" href="#expectation-maximization-algorithm" id="id11">Expectation-Maximization algorithm</a></p>
+<ul>
+<li><p><a class="reference internal" href="#the-e-step" id="id12">The E step</a></p></li>
+<li><p><a class="reference internal" href="#the-m-step" id="id13">The M step</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#the-forward-backward-algorithm" id="id14">The forward-backward algorithm</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="markov-models">
+<h2><a class="toc-backref" href="#id3">Markov Models</a><a class="headerlink" href="#markov-models" title="Permalink to this headline">¶</a></h2>
+<p>Using the product rule, we can express the joint distribution for a sequence of obervations in the form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x_1, ..., x_N) &amp;= \prod\limits_{n=1}^N p(x_1, ... x_{n-1})\\
+                 &amp;= p(x_1) p(x_2|x_1) p(x_3|x_2, x_1) ...\end{split}\]</div>
+<div class="section" id="first-order-markov-chain">
+<h3><a class="toc-backref" href="#id4">First-order Markov chain</a><a class="headerlink" href="#first-order-markov-chain" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Definition:</strong> First-Order Markov Chain</dt><dd><p>If we assume that each of the conditional distributions on the RHS is independent of all previousobservations except the most recent (the Markov Property), we obtain the <em>first-order Markov chain</em>:</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x_1, ..., x_N) &amp;= p(x_1)\prod\limits_{n=2}^N p(x_n|x_{n-1})\\
+                 &amp;= p(x_1) p(x_2|x_1) p(x_3|x_2) ...\end{split}\]</div>
+<div class="topic">
+<p class="topic-title first">Illustration of First-Order Markov Chain</p>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/first_order_markov_chain.png" src="Lecture/_static/hidden_markov_models/first_order_markov_chain.png" />
+</div>
+</div>
+<p>The conditional distribution for observation <span class="math notranslate nohighlight">\(x_n\)</span>, given all of the observations up to time <span class="math notranslate nohighlight">\(n\)</span> is given by:</p>
+<div class="math notranslate nohighlight">
+\[p(x_n | x_1, ..., x_{n-1}) = p(x_n|x_{n-1})\]</div>
+<p>If we use this model to predict the next observation in a sequence, the distribution of predictions will only depend on the value of the immediately preceding observation, and will be independent of all earlier observations.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Definiton:</strong> Homogeneous Markov Chain</dt><dd><p>A markov chain is <em>homogeneous</em> when we assume a stationary time series, i.e. conditional distributions <span class="math notranslate nohighlight">\(p(x_n|x_{n-1})\)</span> are equal.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="higher-order-markov-chain">
+<h3><a class="toc-backref" href="#id5">Higher-order Markov chain</a><a class="headerlink" href="#higher-order-markov-chain" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes the trends in the data over several successive observations will provide important information in predicting the next value. We can increase the number of obeservations the predictions depend on and obtain higher-order Markov chains.</p>
+<p>For example, the joint distribution of the second-order Markov chain is given by:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(x_1, ..., x_N) &amp;= p(x_1)p(x_2|x_1)\prod\limits_{n=3}^N p(x_n|x_{n-1}, x_{n-2})\\
+             &amp;= p(x_1) p(x_2|x_1) p(x_3|x_2, x_1) p(x_4|x_3, x_2) ...\end{split}\]</div>
+<div class="topic">
+<p class="topic-title first">Illustration of Second-Order Markov Chain</p>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/second_order_markov_chain.png" src="Lecture/_static/hidden_markov_models/second_order_markov_chain.png" />
+</div>
+</div>
+<p>More generally, we have <span class="math notranslate nohighlight">\(M^{th}\)</span>-order markov chain where</p>
+<div class="math notranslate nohighlight">
+\[p(x_n |x_1, ... x_{n-1}) = p(x_n| x_{n-1}, ... x_{n-M})\]</div>
+<ul class="simple">
+<li><p><em>Note</em> the incresed flexibility results in a model with a much larger number of parameters (can grow exponentially).</p></li>
+</ul>
+</div>
+<div class="section" id="latent-variables">
+<h3><a class="toc-backref" href="#id6">Latent variables</a><a class="headerlink" href="#latent-variables" title="Permalink to this headline">¶</a></h3>
+<p>Suppose we do not want to limit our model to the Markov assumption and yet can be specified using a limited number of free parameters, we can introduce <em>latent variables</em> to permit a rich class of models to be constructed out of simple components. (Similar approach: mixture distributions, continuous latent variable models, etc.)</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Definition</strong> State Space Model</dt><dd><p>For each observation <span class="math notranslate nohighlight">\(x_n\)</span>, we introduce a corresponding latent variable <span class="math notranslate nohighlight">\(z_n\)</span> (can have different dimentionality/type). If we assume that the latent variables form a Markov chain, we have a graphical structure called <em>state space model</em>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">State Space Model</p>
+<div class="figure align-center" id="figure-13-5">
+<img alt="Lecture/_static/hidden_markov_models/markov_chain_latent.png" src="Lecture/_static/hidden_markov_models/markov_chain_latent.png" />
+</div>
+</div>
+<p>It satisfies the key conditional independence property that <span class="math notranslate nohighlight">\(z_{n-1}\)</span> and <span class="math notranslate nohighlight">\(z_{n+1}\)</span> are <strong>independent</strong> given <span class="math notranslate nohighlight">\(z_n\)</span>, and the joint distribution of the model is given by:</p>
+<div class="math notranslate nohighlight" id="equation-equ1">
+<span class="eqno">(1)<a class="headerlink" href="#equation-equ1" title="Permalink to this equation">¶</a></span>\[\begin{split}p(x_1, ..., x_N, z_1, ... z_N) &amp;= p(z_1) (\prod\limits_{n=2}^N p(z_n|z_{n-1})) (\prod\limits_{n=1}^N p(x_n|z_n))\\
+                               &amp;= p(z_1)p(z_2|z_1)p(z_3|z_2)...p(x_1|z_1)p(x_2|z_2)p(x_3|z_3)...\end{split}\]</div>
+<p>Using the d-separation criterion, we see that there is always a path connecting any two observed variables <span class="math notranslate nohighlight">\(x_n\)</span> and <span class="math notranslate nohighlight">\(x_m\)</span> voa tje ;atemt variables, and that this path is never blocked.</p>
+<p>In this model, the predictions for <span class="math notranslate nohighlight">\(x_{n+1}\)</span> depends on all previous observations, because <span class="math notranslate nohighlight">\(p(x_{n+1}|x_1, ..., x_n)\)</span> does not exhibit any conditional independence properties.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>d-separation</p>
+</div>
+<p>There are two models described by this graph:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><em>Hidden Markov model</em> if the latent variables are discrete;</p></li>
+<li><p><em>Linear dynamical system</em> if both the latent and the observed variables are Gaussian.</p></li>
+</ol>
+</div></blockquote>
+<p><em>Note:</em> the observed variables in an HMM may be discrete or continuous, and a variety of different conditional distributions can be used to model them.</p>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><a class="toc-backref" href="#id7">Hidden Markov Models</a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>The hidden Markov model is a specific instance of the state space model in which the latent variables are discrete. If we examine a single time slice of the model, we see that it corresponds to a mixture distribution, with component densities given by <span class="math notranslate nohighlight">\(p(\mathbf{x}|\mathbf{z})\)</span>.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Mixture model</p>
+</div>
+<p>The discrete multinomial variables <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span> represent the latent variables, and <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> the corresponding observation. We use a 1-of-K coding scheme.</p>
+<div class="section" id="specification-transition-probabilities-matrix-and-diagram">
+<h3><a class="toc-backref" href="#id8">Specification - Transition probabilities, matrix and diagram</a><a class="headerlink" href="#specification-transition-probabilities-matrix-and-diagram" title="Permalink to this headline">¶</a></h3>
+<p>The latent variable <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span> depends on the previous latent ariable <span class="math notranslate nohighlight">\(\mathbf{z}_{n-1}\)</span>, and the conditional distribution <span class="math notranslate nohighlight">\(p (\mathbf{z}_n|\mathbf{z}_{n-1})\)</span> is stored in the matrix <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>. The elements of <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are referred to as <strong>transition probabilities</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}A_{jk} := p(z_k^n = 1|z^{n-1}_j = 1), \\\end{split}\]</div>
+<p>where</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}0 \leq A_{jk} &amp;\leq 1\\
+\sum_k A_{jk} &amp;= 1\end{split}\]</div>
+<dl class="simple">
+<dt><em>Note:</em></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(A_{jk}\)</span> is the probabitliy of the latent variable transiting from state j to state k.</p></li>
+<li><p><span class="math notranslate nohighlight">\(\mathbf{A}\)</span> has <span class="math notranslate nohighlight">\(K(K-1)\)</span> independent parameters (-1 because the probabilities sum to one)</p></li>
+</ul>
+</dd>
+</dl>
+<p>The conditional distribution can then be explicitly written as:</p>
+<div class="math notranslate nohighlight">
+\[p (\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A}) = \prod\limits_{k=1}^K \prod\limits_{j=1}^K A_{jk}^{z^{n-1}_j z^n_k}\]</div>
+<p>The initial latent node <span class="math notranslate nohighlight">\(\mathbf{z_1}\)</span> has a marginal distribution <span class="math notranslate nohighlight">\(p(\mathbf{z_1})\)</span> represented by a vector of probabilities <span class="math notranslate nohighlight">\(\mathbf{\pi}\)</span> with <span class="math notranslate nohighlight">\(\pi_k := p(z^1_k = 1)\)</span>, so that</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{z_1}|\mathbf{\pi}) = \prod\limits_{k=1}^K \pi_k^{z_k^1},\]</div>
+<p>where <span class="math notranslate nohighlight">\(\sum_k \pi_k = 1\)</span>.</p>
+<p>If we unfold a state transition diagram over time, we have an alternative representation of the transitions, known as <em>lattive</em> or <em>trellis</em> diagram.</p>
+<div class="topic">
+<p class="topic-title first">Example of Transition Diagram</p>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/transition_diagram_1.png" src="Lecture/_static/hidden_markov_models/transition_diagram_1.png" />
+</div>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/transition_diagram_2.png" src="Lecture/_static/hidden_markov_models/transition_diagram_2.png" />
+</div>
+</div>
+</div>
+<div class="section" id="specification-emission-probabilities">
+<h3><a class="toc-backref" href="#id9">Specification - Emission probabilities</a><a class="headerlink" href="#specification-emission-probabilities" title="Permalink to this headline">¶</a></h3>
+<p>We now define the conditional distributions of the observed variables <span class="math notranslate nohighlight">\(p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi})\)</span>, where <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span> is a set of parameters governing the distribution.</p>
+<p>These emission probabilities can be given by:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Gaussians if the elements of <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> are coninuous variables,</p></li>
+<li><p>or conditional probability tables if <span class="math notranslate nohighlight">\(\mathbf{x}\)</span> is discrete.</p></li>
+</ol>
+</div></blockquote>
+<p>Because <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> is observed, given <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span>, <span class="math notranslate nohighlight">\(p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi})\)</span> consists of a vector of K numbers, corresponding to the K possible states of the binary vector <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}_n | \mathbf{z}_n, \mathbf{\phi}) = \prod\limits_{k=1}^K p(\mathbf{x}_n | \mathbf{\phi})^{z^n_k}.\]</div>
+<p><em>Note:</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>We will assume a <em>homogeneous</em> model, where the parameters <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> and <span class="math notranslate nohighlight">\(\mathbf{\phi}\)</span> are shared.</p></li>
+<li><dl class="simple">
+<dt>A mixture model for an i.i.d. data set corresponds to the case where <span class="math notranslate nohighlight">\(A_{jk}\)</span> are the same for all j. The conditional distribution <span class="math notranslate nohighlight">\(p(\mathbf{z}_n | \mathbf{z}_{n-1})\)</span> is independent of <span class="math notranslate nohighlight">\(\mathbf{z}_{n-1}\)</span>.</dt><dd><ul>
+<li><p>corresponds to deleting the horizontal links in <a class="reference internal" href="#figure-13-5"><span class="std std-numref">Fig. 1</span></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="specification-joint-probability">
+<h3><a class="toc-backref" href="#id10">Specification - Joint probability</a><a class="headerlink" href="#specification-joint-probability" title="Permalink to this headline">¶</a></h3>
+<p>The joint probability distribution over both latent and observed variables is given by:</p>
+<div class="math notranslate nohighlight" id="equation-equ-joint-prob">
+<span class="eqno">(2)<a class="headerlink" href="#equation-equ-joint-prob" title="Permalink to this equation">¶</a></span>\[p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}) = p(\mathbf{z_1}|\mathbf{\pi}) \Big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \Big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\mathbf{X} = \{ \mathbf{x}_1, ...,  \mathbf{x}_N \}\)</span>, <span class="math notranslate nohighlight">\(\mathbf{Z} = \{ \mathbf{z}_1, ...,  \mathbf{z}_N \}\)</span>, and <span class="math notranslate nohighlight">\(\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}\)</span> is the set of parameters.</p>
+<p><em>Note:</em> more general form: <a class="reference internal" href="#equation-equ1">Eq.1</a></p>
+</div>
+<div class="section" id="expectation-maximization-algorithm">
+<h3><a class="toc-backref" href="#id11">Expectation-Maximization algorithm</a><a class="headerlink" href="#expectation-maximization-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>If we have observed a dataset <span class="math notranslate nohighlight">\(\mathbf{X} = {\mathbf{x_1}, ... \mathbf{x_N}}\)</span>, we can determine the parameters of the HMM model using maximum likelihood. The likelihood function is:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{X}|\mathbf{\theta}) = \sum\limits_\mathbf{Z}  p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}),\]</div>
+<p>where we marginalize over the latent variables in <a class="reference internal" href="#equation-equ-joint-prob">Eq.2</a>.</p>
+<p>We use the <strong>expectation maximization algorithm</strong> to maximize the likelihood function efficiently. The EM algorithm starts with some initial selection for the model parameters, denoted as <span class="math notranslate nohighlight">\(\mathbf{\theta}^{old}\)</span>.</p>
+<div class="section" id="the-e-step">
+<h4><a class="toc-backref" href="#id12">The E step</a><a class="headerlink" href="#the-e-step" title="Permalink to this headline">¶</a></h4>
+<ul class="simple">
+<li><p>First find the posterior distribution of the latent variables <span class="math notranslate nohighlight">\(p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old})\)</span>.</p></li>
+<li><p>Then we evaluate the expectation of the logarithm of the complete-data likelihood function:</p></li>
+</ul>
+<div class="math notranslate nohighlight" id="equation-equ-expect-likelihood">
+<span class="eqno">(3)<a class="headerlink" href="#equation-equ-expect-likelihood" title="Permalink to this equation">¶</a></span>\[Q(\mathbf{\theta}, \mathbf{\theta}^{old}) = \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln} p(\mathbf{X}, \mathbf{Z} | \mathbf{\theta}).\]</div>
+<div class="topic">
+<p class="topic-title first">Quantities to evaluate</p>
+<p>We introduce some new notations for convenience.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>the marginal posterior distribution of a latent variable <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\gamma(\mathbf{z}_n) = p(\mathbf{z}_n| \mathbf{X}, \mathbf{\theta}^{old})\]</div>
+<ul class="simple">
+<li><p>the joint posterior distribution of two successive latent variables:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\xi(\mathbf{z}_{n-1}, \mathbf{z}_n) = p(\mathbf{z}_{n-1}, \mathbf{z}_n | \mathbf{X}, \mathbf{\theta}^{old}).\]</div>
+</div></blockquote>
+</div>
+<dl class="simple">
+<dt>For each value of <span class="math notranslate nohighlight">\(n\)</span>, we store</dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> using a set of K nonnegative numbers (sum to 1)</p></li>
+<li><p><span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n) \)</span> matrix of nonnegative numbers (sum to 1)</p></li>
+</ul>
+</dd>
+</dl>
+<p><strong>The goal of the E step is to evaluate these quantities efficiently.</strong> See details in later sections.</p>
+<p>We use <span class="math notranslate nohighlight">\(\gamma(z_k^n)\)</span> to denote the conditional probability of <span class="math notranslate nohighlight">\(z^n_k = 1\)</span> and similar for <span class="math notranslate nohighlight">\(\xi(z^{n-1}_j, z^n_k)\)</span>. We have the following equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\gamma(z^n_{k}) &amp;= p(z^n_{k} = 1| \mathbf{X}, \mathbf{\theta}^{old})\\
+                &amp;= \mathbb{E}[z^n_{k}] = \sum_\mathbf{z}\gamma(\mathbf{z}) z^n_{k}\\
+\xi(z^{n-1}_{j}, z^n_k) &amp;= p(z^{n-1}_{j} = 1 , z^n_k = 1| \mathbf{X}, \mathbf{\theta}^{old})\\
+                &amp;= \mathbb{E}[z^{n-1}_{j}z^n_k] = \sum_\mathbf{z}\gamma(\mathbf{z}) z^{n-1}_{j}z^n_k.\end{split}\]</div>
+<p>Now we substitute <a class="reference internal" href="#equation-equ-joint-prob">Eq.2</a> into <a class="reference internal" href="#equation-equ-expect-likelihood">Eq.3</a>, and use the above notations, we have:</p>
+<div class="math notranslate nohighlight" id="equation-equ-expect-likelihood-2">
+<span class="eqno">(4)<a class="headerlink" href="#equation-equ-expect-likelihood-2" title="Permalink to this equation">¶</a></span>\[\begin{split} Q(\mathbf{\theta}, \mathbf{\theta}^{old})
+ &amp;= \sum\limits_\mathbf{z} p (\mathbf{Z} | \mathbf{X}, \mathbf{\theta}^{old}) \text{ln}
+ \Big[ p(\mathbf{z_1}|\mathbf{\pi}) \big[ \prod\limits_{n=2}^N p(\mathbf{z}_n|\mathbf{z}_{n-1}, \mathbf{A} ) \big]  \prod\limits_{m=1}^N p(\mathbf{x}_m|\mathbf{z}_m, \mathbf{\phi}) \Big]\\
+ &amp;= \sum\limits_{k=1}^K  \gamma(z^1_{k}) \text{ln} \pi_k + \sum\limits_{n=2}^K \sum\limits_{j=1}^K \sum\limits_{k=1}^K \xi(z^{n-1}_{j}, z^n_k) \text{ln} A_{jk} + \sum\limits_{n=1}^N \sum\limits_{k=1}^K \gamma(z^n_{k}) \text{ln} p(\mathbf{x}_n |\phi_k).\end{split}\]</div>
+</div>
+<div class="section" id="the-m-step">
+<h4><a class="toc-backref" href="#id13">The M step</a><a class="headerlink" href="#the-m-step" title="Permalink to this headline">¶</a></h4>
+<p>In the M step, we maximize <span class="math notranslate nohighlight">\(Q(\mathbf{\theta}, \mathbf{\theta}^{old})\)</span> with respect to the parameters <span class="math notranslate nohighlight">\(\mathbf{\theta} = \{ \mathbf{\pi}, \mathbf{A}, \mathbf{\phi}\}\)</span>, where we treat <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> and <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span> as constant.</p>
+<div class="topic">
+<p class="topic-title first">Parameters Updates</p>
+<p>Using appropriate Lagrange multipliers, we get the optimal values of <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\mathbf{A}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\pi_k &amp;= \frac{\gamma(z_k^1)}{\sum\limits_{j=1}^K \gamma(z^1_j)}\\
+A_{jk} &amp;= \frac{\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_k)}{\sum\limits_{l=1}^K\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_l)}\end{split}\]</div>
+</div>
+<p><em>Note:</em> if any element of <span class="math notranslate nohighlight">\(\pi\)</span> and <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> are set to zero initially, it will remain zero in subsequent EM updates.</p>
+<p>For maximizing <span class="math notranslate nohighlight">\(Q(\mathbf{\theta}, \mathbf{\theta}^{old})\)</span> with respect to <span class="math notranslate nohighlight">\(\mathbf{\phi}_k\)</span>, we notice that only the final term in <a class="reference internal" href="#equation-equ-expect-likelihood-2">Eq.4</a> depends on <span class="math notranslate nohighlight">\(\mathbf{\phi}_k\)</span>. The calculations depend on the emission densities we choose.</p>
+<div class="topic">
+<p class="topic-title first">Parameters Updates</p>
+<p>Suppose we have Gaussian emission densities <span class="math notranslate nohighlight">\(p(\mathbf{x}_n |\phi_k) = \mathcal{N}(\mathbf{x}| \mathbf{\mu}_k, \mathbf{\Sigma}_k)\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{\mu}_k &amp;= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)\mathbf{x}_n}{\sum\limits_{n=1}^N  \gamma(z^n_k)}\\
+\mathbf{\Sigma}_k &amp;= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)(\mathbf{x}_n - \mathbf{\mu}_n)(\mathbf{x}_n - \mathbf{\mu}_n)^T }{\sum\limits_{n=1}^N  \gamma(z^n_k)}\\\end{split}\]</div>
+<p>Suppose we have discrete multinomial observed variables, where</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{x}|\mathbf{z}) = \prod\limits^D_{i=1}\prod\limits^K_{k=1} \mu_{ik}^{x_iz_k}\]</div>
+<p>then the M-step equations are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mu_{ik} &amp;= \frac{\sum\limits_{n=1}^N \gamma(z_k^n)x^n_i}{\sum\limits_{n=1}^N \gamma(z^n_k)}\\\end{split}\]</div>
+</div>
+</div>
+</div>
+<div class="section" id="the-forward-backward-algorithm">
+<h3><a class="toc-backref" href="#id14">The forward-backward algorithm</a><a class="headerlink" href="#the-forward-backward-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>For the E step of the EM algorithm, we want to find a efficient way to evaluate <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span> and <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>. The posterior distribution of the latent variables can be obtained efficiently using a two-stage message passing algorithm. In this context, it is the <em>forward-backward algotirhm</em>, or the <em>Baum-Welch algorithm</em>.</p>
+<p>From now on, we will emit the dependence on the model parameter <span class="math notranslate nohighlight">\(\theta^{old}\)</span> as they are fixed.</p>
+<p>Let’s start with <span class="math notranslate nohighlight">\(\gamma(\mathbf{z}_n)\)</span>. Using Bayes’ theorem and conditional independence property, we have:</p>
+<div class="math notranslate nohighlight" id="equation-equ-forward-backward">
+<span class="eqno">(5)<a class="headerlink" href="#equation-equ-forward-backward" title="Permalink to this equation">¶</a></span>\[\begin{split}\gamma(\mathbf{z}_n) &amp;= p(\mathbf{z}|\mathbf{X}) = \frac{p(\mathbf{X}|\mathbf{z}_n)p(\mathbf{z}_n)}{p(\mathbf{X})} \\
+&amp;= \frac{p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)p(\mathbf{x}_{n+1}, ..., \mathbf{N}|\mathbf{z}_n)}{p(\mathbf{x}_N)} \\
+&amp;= \frac{\alpha(\mathbf{z}_n)\beta(\mathbf{z}_n)}{p(\mathbf{X})},\end{split}\]</div>
+<p>where we define</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\alpha(\mathbf{z}_n) &amp;:= p(\mathbf{x}_1, ..., \mathbf{x}_n, \mathbf{z}_n)\\
+\beta(\mathbf{z}_n) &amp;:= p(\mathbf{x}_{n+1}, ..., \mathbf{x}_N|\mathbf{z}_n)\end{split}\]</div>
+<p><em>Note:</em>  Given <span class="math notranslate nohighlight">\(\mathbf{X} = \{\mathbf{x}_1, ..., \mathbf{x}_N \}\)</span>, every path from any one of the nodes <span class="math notranslate nohighlight">\(\mathbf{x}_1, ... \mathbf{x}_{n-1}\)</span> to the node <span class="math notranslate nohighlight">\(\mathbf{x}_n\)</span> passes through the node <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>, which is observed. All such path are head-to-tail. Check topics on <em>Graphical Models</em> for proving conditional independence properties.</p>
+<div class="topic">
+<p class="topic-title first">Forward Recursion for <span class="math notranslate nohighlight">\(\alpha(\mathbf{z}_n)\)</span></p>
+<p>We can evaluate <span class="math notranslate nohighlight">\(\alpha(\mathbf{z}_n)\)</span> recursively in the forward direction:</p>
+<div class="math notranslate nohighlight">
+\[\alpha(\mathbf{z}_n) := p(\mathbf{x}_n|\mathbf{z}_n)\sum\limits_{\mathbf{z}_{n-1}}\alpha(\mathbf{z}_{n-1})p(\mathbf{z}_n|\mathbf{z}_{n-1}).\]</div>
+<p><em>Note:</em> There are K terms in the summation for each of the K values of <span class="math notranslate nohighlight">\(\mathbf{z}_n\)</span>, which gives a cost of <span class="math notranslate nohighlight">\(O(K^2)\)</span>. The overall cost of evaluating the whole chain is of <span class="math notranslate nohighlight">\(O(K^2N)\)</span>.</p>
+<p>The initial condition is given by:</p>
+<div class="math notranslate nohighlight">
+\[\alpha(\mathbf{z}_1) := p(\mathbf{x}_1, \mathbf{z}_1) = p(\mathbf{z}_1)p(\mathbf{x}_1|\mathbf{z}_1) = \prod\limits_{k=1}^K(\pi_k p(\mathbf{x}_1|\mathbf{\phi}_k))^{z_k^1},\]</div>
+<p>which means that for <span class="math notranslate nohighlight">\(k = 1, ... K\)</span>,</p>
+<div class="math notranslate nohighlight">
+\[\alpha(z^1_k) = \pi_k p(\mathbf{x}_1|\mathbf{\phi}_k).\]</div>
+</div>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/forward.png" src="Lecture/_static/hidden_markov_models/forward.png" />
+</div>
+<div class="topic">
+<p class="topic-title first">Backward Resursion for <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span></p>
+<p>Similarly we can find the recursive relation for <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span>. In this case, we have a backward message passing algorithm that evaluate <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span> in terms of <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_{n+1})\)</span>.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\beta(\mathbf{z}_n) &amp;:= \beta(\mathbf{z}_{n+1})p(\mathbf{x}_{n+1}|\mathbf{z}_{n+1})p(\mathbf{z}_{n+1}|\mathbf{z}_{n})\\\end{split}\]</div>
+<p>To obtain the initial value, we set <span class="math notranslate nohighlight">\(n = N\)</span> in <a class="reference internal" href="#equation-equ-forward-backward">Eq.5</a> and get:</p>
+<div class="math notranslate nohighlight">
+\[p(\mathbf{z}_N|\mathbf{X}) = \frac{p(\mathbf{X}, \mathbf{z}_N)\beta(\mathbf{z}_N)}{p(X)}.\]</div>
+<p>which is correct if we take <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_N) = 1\)</span> for all settings of <span class="math notranslate nohighlight">\(\mathbf{z}_N\)</span>.</p>
+</div>
+<div class="figure align-center">
+<img alt="Lecture/_static/hidden_markov_models/backward.png" src="Lecture/_static/hidden_markov_models/backward.png" />
+</div>
+<p>It is useful to monitor the likelihood function <span class="math notranslate nohighlight">\(p(\mathbf{X})\)</span> during the EM optimization. From <a class="reference internal" href="#equation-equ-forward-backward">Eq.5</a>, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(\mathbf{X}) &amp;= \sum\limits_{\mathbf{z}_n} \alpha(\mathbf{z}_n)\beta(\mathbf{z}_n) \\
+            &amp;=  \sum\limits_{\mathbf{z}_N} \alpha(\mathbf{z}_N).\end{split}\]</div>
+<p>Now consider <span class="math notranslate nohighlight">\(\xi(\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>, which correspond to the value of the conditional probablities <span class="math notranslate nohighlight">\(p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X})\)</span> for each of the <span class="math notranslate nohighlight">\(K\times K\)</span> settings for <span class="math notranslate nohighlight">\((\mathbf{z}_{n-1}, \mathbf{z}_n)\)</span>. Use Bayes’ theorem, we have:</p>
+<div class="math notranslate nohighlight" id="equation-equ-forward-backward-2">
+<span class="eqno">(6)<a class="headerlink" href="#equation-equ-forward-backward-2" title="Permalink to this equation">¶</a></span>\[\begin{split}\xi(\mathbf{z}_{n-1}, \mathbf{z}_n) &amp;= p(\mathbf{z}_{n-1}, \mathbf{z}_n| \mathbf{X}) \\
+&amp;= \frac{\alpha(\mathbf{z}_{n-1})p(\mathbf{x}_{n}|\mathbf{z}_n)p(\mathbf{z}_{n}| \mathbf{z}_{n-1})\beta(\mathbf{z}_n)}{p(\mathbf{X})}\end{split}\]</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Add a summary for the EM algorithm.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Java/jsp.html" title="JavaServer Pages (JSP) Tutorial"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="first_order_theory.html" title="First-Order Theroies"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

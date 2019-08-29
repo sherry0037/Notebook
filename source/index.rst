@@ -11,13 +11,14 @@ Welcome to Yixuan's documentation!
 
    rst.rst
    latex.rst
-   hoare_logic.rst
-   first_order_theory.rst
-   hmm.rst
-   reading.rst
-   jsp.rst
-   spring_in_action.rst
    git.rst
+   reading.rst
+   Lecture/hoare_logic.rst
+   Lecture/first_order_theory.rst
+   Lecture/hmm.rst
+   Java/jsp.rst
+   Java/spring_in_action.rst
+   
 
 
 

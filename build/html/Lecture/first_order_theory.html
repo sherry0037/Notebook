@@ -1,0 +1,1478 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>First-Order Theroies &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Hidden Markov Models" href="hmm.html" />
+    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hmm.html" title="Hidden Markov Models"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">First-Order Theroies</a><ul>
+<li><a class="reference internal" href="#syntax-and-semantics">Syntax and Semantics</a></li>
+<li><a class="reference internal" href="#commonly-used-first-order-theories">Commonly-Used First-Order Theories</a><ul>
+<li><a class="reference internal" href="#theory-of-equality-t">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></li>
+<li><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></li>
+<li><a class="reference internal" href="#presburger-arithmetric-natural-addition">Presburger Arithmetric (natural, addition)</a></li>
+<li><a class="reference internal" href="#theory-of-integers">Theory of integers</a></li>
+<li><a class="reference internal" href="#theory-of-rationals">Theory of rationals</a></li>
+<li><a class="reference internal" href="#theory-of-arrays">Theory of arrays</a></li>
+<li><a class="reference internal" href="#combined-theories">Combined Theories</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-equality">Decision Procedure: Theory of Equality</a><ul>
+<li><a class="reference internal" href="#congruence-closure-algorithm">Congruence Closure Algorithm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-rationals">Decision Procedure: Theory of Rationals</a><ul>
+<li><a class="reference internal" href="#linear-programming">Linear programming</a></li>
+<li><a class="reference internal" href="#simplex-algorithm">Simplex algorithm</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-procedure-theory-of-integers">Decision Procedure: Theory of Integers</a><ul>
+<li><a class="reference internal" href="#omega-test">Omega Test</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#decision-procedure-combined-theories">Decision Procedure: Combined Theories</a><ul>
+<li><a class="reference internal" href="#nelson-oppen-method">Nelson-Oppen Method</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#smt-solvers-and-dpll-mathcal-t-framework">SMT Solvers and DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a><ul>
+<li><a class="reference internal" href="#off-line-smt-solver">Off-line SMT Solver</a></li>
+<li><a class="reference internal" href="#on-line-smt-solver-dpll-mathcal-t-framework">On-line SMT Solver (DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="previous chapter">Hoare Logic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hmm.html"
+                        title="next chapter">Hidden Markov Models</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Lecture/first_order_theory.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="first-order-theroies">
+<h1><a class="toc-backref" href="#id1">First-Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
+<p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>-Automated Logical Reasoning (lecture 10-15, first-order theories and their decision procedures).</p>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#first-order-theroies" id="id1">First-Order Theroies</a></p>
+<ul>
+<li><p><a class="reference internal" href="#syntax-and-semantics" id="id2">Syntax and Semantics</a></p></li>
+<li><p><a class="reference internal" href="#commonly-used-first-order-theories" id="id3">Commonly-Used First-Order Theories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#theory-of-equality-t" id="id4">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a></p></li>
+<li><p><a class="reference internal" href="#peano-arithmetric-t-pa-natural-multiplication-addition" id="id5">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a></p></li>
+<li><p><a class="reference internal" href="#presburger-arithmetric-natural-addition" id="id6">Presburger Arithmetric (natural, addition)</a></p></li>
+<li><p><a class="reference internal" href="#theory-of-integers" id="id7">Theory of integers</a></p></li>
+<li><p><a class="reference internal" href="#theory-of-rationals" id="id8">Theory of rationals</a></p></li>
+<li><p><a class="reference internal" href="#theory-of-arrays" id="id9">Theory of arrays</a></p></li>
+<li><p><a class="reference internal" href="#combined-theories" id="id10">Combined Theories</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#decision-procedure-theory-of-equality" id="id11">Decision Procedure: Theory of Equality</a></p>
+<ul>
+<li><p><a class="reference internal" href="#congruence-closure-algorithm" id="id12">Congruence Closure Algorithm</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#decision-procedure-theory-of-rationals" id="id13">Decision Procedure: Theory of Rationals</a></p>
+<ul>
+<li><p><a class="reference internal" href="#linear-programming" id="id14">Linear programming</a></p></li>
+<li><p><a class="reference internal" href="#simplex-algorithm" id="id15">Simplex algorithm</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#decision-procedure-theory-of-integers" id="id16">Decision Procedure: Theory of Integers</a></p>
+<ul>
+<li><p><a class="reference internal" href="#omega-test" id="id17">Omega Test</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#decision-procedure-combined-theories" id="id18">Decision Procedure: Combined Theories</a></p>
+<ul>
+<li><p><a class="reference internal" href="#nelson-oppen-method" id="id19">Nelson-Oppen Method</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#smt-solvers-and-dpll-mathcal-t-framework" id="id20">SMT Solvers and DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a></p>
+<ul>
+<li><p><a class="reference internal" href="#off-line-smt-solver" id="id21">Off-line SMT Solver</a></p></li>
+<li><p><a class="reference internal" href="#on-line-smt-solver-dpll-mathcal-t-framework" id="id22">On-line SMT Solver (DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework)</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="syntax-and-semantics">
+<h2><a class="toc-backref" href="#id2">Syntax and Semantics</a><a class="headerlink" href="#syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><dl class="simple">
+<dt>A first-order theory T consists of</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Signature <span class="math notranslate nohighlight">\(\Sigma_T\)</span></dt><dd><p>set of constants, functions, and predicate symbols</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Axioms <span class="math notranslate nohighlight">\(A_T\)</span></dt><dd><ul>
+<li><p>set of FOL sentences over <span class="math notranslate nohighlight">\(\Sigma_T\)</span></p></li>
+<li><p>provide the meaning of symbols in <span class="math notranslate nohighlight">\(\Sigma_T\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> <span class="math notranslate nohighlight">\(\Sigma_T\)</span> formula</dt><dd><p>Formula constructed from symbols of <span class="math notranslate nohighlight">\(\Sigma_T\)</span> and variables, logival connectives and quantifiers.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> T-Model</dt><dd><p>A structure <span class="math notranslate nohighlight">\(M = \langle U, I\rangle\)</span> is a model of theory T, or T-model, if <span class="math notranslate nohighlight">\(M \vDash A\)</span> for every <span class="math notranslate nohighlight">\(A \in A_T\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> Satistiable modulo T</dt><dd><p>Formula F is satistiable modulo T if <em>there exists</em> a T-model M and variable assignment <span class="math notranslate nohighlight">\(\sigma\)</span>
+such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Valid modulo T</dt><dd><p>Formula F is valid modulo T if <em>for all</em> a T-models M and variable assignments <span class="math notranslate nohighlight">\(\sigma\)</span>, we have <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</span>.</p>
+<p>Write as: <span class="math notranslate nohighlight">\(T \vDash F\)</span>.</p>
+<ul class="simple">
+<li><p>if a formula is valid in FOL, it is also valid module T</p></li>
+<li><p>if a formula is valid modulo T, it is <em>not</em> necessarily valid in FOL.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Equivalence modulo T</dt><dd><p>Two formulas <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> are euivalent module theory T if for every T-model M and for every variable assignment
+<span class="math notranslate nohighlight">\(\sigma\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[M, \sigma \vDash F_1 \text{ iff } M, \sigma \vDash F_2\]</div>
+<p>Or write as:</p>
+<div class="math notranslate nohighlight">
+\[T \vDash F_1 \leftrightarrow F_2\]</div>
+<ul class="simple">
+<li><p><em>Example:</em> <span class="math notranslate nohighlight">\(x = y\)</span> and <span class="math notranslate nohighlight">\(y = x\)</span> are equivalent modulo <span class="math notranslate nohighlight">\(T_=\)</span>, but not equivalent in FOL</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Completeness of Theory</dt><dd><p>A theory T is complete if for every <em>sentence</em> (no free variable) F, if T entails F or its negation:</p>
+<div class="math notranslate nohighlight">
+\[T \vDash F \text{ or } T \vDash \lnot F\]</div>
+<ul class="simple">
+<li><p>FOL is <em>not</em> complete: neither <span class="math notranslate nohighlight">\(p(a)\)</span> nor <span class="math notranslate nohighlight">\(\lnot p(a)\)</span> is valid.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="commonly-used-first-order-theories">
+<h2><a class="toc-backref" href="#id3">Commonly-Used First-Order Theories</a><a class="headerlink" href="#commonly-used-first-order-theories" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="theory-of-equality-t">
+<h3><a class="toc-backref" href="#id4">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a><a class="headerlink" href="#theory-of-equality-t" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_= : \{=, a, b, c, ..., f, g, h, ..., p, q, r, ...\}\]</div>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(=\)</span>: binary predicate</p></li>
+<li><p>all constants, functions and predicate symbols</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Reflexivity: <span class="math notranslate nohighlight">\(\forall x. x=x\)</span></p></li>
+<li><p>Symmetrix: <span class="math notranslate nohighlight">\(\forall x, y. (x=y \to y=x)\)</span></p></li>
+<li><p>Transitivity <span class="math notranslate nohighlight">\(\forall x, y, z. (x=y \land y=z \to x=z)\)</span></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Axiom Schemata</strong></dt><dd><p><strong>Definition:</strong> A set of axioms instantiated for each function and predicate symbol.</p>
+<ul>
+<li><dl>
+<dt>Function congruence:</dt><dd><p>For any n-ary <em>function</em> f, two terms <span class="math notranslate nohighlight">\(f(\vec{x})\)</span> and <span class="math notranslate nohighlight">\(f(\vec{y})\)</span> are equal if <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{y}\)</span> are equal:</p>
+<div class="math notranslate nohighlight">
+\[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (f(x_1, ... x_n) = f(y_1, ..., y_n))\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Predicate congruence:</dt><dd><p>For any n-ary <em>predicate</em> p, two formulas <span class="math notranslate nohighlight">\(p(\vec{x})\)</span> and <span class="math notranslate nohighlight">\(p(\vec{y})\)</span> are equivalent if <span class="math notranslate nohighlight">\(\vec{x}\)</span> and <span class="math notranslate nohighlight">\(\vec{y}\)</span> are equal:</p>
+<div class="math notranslate nohighlight">
+\[\forall x_1, ..., x_n, y_1, ... ,y_n. \bigwedge\limits_{i} (x_i = x_j) \to (p(x_1, ... x_n) \leftrightarrow p(y_1, ..., y_n))\]</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Decidability and Completeness</strong></p>
+<blockquote>
+<div><ul>
+<li><p><em>Not</em> decidable (wether a <span class="math notranslate nohighlight">\(T_=\)</span> formula is provable)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>FOL is not decidable.</p></li>
+<li><p>Quantifier-free fragment is decidable but <em>NP-complete</em>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><em>Not</em> complete</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="peano-arithmetric-t-pa-natural-multiplication-addition">
+<h3><a class="toc-backref" href="#id5">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a><a class="headerlink" href="#peano-arithmetric-t-pa-natural-multiplication-addition" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{PA} : \{0, 1, +, \cdot, =\}\]</div>
+<ul class="simple">
+<li><p>0, 1 are constants</p></li>
+<li><p>+, <span class="math notranslate nohighlight">\(\cdot\)</span> are binary functions</p></li>
+<li><p>= is a binary predicate</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><p>Equality axioms, reflexivity, symmety, transitivity, and the following:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Zero: <span class="math notranslate nohighlight">\(\forall x. \lnot(x+1 = 0))\)</span></dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(0\)</span> is the minimal element of <span class="math notranslate nohighlight">\(\mathbb{N}\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Pluse zero: <span class="math notranslate nohighlight">\(\forall x. x+0=x\)</span></dt><dd><ul class="simple">
+<li><p>identity for addition</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Successor: <span class="math notranslate nohighlight">\(\forall x, y. x+1=y+1 \to x=y\)</span></p></li>
+<li><p>Plus successor: <span class="math notranslate nohighlight">\(\forall x, y. x+ (y+1) = (x+y)+1\)</span></p></li>
+<li><p>Times zero: <span class="math notranslate nohighlight">\(\forall x. x \cdot 0 = 0\)</span></p></li>
+<li><p>Times successor: <span class="math notranslate nohighlight">\(\forall x, y. x \cdot (y+1) = x\cdot y + x\)</span></p></li>
+<li><dl class="simple">
+<dt>Axiom schema for induction:</dt><dd><ul class="simple">
+<li><p>any valid interpretation must obey induction</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="math notranslate nohighlight">
+\[(F[0] \land (\forall x. F[x] \to f[x+1])) \to \forall x. F[x]\]</div>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><strong>Inequalities</strong></dt><dd><p>The theory of Peano arithmetric doesn’t have inequality symbols.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(x \cdot y \geq z \Rightarrow \exists w. x \cdot y = z + w\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(x \cdot y &lt; z \Rightarrow \exists w. \lnot (w=0) \land x \cdot y + w = z\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Decidability and Completeness</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Validity in full <span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>undecidable</em></p></li>
+<li><p>Validity in quantifier-free fragment of <span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>undecidable</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>imcomplete</em></p></li>
+<li><p>Where problem is: multiplication!</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="presburger-arithmetric-natural-addition">
+<h3><a class="toc-backref" href="#id6">Presburger Arithmetric (natural, addition)</a><a class="headerlink" href="#presburger-arithmetric-natural-addition" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{\mathbb{N}} : \{0, 1, +, =\}\]</div>
+<ul class="simple">
+<li><p><em>Note:</em> remove multiplication from Peano</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><p>Same as Peano’s, except removing <em>times zero</em> and <em>times successor</em>.</p>
+</div></blockquote>
+</li>
+<li><p><strong>Decidability and Completeness</strong></p>
+<blockquote>
+<div><ul>
+<li><p>Validity in full <span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>decidable</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>super exponential <span class="math notranslate nohighlight">\(O(2^{2^n})\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Validity in quantifier-free fragment of <span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>decidable</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>but in coNP-complete (compliment is NP-complete)</p></li>
+<li><p>quantifier elimination: for any formula F in <span class="math notranslate nohighlight">\(T_{\mathbb{N}}\)</span>, there is an equivalent quantifier-free formula F’.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><span class="math notranslate nohighlight">\(T_{PA}\)</span> is <em>complete</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>for any sentence F, <span class="math notranslate nohighlight">\(T_{\mathbb{N}} \vDash F \lor T_{\mathbb{N}}\vDash \lnot F\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="theory-of-integers">
+<h3><a class="toc-backref" href="#id7">Theory of integers</a><a class="headerlink" href="#theory-of-integers" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{\mathbb{z}} : \{..., -2, -1, 0, 1, 2, ...., -3 \cdot, -2 \cdot, 2 \cdot, 3 \cdot ,..., +, =, &gt; \}\]</div>
+<ul class="simple">
+<li><p><em>Note:</em> only has &gt;</p></li>
+<li><p>also referred to as: linear arthmetric over integer</p></li>
+<li><p>equicalent in expressiveness to Presburger arithmetic</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="theory-of-rationals">
+<h3><a class="toc-backref" href="#id8">Theory of rationals</a><a class="headerlink" href="#theory-of-rationals" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{\mathbb{Q}} : \{0, 1, +, -, =, \geq\}\]</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt><em>Note:</em> doesn’t allow strict inequality</dt><dd><ul>
+<li><p><span class="math notranslate nohighlight">\(\forall x,y. \exists z. x+y&gt;z \Rightarrow \forall x, y. \exists z. \lnot (x+y=z) \land x+y \geq z\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Decidability</strong></p>
+<blockquote>
+<div><ul>
+<li><p>Validity in full <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}\)</span> is <em>decidable</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>but doubly exponential</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Validity in <em>conjuctive quantifier-free</em> fragment <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}\)</span> is <em>decidable</em> in <em>polynomial</em> time</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="theory-of-arrays">
+<h3><a class="toc-backref" href="#id9">Theory of arrays</a><a class="headerlink" href="#theory-of-arrays" title="Permalink to this headline">¶</a></h3>
+<ul>
+<li><p><strong>Signature</strong></p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\Sigma_{A} : \{\cdot[\cdot], \cdot \langle \cdot \triangleleft \cdot \rangle, =\}\]</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(a[i]\)</span> binary function</dt><dd><ul>
+<li><p>read array a at index i (“read(a, i)”)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(a \langle i \triangleleft v \rangle\)</span> ternary function</dt><dd><ul>
+<li><p>write value v to index i of array a (“write(a, i, e)”)</p></li>
+<li><p>represents the resulting array after writing</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Axioms</strong></p>
+<blockquote>
+<div><p>Reflexivity, symmety, transitivity, and the following:</p>
+<ol class="arabic simple">
+<li><p>Array congruence: <span class="math notranslate nohighlight">\(\forall a, i, j. i=j \to a[i] = a[j]\)</span></p></li>
+<li><p>Read-over-write 1: <span class="math notranslate nohighlight">\(\forall a, v, i, j. i=j \to a \langle i \triangleleft v \rangle [j] = v\)</span></p></li>
+<li><p>Read-over-write 2: <span class="math notranslate nohighlight">\(\forall a, i, j. i \neq j \to a \langle i \triangleleft v \rangle [j] = a[j]\)</span></p></li>
+</ol>
+</div></blockquote>
+</li>
+<li><p><strong>Decidability</strong></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Validity in full <span class="math notranslate nohighlight">\(T_{A}\)</span> is <em>not</em> decidable</p></li>
+<li><p>Validity in <em>quantifier-free</em> fragment of <span class="math notranslate nohighlight">\(T_{A}\)</span> is <em>decidable</em> but not expressive enough</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="combined-theories">
+<h3><a class="toc-backref" href="#id10">Combined Theories</a><a class="headerlink" href="#combined-theories" title="Permalink to this headline">¶</a></h3>
+<p>Given two theories <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> that have the <span class="math notranslate nohighlight">\(=\)</span> predicate, we define a combined theory <span class="math notranslate nohighlight">\(T_1 \cup T_2\)</span>:</p>
+<ul class="simple">
+<li><p><strong>Signature</strong>: <span class="math notranslate nohighlight">\(\Sigma_1 \cup \Sigma_2\)</span></p></li>
+<li><p><strong>Axioms</strong> <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="decision-procedure-theory-of-equality">
+<h2><a class="toc-backref" href="#id11">Decision Procedure: Theory of Equality</a><a class="headerlink" href="#decision-procedure-theory-of-equality" title="Permalink to this headline">¶</a></h2>
+<ul>
+<li><p><strong>Congruence Closure Algorithm</strong> is the decision procedure for theory of equality. It is used to decide the satisfiability in the <em>quantifier-free</em> fragment of <span class="math notranslate nohighlight">\(T_=\)</span>.</p>
+<blockquote>
+<div><p>The algorithm computes the congruence closure of the binary relation defined by formula.</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Restrictions:</dt><dd><ul class="simple">
+<li><p>formula only contains <em>conjunctions</em> of literals</p></li>
+<li><p>allow functions, but no predicates</p></li>
+<li><dl class="simple">
+<dt>eliminating predicates: tranform to <em>equisatisfiable</em> formula with only functions</dt><dd><dl class="simple">
+<dt>for each relation constant <span class="math notranslate nohighlight">\(p\)</span></dt><dd><ol class="arabic simple">
+<li><p>introduce a fresh function constant <span class="math notranslate nohighlight">\(f_p\)</span></p></li>
+<li><p>rewrite <span class="math notranslate nohighlight">\(p(x_1, ... , x_n)\)</span> as <span class="math notranslate nohighlight">\(f_p(x_1, ... , x_n) = t\)</span>, where <span class="math notranslate nohighlight">\(t\)</span> is a fresh object constant</p></li>
+</ol>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Definition:</strong> Equivalence relation</dt><dd><p>A binary relation <span class="math notranslate nohighlight">\(R\)</span> over a set <span class="math notranslate nohighlight">\(S\)</span> is an equivalence relation if it is</p>
+<ol class="arabic simple">
+<li><p>reflexive: <span class="math notranslate nohighlight">\(\forall s\in S. sRs\)</span></p></li>
+<li><p>symmetric: <span class="math notranslate nohighlight">\(\forall s_1, s_2 \in S. s_1Rs_2 \to s_2Rs_1\)</span></p></li>
+<li><p>transitive: <span class="math notranslate nohighlight">\(\forall s_1, s_2, s_3 \in S. s_1Rs_2 \land s_2Rs_3 \to s_1Rs_3\)</span></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Congruence relation</dt><dd><p>Consider set <span class="math notranslate nohighlight">\(S\)</span> equipped with functions <span class="math notranslate nohighlight">\(F = \{ f_1, ... ,f_n\}\)</span></p>
+<p>A relation <span class="math notranslate nohighlight">\(R\)</span> over <span class="math notranslate nohighlight">\(S\)</span> is a congruence relation if it is an <em>equilalence relation</em> and for every n’ary function <span class="math notranslate nohighlight">\(f \in F\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\forall \vec{s}, \vec{t}. \bigwedge\limits_{i=1}^n s_iRt_i \to f(\vec{s})Rf(\vec{t})\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition</strong> Equivalence/congruence class</dt><dd><p>For a given equivalence relation <span class="math notranslate nohighlight">\(R\)</span> over <span class="math notranslate nohighlight">\(S\)</span>, the equivalence class of <span class="math notranslate nohighlight">\(s \in S\)</span> under <span class="math notranslate nohighlight">\(R\)</span> is the set:</p>
+<div class="math notranslate nohighlight">
+\[[s]_R := \{s' \in S: sRs' \}.\]</div>
+<p>If <span class="math notranslate nohighlight">\(R\)</span> is a congruence relation, the set is called congruence class.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Equivalence closure</dt><dd><p>The equivalence closure <span class="math notranslate nohighlight">\(R^E\)</span> of a binary relation <span class="math notranslate nohighlight">\(R\)</span> over <span class="math notranslate nohighlight">\(S\)</span> is the equivalence relation such that:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(R \subseteq R^E\)</span></p></li>
+<li><p>for all other equivalence relations <span class="math notranslate nohighlight">\(R'\)</span> s.t <span class="math notranslate nohighlight">\(R \subseteq R'\)</span>, we have <span class="math notranslate nohighlight">\(R^E \subseteq R'\)</span></p></li>
+</ol>
+<p>i.e. the smallest equivalence relation that includes <span class="math notranslate nohighlight">\(R\)</span>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Congruence closure</dt><dd><p>Similarly, the congruence closure <span class="math notranslate nohighlight">\(R^C\)</span> is the smallest congruence relation that includes <span class="math notranslate nohighlight">\(R\)</span>.</p>
+<p><em>Example:</em> Consider <span class="math notranslate nohighlight">\(S=\{a, b, c\}\)</span> and function <span class="math notranslate nohighlight">\(f\)</span> such that:</p>
+<div class="math notranslate nohighlight">
+\[f(a) = b, \quad f(b)=c, \quad f(c)=c\]</div>
+<p>The conguence closure of relation <span class="math notranslate nohighlight">\(\{ \langle a, b\rangle \}\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[R^C = \{ \langle a, b\rangle, \langle a, a\rangle, \langle b, b\rangle, \langle c, c\rangle, \langle b, a\rangle, \langle b, c\rangle, \langle c, b\rangle, \langle a, c\rangle, \langle c, a\rangle\}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Theorem:</strong> Satisfiability of a <span class="math notranslate nohighlight">\(\Sigma_=\)</span> formula</dt><dd><p>Consider formula F</p>
+<div class="math notranslate nohighlight">
+\[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
+<p>Let <span class="math notranslate nohighlight">\(R_F = \{ \langle x, y \rangle | x=s_i, y=t_i, i\in [1, m]\}\)</span></p>
+<p>F is satisfiable if the congruence closure <span class="math notranslate nohighlight">\(\sim\)</span> of <span class="math notranslate nohighlight">\(R_F\)</span> satisfies <span class="math notranslate nohighlight">\(s_i \not\sim t_i\)</span> for all <span class="math notranslate nohighlight">\(i\in[m+1, n]\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="congruence-closure-algorithm">
+<h3><a class="toc-backref" href="#id12">Congruence Closure Algorithm</a><a class="headerlink" href="#congruence-closure-algorithm" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">Congruence Closure Algorithm (Basic Idea)</p>
+<p>Congruence closure algorithm decides satisfiability of</p>
+<div class="math notranslate nohighlight">
+\[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
+<p>Steps:</p>
+<ol class="arabic simple">
+<li><p>Construct the <em>congruence closure</em> <span class="math notranslate nohighlight">\(\sim\)</span> of <span class="math notranslate nohighlight">\(R_F\)</span> over the subterm set <span class="math notranslate nohighlight">\(S_F\)</span></p></li>
+<li><p>If <span class="math notranslate nohighlight">\(s_i \sim s_t\)</span> for any i in <span class="math notranslate nohighlight">\([m+1, n]\)</span>, <span class="math notranslate nohighlight">\(F\)</span> is unsatisfiable</p></li>
+<li><p>Otherwise, <span class="math notranslate nohighlight">\(F\)</span> is satisfiable.</p></li>
+</ol>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><dl>
+<dt>Computing congruence closure</dt><dd><p>To compute congruence closure efficiently, we’ll represent the subterm set of the formula as a DAG:</p>
+<ul class="simple">
+<li><p>Node: a subterm and a unique id</p></li>
+<li><p>Edges: point from function symbol to arguments</p></li>
+</ul>
+<p>We need to merge congruence classes:</p>
+<ul class="simple">
+<li><p>Each class has a <em>representative</em>, each subterm (node) has a <em>find</em> pointer that eventually leads to the representative of its congruence class.</p></li>
+<li><p>Each representative node has <em>parents</em>: pointer from representative to parents of all subterms in the class.</p></li>
+</ul>
+<p>How to merge congruence classes of two terms <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span>:</p>
+<ol class="arabic simple">
+<li><p>Find representatives of <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span></p></li>
+<li><p>Change <em>find</em> field of <span class="math notranslate nohighlight">\(Rep(t_1)\)</span> to point to <span class="math notranslate nohighlight">\(Rep(t_2)\)</span></p></li>
+<li><p>Update parents: move parents of <span class="math notranslate nohighlight">\(Rep(t_1)\)</span> to <span class="math notranslate nohighlight">\(Rep(t_2\)</span>)</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Process equalities</dt><dd><p>To process <span class="math notranslate nohighlight">\(t_1 = t_2\)</span>:</p>
+<ol class="arabic">
+<li><p>Find representatives of <span class="math notranslate nohighlight">\(t_1\)</span> and <span class="math notranslate nohighlight">\(t_2\)</span></p></li>
+<li><p>Merge equivalence classes</p></li>
+<li><p>Retrieve the set of parents <span class="math notranslate nohighlight">\(P_1\)</span>, <span class="math notranslate nohighlight">\(P_2\)</span> stored in <span class="math notranslate nohighlight">\(Rep(t_1)\)</span>, <span class="math notranslate nohighlight">\(Rep(t_2\)</span>)</p></li>
+<li><p>For each <span class="math notranslate nohighlight">\((p_i, p_j) \in P_1 \times P_2\)</span>, if <span class="math notranslate nohighlight">\(p_1\)</span> and <span class="math notranslate nohighlight">\(p_2\)</span> are <em>congruent</em>, process equality <span class="math notranslate nohighlight">\(p_i = p_j\)</span></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>Note:</em> at this step, new equalities may be generated.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Congruence Closure Algorithm (Full Version)</p>
+<p>Congruence closure algorithm decides satisfiability of</p>
+<div class="math notranslate nohighlight">
+\[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
+<p>Steps:</p>
+<ol class="arabic">
+<li><p>Compute subterms and construct initial DAG (each node’s representative is itself)</p></li>
+<li><p>For each  <span class="math notranslate nohighlight">\(i \in [i, m]\)</span>, process equality <span class="math notranslate nohighlight">\(s_i = t_i\)</span></p></li>
+<li><p>For each  <span class="math notranslate nohighlight">\(i \in [i, m]\)</span>, process inequality <span class="math notranslate nohighlight">\(s_i \neq t_i\)</span>:</p>
+<blockquote>
+<div><ol class="lowerroman simple">
+<li><p>if <span class="math notranslate nohighlight">\(\exists i. Rep(s_i) = Rep(t_i)\)</span>: return UNSAT</p></li>
+<li><p>if <span class="math notranslate nohighlight">\(\forall i. Rep(s_i) \neq Rep(t_i)\)</span>: return SAT</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Time complexity</dt><dd><p>This algorithm is <span class="math notranslate nohighlight">\(O(e^2)\)</span>. Can be solved in <span class="math notranslate nohighlight">\(O(elog(e))\)</span>.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="decision-procedure-theory-of-rationals">
+<h2><a class="toc-backref" href="#id13">Decision Procedure: Theory of Rationals</a><a class="headerlink" href="#decision-procedure-theory-of-rationals" title="Permalink to this headline">¶</a></h2>
+<p>We only consider <em>quantifier-free</em> <em>conjuctive</em> <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}\)</span> formulas. Deciding satistiability of qff conjuctive formulas is a special case of <em>linear programming</em>, which can be solved by the <em>Simplex</em> algorithm.</p>
+<div class="section" id="linear-programming">
+<h3><a class="toc-backref" href="#id14">Linear programming</a><a class="headerlink" href="#linear-programming" title="Permalink to this headline">¶</a></h3>
+<div class="topic">
+<p class="topic-title first">Linear Programming</p>
+<p>In a <strong>linear programming</strong> problem, we have an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>, and an <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{c}\)</span></p>
+<p>We want to solve the problem:</p>
+<div class="math notranslate nohighlight">
+\[max_{\vec{x}} \vec{c}^T \vec{x}\]</div>
+<p>subject to</p>
+<div class="math notranslate nohighlight">
+\[A\vec{x} \leq \vec{b}\]</div>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Geometric formulation and LP lingo</p>
+<ul class="simple">
+<li><p>feasible solution</p></li>
+<li><p>optimal solution</p></li>
+<li><p>bounded</p></li>
+</ul>
+</div>
+<ul>
+<li><p><span class="math notranslate nohighlight">\(T_\mathbb{Q}\)</span> as LP problem</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Convert a <span class="math notranslate nohighlight">\(T_\mathbb{Q}\)</span> formula to NNF</p></li>
+<li><p>Rewrite it as <em>equisatisfiable</em> formula containing only <span class="math notranslate nohighlight">\(\leq\)</span> and <span class="math notranslate nohighlight">\(&gt;0\)</span>:</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[\begin{split}\vec{a}^T \vec{x} \geq c \quad&amp;\Rightarrow\quad -\vec{a}^T \vec{x} \leq -c\\
+\vec{a}^T \vec{x} &lt; c    \quad&amp;\Rightarrow\quad \vec{a}^T \vec{x} + y \leq c \land y &gt; 0\\
+\vec{a}^T \vec{x} = c    \quad&amp;\Rightarrow\quad \vec{a}^T \vec{x} \leq c \land -\vec{a}^T \vec{x} \leq -c\\
+\vec{a}^T \vec{x} \neq c \quad&amp;\Rightarrow\quad (\vec{a}^T \vec{x} + y \leq c \land y &gt;0) \lor (-\vec{a}^T \vec{x} + y \leq -c \land y &gt;0)\end{split}\]</div>
+<p>3. Convert to DNF. F is satisfiable iff any of the clauses satisfiable.
+Each clause is of the following form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i\\
+\land \quad &amp;\bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i\\
+\land \quad &amp;y&gt;0\end{split}\]</div>
+<p>This constraint is satisfiable iff the opitmal solution of the following LP problem is <strong>strictly positive</strong>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;\text{Maximize      } \quad y \\
+&amp;\text{Subject to} \quad\bigwedge a_{i1}x_i + ... + a_{in}x_n \leq b_i \\
+&amp;\qquad\quad\land \quad \bigwedge a_{i1}x_i + ... + a_{in}x_n + y \leq \beta_i\end{split}\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+<div class="section" id="simplex-algorithm">
+<h3><a class="toc-backref" href="#id15">Simplex algorithm</a><a class="headerlink" href="#simplex-algorithm" title="Permalink to this headline">¶</a></h3>
+<p>To apply Simplex, a linear inequality system needs to be converted into <em>standard form</em>, and then into <em>slack form</em>.</p>
+<ul class="simple">
+<li><p><strong>Standard form</strong></p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize      } &amp;\quad\vec{C}^T\vec{x} \\
+    \text{Subject to} &amp;\quad A\vec{x} \leq \vec{b}\\
+                        &amp;\quad\vec{x} \geq 0\end{split}\]</div>
+<ul>
+<li><dl class="simple">
+<dt>We can convert every LP problem into an <em>equisatisfiable</em> standard form representation.</dt><dd><ul class="simple">
+<li><p>Equisatisfiable: original problem has optimal objective value c iff problem in standard form has optimal objective value c</p></li>
+<li><dl class="simple">
+<dt>If <span class="math notranslate nohighlight">\(x_i\)</span> does not have non-negativity constraint</dt><dd><ul>
+<li><p>introduce <span class="math notranslate nohighlight">\(x_i'\)</span> and <span class="math notranslate nohighlight">\(x_i''\)</span></p></li>
+<li><p>replace <span class="math notranslate nohighlight">\(x_i\)</span> with <span class="math notranslate nohighlight">\(x_i' - x_i''\)</span></p></li>
+<li><p>add two constraints <span class="math notranslate nohighlight">\(x_i' \geq 0\)</span> and <span class="math notranslate nohighlight">\(x_i'' \geq 0\)</span>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>Slack form</strong></p>
+<blockquote>
+<div><p>In slack form, we only have equalities; the only inequality allowed is non-negativity constraints</p>
+<ul class="simple">
+<li><p>For each inequality <span class="math notranslate nohighlight">\(A_i\vec{x} \leq b_i\)</span>, introduce a <em>slack variable</em> <span class="math notranslate nohighlight">\(s_i\)</span>.</p></li>
+<li><p>Rewrite inequality as equality <span class="math notranslate nohighlight">\(s_i = b_i - A_ix\)</span> and introduce non-negativity constraint <span class="math notranslate nohighlight">\(s_i \geq 0\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p><strong>Example</strong></p>
+<blockquote>
+<div><p>Consider the following linear program:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2 \\
+\text{Subject to} &amp;\quad x_1 + x_2 \leq 7 \\
+                  &amp;\quad -x_1 - x_2 \leq -7 \\
+                  &amp;\quad x_1 - 2 x_2 \leq 4 \\
+                  &amp;\quad x_1 \geq 0\\\end{split}\]</div>
+<p>Equisatisfiable system in standard form (replace <span class="math notranslate nohighlight">\(x_1\)</span> with <span class="math notranslate nohighlight">\(x_2 - x_3\)</span>):</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2  + 3x_3\\
+\text{Subject to} &amp;\quad x_1 + x_2 - x_3 \leq 7 \\
+                  &amp;\quad -x_1 - x_2 + x_3 \leq -7 \\
+                  &amp;\quad x_1 - 2 x_2 + 2x_3 \leq 4 \\
+                  &amp;\quad x_1, x_2, x_3\geq 0\\\end{split}\]</div>
+<p>In slack form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad 2x_1 - 3x_2  + 3x_3\\
+\text{Subject to} &amp;\quad x_4 = 7 - x_1 - x_2 + x_3 \\
+                  &amp;\quad x_5 = -7 + x_1 + x_2 - x_3  \\
+                  &amp;\quad x_6 = 4 - x_1 + 2 x_2 - 2x_3 \\
+                  &amp;\quad x_1, x_2, x_3, x_4, x_5, x_6 \geq 0\\\end{split}\]</div>
+</div></blockquote>
+</li>
+<li><p><strong>Slack form</strong></p>
+<blockquote>
+<div><ul>
+<li><p>variables on the left-hand side are <em>basic variables</em>, denoted by <span class="math notranslate nohighlight">\(B\)</span></p></li>
+<li><p>variables on the right-hand side are <em>non-basic variables</em>, denoted by <span class="math notranslate nohighlight">\(N\)</span></p></li>
+<li><p><strong>Invariant:</strong> only non-basic variables can appear in the objective function</p></li>
+<li><p>write the slack form as:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}z &amp;= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)\end{split}\]</div>
+<ul class="simple">
+<li><p>the non-negativity constraints are omitted</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>The Simplex Algorithm</dt><dd><p>The algorithm has two phases:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><em>Phase 1:</em> Compute a feasible basic solution, if one exists</p></li>
+<li><p><em>Phase 2:</em> Optimize value of objective function (by pivoting)</p></li>
+</ol>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Simplex Phase 2</p>
+<p>In phase 2, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.</p>
+<p>We have the problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}z &amp;= v + \sum\limits_{x_j\in N} c_j x_j \quad\text{(objective function)}\\
+x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i \in B)\end{split}\]</div>
+<p>Step 1: given term <span class="math notranslate nohighlight">\(c_jx_j\)</span> with positive <span class="math notranslate nohighlight">\(c_j\)</span> in objective function, we want to increase <span class="math notranslate nohighlight">\(x_j\)</span> as much as possible.</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Find the most restricting equality for <span class="math notranslate nohighlight">\(x_j\)</span>:</dt><dd><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(x_j\)</span>’s coefficient <span class="math notranslate nohighlight">\(a_{ij}\)</span> is positive</p></li>
+<li><p>has smallest value of <span class="math notranslate nohighlight">\(\frac{b_i}{a_{ij}}\)</span></p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Step 2: pivot operation</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Suppose the equality with basic var <span class="math notranslate nohighlight">\(x_i\)</span> is the most restrictive for <span class="math notranslate nohighlight">\(x_j\)</span></p></li>
+<li><p>Rewrite <span class="math notranslate nohighlight">\(x_j\)</span> in terms of <span class="math notranslate nohighlight">\(x_i\)</span> and plug into other equations</p></li>
+<li><p>Now <span class="math notranslate nohighlight">\(x_j\)</span> is basic, <span class="math notranslate nohighlight">\(x_i\)</span> is non-basic. <span class="math notranslate nohighlight">\(x_j\)</span>’s value increased from 0 to <span class="math notranslate nohighlight">\(\frac{b_i}{a_{ij}}\)</span> (also the objective value)</p></li>
+</ul>
+</div></blockquote>
+<p>Repeats this operation until one of the two conditions hold:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt><em>ALL</em> coefficients in objective function are <em>nagative</em></dt><dd><ul class="simple">
+<li><p>found optimal solution</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>There exists a non-basic variable <span class="math notranslate nohighlight">\(x_j\)</span> with positive coefficient <span class="math notranslate nohighlight">\(c_j\)</span> in objective functon, but all coefficients <span class="math notranslate nohighlight">\(a_{ij}\)</span> are negative</dt><dd><ul class="simple">
+<li><p>optimal solution = <span class="math notranslate nohighlight">\(\infty\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><dl>
+<dt>Degenerate problems</dt><dd><p>The objective value can stay the same after pivoting. For degenerate problems, Simplex might not terminate.</p>
+<p>There are pivot selection strategies for which Simplex is guaranteed to terminate.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>Bland’s Rule</strong> if there are multiple variables with positive coefficients in objective funtion, always choose the variable with the <em>smallest</em> index</p></li>
+</ul>
+</div></blockquote>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Simplex Phase 1</p>
+<p>In phase 1, we want to find a feasible basic solution if it exists.</p>
+<p>To do this, we construct an <em>auxiliary linear program</em> <span class="math notranslate nohighlight">\(L_{aux}\)</span>, which has the properties:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>we can find a feasible basic solution for it after at most one pivot operation</p></li>
+<li><p><strong>the original LP has a feasible solution iff the optimal objective value for</strong> <span class="math notranslate nohighlight">\(L_{aux}\)</span> <strong>is zero</strong></p></li>
+</ul>
+</div></blockquote>
+<p>Consider the original LP problem:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad \sum\limits_{j=1}^{n}c_jx_j\\
+\text{Subject to} &amp;\quad \sum\limits_{j=1}^{n}a_{ij}x_j \leq b_j \quad(i \in [i, m])\\
+                  &amp;\quad   x_j \geq 0 \quad(j \in [1, n])\\\end{split}\]</div>
+<p>The corresponding auxiliary linear problem is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\text{Maximize}   &amp;\quad -x_0\\
+\text{Subject to} &amp;\quad \sum\limits_{j=1}^{n}a_{ij}x_j - x_0 \leq b_j \quad(i \in [i, m])\\
+                  &amp;\quad   x_j \geq 0 \quad(j \in [0, n])\\\end{split}\]</div>
+<p>In slack form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}z &amp;= -x_0\\
+x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
+<dl class="simple">
+<dt>If all <span class="math notranslate nohighlight">\(b_i\)</span>’s are positive, basic solution already feasible. Otherwise:</dt><dd><ul class="simple">
+<li><p>find the equality <span class="math notranslate nohighlight">\(x_i\)</span> with most negative :math`b_i`</p></li>
+<li><p>make <span class="math notranslate nohighlight">\(x_0\)</span> new basic variable, and :math`x_i` non-basic</p></li>
+</ul>
+</dd>
+</dl>
+<p>After this one pivot operation, all :math`b_i`’s are non-negative; thus the basic solution is feasible.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+</div>
+</div>
+<div class="section" id="decision-procedure-theory-of-integers">
+<h2><a class="toc-backref" href="#id16">Decision Procedure: Theory of Integers</a><a class="headerlink" href="#decision-procedure-theory-of-integers" title="Permalink to this headline">¶</a></h2>
+<p>Similarly as before, we only consider <em>quantifier-free</em> <span class="math notranslate nohighlight">\(T_{\mathbb{Z}}\)</span> formulas without disjunctions. We want to solve the following problem:</p>
+<p>Given an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> with only integer coefficients and a vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{Z}^n\)</span>, does</p>
+<div class="math notranslate nohighlight">
+\[A\vec{x} \leq \vec{b}\]</div>
+<p>has <strong>integer</strong> solutions?</p>
+<p><em>Note:</em> Finding rational solution is poly-time, but integer problem is NP-complete (without disjunctions).</p>
+<div class="section" id="omega-test">
+<h3><a class="toc-backref" href="#id17">Omega Test</a><a class="headerlink" href="#omega-test" title="Permalink to this headline">¶</a></h3>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Historical perspective: array dependence analysis</p>
+<ul class="simple">
+<li><p>the problem of determine wether the same element is both read and written to at the same time during the execution of a program</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[w_i = r_i \land w_j = r_j\]</div>
+</div>
+<p>The main idea of Omega test is to eleminate variables one by one from the initial system <span class="math notranslate nohighlight">\(A\vec{x} \leq \vec{b}\)</span>. Geometrically it corresponds to computing a projection of a polytope in n-dimensional space to an n-1-dimensional space.</p>
+<ul>
+<li><p><strong>Omega Test:</strong> Work Flow</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><dl class="simple">
+<dt>Real shadow (overapproximation)</dt><dd><ul class="simple">
+<li><p>if no solution: return <strong>UNSAT</strong></p></li>
+<li><p>otherwise continue</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Dard shadow (underapproximation)</dt><dd><ul class="simple">
+<li><p>if has solution: return <strong>SAT</strong></p></li>
+<li><p>otherwise continue</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Gray shadows</dt><dd><ul class="simple">
+<li><p>any subproblem has solution: <strong>SAT</strong></p></li>
+<li><p>otherwise UNSAT</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Real Shadow (Fourier-Motzkin technique)</p>
+<p>We ignore requirement that solution must be integer.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add formal definition</p>
+</div>
+</div>
+<ul>
+<li><p><strong>Example</strong> for real shadow</p>
+<blockquote>
+<div><p>Consider the set of inequalities:</p>
+<div class="math notranslate nohighlight">
+\[x \leq y+10 \quad y \leq 15 \quad -x+20 \leq y\]</div>
+<ul class="simple">
+<li><p>First rearrange the inequalities to isolate y on one side:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;(1) \quad x-10\leq y\\
+&amp;(2) \quad y \leq 15 \\
+&amp;(3) \quad -x+20 \leq y\end{split}\]</div>
+<ul class="simple">
+<li><p>From (1) and (2), we have <span class="math notranslate nohighlight">\(x-10 \leq 15 \equiv x\leq 25\)</span></p></li>
+<li><p>From (2) and (3), we have <span class="math notranslate nohighlight">\(-x +20 \leq 15 \equiv x\geq 5\)</span></p></li>
+<li><p>The real shadow on x-axis is <span class="math notranslate nohighlight">\(5 \leq x \leq 25\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Dark Shadow</p>
+<p>Dark shadow only projects those parts of polytope that are <em>at least one unit thick</em> in the x-dimension; thus we are guaranteed to have an interger solution for x if dark shadow has integer solution.</p>
+<p>Consider a pair of inequalities corresponding to lower and upper bounds on <span class="math notranslate nohighlight">\(x\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}L \leq ax \quad bx \leq U \\
+\equiv \frac{L}{a} \leq x \leq \frac{U}{b}\end{split}\]</div>
+<p>Then to guarantee there is an integer value for <span class="math notranslate nohighlight">\(x\)</span>, we have the constraint:</p>
+<div class="math notranslate nohighlight">
+\[aU - bL &gt; ab-a-b\]</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add derivations of the formula</p>
+</div>
+</div>
+<ul>
+<li><p><strong>Example</strong> for dark shadow</p>
+<blockquote>
+<div><blockquote>
+<div><p>Consider the set of inequalities:</p>
+</div></blockquote>
+<div class="math notranslate nohighlight">
+\[\begin{split}&amp;(1) \quad 4y \geq x \\
+&amp;(2) \quad 2y \geq 6-3x \\
+&amp;(3) \quad 3y \leq 7-x\end{split}\]</div>
+<ul class="simple">
+<li><p>From (1) and (3), we have <span class="math notranslate nohighlight">\(a=4, L=x, b=3, U=7-x\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[4(7-x) -3x &gt; 12 -4 -3 \implies x&lt;\frac{23}{7}\]</div>
+<ul class="simple">
+<li><p>From (2) and (3), we have <span class="math notranslate nohighlight">\(a=2, L=6-3x, b=3, U=7-x\)</span>:</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[2(7-x) -3(6-3x) &gt; 6-3-2 \implies x&lt;\frac{5}{7}\]</div>
+<ul class="simple">
+<li><p>The real shadow on x-axis is <span class="math notranslate nohighlight">\(\frac{5}{7}&lt;x&lt;\frac{23}{7}\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Gray Shadows</p>
+<p>If real shadow has integer solutions, but dark shadow does not, we still cannot conclude about the original problem. In this case, we construct the gray shadows, which look for integers <em>outside</em> the dark shadow, but <em>inside</em> the real shadow.</p>
+<p>By construction, points inside the real shadow satisfies:</p>
+<div class="math notranslate nohighlight">
+\[bL \leq abx \leq aU\]</div>
+<p>And points outside the dark shadow satisfies:</p>
+<div class="math notranslate nohighlight">
+\[aU-bL \leq ab-a-b\]</div>
+<p>Combining these two, points in the gray shadow must satisfy:</p>
+<div class="math notranslate nohighlight">
+\[L \leq ax \leq L + \frac{ab -a-b}{b}\]</div>
+<p>Observe that <span class="math notranslate nohighlight">\(ax\)</span> must be integer. We then construct each gray shadow by adding the equality:</p>
+<div class="math notranslate nohighlight">
+\[ax = L +i\]</div>
+<p>for <span class="math notranslate nohighlight">\(i\)</span> in <span class="math notranslate nohighlight">\([0, \frac{ab-a-b}{b}]\)</span>.</p>
+<ul class="simple">
+<li><p><strong>If any subproblem has integer solution, then so does original problem</strong></p></li>
+<li><p><strong>If no subproblem has integer solution, original problem is UNSAT</strong></p></li>
+</ul>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p>Remarks</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If there are <span class="math notranslate nohighlight">\(n\)</span> integers between <span class="math notranslate nohighlight">\(0\)</span> and <span class="math notranslate nohighlight">\(\frac{ab-a-b}{b}\)</span>, Omega test constructs <span class="math notranslate nohighlight">\(n\)</span> gray shadows</p></li>
+<li><p>Thus it is very sensitive to coefficients: the larger <span class="math notranslate nohighlight">\(a\)</span> is, the more gray shadows we must consider</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="decision-procedure-combined-theories">
+<h2><a class="toc-backref" href="#id18">Decision Procedure: Combined Theories</a><a class="headerlink" href="#decision-procedure-combined-theories" title="Permalink to this headline">¶</a></h2>
+<p>Given decision procedures for quantifier-free <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span>, we want a decision procedure to decide satisfiability of formulas in qff <span class="math notranslate nohighlight">\(T_1 \cup T_2\)</span>.</p>
+<p>We use the Nelson-Oppen method. It has the following restrictions:</p>
+<ol class="arabic simple">
+<li><p>Only allows combining <em>quantifier-free</em> fragments</p></li>
+<li><p>Only allows combining formulas <em>without disjunctions</em> (Note: we can convert formula to DNF in order to use this method)</p></li>
+<li><p>Signatures can only share equality: <span class="math notranslate nohighlight">\(\Sigma_1 \cap \Sigma_2 = \{=\}\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> must be <strong>stably infinite</strong></p></li>
+</ol>
+<ul>
+<li><dl>
+<dt><strong>Definition:</strong> Stably infinite</dt><dd><p>Theory T is stably infinite iff every <em>satisfiable</em> qff formula is satisfiable in a universe of discourse with infinite cardinality</p>
+<ul>
+<li><dl>
+<dt><em>Example:</em> non-stably infinite theory:</dt><dd><div class="math notranslate nohighlight">
+\[\begin{split}\text{Signature:}\quad &amp;\{a, b, =\}\\
+\text{Axiom:} \quad &amp;\forall x. x=a \lor x=b\end{split}\]</div>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><em>Example:</em> some stably infinite theories are</dt><dd><p><span class="math notranslate nohighlight">\(T_=, T_\mathbb{Q}, T_\mathbb{Z}, T_A\)</span></p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="nelson-oppen-method">
+<h3><a class="toc-backref" href="#id19">Nelson-Oppen Method</a><a class="headerlink" href="#nelson-oppen-method" title="Permalink to this headline">¶</a></h3>
+<p>Nelson-Oppen method has two phases:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Purification</dt><dd><p>Seperate formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span> into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> in <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> in <span class="math notranslate nohighlight">\(T_2\)</span></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Equality propagation</dt><dd><p>Propagate all relevant equalities between theories (different for convex &amp; non-convex)</p>
+</dd>
+</dl>
+</li>
+</ol>
+<div class="topic">
+<p class="topic-title first">Purification</p>
+<p>Given formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span>, goal is to seperate it into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> such that:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1\)</span> belongs only to <span class="math notranslate nohighlight">\(T_1\)</span> (‘pure’)</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_2\)</span> belongs only to <span class="math notranslate nohighlight">\(T_2\)</span> (‘pure’)</p></li>
+<li><p><span class="math notranslate nohighlight">\(F_1 \land F_2\)</span> is <strong>equisatisfiable</strong> as <span class="math notranslate nohighlight">\(F\)</span></p></li>
+</ol>
+</div></blockquote>
+<p>To purify <span class="math notranslate nohighlight">\(F\)</span>, exhaustively apply the following:</p>
+<blockquote>
+<div><ol class="arabic">
+<li><p>Consider term <span class="math notranslate nohighlight">\(f(..., t_i, ...)\)</span>.</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(f \in \Sigma_i\)</span> but <span class="math notranslate nohighlight">\(t_i\)</span> is not a term in <span class="math notranslate nohighlight">\(T_i\)</span>, replace <span class="math notranslate nohighlight">\(t_i\)</span> with freash variable <span class="math notranslate nohighlight">\(z\)</span> and conjoin <span class="math notranslate nohighlight">\(z=t_i\)</span></p>
+</div></blockquote>
+</li>
+<li><p>Consider predicate <span class="math notranslate nohighlight">\(p(..., t_i, ...)\)</span>.</p>
+<blockquote>
+<div><p>If <span class="math notranslate nohighlight">\(p \in \Sigma_i\)</span> but <span class="math notranslate nohighlight">\(t_i\)</span> is not a term in <span class="math notranslate nohighlight">\(T_i\)</span>, replace <span class="math notranslate nohighlight">\(t_i\)</span> with freash variable <span class="math notranslate nohighlight">\(w\)</span> and conjoin <span class="math notranslate nohighlight">\(w=t_i\)</span></p>
+</div></blockquote>
+</li>
+</ol>
+</div></blockquote>
+<p>After this procedure, we have <span class="math notranslate nohighlight">\(F_1 \land F_2\)</span> as required.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p><strong>Definition:</strong> Shared/Unshared Variables</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If <span class="math notranslate nohighlight">\(x\)</span> occurs in both <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span>, it is called <em>shared</em> variable</p></li>
+<li><p>If <span class="math notranslate nohighlight">\(y\)</span> occurs only in <span class="math notranslate nohighlight">\(F_1\)</span> or <span class="math notranslate nohighlight">\(F_2\)</span>, it is called <em>unshared</em> variable</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Convex Theories</dt><dd><p>A theory T is convex if for every conjunctive formula <span class="math notranslate nohighlight">\(F\)</span>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if <span class="math notranslate nohighlight">\(F \to \bigvee\limits_{i=1}^{n} x_i = y_i\)</span> for finite n</p></li>
+<li><p>then <span class="math notranslate nohighlight">\(F \to x_i = y_i\)</span> for some <span class="math notranslate nohighlight">\(i \in [1, n]\)</span></p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><dl class="simple">
+<dt><em>Example:</em>  <span class="math notranslate nohighlight">\(T_{\mathbb{Z}}\)</span> is non-convex:</dt><dd><ul>
+<li><p>consider <span class="math notranslate nohighlight">\(1 \leq x \land x \leq 2 \to x=1 \lor x=2\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><em>Example:</em>  <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}, T_=\)</span> are convex</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Equality propagation (Convex)</p>
+<p>After purification, if either <span class="math notranslate nohighlight">\(F_1\)</span> or <span class="math notranslate nohighlight">\(F_2\)</span> is UNSAT, <span class="math notranslate nohighlight">\(F\)</span> is UNSAT. Otherwise, we need equality propagation. First consider only convex theories.</p>
+<dl class="simple">
+<dt>For each pair of <em>shared</em> variables <span class="math notranslate nohighlight">\(x, y\)</span>, determine if</dt><dd><ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1 \to x=y\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_2 \to x=y\)</span></p></li>
+</ol>
+</dd>
+</dl>
+<ul class="simple">
+<li><p>If (1) holds but not (2), conjoin <span class="math notranslate nohighlight">\(x=y\)</span> with <span class="math notranslate nohighlight">\(F_2\)</span></p></li>
+<li><p>If (2) holds but not (1), conjoin <span class="math notranslate nohighlight">\(x=y\)</span> with <span class="math notranslate nohighlight">\(F_1\)</span></p></li>
+</ul>
+<p>Then check the satisfiability of the new formulas. Repeat until either formula is UNSAT or no new equalities can be inferred.</p>
+</div>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><p><em>Example:</em> The technique above does not apply to non-convex theories:</p>
+<blockquote>
+<div><p>Consider the following <span class="math notranslate nohighlight">\(T_{\mathbb{Z}} \cup T_=\)</span> formula:</p>
+<div class="math notranslate nohighlight">
+\[1 \leq x \land x \leq 2 \land f(x) \neq f(1) \land f(x) \neq f(2)\]</div>
+<p>After purifying, we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div>
+<p>By the previous technique, these return SAT, although the formula is UNSAT.</p>
+</div></blockquote>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Equality propagation (Non-Convex)</p>
+<p>Probelm involving non-convex theories is that a formula might not imply an equality, but imply a <em>disjunction</em> of equalities. However, we can only deal with conjunctions.</p>
+<p>If any of the formula implies <span class="math notranslate nohighlight">\(\bigvee\limits_{i=1}^n x_i = y_i\)</span>, we create n subproblems where we propagate <span class="math notranslate nohighlight">\(x_i = y_i\)</span> in <span class="math notranslate nohighlight">\(i\)</span>’th subproblem.</p>
+<ul class="simple">
+<li><p>If <em>any</em> subproblem is SAT, the original formula is SAT.</p></li>
+<li><p>If <em>every</em> subproblems are UNSAT, the original formula is UNSAT.</p></li>
+</ul>
+</div>
+<ul>
+<li><p><em>Example:</em> Consider the same problem:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}F_1: \quad f(x) \neq f(w_1) \land f(x) \neq f(w_2)\\
+F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div>
+<p>We have the following implication of a disjunction of equalities:</p>
+<div class="math notranslate nohighlight">
+\[F_2 \to x=w_1 \lor x=w_2\]</div>
+<p>Now generate two subproblems:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(F_1' = F_1 \land x=w_1\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(F_1' = F_1 \land x=w_2\)</span></p></li>
+</ol>
+<p>Both are UNSAT; hence the original formula is UNSAT.</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt>Remarks: Nelson-Oppen is</dt><dd><ul class="simple">
+<li><p>poly-time for convex theories (if <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> are poly-time)</p></li>
+<li><p>NP-time for non-convex theories (if <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> are NP-time)</p></li>
+<li><p><strong>sound and complete</strong></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="smt-solvers-and-dpll-mathcal-t-framework">
+<h2><a class="toc-backref" href="#id20">SMT Solvers and DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dpll-mathcal-t-framework" title="Permalink to this headline">¶</a></h2>
+<p>Previous sections talk about decision procedures for conjunctive formulas in various first-order theories. However, converting a formula to DNF is not feasible because its size can blow-up exponentially. In this section, we want to decide satisfiability in first-order theories without converting to DNF. More specifically, we want to handle <strong>boolean structure</strong> when deciding satisfiability modulo theories.</p>
+<blockquote>
+<div><p>We will combine SAT (satisfiability modulo theory) solvers with thoery solvers:</p>
+<ul class="simple">
+<li><p>theory solver is decision procedure for checking satisfiability in conjunctive fragment</p></li>
+<li><p><strong>theory solver</strong> handles theory-specific reasoning</p></li>
+<li><p><strong>SAT solver</strong> handles boolean structure</p></li>
+</ul>
+</div></blockquote>
+<ul>
+<li><p>Basic idea</p>
+<blockquote>
+<div><p>Given a formula <span class="math notranslate nohighlight">\(F\)</span>, we construct a propositional formula <span class="math notranslate nohighlight">\(B(F)\)</span> (called <strong>boolean abstraction</strong>).</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(B(F)\)</span> overapproximates satisfiability: if <span class="math notranslate nohighlight">\(B(F)\)</span> if UNSAT, <span class="math notranslate nohighlight">\(F\)</span> is UNSAT.</p></li>
+<li><dl class="simple">
+<dt>if <span class="math notranslate nohighlight">\(B(F)\)</span> SAT</dt><dd><ul>
+<li><p>get assignment returned by SAT</p></li>
+<li><p>use theory solver to check if <span class="math notranslate nohighlight">\(F\)</span> SAT</p></li>
+<li><p>if not, add additional boolean constraints (<strong>theory conflict clauses</strong>)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> Boolean abstraction</dt><dd><p>A boolean abstraction (or boolean skeleton) function <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> is a bijective function that maps a SMT formula to a  SAT formula that overapproximates its satisfiability.</p>
+<p>SMT formula in theory <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> has the form:</p>
+<div class="math notranslate nohighlight">
+\[F := a_\mathcal{T} | F_1 \land F_2 | F_1 \lor F_2 | \lnot F\]</div>
+<p>Function <span class="math notranslate nohighlight">\(\mathcal{B}\)</span> is defined as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathcal{B}(a_\mathcal{T}) &amp;= b \quad\text{(b is fresh)} \\
+\mathcal{B}(F_1 \land F_2) &amp;= \mathcal{B}(F_1) \land \mathcal{B}(F_2)\\
+\mathcal{B}(F_1 \lor F_2) &amp;= \mathcal{B}(F_1) \lor \mathcal{B}(F_2) \\
+\mathcal{B}(\lnot F) &amp;= \lnot \mathcal{B}(F)\end{split}\]</div>
+</dd>
+</dl>
+</li>
+<li><p><em>Example:</em> Boolean abstraction is an overapproximation</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\begin{split}F: &amp;\quad x=z \land ((y=z \land x &lt; z) \lor \lnot (x=z))\\
+\mathcal{B}(F): &amp;\quad b_1 \land ((b_2 \land b_3) \lor \lnot b_1)\\
+\text{where we define:} \\
+\mathcal{B}(x=z) : &amp;\quad b_1\\
+\mathcal{B}(y=z) : &amp;\quad b_2\\
+\mathcal{B}(x&lt;z) : &amp;\quad b_3\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\mathcal{B}(F)\)</span> is SAT. An satisfiable assignment is:</p>
+<div class="math notranslate nohighlight">
+\[A = b_1 \land b_2 \land b_3 \quad (\text{meaning: all set to true})\]</div>
+<p>However,</p>
+<div class="math notranslate nohighlight">
+\[\mathcal{B}^{-1}(A): \quad x=y \land y=z \land x&lt;z\]</div>
+<p>is <strong>not satisfiable</strong>. Therefore the boolean abstraction <em>overapproximates</em> satisfiability (If UNSAT, then original UNSAT. Not the other way around).</p>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Theory Conflict Clauses</dt><dd><p>SAT solver may yield assignments that are not sat module T, hence we need to learn theory conflict clauses.</p>
+<p>There are two approaches:</p>
+<ol class="arabic simple">
+<li><p>Off-line (eager): use SAT solver as black-box</p></li>
+<li><p>On-line (lazy): integrate theory solver into the CDCL loop</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="off-line-smt-solver">
+<h3><a class="toc-backref" href="#id21">Off-line SMT Solver</a><a class="headerlink" href="#off-line-smt-solver" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>First approach</strong></dt><dd><p>Adding the negation of current assignment as theory conflict clauses</p>
+</dd>
+</dl>
+</li>
+</ul>
+<a class="reference internal image-reference" href="Lecture/_static/first_order_theory/OfflineSMT.png"><img alt="Lecture/_static/first_order_theory/OfflineSMT.png" src="Lecture/_static/first_order_theory/OfflineSMT.png" /></a>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>add example</p>
+</div>
+<ul>
+<li><dl class="simple">
+<dt>Problem: conflict clauses too weak</dt><dd><ul class="simple">
+<li><p>only prevents exact same assignment (imagine 1000 literals where first two are conflict to each other)</p></li>
+<li><p>Improvement: add <em>unsatisfiable core</em> of <span class="math notranslate nohighlight">\(\mathcal{B}^{-1}(A)\)</span></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt><strong>Definition:</strong> (Minimal) unsatisfiable core</dt><dd><p>Given a set <span class="math notranslate nohighlight">\(S\)</span> of clauses, an UNSAT core of <span class="math notranslate nohighlight">\(S\)</span> is a subset <span class="math notranslate nohighlight">\(S'\)</span> such that <span class="math notranslate nohighlight">\(S'\)</span> is also UNSAT.</p>
+<p>Minimal unsatisfiable core <span class="math notranslate nohighlight">\(C^*\)</span> has property that if you drop any single atom of <span class="math notranslate nohighlight">\(C^*\)</span>, result is satisfiable</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>Second Approach</strong></dt><dd><p>Adding the negation of the minimal unsat core as theory conflict clauses</p>
+</dd>
+</dl>
+</li>
+</ul>
+<a class="reference internal image-reference" href="Lecture/_static/first_order_theory/OfflineSMT_improved.png"><img alt="Lecture/_static/first_order_theory/OfflineSMT_improved.png" src="Lecture/_static/first_order_theory/OfflineSMT_improved.png" /></a>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>UnsatCore(</strong><span class="math notranslate nohighlight">\(\mathcal{B}^{-1}(A)\)</span>)</dt><dd><p>Given an UNSAT conjunctive <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> formula <span class="math notranslate nohighlight">\(\phi\)</span>, try dropping each atom from <span class="math notranslate nohighlight">\(\phi\)</span> and check satisfiabiliy. If <span class="math notranslate nohighlight">\(\phi\)</span> becomes SAT, keep this atom.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="on-line-smt-solver-dpll-mathcal-t-framework">
+<h3><a class="toc-backref" href="#id22">On-line SMT Solver (DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework)</a><a class="headerlink" href="#on-line-smt-solver-dpll-mathcal-t-framework" title="Permalink to this headline">¶</a></h3>
+<p>Instead of using SMT solver as “blackbox”, the online version integrates theory solver into the CDCL. The combination of DPLL-based SAT solver and decision procedure for conjunctive <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> formula is called DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) framework.</p>
+<a class="reference internal image-reference" href="Lecture/_static/first_order_theory/DPLL(T).png"><img alt="Lecture/_static/first_order_theory/DPLL(T).png" src="Lecture/_static/first_order_theory/DPLL(T).png" /></a>
+<ul>
+<li><dl>
+<dt>DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) framework Explanation</dt><dd><ul>
+<li><p>Suppose <span class="math notranslate nohighlight">\(A\)</span> is the current partial assignment after the Decide and BCP step</p></li>
+<li><p>Use theory solver to decide if <span class="math notranslate nohighlight">\(\mathcal{B}^{-1}(A)\)</span> is UNSAT</p>
+<blockquote>
+<div><ul>
+<li><p>if so, add <span class="math notranslate nohighlight">\(\lnot A\)</span> to clause database</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>or add <span class="math notranslate nohighlight">\(\lnot UnsatCore(A)\)</span></p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>continue doing BCP to detect conflict if exists</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Theory Propagation</dt><dd><p>Suppose original formula contains literals <span class="math notranslate nohighlight">\(x=y, y=z, x&lt;z\)</span>, corresponding to <span class="math notranslate nohighlight">\(b_1, b_2, b_3\)</span>.</p>
+<p>Suppose the partial assignment is <span class="math notranslate nohighlight">\(b_1: T, b_2: T\)</span>. Assigning <span class="math notranslate nohighlight">\(b_3: T\)</span> would cause conflict.</p>
+<p>To avoid this, we can add <span class="math notranslate nohighlight">\(b_1 \land b_2 \implies \lnot b_3\)</span> to clauses database.</p>
+<p>These clauses are called <strong>theory propagation lemmas</strong>.</p>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Inferring theory propagation lemmas</dt><dd><p>We have two options to find theory propagation lemmas:</p>
+<ol class="arabic simple">
+<li><p>Treat theory solver as blackbox. Test for each literal <span class="math notranslate nohighlight">\(a\)</span> wether it is implied by current partial assignment</p></li>
+<li><p>Modify theory solver (need to be specific for each theory)</p></li>
+</ol>
+<p>We also have two options to decide which theory propagation lemmas to keep:</p>
+<ol class="arabic simple">
+<li><p>Add all possible implications (<em>exhaustive theory propagation</em>)</p></li>
+<li><p>Only figure out the obvious ones</p></li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hmm.html" title="Hidden Markov Models"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>
