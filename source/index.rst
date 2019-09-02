@@ -3,25 +3,42 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Yixuan's documentation!
+Welcome to Yixuan's notebook!
 ==================================
 
 .. toctree::
    :maxdepth: 1
+   :glob:
 
    rst.rst
    latex.rst
    git.rst
    reading.rst
-   Lecture/hoare_logic.rst
-   Lecture/first_order_theory.rst
-   Lecture/hmm.rst
-   Java/jsp.rst
-   Java/spring_in_action.rst
-   Project/meal_planner.rst
+
+Lecture notes:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Lecture/*
+
+What I learned about Java:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Java/*
+
+Fun projects:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Project/*
    
-
-
 
 
 .. Indices and tables
