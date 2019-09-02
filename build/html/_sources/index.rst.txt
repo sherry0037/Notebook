@@ -18,6 +18,7 @@ Welcome to Yixuan's documentation!
    Lecture/hmm.rst
    Java/jsp.rst
    Java/spring_in_action.rst
+   Project/meal_planner.rst
    
 
 

@@ -1,7 +1,7 @@
 ================================
 Spring in Action - Notes
 ================================
-Reading notes of the book Spring in Action - 4th edition by Craig Walls.
+Reading notes of the book *Spring in Action - 4th edition by Craig Walls*.
 
 .. contents::
 
@@ -20,7 +20,7 @@ Why do we need bean-wiring?
 
 An application (at least a non-trivial one) is made up of several objects, each has its own funtionalities. These objects must be aware of one another and communicate with one another to get their jobs done.
 
-If you write the application in the traditional, these associations between objects are created via constuction or lookup, leading to complicated code that's difficult to reuse or unit-test. The ojects do more work (like initializing other objects), and are highly coupled to one another.
+These associations between objects are created via constuction or lookup in the traditional way, leading to complicated code that's difficult to reuse or unit-test. The ojects do more work the they should (like initializing other objects) and are highly coupled to one another.
 
 
 This is when **wiring**, or **dependency injection** (DI), comes handy. Remeber, beans can be seen as just Plain Old Java Objects (POJOs) and the ojects are created and wired by *Spring application context* (container). Wiring means that, instead of letting the object to initialize it's own instance of other objects, we will inject the instance into this object either using the *constructor* or a *setter*. In spring, the container will do this for you.
@@ -90,18 +90,18 @@ Spring needs to seek out classes annotated with @Component and create beans from
     public class CDPlayerConfig {
     }
 
-In this minimal configuration, @ComponentScan default to scanning the same package as the configuration class. We put the ``CompactDisc`` class under the same package as ``CDPlayerConfig``, so that @ComponentScan will find it and create a bean for it.
+In this minimal configuration, ``@ComponentScan`` default to scanning the same package as the configuration class. We put the ``CompactDisc`` class under the same package as ``CDPlayerConfig``, so that ``@ComponentScan`` will find it and create a bean for it.
 
 Now we can write a simple JUnit test that creates a Spring application context and asserts that the ``CompactDisc`` bean is created.
 
 .. code-block:: java
 
     @RunWith(StringJUnit4ClassRunner.class)
-    @ContextConfiguration(classes=CDPlayerCOnfig.class)
+    @ContextConfiguration(classes=CDPlayerConfig.class)
     public class CDPlayerTest{
 
         @Autowired
-        private COmpactDisc cd;
+        private CompactDisc cd;
 
         @Test
         public void cdShouldNotBeNull(){
@@ -112,9 +112,9 @@ Now we can write a simple JUnit test that creates a Spring application context a
 Note:
 
 - ``SpringJUnit4ClassRunner`` automatically creates a Spring application context when the test starts.
-- ``@ContextCOnfiguration`` tells it to load configuration from ``CDPlayerConfig`` class.
+- ``@ContextConfiguration`` tells it to load configuration from ``CDPlayerConfig`` class.
 
-    - The configuration class includes @ComponentScan, so the application context will include the ``CompactDisc`` bean.
+    - The configuration class includes ``@ComponentScan``, so the application context will include the ``CompactDisc`` bean.
 
 - The test has a property of type ``CompactDisc``, annotated with ``@Autowired``, to inject the bean into the test.
 - All classes in or under the ``soundsystem`` package that are annotated with ``@Component`` will be created as beans.
@@ -146,7 +146,52 @@ Or you can use classes/interfaces instead of strings:
     @ComponentScan(basePackageClasses={CDPlayer.class, DVDPlayer.class})
 
 
-Autowiring beans
+Annotating beans to be automatically wired
 ==============================================
 Autowiring is a means of letting Spring automatically satisfy a bean's dependencies by finding other beans in the application context that are a match to the bean's needs. ``@Autowired`` annotation is used for this case.
+
+Consider a ``CDPlayer`` class:
+
+.. code-block:: java
+
+    @Component
+    public class CDPlayer implements MediaPlayer {
+        private CompactDisc cd;
+
+        @Autowired
+        public CDPlayer(CompactDisc cd) {
+            this.cd = cd;
+        }
+
+        public void play(){
+            cd.play();
+        }
+    }
+
+The constructor of the ``CDPlayer`` class is annotated with ``@Autowired``. When Spring initialize the ``CDPlayer`` bean via the constructor, it passes a ``CompactDisc`` bean into it.
+
+Another way to use ``@Autowired`` is on a property's setter method.
+
+.. code-block:: java
+
+    @Autowired
+    public void setCompactDisc(CompactDisc cd){
+        this.cd = cd;
+    }
+
+After Spring has instantiated the bean, it will try to satisfy the dependencies expressed through the setter methods. ``@Autowired`` can also be applied to any method.
+
+If there are no matching beans for the annotated constructor/method, Spring will throw an exception as the application context is being created. You can set the ``required`` attribute to ``false`` to avoid such exception.
+
+.. code-block:: java
+
+    @Autowired(required=false)
+
+This will leave the bean unwired if there are no matching beans. Remember, this can lead to ``NullPointerExceptions``.
+
+If therea re multiple matching beans, Spring will throw an exception indicating ambiguity. Chapter 3 will contain more information about ambiguity handling.
+
+You can use ``@Inject`` instead of ``@Autowired``. They are interchangeable in many cases.
+
+
 
