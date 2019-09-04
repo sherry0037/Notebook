@@ -38,6 +38,14 @@ Fun projects:
    :glob:
 
    Project/*
+
+Algorithm problems:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Algorithm/*
    
 
 
