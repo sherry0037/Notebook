@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Dependable System &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="First-Order Theroies" href="first_order_theory.html" />
+    <link rel="prev" title="Reading Log and Quotes" href="../reading.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="first_order_theory.html" title="First-Order Theroies"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../reading.html" title="Reading Log and Quotes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dependable System</a><ul>
+<li><a class="reference internal" href="#readings">Readings</a><ul>
+<li><a class="reference internal" href="#understanding-fault-tolerant-distributed-systems">Understanding Fault-Tolerant Distributed Systems</a><ul>
+<li><a class="reference internal" href="#basic-architectural-concepts">Basic Architectural Concepts</a><ul>
+<li><a class="reference internal" href="#services-servers-and-the-depends-relation">Services, Servers, and the “Depends” Relation</a></li>
+<li><a class="reference internal" href="#failure-classification">Failure Classification</a></li>
+<li><a class="reference internal" href="#failure-semantics">Failure Semantics</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../reading.html"
+                        title="previous chapter">Reading Log and Quotes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="first_order_theory.html"
+                        title="next chapter">First-Order Theroies</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Lecture/dependable_system.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="dependable-system">
+<h1><a class="toc-backref" href="#id1">Dependable System</a><a class="headerlink" href="#dependable-system" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#dependable-system" id="id1">Dependable System</a></p>
+<ul>
+<li><p><a class="reference internal" href="#readings" id="id2">Readings</a></p>
+<ul>
+<li><p><a class="reference internal" href="#understanding-fault-tolerant-distributed-systems" id="id3">Understanding Fault-Tolerant Distributed Systems</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="readings">
+<h2><a class="toc-backref" href="#id2">Readings</a><a class="headerlink" href="#readings" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="understanding-fault-tolerant-distributed-systems">
+<h3><a class="toc-backref" href="#id3">Understanding Fault-Tolerant Distributed Systems</a><a class="headerlink" href="#understanding-fault-tolerant-distributed-systems" title="Permalink to this headline">¶</a></h3>
+<p><strong>Fault-tolerant systems</strong> either exhibit a well-defined failure behavior when components fail, or mask component failures to users (continue to provide their specified standard service despite the occurrence of component failures).</p>
+<div class="section" id="basic-architectural-concepts">
+<h4>Basic Architectural Concepts<a class="headerlink" href="#basic-architectural-concepts" title="Permalink to this headline">¶</a></h4>
+<p>To achieve fault tolerance, a distributed system architecture incorperates redundant processing components. This section discusses the basic architectural building blocks of these systems, and classifies the failures that these basic blocks can experience.</p>
+<div class="section" id="services-servers-and-the-depends-relation">
+<h5>Services, Servers, and the “Depends” Relation<a class="headerlink" href="#services-servers-and-the-depends-relation" title="Permalink to this headline">¶</a></h5>
+<ul class="simple">
+<li><dl class="simple">
+<dt>A <strong>service</strong> specifies a collection of operations whose execution can be triggered by inputs from service users or the pssage of time.</dt><dd><ul>
+<li><p>Operation executions may result in outputs to users and in service state changes</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A <strong>server</strong> performs the operations defined by a service specification.</dt><dd><ul>
+<li><p>It implements a service without exposing to users the internal service state representation and operation implementation details.</p></li>
+<li><p>Servers can be hardware or software implemented.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>A server <code class="docutils literal notranslate"><span class="pre">u</span></code> <strong>depends</strong> on a server <code class="docutils literal notranslate"><span class="pre">r</span></code> if the correctness of <code class="docutils literal notranslate"><span class="pre">u</span></code>’s behavior depends on the correctness of <code class="docutils literal notranslate"><span class="pre">r</span></code>’s behavior.</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span></code> is called a user (or client)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r</span></code> is called a resource of <code class="docutils literal notranslate"><span class="pre">u</span></code></p></li>
+<li><p>this relation is often represented as an acyclic graph in which nodes denote servers and arrows represent the “depends” relation.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">u</span></code> is said to be at a level of abstraction “higher” than <code class="docutils literal notranslate"><span class="pre">r</span></code>.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="topic">
+<p class="topic-title first">Example</p>
+<p>A distributed system consists of software servers which depend on <em>processor</em> and <em>communication services</em>.</p>
+<dl class="simple">
+<dt>Processor service is typically provided concurrently to serveral software servers by a multiuser operating system such as Unix or MVS.</dt><dd><ul class="simple">
+<li><p>These operating systems in turn depend on the raw processor service provided by physical processors.</p></li>
+<li><p>These physical processors depend on lower-level hardware resources such as CPUs, memories, I/O controllers, disks, displyas, keyboards, etc.</p></li>
+</ul>
+</dd>
+</dl>
+<p>The communication services are implemented by distributed communication servers which implement communication protocols such as TCP/IP and SNA, by depending on lower-level hardware networking services.</p>
+<p>The union of processor and communication service operations provided to application servers are designated as a distributed operating system service.</p>
+</div>
+</div>
+<div class="section" id="failure-classification">
+<h5>Failure Classification<a class="headerlink" href="#failure-classification" title="Permalink to this headline">¶</a></h5>
+<dl class="simple">
+<dt>This artical assumes the service specification prescribes both:</dt><dd><ul class="simple">
+<li><p>the server’s response for any initial server state, and</p></li>
+<li><p>the real-time interval within which the response should occur.</p></li>
+</ul>
+</dd>
+</dl>
+<p>A server <strong>failure</strong> occurs when the server does not behave in the manner specified.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>omission failure</strong>: a server omits to respond to an input</p></li>
+<li><dl class="simple">
+<dt><strong>timing failure</strong>: the server’s response is functionally correct but untimely (outside the real-time interval specified)</dt><dd><ul>
+<li><p>can be either early or late</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>response failure</strong>: the server responds incorrectly</dt><dd><ul>
+<li><p><em>value failure</em>: value is incorrect</p></li>
+<li><p><em>state transition failure</em>: state transition is incorrect</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>crash failure</strong>: after a first omission to produce output, a server omits to produce output to subsequent inputs until its restart. Depending on the state at restart, we have:</dt><dd><ul>
+<li><p><em>amnesia-crash</em>: server restarts in a predefined initial state that does not depend on the inputs seen before the crash</p></li>
+<li><p><em>partial-amnesia-crash</em>: at restart, some part of the state is the same as before the crash, while the rest of the state is reset to a predefined initial state</p></li>
+<li><p><em>pause-crash</em>: a server restarts in the state it had before the crash</p></li>
+<li><p><em>halting-crash</em>: a crashed server never restarts</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="failure-semantics">
+<h5>Failure Semantics<a class="headerlink" href="#failure-semantics" title="Permalink to this headline">¶</a></h5>
+<p><strong>Failure semantics</strong> is the likely failure behaviors of a server. The recovery actions invoked upon detection of a server failure depend on the failure semantics, a fault-tolerant system has to <em>extend</em> the standard specification of servers to include, in addition to their failure-free semantics, the failure semantics.</p>
+<p>If the specification of a server <code class="docutils literal notranslate"><span class="pre">s</span></code> prescribes that the failure behaviors likely to be observed by <code class="docutils literal notranslate"><span class="pre">s</span></code> users should be in class F, it is said that “s has F failure semantics”.</p>
+<dl class="simple">
+<dt>In general, if the failure specification of a server <code class="docutils literal notranslate"><span class="pre">s</span></code> allows <code class="docutils literal notranslate"><span class="pre">s</span></code> to exhibit behaviors in the union of two failure classes F and G, we say that <code class="docutils literal notranslate"><span class="pre">s</span></code> has F/G failure semantics.</dt><dd><ul class="simple">
+<li><p>F/G is a weaker (less restrictive) failure semantics than F</p></li>
+<li><p>F is a stronger (more restrictive) failure semantics than F/G</p></li>
+<li><p><strong>arbitrary</strong> failure semantics is the weakest possible failure semantics. The class of arbitrary failure behaviors includes all the failure classes defined previously.</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="first_order_theory.html" title="First-Order Theroies"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../reading.html" title="Reading Log and Quotes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

@@ -2,6 +2,8 @@
 Backtracking
 ==================================
 
+.. contents::
+
 -----------------------------------------
 784. Letter Case Permutation (09/03/19)
 -----------------------------------------
@@ -90,6 +92,7 @@ The ``choose()`` method takes two Lists of Integers, representing the lights, an
 Things to do next time:
     - change a way to write the recursive method
     - extract the String generation out of the loop
+    - use array instead of List?
 
 .. code-block:: java
 
@@ -170,3 +173,22 @@ Things to do next time:
             return rst;
         }
     }
+
+
+-----------------------------------------
+46. Permutations (09/04/19)
+-----------------------------------------
+Given a collection of **distinct** integers, return all possible permutations.
+
+.. topic:: Example
+
+    Input: [1,2,3]
+    Output:
+    [
+      [1,2,3],
+      [1,3,2],
+      [2,1,3],
+      [2,3,1],
+      [3,1,2],
+      [3,2,1]
+    ]
