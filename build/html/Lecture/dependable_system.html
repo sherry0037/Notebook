@@ -192,6 +192,7 @@
 </dd>
 </dl>
 </li>
+<li><p><strong>arbitrary failure</strong>: includes all the failure classes above</p></li>
 </ul>
 </div></blockquote>
 </div>
@@ -203,10 +204,18 @@
 <dt>In general, if the failure specification of a server <code class="docutils literal notranslate"><span class="pre">s</span></code> allows <code class="docutils literal notranslate"><span class="pre">s</span></code> to exhibit behaviors in the union of two failure classes F and G, we say that <code class="docutils literal notranslate"><span class="pre">s</span></code> has F/G failure semantics.</dt><dd><ul class="simple">
 <li><p>F/G is a weaker (less restrictive) failure semantics than F</p></li>
 <li><p>F is a stronger (more restrictive) failure semantics than F/G</p></li>
-<li><p><strong>arbitrary</strong> failure semantics is the weakest possible failure semantics. The class of arbitrary failure behaviors includes all the failure classes defined previously.</p></li>
+<li><p><strong>arbitrary</strong> failure semantics is the weakest possible failure semantics. The class of arbitrary failure behaviors includes all the failure classes defined previously</p></li>
 </ul>
 </dd>
 </dl>
+<div class="topic">
+<p class="topic-title first">Example: Implementing Failure Semantics</p>
+<p>To ensure that a raw hardware processor service has crash failure semantics, one can use duplication and matching:
+- use two physically independent processors that execute in parallel the same sequence of instructions,
+- compare their results after each instruction execution,
+- a crash occurs when a disagreement between processor outputs is detected.</p>
+</div>
+<p>In general, the stronger a specified failure semantics is, the more expensive and complex it is to build a server that implements it.</p>
 </div>
 </div>
 </div>

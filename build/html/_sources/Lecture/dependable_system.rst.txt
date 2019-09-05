@@ -64,6 +64,7 @@ A server **failure** occurs when the server does not behave in the manner specif
         - *partial-amnesia-crash*: at restart, some part of the state is the same as before the crash, while the rest of the state is reset to a predefined initial state
         - *pause-crash*: a server restarts in the state it had before the crash
         - *halting-crash*: a crashed server never restarts
+    - **arbitrary failure**: includes all the failure classes above
 
 Failure Semantics
 ~~~~~~~~~~~~~~~~~~~~
@@ -74,5 +75,14 @@ If the specification of a server ``s`` prescribes that the failure behaviors lik
 In general, if the failure specification of a server ``s`` allows ``s`` to exhibit behaviors in the union of two failure classes F and G, we say that ``s`` has F/G failure semantics.
     - F/G is a weaker (less restrictive) failure semantics than F
     - F is a stronger (more restrictive) failure semantics than F/G
-    - **arbitrary** failure semantics is the weakest possible failure semantics. The class of arbitrary failure behaviors includes all the failure classes defined previously.
+    - **arbitrary** failure semantics is the weakest possible failure semantics. The class of arbitrary failure behaviors includes all the failure classes defined previously
+
+.. topic:: Example: Implementing Failure Semantics
+
+    To ensure that a raw hardware processor service has crash failure semantics, one can use duplication and matching: 
+    - use two physically independent processors that execute in parallel the same sequence of instructions,
+    - compare their results after each instruction execution,
+    - a crash occurs when a disagreement between processor outputs is detected.
+
+In general, the stronger a specified failure semantics is, the more expensive and complex it is to build a server that implements it.
 

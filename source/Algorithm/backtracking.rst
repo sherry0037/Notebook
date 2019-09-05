@@ -183,12 +183,64 @@ Given a collection of **distinct** integers, return all possible permutations.
 .. topic:: Example
 
     Input: [1,2,3]
-    Output:
-    [
-      [1,2,3],
-      [1,3,2],
-      [2,1,3],
-      [2,3,1],
-      [3,1,2],
-      [3,2,1]
-    ]
+    Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]
+
+
+**1st Attempt:**
+
+We can use a stack to keep adding elements to Lists. At the first step, the stack is ``[[1], [2], [3]]``. We pop out the head of the stack, in this case ``[1]``, iterate through the input nums. For each element, check wether it is contained in the head. If not, add this element to a copy of the head, and push it back to the stack. So the stack changes as follows:
+
+======  ==================================================================
+head    stack
+======  ==================================================================
+null    [[1], [2], [3]]
+[1]     [[2], [3], [1, 2], [1, 3]]
+[2]     [[3], [1, 2], [1, 3], [2, 1], [2, 3]]   
+[3]     [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
+[1, 2]  [[1, 3], [2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3]] 
+[1, 3]  [[2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2]] 
+[2, 1]  [[2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3]] 
+[2, 3]  [[3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1]] 
+[3, 1]  [[3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2]] 
+[3, 2]  [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]] 
+======  ==================================================================
+
+When the size of the head is same as the input length, this List is finished and can be added to the final result.
+
+
+.. code-block:: java
+
+    class Solution {
+        public List<List<Integer>> permute(int[] nums) {
+            List<List<Integer>> rst = new ArrayList<>();
+            LinkedList<List<Integer>> stack  = new LinkedList<>();
+            for (int i:nums){
+                List<Integer> l = new ArrayList<>();
+                l.add(i);
+                stack.add(l);
+            }
+            
+            while (stack.size()>0){
+                List<Integer> current = stack.pop();
+                if (current.size() == nums.length){
+                    rst.add(current);
+                }else{
+                    for (int i:nums){
+                        if (!current.contains(i)){
+                            List<Integer> newList = new ArrayList<>();
+                            for (int j:current){
+                                newList.add(j);
+                            }
+                            newList.add(i);
+                            stack.push(newList);
+                        }
+                    }
+                }
+            }
+            return rst;
+                
+        }
+    }
+
+Things to do:
+    - check how to use stream: ``stack = Arrays.stream( nums ).boxed().collect( Collectors.toCollection(LinkedList::new) );``
