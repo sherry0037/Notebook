@@ -10,6 +10,7 @@ Welcome to Yixuan's notebook!
    :maxdepth: 1
    :glob:
 
+   CS394N_personal_ad.rst
    rst.rst
    latex.rst
    git.rst
