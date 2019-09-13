@@ -53,3 +53,11 @@ Stash the changes
 - use `git stash` to save all the changes.
 
 - use `git stash apply` to get the latest stashed changes back.
+
+
+----------------------------------
+See changes in a commit
+----------------------------------
+- use `git diff-tree --no-commit-id --name-only -r bd61ad98` to see all the files added in a commit
+
+- use `git diff COMMIT~ COMMIT` to see the changes in a commit

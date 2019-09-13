@@ -44,6 +44,7 @@
 <li><a class="reference internal" href="#how-to-modify-commits">How to modify commits?</a></li>
 <li><a class="reference internal" href="#different-ways-to-do-git-pull">Different ways to do <cite>git pull</cite></a></li>
 <li><a class="reference internal" href="#stash-the-changes">Stash the changes</a></li>
+<li><a class="reference internal" href="#see-changes-in-a-commit">See changes in a commit</a></li>
 </ul>
 </li>
 </ul>
@@ -146,6 +147,13 @@
 <ul class="simple">
 <li><p>use <cite>git stash</cite> to save all the changes.</p></li>
 <li><p>use <cite>git stash apply</cite> to get the latest stashed changes back.</p></li>
+</ul>
+</div>
+<div class="section" id="see-changes-in-a-commit">
+<h2>See changes in a commit<a class="headerlink" href="#see-changes-in-a-commit" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>use <cite>git diff-tree –no-commit-id –name-only -r bd61ad98</cite> to see all the files added in a commit</p></li>
+<li><p>use <cite>git diff COMMIT~ COMMIT</cite> to see the changes in a commit</p></li>
 </ul>
 </div>
 </div>
