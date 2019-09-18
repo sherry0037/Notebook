@@ -61,3 +61,9 @@ See changes in a commit
 - use `git diff-tree --no-commit-id --name-only -r bd61ad98` to see all the files added in a commit
 
 - use `git diff COMMIT~ COMMIT` to see the changes in a commit
+
+
+----------------------------------
+Push specific commit
+----------------------------------
+- `git push origin 1d9ec65c09b07661b7daff31c810d365d1c73be4:refs/heads/master`

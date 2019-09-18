@@ -35,6 +35,10 @@ Figures
 
 .. code-block:: RST
 
+    \usepackage{graphicx}
+
+    ...
+
     \begin{figure}{}
       \centering
       \includegraphics[width=0.7\linewidth]{Q2_b.png}
