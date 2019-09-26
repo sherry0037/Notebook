@@ -147,7 +147,7 @@
 <div class="topic">
 <p class="topic-title first">Illustration of First-Order Markov Chain</p>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/first_order_markov_chain.png" src="Lecture/_static/hidden_markov_models/first_order_markov_chain.png" />
+<img alt="../_images/first_order_markov_chain.png" src="../_images/first_order_markov_chain.png" />
 </div>
 </div>
 <p>The conditional distribution for observation <span class="math notranslate nohighlight">\(x_n\)</span>, given all of the observations up to time <span class="math notranslate nohighlight">\(n\)</span> is given by:</p>
@@ -172,7 +172,7 @@
 <div class="topic">
 <p class="topic-title first">Illustration of Second-Order Markov Chain</p>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/second_order_markov_chain.png" src="Lecture/_static/hidden_markov_models/second_order_markov_chain.png" />
+<img alt="../_images/second_order_markov_chain.png" src="../_images/second_order_markov_chain.png" />
 </div>
 </div>
 <p>More generally, we have <span class="math notranslate nohighlight">\(M^{th}\)</span>-order markov chain where</p>
@@ -195,7 +195,7 @@
 <div class="topic">
 <p class="topic-title first">State Space Model</p>
 <div class="figure align-center" id="figure-13-5">
-<img alt="Lecture/_static/hidden_markov_models/markov_chain_latent.png" src="Lecture/_static/hidden_markov_models/markov_chain_latent.png" />
+<img alt="../_images/markov_chain_latent.png" src="../_images/markov_chain_latent.png" />
 </div>
 </div>
 <p>It satisfies the key conditional independence property that <span class="math notranslate nohighlight">\(z_{n-1}\)</span> and <span class="math notranslate nohighlight">\(z_{n+1}\)</span> are <strong>independent</strong> given <span class="math notranslate nohighlight">\(z_n\)</span>, and the joint distribution of the model is given by:</p>
@@ -253,10 +253,10 @@
 <div class="topic">
 <p class="topic-title first">Example of Transition Diagram</p>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/transition_diagram_1.png" src="Lecture/_static/hidden_markov_models/transition_diagram_1.png" />
+<img alt="../_images/transition_diagram_1.png" src="../_images/transition_diagram_1.png" />
 </div>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/transition_diagram_2.png" src="Lecture/_static/hidden_markov_models/transition_diagram_2.png" />
+<img alt="../_images/transition_diagram_2.png" src="../_images/transition_diagram_2.png" />
 </div>
 </div>
 </div>
@@ -402,7 +402,7 @@ A_{jk} &amp;= \frac{\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_k)}{\sum\limits_{l=1}
 \[\alpha(z^1_k) = \pi_k p(\mathbf{x}_1|\mathbf{\phi}_k).\]</div>
 </div>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/forward.png" src="Lecture/_static/hidden_markov_models/forward.png" />
+<img alt="../_images/forward.png" src="../_images/forward.png" />
 </div>
 <div class="topic">
 <p class="topic-title first">Backward Resursion for <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_n)\)</span></p>
@@ -415,7 +415,7 @@ A_{jk} &amp;= \frac{\sum\limits_{n=2}^N \xi(z^{n-1}_j, z^n_k)}{\sum\limits_{l=1}
 <p>which is correct if we take <span class="math notranslate nohighlight">\(\beta(\mathbf{z}_N) = 1\)</span> for all settings of <span class="math notranslate nohighlight">\(\mathbf{z}_N\)</span>.</p>
 </div>
 <div class="figure align-center">
-<img alt="Lecture/_static/hidden_markov_models/backward.png" src="Lecture/_static/hidden_markov_models/backward.png" />
+<img alt="../_images/backward.png" src="../_images/backward.png" />
 </div>
 <p>It is useful to monitor the likelihood function <span class="math notranslate nohighlight">\(p(\mathbf{X})\)</span> during the EM optimization. From <a class="reference internal" href="#equation-equ-forward-backward">Eq.5</a>, we have:</p>
 <div class="math notranslate nohighlight">

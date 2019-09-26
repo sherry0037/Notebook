@@ -6,11 +6,6 @@ Dependable System
 .. contents::
     :depth: 3
 
-----------------------
-Readings
-----------------------
-
-
 Understanding Fault-Tolerant Distributed Systems
 ================================================================
 **Fault-tolerant systems** either exhibit a well-defined failure behavior when components fail, or mask component failures to users (continue to provide their specified standard service despite the occurrence of component failures).
@@ -85,4 +80,19 @@ In general, if the failure specification of a server ``s`` allows ``s`` to exhib
     - a crash occurs when a disagreement between processor outputs is detected.
 
 In general, the stronger a specified failure semantics is, the more expensive and complex it is to build a server that implements it.
+
+
+Probabilistic Clock Synchronization
+================================================================
+
+The goal for clock synchronization is:
+
+for every t, t: global time, :math:`|P(t) - Q(t) \leq \epsilon|`.
+
+We make the assumptions that the clocks are correct. A clock is considered to be correct if for every :math:`t > t'`
+
+.. math::
+
+    |C(t) - C(t') - (t-t')| \leq \rho (t - t')
+
 

@@ -40,7 +40,6 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Dependable System</a><ul>
-<li><a class="reference internal" href="#readings">Readings</a><ul>
 <li><a class="reference internal" href="#understanding-fault-tolerant-distributed-systems">Understanding Fault-Tolerant Distributed Systems</a><ul>
 <li><a class="reference internal" href="#basic-architectural-concepts">Basic Architectural Concepts</a><ul>
 <li><a class="reference internal" href="#services-servers-and-the-depends-relation">Services, Servers, and the “Depends” Relation</a></li>
@@ -50,8 +49,7 @@
 </li>
 </ul>
 </li>
-</ul>
-</li>
+<li><a class="reference internal" href="#probabilistic-clock-synchronization">Probabilistic Clock Synchronization</a></li>
 </ul>
 </li>
 </ul>
@@ -94,25 +92,24 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#dependable-system" id="id1">Dependable System</a></p>
 <ul>
-<li><p><a class="reference internal" href="#readings" id="id2">Readings</a></p>
+<li><p><a class="reference internal" href="#understanding-fault-tolerant-distributed-systems" id="id2">Understanding Fault-Tolerant Distributed Systems</a></p>
 <ul>
-<li><p><a class="reference internal" href="#understanding-fault-tolerant-distributed-systems" id="id3">Understanding Fault-Tolerant Distributed Systems</a></p></li>
+<li><p><a class="reference internal" href="#basic-architectural-concepts" id="id3">Basic Architectural Concepts</a></p></li>
 </ul>
 </li>
+<li><p><a class="reference internal" href="#probabilistic-clock-synchronization" id="id4">Probabilistic Clock Synchronization</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
-<div class="section" id="readings">
-<h2><a class="toc-backref" href="#id2">Readings</a><a class="headerlink" href="#readings" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="understanding-fault-tolerant-distributed-systems">
-<h3><a class="toc-backref" href="#id3">Understanding Fault-Tolerant Distributed Systems</a><a class="headerlink" href="#understanding-fault-tolerant-distributed-systems" title="Permalink to this headline">¶</a></h3>
+<h2><a class="toc-backref" href="#id2">Understanding Fault-Tolerant Distributed Systems</a><a class="headerlink" href="#understanding-fault-tolerant-distributed-systems" title="Permalink to this headline">¶</a></h2>
 <p><strong>Fault-tolerant systems</strong> either exhibit a well-defined failure behavior when components fail, or mask component failures to users (continue to provide their specified standard service despite the occurrence of component failures).</p>
 <div class="section" id="basic-architectural-concepts">
-<h4>Basic Architectural Concepts<a class="headerlink" href="#basic-architectural-concepts" title="Permalink to this headline">¶</a></h4>
+<h3><a class="toc-backref" href="#id3">Basic Architectural Concepts</a><a class="headerlink" href="#basic-architectural-concepts" title="Permalink to this headline">¶</a></h3>
 <p>To achieve fault tolerance, a distributed system architecture incorperates redundant processing components. This section discusses the basic architectural building blocks of these systems, and classifies the failures that these basic blocks can experience.</p>
 <div class="section" id="services-servers-and-the-depends-relation">
-<h5>Services, Servers, and the “Depends” Relation<a class="headerlink" href="#services-servers-and-the-depends-relation" title="Permalink to this headline">¶</a></h5>
+<h4>Services, Servers, and the “Depends” Relation<a class="headerlink" href="#services-servers-and-the-depends-relation" title="Permalink to this headline">¶</a></h4>
 <ul class="simple">
 <li><dl class="simple">
 <dt>A <strong>service</strong> specifies a collection of operations whose execution can be triggered by inputs from service users or the pssage of time.</dt><dd><ul>
@@ -155,7 +152,7 @@
 </div>
 </div>
 <div class="section" id="failure-classification">
-<h5>Failure Classification<a class="headerlink" href="#failure-classification" title="Permalink to this headline">¶</a></h5>
+<h4>Failure Classification<a class="headerlink" href="#failure-classification" title="Permalink to this headline">¶</a></h4>
 <dl class="simple">
 <dt>This artical assumes the service specification prescribes both:</dt><dd><ul class="simple">
 <li><p>the server’s response for any initial server state, and</p></li>
@@ -197,7 +194,7 @@
 </div></blockquote>
 </div>
 <div class="section" id="failure-semantics">
-<h5>Failure Semantics<a class="headerlink" href="#failure-semantics" title="Permalink to this headline">¶</a></h5>
+<h4>Failure Semantics<a class="headerlink" href="#failure-semantics" title="Permalink to this headline">¶</a></h4>
 <p><strong>Failure semantics</strong> is the likely failure behaviors of a server. The recovery actions invoked upon detection of a server failure depend on the failure semantics, a fault-tolerant system has to <em>extend</em> the standard specification of servers to include, in addition to their failure-free semantics, the failure semantics.</p>
 <p>If the specification of a server <code class="docutils literal notranslate"><span class="pre">s</span></code> prescribes that the failure behaviors likely to be observed by <code class="docutils literal notranslate"><span class="pre">s</span></code> users should be in class F, it is said that “s has F failure semantics”.</p>
 <dl class="simple">
@@ -219,6 +216,13 @@
 </div>
 </div>
 </div>
+<div class="section" id="probabilistic-clock-synchronization">
+<h2><a class="toc-backref" href="#id4">Probabilistic Clock Synchronization</a><a class="headerlink" href="#probabilistic-clock-synchronization" title="Permalink to this headline">¶</a></h2>
+<p>The goal for clock synchronization is:</p>
+<p>for every t, t: global time, <span class="math notranslate nohighlight">\(|P(t) - Q(t) \leq \epsilon|\)</span>.</p>
+<p>We make the assumptions that the clocks are correct. A clock is considered to be correct if for every <span class="math notranslate nohighlight">\(t &gt; t'\)</span></p>
+<div class="math notranslate nohighlight">
+\[|C(t) - C(t') - (t-t')| \leq \rho (t - t')\]</div>
 </div>
 </div>
 

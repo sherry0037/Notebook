@@ -110,15 +110,19 @@ Hyperlink
 There are multiple ways to make links:
 
 - By adding an underscore after a word : Github_ and by adding the target URL after the text (this way has the advantage to not insert unnecessary URLs inside readable text).
+
+  .. code-block:: RST
+
+      Github_ 
+
+      .. _Github: https://github.com/
+
 - By typing a full comprehensible URL : https://github.com/ (will be automatically converted to a link)
 - By making a more Markdown-like link: `Github <https://github.com/>`_ .
 
-
-.. code-block:: RST
-
-    Github_ 
-    https://github.com/
-    `Github <https://github.com/>`_ 
+  .. code-block:: RST
+      
+      `Github <https://github.com/>`_ 
 
 ----------------------------------
 Latex
