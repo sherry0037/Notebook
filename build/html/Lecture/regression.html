@@ -40,7 +40,17 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Regression Analysis</a><ul>
-<li><a class="reference internal" href="#linear-regression-model">Linear Regression Model</a></li>
+<li><a class="reference internal" href="#simple-linear-regression-model">Simple Linear Regression Model</a><ul>
+<li><a class="reference internal" href="#model-definition">Model definition</a></li>
+<li><a class="reference internal" href="#meaning-of-regression-parameters">Meaning of regression parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#estimation-of-regression-function">Estimation of Regression Function</a><ul>
+<li><a class="reference internal" href="#method-of-least-squares">Method of least squares</a></li>
+<li><a class="reference internal" href="#point-estimation-of-mean-response">Point estimation of mean response</a></li>
+<li><a class="reference internal" href="#residuals">Residuals</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -78,11 +88,156 @@
             
   <div class="section" id="regression-analysis">
 <h1>Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="linear-regression-model">
-<h2>Linear Regression Model<a class="headerlink" href="#linear-regression-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="simple-linear-regression-model">
+<h2>Simple Linear Regression Model<a class="headerlink" href="#simple-linear-regression-model" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="model-definition">
+<h3>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h3>
 <p>This is a basic regression model with one predictor variable and the function is linear:</p>
 <div class="math notranslate nohighlight">
 \[Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\]</div>
+<dl class="simple">
+<dt>where:</dt><dd><ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y_i\)</span> is the value of the response variable in the ith trial</p></li>
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are parameters</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_i\)</span> is the value of the predictor variable in the ith trial. <span class="math notranslate nohighlight">\(X_i\)</span> is a constant</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon_i\)</span> is a random error term with mean <span class="math notranslate nohighlight">\(E[\epsilon_i] = 0\)</span> and variance <span class="math notranslate nohighlight">\(\sigma^2[\epsilon_i] = \sigma^2\)</span></p></li>
+</ul>
+</dd>
+</dl>
+<p>For this model, there are some importance features:</p>
+<ol class="arabic simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0 + \beta_1 X_i\)</span> is a constant term, <span class="math notranslate nohighlight">\(\epsilon_i\)</span> is a random term, hence <span class="math notranslate nohighlight">\(Y_i\)</span> is a random variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(E[Y_i] = \beta_0 + \beta_1 X_i\)</span></p></li>
+<li><p><span class="math notranslate nohighlight">\(\sigma^2[Y_i] = \sigma^2[\epsilon_i] = \sigma^2\)</span></p></li>
+<li><p>The error terms are uncorrelated to each other, so are the response <span class="math notranslate nohighlight">\(Y_i\)</span></p></li>
+</ol>
+<p>The <strong>regression function</strong>, by definition, relates the means of the probability distributions of Y for given X to the level of X. Hence, the regression function for this model is:</p>
+<div class="math notranslate nohighlight">
+\[E[Y] = \beta_0 + \beta_1 X\]</div>
+<div class="topic">
+<p class="topic-title first">A Simple Linear Regression Model</p>
+<p>A consultant is studying the relationship between the number of bids requested by construction contractors for basic lighting equipment during a week and the time required to prepare the bids. Suppose the regression model is:</p>
+<div class="math notranslate nohighlight">
+\[Y_i = 9.5 + 2.1X_i + \epsilon_i\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure1_6.png"><img alt="../_images/figure1_6.png" src="../_images/figure1_6.png" style="width: 534.4px; height: 228.0px;" /></a>
+</div>
+</div>
+</div>
+<div class="section" id="meaning-of-regression-parameters">
+<h3>Meaning of regression parameters<a class="headerlink" href="#meaning-of-regression-parameters" title="Permalink to this headline">¶</a></h3>
+<p>The parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are <em>regression coefficients</em>.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> is the <em>slope</em> of the regression line. It indicates the change in the mean of <span class="math notranslate nohighlight">\(Y\)</span> per unit increase in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(\beta_1\)</span> is the <span class="math notranslate nohighlight">\(Y\)</span> <em>intercept</em> of the regression line. When the scope of the model includes <span class="math notranslate nohighlight">\(X=0\)</span>, <span class="math notranslate nohighlight">\(\beta_0\)</span> gives the mean of the probability distribution of <span class="math notranslate nohighlight">\(Y\)</span> at <span class="math notranslate nohighlight">\(X=0\)</span>.</dt><dd><ul>
+<li><p>Note: when the scope of the model does not cover <span class="math notranslate nohighlight">\(X = 0\)</span>, the intercept does not have any particular meaning. For example, we cannot say the time to build a lot with 0 size is a positive number.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="estimation-of-regression-function">
+<h2>Estimation of Regression Function<a class="headerlink" href="#estimation-of-regression-function" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="method-of-least-squares">
+<h3>Method of least squares<a class="headerlink" href="#method-of-least-squares" title="Permalink to this headline">¶</a></h3>
+<p>We use the method of least squares to find estimators of the regression parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. This method considers the sum of the squared deviations of each observations <span class="math notranslate nohighlight">\(Y_i\)</span> from its expected value <span class="math notranslate nohighlight">\(E[Y_i]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[Q = \sum_n^{i=1} (Y_i - \beta_0 -\beta_1X_i)^2\]</div>
+<p>The estimators of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are the values <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> that <strong>minimize</strong> the criterion <span class="math notranslate nohighlight">\(Q\)</span> for a given sample observations <span class="math notranslate nohighlight">\((X_1, Y_1), ... (X_n, Y_n)\)</span>. <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> are called <em>point estimators</em> of <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>, respectively.</p>
+<div class="topic">
+<p class="topic-title first">Example</p>
+<p>In a small-scale study of persistence, an experimenter gave three subjects a very difficult task. Data on the age of the subject (X) and on the number of attempts to accomplish the task before giving up (Y) follow:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 70%" />
+<col style="width: 9%" />
+<col style="width: 9%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Subject i:</p></th>
+<th class="head"><p>1</p></th>
+<th class="head"><p>2</p></th>
+<th class="head"><p>3</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Age Xi:</p></td>
+<td><p>20</p></td>
+<td><p>55</p></td>
+<td><p>30</p></td>
+</tr>
+<tr class="row-odd"><td><p>Number of attempts Yi:</p></td>
+<td><p>5</p></td>
+<td><p>12</p></td>
+<td><p>10</p></td>
+</tr>
+</tbody>
+</table>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure1_9.png"><img alt="../_images/figure1_9.png" src="../_images/figure1_9.png" style="width: 595.2px; height: 308.8px;" /></a>
+</div>
+<p>In this example, the estimators on the right are better than those on the left.</p>
+</div>
+<p>We can calculate <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> using the following equations:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}b_1 = \frac{\sum(X_i - \bar{X}) (Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2} \\\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[b_0 = \bar{Y} - b_1 \bar{X}\]</div>
+<p>where <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\bar{Y}\)</span> are the means of the <span class="math notranslate nohighlight">\(X_i\)</span> and the <span class="math notranslate nohighlight">\(Y_i\)</span> observations, respectively.</p>
+<p>There is an important theorem about the least squares estimators:</p>
+<div class="topic">
+<p class="topic-title first">Gauss-Markov theorem</p>
+<p>Under the conditions of the regression model, the least squares estimators <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> are <em>unbiased</em> and have minimum variance among all unbiased linear estimators.</p>
+</div>
+<p>Because <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> are unbiased estimators, we have:</p>
+<div class="math notranslate nohighlight">
+\[E[b_0] = \beta_0\]</div>
+<div class="math notranslate nohighlight">
+\[E[b_1] = \beta_1\]</div>
+<p>The second statement of the theorem means that among all unbiased linear estimators, <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> have the smallest variability in repeated samples in which the X levels remain unchanged.</p>
+</div>
+<div class="section" id="point-estimation-of-mean-response">
+<h3>Point estimation of mean response<a class="headerlink" href="#point-estimation-of-mean-response" title="Permalink to this headline">¶</a></h3>
+<p>Given sample estimators <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> of the parameters in the regression function:</p>
+<div class="math notranslate nohighlight">
+\[E[Y] = \beta_0 + \beta_1 X\]</div>
+<p>we estimate the regression function as follows:</p>
+<div class="math notranslate nohighlight">
+\[\hat{Y} = b_0 + b_1X\]</div>
+<p>where <span class="math notranslate nohighlight">\(\hat{Y}\)</span> is the value of the estimated regression function at the level <span class="math notranslate nohighlight">\(X\)</span> of the predictor variable.</p>
+<p>Here are some names and definitions:</p>
+<ul class="simple">
+<li><p>value of the response variable <span class="math notranslate nohighlight">\(Y\)</span> is called <em>response</em></p></li>
+<li><p><span class="math notranslate nohighlight">\(E[Y]\)</span>, the mean of the probability distribution of <span class="math notranslate nohighlight">\(Y\)</span> corresponding to the level <span class="math notranslate nohighlight">\(X\)</span> of the predictor variable, is called the <em>mean response</em></p></li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(\hat{Y}\)</span> is a point estimator of the mean response at level <span class="math notranslate nohighlight">\(X\)</span></dt><dd><ul>
+<li><p><span class="math notranslate nohighlight">\(\hat{Y}\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(E[Y]\)</span>, with minimum variance</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><span class="math notranslate nohighlight">\(\hat{Y}_i = b_0 + b_1X_i\)</span> for <span class="math notranslate nohighlight">\(i = 1, ..., n\)</span> is the <em>fitted value</em> for the ith case</dt><dd><ul>
+<li><p>Note: <span class="math notranslate nohighlight">\(Y_i\)</span> is the observed value for the ith case</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="residuals">
+<h3>Residuals<a class="headerlink" href="#residuals" title="Permalink to this headline">¶</a></h3>
+<p>The ith <em>residual</em> is the difference between the observed value <span class="math notranslate nohighlight">\(Y_i\)</span> and the corresponding fitted value <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[e_i = Y_i - \hat{Y}_i = Y_i - b_0 - b_1X_i\]</div>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure1_12.png"><img alt="../_images/figure1_12.png" src="../_images/figure1_12.png" style="width: 471.20000000000005px; height: 231.20000000000002px;" /></a>
+</div>
+</div>
 </div>
 </div>
 
