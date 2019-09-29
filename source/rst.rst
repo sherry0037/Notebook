@@ -53,6 +53,16 @@ Lists are as simple as in Markdown:
     * Second item
         * Sub item
 
+
+----------------------------------
+Figure
+----------------------------------
+
+.. code-block:: RST
+
+  .. figure:: _static/regression/figure1_12.png 
+      :scale: 40 %
+
 ----------------------------------
 Table
 ----------------------------------
