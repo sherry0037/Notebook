@@ -43,7 +43,7 @@ language = 'en'
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
 # This pattern also affects html_static_path and html_extra_path.
-exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'amazon/*']
+exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'Amazon/*']
 
 
 # -- Options for HTML output -------------------------------------------------
@@ -68,3 +68,6 @@ numfig = True
 
 # https://stackoverflow.com/questions/50631942/how-does-equation-numbering-work-for-sphinx
 math_eqref_format = "Eq.{number}"
+numfig = True
+math_numfig = True
+numfig_secnum_depth = 2

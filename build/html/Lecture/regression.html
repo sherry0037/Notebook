@@ -40,6 +40,7 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Regression Analysis</a><ul>
+<li><a class="reference internal" href="#chapter-1-linear-regression-with-one-predictor-variable">Chapter 1: Linear Regression with One Predictor Variable</a><ul>
 <li><a class="reference internal" href="#simple-linear-regression-model">Simple Linear Regression Model</a><ul>
 <li><a class="reference internal" href="#model-definition">Model definition</a></li>
 <li><a class="reference internal" href="#meaning-of-regression-parameters">Meaning of regression parameters</a></li>
@@ -49,6 +50,29 @@
 <li><a class="reference internal" href="#method-of-least-squares">Method of least squares</a></li>
 <li><a class="reference internal" href="#point-estimation-of-mean-response">Point estimation of mean response</a></li>
 <li><a class="reference internal" href="#residuals">Residuals</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#estimation-of-error-terms-variance-sigma-2">Estimation of Error Terms Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></a><ul>
+<li><a class="reference internal" href="#point-estimator-of-sigma-2">Point estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#normally-distributed-error">Normally Distributed Error</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#chapter-2-inferences-in-regression-and-correlation-analysis">Chapter 2: Inferences in Regression and Correlation Analysis</a><ul>
+<li><a class="reference internal" href="#inferences-on-beta-1">Inferences on <span class="math notranslate nohighlight">\(\beta_1\)</span></a><ul>
+<li><a class="reference internal" href="#sampling-distribution-of-beta-1">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a></li>
+<li><a class="reference internal" href="#distribution-of-b-1-beta-1-s-b-1">Distribution of <span class="math notranslate nohighlight">\((b_1 - \beta_1) / s[b_1]\)</span></a></li>
+<li><a class="reference internal" href="#confidence-interval-for-beta-1">Confidence interval for <span class="math notranslate nohighlight">\(\beta_1\)</span></a></li>
+<li><a class="reference internal" href="#hypothesis-test-for-beta-1">Hypothesis test for <span class="math notranslate nohighlight">\(\beta_1\)</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#inferences-on-beta-0">Inferences on <span class="math notranslate nohighlight">\(\beta_0\)</span></a><ul>
+<li><a class="reference internal" href="#id1">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a></li>
+<li><a class="reference internal" href="#confidence-interval-for-beta-0">Confidence interval for <span class="math notranslate nohighlight">\(\beta_0\)</span></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#power-of-tests">Power of Tests</a></li>
 </ul>
 </li>
 </ul>
@@ -87,11 +111,64 @@
           <div class="body" role="main">
             
   <div class="section" id="regression-analysis">
-<h1>Regression Analysis<a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id2">Regression Analysis</a><a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#regression-analysis" id="id2">Regression Analysis</a></p>
+<ul>
+<li><p><a class="reference internal" href="#chapter-1-linear-regression-with-one-predictor-variable" id="id3">Chapter 1: Linear Regression with One Predictor Variable</a></p>
+<ul>
+<li><p><a class="reference internal" href="#simple-linear-regression-model" id="id4">Simple Linear Regression Model</a></p>
+<ul>
+<li><p><a class="reference internal" href="#model-definition" id="id5">Model definition</a></p></li>
+<li><p><a class="reference internal" href="#meaning-of-regression-parameters" id="id6">Meaning of regression parameters</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#estimation-of-regression-function" id="id7">Estimation of Regression Function</a></p>
+<ul>
+<li><p><a class="reference internal" href="#method-of-least-squares" id="id8">Method of least squares</a></p></li>
+<li><p><a class="reference internal" href="#point-estimation-of-mean-response" id="id9">Point estimation of mean response</a></p></li>
+<li><p><a class="reference internal" href="#residuals" id="id10">Residuals</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#estimation-of-error-terms-variance-sigma-2" id="id11">Estimation of Error Terms Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#point-estimator-of-sigma-2" id="id12">Point estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#normally-distributed-error" id="id13">Normally Distributed Error</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#chapter-2-inferences-in-regression-and-correlation-analysis" id="id14">Chapter 2: Inferences in Regression and Correlation Analysis</a></p>
+<ul>
+<li><p><a class="reference internal" href="#inferences-on-beta-1" id="id15">Inferences on <span class="math notranslate nohighlight">\(\beta_1\)</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#sampling-distribution-of-beta-1" id="id16">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a></p></li>
+<li><p><a class="reference internal" href="#distribution-of-b-1-beta-1-s-b-1" id="id17">Distribution of <span class="math notranslate nohighlight">\((b_1 - \beta_1) / s[b_1]\)</span></a></p></li>
+<li><p><a class="reference internal" href="#confidence-interval-for-beta-1" id="id18">Confidence interval for <span class="math notranslate nohighlight">\(\beta_1\)</span></a></p></li>
+<li><p><a class="reference internal" href="#hypothesis-test-for-beta-1" id="id19">Hypothesis test for <span class="math notranslate nohighlight">\(\beta_1\)</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#inferences-on-beta-0" id="id20">Inferences on <span class="math notranslate nohighlight">\(\beta_0\)</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#id1" id="id21">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a></p></li>
+<li><p><a class="reference internal" href="#confidence-interval-for-beta-0" id="id22">Confidence interval for <span class="math notranslate nohighlight">\(\beta_0\)</span></a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#power-of-tests" id="id23">Power of Tests</a></p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="chapter-1-linear-regression-with-one-predictor-variable">
+<h2><a class="toc-backref" href="#id3">Chapter 1: Linear Regression with One Predictor Variable</a><a class="headerlink" href="#chapter-1-linear-regression-with-one-predictor-variable" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="simple-linear-regression-model">
-<h2>Simple Linear Regression Model<a class="headerlink" href="#simple-linear-regression-model" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id4">Simple Linear Regression Model</a><a class="headerlink" href="#simple-linear-regression-model" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="model-definition">
-<h3>Model definition<a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id5">Model definition</a><a class="headerlink" href="#model-definition" title="Permalink to this headline">¶</a></h4>
 <p>This is a basic regression model with one predictor variable and the function is linear:</p>
 <div class="math notranslate nohighlight">
 \[Y_i = \beta_0 + \beta_1 X_i + \epsilon_i\]</div>
@@ -125,7 +202,7 @@
 </div>
 </div>
 <div class="section" id="meaning-of-regression-parameters">
-<h3>Meaning of regression parameters<a class="headerlink" href="#meaning-of-regression-parameters" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id6">Meaning of regression parameters</a><a class="headerlink" href="#meaning-of-regression-parameters" title="Permalink to this headline">¶</a></h4>
 <p>The parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are <em>regression coefficients</em>.</p>
 <ul class="simple">
 <li><p><span class="math notranslate nohighlight">\(\beta_0\)</span> is the <em>slope</em> of the regression line. It indicates the change in the mean of <span class="math notranslate nohighlight">\(Y\)</span> per unit increase in <span class="math notranslate nohighlight">\(X\)</span>.</p></li>
@@ -140,9 +217,9 @@
 </div>
 </div>
 <div class="section" id="estimation-of-regression-function">
-<h2>Estimation of Regression Function<a class="headerlink" href="#estimation-of-regression-function" title="Permalink to this headline">¶</a></h2>
+<h3><a class="toc-backref" href="#id7">Estimation of Regression Function</a><a class="headerlink" href="#estimation-of-regression-function" title="Permalink to this headline">¶</a></h3>
 <div class="section" id="method-of-least-squares">
-<h3>Method of least squares<a class="headerlink" href="#method-of-least-squares" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id8">Method of least squares</a><a class="headerlink" href="#method-of-least-squares" title="Permalink to this headline">¶</a></h4>
 <p>We use the method of least squares to find estimators of the regression parameters <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. This method considers the sum of the squared deviations of each observations <span class="math notranslate nohighlight">\(Y_i\)</span> from its expected value <span class="math notranslate nohighlight">\(E[Y_i]\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[Q = \sum_n^{i=1} (Y_i - \beta_0 -\beta_1X_i)^2\]</div>
@@ -183,10 +260,10 @@
 <p>In this example, the estimators on the right are better than those on the left.</p>
 </div>
 <p>We can calculate <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> using the following equations:</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}b_1 = \frac{\sum(X_i - \bar{X}) (Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2} \\\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[b_0 = \bar{Y} - b_1 \bar{X}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-b1">
+<span class="eqno">(7)<a class="headerlink" href="#equation-eq-b1" title="Permalink to this equation">¶</a></span>\[\begin{split}b_1 = \frac{\sum(X_i - \bar{X}) (Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2} \\\end{split}\]</div>
+<div class="math notranslate nohighlight" id="equation-eq-b0">
+<span class="eqno">(8)<a class="headerlink" href="#equation-eq-b0" title="Permalink to this equation">¶</a></span>\[b_0 = \bar{Y} - b_1 \bar{X}\]</div>
 <p>where <span class="math notranslate nohighlight">\(\bar{X}\)</span> and <span class="math notranslate nohighlight">\(\bar{Y}\)</span> are the means of the <span class="math notranslate nohighlight">\(X_i\)</span> and the <span class="math notranslate nohighlight">\(Y_i\)</span> observations, respectively.</p>
 <p>There is an important theorem about the least squares estimators:</p>
 <div class="topic">
@@ -201,7 +278,7 @@
 <p>The second statement of the theorem means that among all unbiased linear estimators, <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> have the smallest variability in repeated samples in which the X levels remain unchanged.</p>
 </div>
 <div class="section" id="point-estimation-of-mean-response">
-<h3>Point estimation of mean response<a class="headerlink" href="#point-estimation-of-mean-response" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id9">Point estimation of mean response</a><a class="headerlink" href="#point-estimation-of-mean-response" title="Permalink to this headline">¶</a></h4>
 <p>Given sample estimators <span class="math notranslate nohighlight">\(b_0\)</span> and <span class="math notranslate nohighlight">\(b_1\)</span> of the parameters in the regression function:</p>
 <div class="math notranslate nohighlight">
 \[E[Y] = \beta_0 + \beta_1 X\]</div>
@@ -230,13 +307,177 @@
 </ul>
 </div>
 <div class="section" id="residuals">
-<h3>Residuals<a class="headerlink" href="#residuals" title="Permalink to this headline">¶</a></h3>
+<h4><a class="toc-backref" href="#id10">Residuals</a><a class="headerlink" href="#residuals" title="Permalink to this headline">¶</a></h4>
 <p>The ith <em>residual</em> is the difference between the observed value <span class="math notranslate nohighlight">\(Y_i\)</span> and the corresponding fitted value <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[e_i = Y_i - \hat{Y}_i = Y_i - b_0 - b_1X_i\]</div>
 <div class="figure align-center">
 <a class="reference internal image-reference" href="../_images/figure1_12.png"><img alt="../_images/figure1_12.png" src="../_images/figure1_12.png" style="width: 471.20000000000005px; height: 231.20000000000002px;" /></a>
 </div>
+<div class="topic">
+<p class="topic-title first">Note</p>
+<p>The model error term <span class="math notranslate nohighlight">\(\epsilon_i = Y_i - E[Y_i]\)</span> and the residual <span class="math notranslate nohighlight">\(e_i = Y_i - \hat{Y}_i\)</span> are <strong>different</strong>. The former is unknown, because the true regression line, <span class="math notranslate nohighlight">\(E[Y_i]\)</span> is unknown. The latter is known, because the fitted value <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span> on the estimated regression line is known.</p>
+</div>
+</div>
+</div>
+<div class="section" id="estimation-of-error-terms-variance-sigma-2">
+<h3><a class="toc-backref" href="#id11">Estimation of Error Terms Variance <span class="math notranslate nohighlight">\(\sigma^2\)</span></a><a class="headerlink" href="#estimation-of-error-terms-variance-sigma-2" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="point-estimator-of-sigma-2">
+<h4><a class="toc-backref" href="#id12">Point estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span></a><a class="headerlink" href="#point-estimator-of-sigma-2" title="Permalink to this headline">¶</a></h4>
+<p>First consider sampling from a single population. The variance <span class="math notranslate nohighlight">\(\sigma^2\)</span> of a single population is estimated by the sample variance <span class="math notranslate nohighlight">\(s^2\)</span>. The sample variance is calculated as follows:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    s^2 &amp;= \frac{\text{sum of squares}}{\text{degree of freedom}}\\
+        &amp;= \frac{\sum^n_{i=1}(Y_i - \bar{Y})^2}{n-1}
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>The sample variance is often called a <em>mean square</em>.</p>
+<p>Now consider the case for regression model. We also calculate the sum of squared first, then divide it by the degree of freedom. The sum of squares, denoted by SSE (<em>error sum of squares</em>, or <em>residual sum of squares</em>), is:</p>
+<div class="math notranslate nohighlight">
+\[SSE = \sum^n_{i-1} (Y_i - \hat{Y}_i)^2 = \sum^n_{i-1}e_i^2\]</div>
+<p>Note that here, the mean of <span class="math notranslate nohighlight">\(Y_i\)</span> depends on the level <span class="math notranslate nohighlight">\(X_i\)</span>; hence different to the previous case, we are subtracting the estimated mean <span class="math notranslate nohighlight">\(\hat{Y}_i\)</span> for each level, instead of the sample mean <span class="math notranslate nohighlight">\(\bar{Y}\)</span>.</p>
+<p>The sum of squares SSE has <span class="math notranslate nohighlight">\(n-2\)</span> degrees of freedom, because we need to estimate both <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span>. The mean square, denoted by MSE (<em>error mean square</em> or <em>residual mean square</em>), is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{equation}
+\begin{split}
+    s^2 &amp;= MSE = \frac{SSE}{n-1}
+        = \frac{\sum^n_{i-1} (Y_i - \hat{Y}_i)^2}{n-2} = \frac{\sum^n_{i-1}e_i^2}{n-2}
+\end{split}
+\end{equation}\]</div>
+<p>MSE is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2\)</span>, so <span class="math notranslate nohighlight">\(E[MSE] = \sigma^2\)</span>.</p>
+</div>
+</div>
+<div class="section" id="normally-distributed-error">
+<h3><a class="toc-backref" href="#id13">Normally Distributed Error</a><a class="headerlink" href="#normally-distributed-error" title="Permalink to this headline">¶</a></h3>
+<p>To set up interval estimates and make tests, we need to make an assumption about the form of the distribution of the <span class="math notranslate nohighlight">\(\epsilon_i\)</span>. The standard assumption is that they are normally distributed:</p>
+<div class="math notranslate nohighlight">
+\[\epsilon_i \sim_{i.i.d} N(0, \sigma^2)\]</div>
+<p>Note: the uncorrelatedness assumption of <span class="math notranslate nohighlight">\(\epsilon_i\)</span> becomes independence. As a result, <span class="math notranslate nohighlight">\(Y_i\)</span> are independent normal random variables.</p>
+</div>
+</div>
+<div class="section" id="chapter-2-inferences-in-regression-and-correlation-analysis">
+<h2><a class="toc-backref" href="#id14">Chapter 2: Inferences in Regression and Correlation Analysis</a><a class="headerlink" href="#chapter-2-inferences-in-regression-and-correlation-analysis" title="Permalink to this headline">¶</a></h2>
+<p>Throughout this chapter, we assume the normal error regression model described in Chapter 1 is applicable.</p>
+<div class="section" id="inferences-on-beta-1">
+<h3><a class="toc-backref" href="#id15">Inferences on <span class="math notranslate nohighlight">\(\beta_1\)</span></a><a class="headerlink" href="#inferences-on-beta-1" title="Permalink to this headline">¶</a></h3>
+<p>Frequently, we are interested in drawing inferences about <span class="math notranslate nohighlight">\(\beta_1\)</span>, the slope of the regression line. We also want to do tests on <span class="math notranslate nohighlight">\(\beta_1\)</span>, particularly in this form:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    H_0: \beta_1 &amp;= 0\\
+    H_a: \beta_1 &amp;\neq 0
+\end{split}
+\end{equation}\end{split}\]</div>
+<p><span class="math notranslate nohighlight">\(\beta_1 = 0\)</span> not only implies that there is no linear association between X and Y, but also that there is not relation of any type between X and Y, because the probability distributions of Y are then identical at all levels of X.</p>
+<div class="section" id="sampling-distribution-of-beta-1">
+<h4><a class="toc-backref" href="#id16">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a><a class="headerlink" href="#sampling-distribution-of-beta-1" title="Permalink to this headline">¶</a></h4>
+<p>The point estimator Ref <span class="math notranslate nohighlight">\(b_1\)</span> is given in <a class="reference internal" href="#equation-eq-b1">Eq.7</a> as follows:</p>
+<div class="math notranslate nohighlight">
+\[b_1 = \frac{\sum(X_i - \bar{X}) (Y_i - \bar{Y})}{\sum(X_i - \bar{X})^2}\]</div>
+<p>The sampling distribution of <span class="math notranslate nohighlight">\(b_1\)</span> is the different values of <span class="math notranslate nohighlight">\(b_1\)</span> that would be obtained with repeated sampling when the levels of X are held constant.</p>
+<p>For normal error regression model, the sampling distribution of <span class="math notranslate nohighlight">\(b_1\)</span> is normal, with mean and variance:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    E[b_1] &amp;= \beta_1\\
+    \sigma^2[b_1] &amp;= \frac{\sigma^2}{\sum(X_i - \bar{X})^2}
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>The normality of <span class="math notranslate nohighlight">\(b_1\)</span> follows from the fact that <span class="math notranslate nohighlight">\(b_1\)</span> is a linear combination of the <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+<p>We can estimate the variance of <span class="math notranslate nohighlight">\(b_1\)</span> by replacing <span class="math notranslate nohighlight">\(\sigma^2\)</span> with its unbiased estimator <span class="math notranslate nohighlight">\(MSE\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[s^2[b_1] = \frac{MSE}{\sum(X_i - \bar{X})^2}\]</div>
+<p>where the point estimator <span class="math notranslate nohighlight">\(s^2[b_1]\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2[b_1]\)</span>.</p>
+</div>
+<div class="section" id="distribution-of-b-1-beta-1-s-b-1">
+<h4><a class="toc-backref" href="#id17">Distribution of <span class="math notranslate nohighlight">\((b_1 - \beta_1) / s[b_1]\)</span></a><a class="headerlink" href="#distribution-of-b-1-beta-1-s-b-1" title="Permalink to this headline">¶</a></h4>
+<p>Since <span class="math notranslate nohighlight">\(b_1\)</span> is normally distributed, we know that the standardized statistic <span class="math notranslate nohighlight">\((b_1 - \beta_1) / \sigma[b_1]\)</span> has standard normal distribution.</p>
+<p>We need to estimate <span class="math notranslate nohighlight">\(\sigma[b_1]\)</span> by <span class="math notranslate nohighlight">\(s[b_1]\)</span>, hence we are interested in the studentized statistic <span class="math notranslate nohighlight">\((b_1 - \beta_1) / s[b_1]\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\frac{b_1 - \beta_1}{s[b_1]} \sim t(n-2),\]</div>
+<p>which is a t distribution with <span class="math notranslate nohighlight">\(n-2\)</span> degrees of freedom.</p>
+</div>
+<div class="section" id="confidence-interval-for-beta-1">
+<h4><a class="toc-backref" href="#id18">Confidence interval for <span class="math notranslate nohighlight">\(\beta_1\)</span></a><a class="headerlink" href="#confidence-interval-for-beta-1" title="Permalink to this headline">¶</a></h4>
+<p>The  <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\beta_1\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[[b_1 - t(1-\alpha/2; n-2) s[b_1]], b_1 + t(1-\alpha/2; n-2) s[b_1]],\]</div>
+<p>where <span class="math notranslate nohighlight">\(t(1-\alpha/2; n-2)\)</span> denotes the <span class="math notranslate nohighlight">\((\alpha/2)100\)</span> percentile of the t distribution with n-2 degrees of freedom. For example, for a 95 percent confidence interval with sample size of 25, we have <span class="math notranslate nohighlight">\(t(.975; 23) = 2.069\)</span>.</p>
+<p>This can also be stated in a probability statement:</p>
+<div class="math notranslate nohighlight">
+\[P[t(\alpha/2; n-2) \leq \frac{b_1 - \beta_1}{s[b_1]} \leq t(1-\alpha/2; n-2)] = 1 - \alpha\]</div>
+</div>
+<div class="section" id="hypothesis-test-for-beta-1">
+<h4><a class="toc-backref" href="#id19">Hypothesis test for <span class="math notranslate nohighlight">\(\beta_1\)</span></a><a class="headerlink" href="#hypothesis-test-for-beta-1" title="Permalink to this headline">¶</a></h4>
+<p>Consider a two-sided test with the test alternatives:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    H_0: \beta_1 &amp;= 0\\
+    H_a: \beta_1 &amp;\neq 0
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>We have the test statistic:</p>
+<div class="math notranslate nohighlight">
+\[t^* = \frac{b_1}{s[b_1]} \sim t(n-2)\]</div>
+<p>and the decision rules is:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    &amp;\text{If } |t^*| \leq t(1-\alpha/2; n-2)\text{, reject }H_0\\
+    &amp;\text{If } |t^*| &gt; t(1-\alpha/2; n-2)\text{, fail to reject }H_0
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>The P-value is the probability <span class="math notranslate nohighlight">\(P[t(n-2) &gt; t^*]\)</span>. If P-value is less than the level of significance <span class="math notranslate nohighlight">\(\alpha\)</span>, we reject the null hypothesis.</p>
+<p>P-value is interpreted as follows: if <span class="math notranslate nohighlight">\(b_1 = 5\)</span>, the P-value is the probability of observing <span class="math notranslate nohighlight">\(b_1\)</span> at least far away from 0 (<span class="math notranslate nohighlight">\(b_1 \geq 5\)</span> or <span class="math notranslate nohighlight">\(b_1 \leq -5\)</span>) assuming that the Null hypothesis is true.</p>
+</div>
+</div>
+<div class="section" id="inferences-on-beta-0">
+<h3><a class="toc-backref" href="#id20">Inferences on <span class="math notranslate nohighlight">\(\beta_0\)</span></a><a class="headerlink" href="#inferences-on-beta-0" title="Permalink to this headline">¶</a></h3>
+<p>We only consider the case when the scope of the model includes <span class="math notranslate nohighlight">\(X=0\)</span>.</p>
+<div class="section" id="id1">
+<h4><a class="toc-backref" href="#id21">Sampling distribution of <span class="math notranslate nohighlight">\(\beta_1\)</span></a><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
+<p>The point estimator Ref <span class="math notranslate nohighlight">\(b_0\)</span> is given in <a class="reference internal" href="#equation-eq-b0">Eq.8</a> as follows:</p>
+<div class="math notranslate nohighlight">
+\[b_0 = \bar{Y} - b_1 \bar{X}\]</div>
+<p>For normal error regression model, the sampling distribution of <span class="math notranslate nohighlight">\(b_1\)</span> is normal, with mean and variance:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    E[b_0] &amp;= \beta_0\\
+    \sigma^2[b_0] &amp;= \sigma^2 \left[ \frac{1}{n} + \frac{\bar{X}^2}{\sum(X_i - \bar{X})^2} \right]
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>The normality of <span class="math notranslate nohighlight">\(b_0\)</span> follows from the fact that <span class="math notranslate nohighlight">\(b_0\)</span> is a linear combination of the <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+<p>We can estimate the variance of <span class="math notranslate nohighlight">\(b_0\)</span> by replacing <span class="math notranslate nohighlight">\(\sigma^2\)</span> with its unbiased estimator <span class="math notranslate nohighlight">\(MSE\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[s^2[b_0] = MSE \left[ \frac{1}{n} + \frac{\bar{X}^2}{\sum(X_i - \bar{X})^2} \right]\]</div>
+<p>where the point estimator <span class="math notranslate nohighlight">\(s^2[b_0]\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2[b_0]\)</span>.</p>
+</div>
+<div class="section" id="confidence-interval-for-beta-0">
+<h4><a class="toc-backref" href="#id22">Confidence interval for <span class="math notranslate nohighlight">\(\beta_0\)</span></a><a class="headerlink" href="#confidence-interval-for-beta-0" title="Permalink to this headline">¶</a></h4>
+<p>The  <span class="math notranslate nohighlight">\(1-\alpha\)</span> confidence interval for <span class="math notranslate nohighlight">\(\beta_0\)</span> is:</p>
+<div class="math notranslate nohighlight">
+\[[b_0 - t(1-\alpha/2; n-2) s[b_0]], b_0 + t(1-\alpha/2; n-2) s[b_0]]\]</div>
+</div>
+</div>
+<div class="section" id="power-of-tests">
+<h3><a class="toc-backref" href="#id23">Power of Tests</a><a class="headerlink" href="#power-of-tests" title="Permalink to this headline">¶</a></h3>
+<p>Consider the general test concerning <span class="math notranslate nohighlight">\(\beta_1\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    H_0: \beta_1 &amp;= \beta_{10}\\
+    H_a: \beta_1 &amp;\neq \beta_{10}
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>The <strong>power</strong> of this test is the probability that the decision rule will lead to conclusion <span class="math notranslate nohighlight">\(H_a\)</span> when <span class="math notranslate nohighlight">\(H_a\)</span> holds:</p>
+<div class="math notranslate nohighlight">
+\[Power = P(|t^*| &gt; t(1-\alpha/2; n-2) | \delta),\]</div>
+<p>where <span class="math notranslate nohighlight">\(\delta\)</span> is the <em>noncentrality measure</em> - how far the true value of <span class="math notranslate nohighlight">\(\beta_1\)</span> is from <span class="math notranslate nohighlight">\(\beta_{10}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\delta = \frac{\beta_1 - \beta_{10}}{\sigma{\beta_1}}\]</div>
 </div>
 </div>
 </div>
