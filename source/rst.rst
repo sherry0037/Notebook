@@ -149,6 +149,20 @@ Or a simpler way:
 :math:`\frac{\sum_{t=0}^{N}f(t,k) }{N}`
 
 
+To align equations:
+
+.. code-block:: RST
+
+  .. math::
+  
+    \begin{equation} 
+    \begin{split}
+        x &= 1\\
+        x &= 2
+    \end{split}
+    \end{equation}
+
+
 ----------------------------------
 Body Elements
 ----------------------------------
