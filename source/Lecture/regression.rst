@@ -417,4 +417,61 @@ where :math:`\delta` is the *noncentrality measure* - how far the true value of 
 
     \delta = \frac{\beta_1 - \beta_{10}}{\sigma{\beta_1}}
 
+--------------------------------------
+Interval Estimation of :math:`E[Y_h]`
+--------------------------------------
+A common objective in regression analysis is to estimate the mean for probability distributions of Y for various levels of X. Let :math:`X_h` denote the level of X. The mean response when :math:`X = X_h` is denoted by :math:`E[Y_h]`.  :math:`\hat{Y}_h` is the point estimator of :math:`E[Y_h]` and is given by:
 
+.. math::
+    
+    \hat{Y}_h = b_0 + b_1X_h
+
+Sampling Distribution of :math:`\hat{Y}_h`
+-------------------------------------------
+The sampling distribution of :math:`\hat{Y}_h` refers to the different values of :math:`\hat{Y}_h` that would be obtained if repeated samples were selected, each holding the levels of the predictor variable X constant, and calculating :math:`\hat{Y}_h` for each sample.
+
+For normal error regression model, the sampling distribution of :math:`\hat{Y}_h` is normal, with mean and variance:
+
+.. math::
+
+    \begin{equation} 
+    \begin{split}
+        E[\hat{Y}_h] &= E[Y_h]\\
+        \sigma^2[\hat{Y}_h] &= \sigma^2 \left[ \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum(X_i - \bar{X})^2} \right]
+    \end{split}
+    \end{equation}
+
+**Normality.** The normality of :math:`\hat{Y}_h` follows from the fact that :math:`\hat{Y}_h` is a linear combination of the :math:`Y_i`.
+
+**Mean.** :math:`\hat{Y}_h` is an unbiased estimator of :math:`E[Y_h]`.
+
+**Variance.** The variance of the sampling distribution of :math:`\hat{Y}_h` is affected by how far :math:`X_h` is from :math:`\bar{X}`. The further from :math:`\bar{X}` is :math:`X_h`, the larger is the variance of :math:`\hat{Y}_h`.
+
+.. figure:: _static/regression/figure2_3.png 
+    :scale: 40 %
+
+We can estimate the variance of :math:`\hat{Y}_h` by replacing :math:`\sigma^2` with its unbiased estimator :math:`MSE`:
+
+.. math::
+
+    s^2[\hat{Y}_h] = MSE \left[ \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum(X_i - \bar{X})^2} \right]
+
+where the point estimator :math:`s^2[\hat{Y}_h]` is an unbiased estimator of :math:`\sigma^2[\hat{Y}_h]`.
+
+
+Confidence interval for :math:`E[Y_h]`
+----------------------------------------
+
+The  :math:`1-\alpha` confidence interval for :math:`E[Y_h]` is:
+
+.. math::
+
+    [\hat{Y}_h - t(1-\alpha/2; n-2) s[\hat{Y}_h]], \hat{Y}_h + t(1-\alpha/2; n-2) s[\hat{Y}_h]]
+
+
+------------------------------
+Prediction of New Observation
+------------------------------
+The new observation of y to be predicted is viewed as the result of a new trial, independent of the trials on which the regression analysis is based. We denote the level of X for the new trial as :math:`X_h` and the new observation on Y as :math:`Y_{h(new)}`
+
+The difference between estimation of the mean response :math:`E[Y_h]` and prediction of a new response :math:`Y_{h(new)}` is that, the former estimates the *mean* of the distribution of Y, and the latter predicts an *individual outcome* drawn from the distribution of Y.

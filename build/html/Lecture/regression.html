@@ -73,6 +73,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#power-of-tests">Power of Tests</a></li>
+<li><a class="reference internal" href="#interval-estimation-of-e-y-h">Interval Estimation of <span class="math notranslate nohighlight">\(E[Y_h]\)</span></a><ul>
+<li><a class="reference internal" href="#sampling-distribution-of-hat-y-h">Sampling Distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span></a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -157,6 +161,11 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#power-of-tests" id="id23">Power of Tests</a></p></li>
+<li><p><a class="reference internal" href="#interval-estimation-of-e-y-h" id="id24">Interval Estimation of <span class="math notranslate nohighlight">\(E[Y_h]\)</span></a></p>
+<ul>
+<li><p><a class="reference internal" href="#sampling-distribution-of-hat-y-h" id="id25">Sampling Distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span></a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -478,6 +487,34 @@
 <p>where <span class="math notranslate nohighlight">\(\delta\)</span> is the <em>noncentrality measure</em> - how far the true value of <span class="math notranslate nohighlight">\(\beta_1\)</span> is from <span class="math notranslate nohighlight">\(\beta_{10}\)</span>:</p>
 <div class="math notranslate nohighlight">
 \[\delta = \frac{\beta_1 - \beta_{10}}{\sigma{\beta_1}}\]</div>
+</div>
+<div class="section" id="interval-estimation-of-e-y-h">
+<h3><a class="toc-backref" href="#id24">Interval Estimation of <span class="math notranslate nohighlight">\(E[Y_h]\)</span></a><a class="headerlink" href="#interval-estimation-of-e-y-h" title="Permalink to this headline">¶</a></h3>
+<p>A common objective in regression analysis is to estimate the mean for probability distributions of Y for various levels of X. Let <span class="math notranslate nohighlight">\(X_h\)</span> denote the level of X. The mean response when <span class="math notranslate nohighlight">\(X = X_h\)</span> is denoted by <span class="math notranslate nohighlight">\(E[Y_h]\)</span>.  <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> is the point estimator of <span class="math notranslate nohighlight">\(E[Y_h]\)</span> and is given by:</p>
+<div class="math notranslate nohighlight">
+\[\hat{Y}_h = b_0 + b_1X_h\]</div>
+<div class="section" id="sampling-distribution-of-hat-y-h">
+<h4><a class="toc-backref" href="#id25">Sampling Distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span></a><a class="headerlink" href="#sampling-distribution-of-hat-y-h" title="Permalink to this headline">¶</a></h4>
+<p>The sampling distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> refers to the different values of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> that would be obtained if repeated samples were selected, each holding the levels of the predictor variable X constant, and calculating <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> for each sample.</p>
+<p>For normal error regression model, the sampling distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> is normal, with mean and variance:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    E[\hat{Y}_h] &amp;= E[Y_h]\\
+    \sigma^2[\hat{Y}_h] &amp;= \sigma^2 \left[ \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum(X_i - \bar{X})^2} \right]
+\end{split}
+\end{equation}\end{split}\]</div>
+<p><strong>Normality.</strong> The normality of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> follows from the fact that <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> is a linear combination of the <span class="math notranslate nohighlight">\(Y_i\)</span>.</p>
+<p><strong>Mean.</strong> <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(E[Y_h]\)</span>.</p>
+<p><strong>Variance.</strong> The variance of the sampling distribution of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> is affected by how far <span class="math notranslate nohighlight">\(X_h\)</span> is from <span class="math notranslate nohighlight">\(\bar{X}\)</span>. The further from <span class="math notranslate nohighlight">\(\bar{X}\)</span> is <span class="math notranslate nohighlight">\(X_h\)</span>, the larger is the variance of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span>.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure2_3.png"><img alt="../_images/figure2_3.png" src="../_images/figure2_3.png" style="width: 428.8px; height: 206.4px;" /></a>
+</div>
+<p>We can estimate the variance of <span class="math notranslate nohighlight">\(\hat{Y}_h\)</span> by replacing <span class="math notranslate nohighlight">\(\sigma^2\)</span> with its unbiased estimator <span class="math notranslate nohighlight">\(MSE\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[s^2[\hat{Y}_h] = MSE \left[ \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum(X_i - \bar{X})^2} \right]\]</div>
+<p>where the point estimator <span class="math notranslate nohighlight">\(s^2[\hat{Y}_h]\)</span> is an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2[\hat{Y}_h]\)</span>.</p>
+</div>
 </div>
 </div>
 </div>
