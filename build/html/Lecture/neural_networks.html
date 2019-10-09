@@ -1,0 +1,343 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>2019 - CS394N - Neural Networks &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Regression Analysis" href="regression.html" />
+    <link rel="prev" title="Hoare Logic" href="hoare_logic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="regression.html" title="Regression Analysis"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">2019 - CS394N - Neural Networks</a><ul>
+<li><a class="reference internal" href="#backpropagation">Backpropagation</a><ul>
+<li><a class="reference internal" href="#backpropagation-through-time-bptt">Backpropagation through time (BPTT)</a></li>
+<li><a class="reference internal" href="#truncated-backpropagation-through-time-tbptt">Truncated backpropagation through time (TBPTT)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#neuroevolution">Neuroevolution</a><ul>
+<li><a class="reference internal" href="#algorithm">Algorithm</a></li>
+<li><a class="reference internal" href="#advanced-neuroevolution">Advanced Neuroevolution</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#self-organizing-map">Self-Organizing Map</a><ul>
+<li><a class="reference internal" href="#learning-vector-quantization-lvq">Learning Vector Quantization (LVQ)</a></li>
+<li><a class="reference internal" href="#lvq-algorithm">LVQ Algorithm</a></li>
+<li><a class="reference internal" href="#modifications">Modifications</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#computational-neuroscience">Computational Neuroscience</a><ul>
+<li><a class="reference internal" href="#visual-coding">Visual coding</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hoare_logic.html"
+                        title="previous chapter">Hoare Logic</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="regression.html"
+                        title="next chapter">Regression Analysis</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Lecture/neural_networks.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="cs394n-neural-networks">
+<h1>2019 - CS394N - Neural Networks<a class="headerlink" href="#cs394n-neural-networks" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="backpropagation">
+<h2>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="backpropagation-through-time-bptt">
+<h3>Backpropagation through time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Permalink to this headline">¶</a></h3>
+<p>Reading material: <a class="reference external" href="https://machinelearningmastery.com/gentle-introduction-backpropagation-time/">https://machinelearningmastery.com/gentle-introduction-backpropagation-time/</a></p>
+<p>BPTT is the application of backpropagation training algorithm to recurrent neural network. It works by unrolling all input timesteps. Each timestep has one input timestep, one copy of the network and one output. Errors are calculated for each timestep and accumulated to the end. The network is rolled back up and the weights are updated.</p>
+<p>BPTT is computationally expensive when the number of timesteps is large. It also suffers from the weight vanish/explode problem.</p>
+</div>
+<div class="section" id="truncated-backpropagation-through-time-tbptt">
+<h3>Truncated backpropagation through time (TBPTT)<a class="headerlink" href="#truncated-backpropagation-through-time-tbptt" title="Permalink to this headline">¶</a></h3>
+<p>TBPTT is a modified version of BPTT to solve the problems mentioned above. It is a more practical method.</p>
+<p>TBPTT processes the sequence one timestep at a time. At every k1 timesteps, it runs BPTT for k2 timesteps (parameter updates). The hidden states have been exposed to many timesteps. so may contain useful information about the far past.</p>
+<p>We can summarize the algorithm as follows:</p>
+<ol class="arabic simple">
+<li><p>Present a sequence of k1 timesteps of input and output pairs to the network.</p></li>
+<li><p>Unroll the network then calculate and accumulate errors across k2 timesteps.</p></li>
+<li><p>Roll-up the network and update weights.</p></li>
+<li><p>Repeat</p></li>
+</ol>
+<p>The TBPTT algorithm requires the consideration of two parameters:</p>
+<ul class="simple">
+<li><p>k1: The number of forward-pass timesteps between updates. Generally, this influences how slow or fast training will be, given how often weight updates are performed.</p></li>
+<li><p>k2: The number of timesteps to which to apply BPTT. Generally, it should be large enough to capture the temporal structure in the problem for the network to learn. Too large a value results in vanishing gradients.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="neuroevolution">
+<h2>Neuroevolution<a class="headerlink" href="#neuroevolution" title="Permalink to this headline">¶</a></h2>
+<p>Reading material: <a class="reference external" href="http://www.scholarpedia.org/article/Neuroevolution">http://www.scholarpedia.org/article/Neuroevolution</a></p>
+<p>Neuroevolution is a biological-inspired method for creating artificial intelligence. It is motivated by the evolution of biological nervous systems. It can be seen as means to investigate how intelligence evolved in nature, and as a practical method for engineering artificial neural networks.</p>
+<p>Neuroevolution has the following advantages:</p>
+<ul>
+<li><p>Most common artificial neural network (ANN) learning algorithm is supervised learning and needs a labeled corpus of input-output pairs. Neuroevolution does not need such corpus and can learn from sparse feedback.</p></li>
+<li><p>Neuroevolution generalizes to a wide range of network architectures and neural models. In addition to modifying the strengths of neural connections (weights), it can optimize parameters like:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>structure of the network (add more neurons or connections)</p></li>
+<li><p>type of computation performed by individual neurons</p></li>
+<li><p>learning rules that modify the network during evaluation</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>Applications of neuroevolution includes:</p>
+<ul class="simple">
+<li><p>reinforcement learning (board games, video games)</p></li>
+<li><p>evolutionary robotics (controlling mobile robots)</p></li>
+<li><p>artificial life</p></li>
+</ul>
+<div class="section" id="algorithm">
+<h3>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
+<p>Goal: evolve a population of genetic encoding of neural networks in order to find a network that solves the given task.</p>
+<p>The generate-and-test loop:</p>
+<ol class="arabic">
+<li><p>choose one encoding in the population (genotype) and decode it into the corresponding neural network (phenotype)</p></li>
+<li><p>employ the network in the task and measure its performance. Obtain a fitness value.</p></li>
+<li><p>after all members are evaluated, genetic operators are used to create the next generation of the population</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>encodings with the highest fitness are mutated and crossed over with each other</p></li>
+<li><p>the resulting offspring replaces the genotypes with the lowest fitness</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>continue until a network with a sufficiently high fitness is found</p></li>
+</ol>
+</div>
+<div class="section" id="advanced-neuroevolution">
+<h3>Advanced Neuroevolution<a class="headerlink" href="#advanced-neuroevolution" title="Permalink to this headline">¶</a></h3>
+<p>There are some problems with the basic neuroevolution implementation:</p>
+<ul class="simple">
+<li><p>the population converges and loses diversity</p></li>
+<li><p>competing conventions: different, incompatible encodings for the same solution</p></li>
+<li><p>too many parameters to be optimized simultaneously</p></li>
+</ul>
+<p>To solve these problems, there are some advanced neuroevolution techniques:</p>
+<p><strong>Evolving Partial Networks</strong>: Enforced Sub-Populations (ESP).</p>
+<ul class="simple">
+<li><p>each neuron is in a separate subpopulation and evolves independently</p></li>
+<li><p>the populations learn compatible subtasks</p></li>
+<li><p>this approach encourages diversity because different kinds of neurons are required to get a good network</p></li>
+<li><p>this approach discourages competing conventions because neurons are optimized for compatible roles</p></li>
+<li><p>large search space is divided into subtasks</p></li>
+</ul>
+<p><strong>Evolutionary Strategies</strong>:</p>
+<ul class="simple">
+<li><p>small populations with no crossover</p></li>
+<li><p>use intelligent mutations</p></li>
+</ul>
+<p><strong>Evolving Network Structure</strong>: Neuroevolution of Augmenting Topologies (NEAT)</p>
+<ul class="simple">
+<li><p>based on complexification of networks and behavior</p></li>
+</ul>
+<p><strong>Indirect Encodings</strong>: Cellular Encoding (CE)</p>
+<ul class="simple">
+<li><p>instructions for constructing the network evolved</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="self-organizing-map">
+<h2>Self-Organizing Map<a class="headerlink" href="#self-organizing-map" title="Permalink to this headline">¶</a></h2>
+<p>Reading materials:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://towardsdatascience.com/self-organizing-maps-ff5853a118d4">https://towardsdatascience.com/self-organizing-maps-ff5853a118d4</a></p></li>
+</ul>
+</div></blockquote>
+<p>A self-organizing map (SOM) is a type of artificial neural network that is trained using unsupervised learning to produce a low-dimensional, discretized representation of the input space. It can be used as a method of dimensionality reduction.</p>
+<p>What’s different about SOM?</p>
+<ul class="simple">
+<li><p>competitive learning instead of error-correction learning (backpropagation)</p></li>
+<li><p>preserve the topological properties of the input space</p></li>
+</ul>
+<p>SOM Algorithm</p>
+<ol class="arabic simple">
+<li><p>Initialize weight vectors of each note</p></li>
+<li><p>Choose a vector randomly from the training data</p></li>
+<li><p>Go through every nodes in the map to find the one with the weights most like the selected vector. This winning node is called the Best Matching Unit (BMU)</p></li>
+<li><p>Find the neighbors of BMU. The amount of neighbors decreases over time</p></li>
+<li><p>The wining weight is rewarded to become more like the sample vector. The neighbors are also rewarded. The closer a node is to the BMU, the more its weights get altered. The farther away the neighbor is from the BMU, the less it learns.</p></li>
+<li><p>Repeat for N iterations</p></li>
+</ol>
+<p>Measurements such like the Euclidean distance are used to find the BMU.</p>
+<p>As the results, the weight vectors become approximations of input vectors and neighboring weight vectors become more parallel.</p>
+<p>Why use SOM?</p>
+<ul class="simple">
+<li><p>reduce high dimensional inputs to 2 dimensional space to make the similarities evident -&gt; reduce the problem to a 2D classification.</p></li>
+</ul>
+<p>Cons of SOM:</p>
+<ul class="simple">
+<li><p>It does not build a generative model. We can not generate a data similar to the training dataset.</p></li>
+<li><p>Not working well for categorical data</p></li>
+<li><p>The time for preparing model is slow, hard to train against slowly evolving data.</p></li>
+</ul>
+<div class="section" id="learning-vector-quantization-lvq">
+<h3>Learning Vector Quantization (LVQ)<a class="headerlink" href="#learning-vector-quantization-lvq" title="Permalink to this headline">¶</a></h3>
+<p>Reading materials:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference external" href="https://machinelearningmastery.com/learning-vector-quantization-for-machine-learning/">https://machinelearningmastery.com/learning-vector-quantization-for-machine-learning/</a></p></li>
+<li><p><a class="reference external" href="https://www.tutorialspoint.com/artificial_neural_network/artificial_neural_network_learning_vector_quantization.htm">https://www.tutorialspoint.com/artificial_neural_network/artificial_neural_network_learning_vector_quantization.htm</a></p></li>
+</ul>
+</div></blockquote>
+<p>SOM is a visualization tool, but not good at classification. LVQ is a supervised classification algorithm that can fine-tune the boundaries. Since it is a supervised method, a set of codebook vectors are feed in as training data.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A codebook vector is a list of numbers that have the same input and output attributes as your training data. For example, if your problem is a binary classification with classes 0 and 1, and the inputs width, length height, then a codebook vector would be comprised of all four attributes: width, length, height and class.</p></li>
+<li><p>In the language of neural networks, each codebook vector may be called a neuron, each attribute on a codebook vector is called a weight and the collection of codebook vectors is called a network.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="lvq-algorithm">
+<h3>LVQ Algorithm<a class="headerlink" href="#lvq-algorithm" title="Permalink to this headline">¶</a></h3>
+<ol class="arabic">
+<li><p>Initialize reference vectors</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>from the training vectors, take the first m (number of clusters) training vectors and use them as weight vectors. Use the remaining vectors for training.</p></li>
+<li><p>assign the initial weight and classification randomly</p></li>
+<li><p>apply K-means clustering method</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>For every training input vector x</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>find the winning unit J where the Euclidean Distance from x to j is minimum</p></li>
+<li><p>update the weight of the winning unit. Updating rules depend on whether the classification is correct or not (with a learning rate).</p></li>
+<li><p>reduce the learning rate</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Repeat until stopping condition is met (reach the maximum number of epochs or learning rate reduced to zero).</p></li>
+</ol>
+</div>
+<div class="section" id="modifications">
+<h3>Modifications<a class="headerlink" href="#modifications" title="Permalink to this headline">¶</a></h3>
+<p><strong>LVQ2</strong>. Only make correction when input falls in wrong side of the boundary. This algorithm will give a finer tuning of the boundary.</p>
+<p><strong>LVQ3</strong> Make correction whenever input falls within a window. This algorithm is smoother and faster.</p>
+</div>
+</div>
+<div class="section" id="computational-neuroscience">
+<h2>Computational Neuroscience<a class="headerlink" href="#computational-neuroscience" title="Permalink to this headline">¶</a></h2>
+<p>Reading material: <a class="reference external" href="http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf">http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf</a></p>
+<p>This paper summarizes work to date on an artificial neural network model, RF-LISSOM (Receptive-Field Laterally Interconnected Syn- ergetically Self-Organizing Map), that shows how the neurons’ receptive fields, 2-D columnar organization, and lateral connectivity can be learned from the input based on Hebbian self-organization. These same mechanisms explain how the cortex can remain plastic and adapt to changes in input and to internal lesions. The model suggests that the resulting organization is formed to represent and process visual input efficiently, forming a redundancy-reduced sparse coding of the visual input. The self-organized model can then be used to model various low-level visual phenomena, including tilt aftereffects and segmentation and binding.</p>
+<div class="topic">
+<p class="topic-title first">Hebbian Learning</p>
+<p>Hebbian learning is one of the oldest learning algorithms, and is based in large part on the dynamics of biological systems. A synapse between two neurons is strengthened when the neurons on either side of the synapse (input and output) have highly correlated outputs. In essence, when an input neuron fires, if it frequently leads to the firing of the output neuron, the synapse is strengthened. Following the analogy to an artificial system, the tap weight is increased with high correlation between two sequential neurons.</p>
+</div>
+<p>Roles of computational model:</p>
+<ul class="simple">
+<li><p>test hypotheses and make predictions</p></li>
+<li><p>build better artificial systems</p></li>
+<li><p>improve medical treatment</p></li>
+</ul>
+<p>How is V1 constructed?</p>
+<ul class="simple">
+<li><p>Input-driven self-organization</p></li>
+</ul>
+<p>Predictions:</p>
+<ul class="simple">
+<li><p>Input deprivation</p></li>
+<li><p>Connection patterns</p></li>
+<li><p>Plasticity</p></li>
+<li><p>Illusions and aftereffects</p></li>
+<li><p>Visual coding</p></li>
+</ul>
+<div class="section" id="visual-coding">
+<h3>Visual coding<a class="headerlink" href="#visual-coding" title="Permalink to this headline">¶</a></h3>
+<p>The goal of visual coding is to represent the important features of the input and represent more information within a limited system</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="regression.html" title="Regression Analysis"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hoare_logic.html" title="Hoare Logic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

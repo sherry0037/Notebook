@@ -50,6 +50,10 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#probabilistic-clock-synchronization">Probabilistic Clock Synchronization</a></li>
+<li><a class="reference internal" href="#synchronous-atomic-broadcast-for-redundant-broadcast-channels">Synchronous Atomic Broadcast for Redundant Broadcast Channels</a><ul>
+<li><a class="reference internal" href="#requirements-and-assumptions">Requirements and Assumptions</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -98,6 +102,11 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#probabilistic-clock-synchronization" id="id4">Probabilistic Clock Synchronization</a></p></li>
+<li><p><a class="reference internal" href="#synchronous-atomic-broadcast-for-redundant-broadcast-channels" id="id5">Synchronous Atomic Broadcast for Redundant Broadcast Channels</a></p>
+<ul>
+<li><p><a class="reference internal" href="#requirements-and-assumptions" id="id6">Requirements and Assumptions</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -223,6 +232,20 @@
 <p>We make the assumptions that the clocks are correct. A clock is considered to be correct if for every <span class="math notranslate nohighlight">\(t &gt; t'\)</span></p>
 <div class="math notranslate nohighlight">
 \[|C(t) - C(t') - (t-t')| \leq \rho (t - t')\]</div>
+</div>
+<div class="section" id="synchronous-atomic-broadcast-for-redundant-broadcast-channels">
+<h2><a class="toc-backref" href="#id5">Synchronous Atomic Broadcast for Redundant Broadcast Channels</a><a class="headerlink" href="#synchronous-atomic-broadcast-for-redundant-broadcast-channels" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="requirements-and-assumptions">
+<h3><a class="toc-backref" href="#id6">Requirements and Assumptions</a><a class="headerlink" href="#requirements-and-assumptions" title="Permalink to this headline">¶</a></h3>
+<p>A synchronous atomic broadcast protocol ensures that, with a time constant <span class="math notranslate nohighlight">\(\Delta\)</span>, if up to <span class="math notranslate nohighlight">\(f\)</span> failures occur during a broadcast, the following properties are satisfied:</p>
+<ul class="simple">
+<li><p><strong>Atomicity</strong>. If any <em>correct</em> processor delivers an update at time <span class="math notranslate nohighlight">\(U\)</span> on its clock, then that update was initiated by some processor and is delivered by all <em>correct</em> processors  at time <span class="math notranslate nohighlight">\(U\)</span> on their clocks</p></li>
+<li><p><strong>Order</strong>. All updates delivered by correct processors are delivered in the same order by each correct processor</p></li>
+<li><p><strong>Termination</strong> Every update whose broadcast is initiated by a correct processor at time <span class="math notranslate nohighlight">\(T\)</span> on its clock is delivered by all correct processors at time <span class="math notranslate nohighlight">\(T + \Delta\)</span> on their clocks</p></li>
+</ul>
+<p>The atomicity and order properties ensure that the same updates are applied to all correct replicas in the same order. Therefore if replicas are initially consistent, they stay consistent.</p>
+<p>The termination property ensures that updates broadcast by correct processors are applied to each correct replica <span class="math notranslate nohighlight">\(\Delta\)</span> time units later. Then all correct replicas display identical contents at identical clock times.</p>
+</div>
 </div>
 </div>
 

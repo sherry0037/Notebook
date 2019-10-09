@@ -10,12 +10,13 @@ Understanding Fault-Tolerant Distributed Systems
 ================================================================
 **Fault-tolerant systems** either exhibit a well-defined failure behavior when components fail, or mask component failures to users (continue to provide their specified standard service despite the occurrence of component failures).
 
+-----------------------------
 Basic Architectural Concepts
 -----------------------------
 To achieve fault tolerance, a distributed system architecture incorperates redundant processing components. This section discusses the basic architectural building blocks of these systems, and classifies the failures that these basic blocks can experience.
 
 Services, Servers, and the "Depends" Relation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+----------------------------------------------------------
 - A **service** specifies a collection of operations whose execution can be triggered by inputs from service users or the pssage of time. 
     - Operation executions may result in outputs to users and in service state changes
 - A **server** performs the operations defined by a service specification.
@@ -41,7 +42,7 @@ Services, Servers, and the "Depends" Relation
 
 
 Failure Classification
-~~~~~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 This artical assumes the service specification prescribes both:
     - the server's response for any initial server state, and
     - the real-time interval within which the response should occur.
@@ -62,7 +63,7 @@ A server **failure** occurs when the server does not behave in the manner specif
     - **arbitrary failure**: includes all the failure classes above
 
 Failure Semantics
-~~~~~~~~~~~~~~~~~~~~
+-----------------------------
 **Failure semantics** is the likely failure behaviors of a server. The recovery actions invoked upon detection of a server failure depend on the failure semantics, a fault-tolerant system has to *extend* the standard specification of servers to include, in addition to their failure-free semantics, the failure semantics.
 
 If the specification of a server ``s`` prescribes that the failure behaviors likely to be observed by ``s`` users should be in class F, it is said that "s has F failure semantics".
@@ -94,5 +95,27 @@ We make the assumptions that the clocks are correct. A clock is considered to be
 .. math::
 
     |C(t) - C(t') - (t-t')| \leq \rho (t - t')
+
+
+Synchronous Atomic Broadcast for Redundant Broadcast Channels
+================================================================
+
+-------------------------------
+Requirements and Assumptions
+-------------------------------
+
+A synchronous atomic broadcast protocol ensures that, with a time constant :math:`\Delta`, if up to :math:`f` failures occur during a broadcast, the following properties are satisfied:
+
+- **Atomicity**. If any *correct* processor delivers an update at time :math:`U` on its clock, then that update was initiated by some processor and is delivered by all *correct* processors  at time :math:`U` on their clocks
+
+- **Order**. All updates delivered by correct processors are delivered in the same order by each correct processor
+
+- **Termination** Every update whose broadcast is initiated by a correct processor at time :math:`T` on its clock is delivered by all correct processors at time :math:`T + \Delta` on their clocks
+
+The atomicity and order properties ensure that the same updates are applied to all correct replicas in the same order. Therefore if replicas are initially consistent, they stay consistent.
+
+The termination property ensures that updates broadcast by correct processors are applied to each correct replica :math:`\Delta` time units later. Then all correct replicas display identical contents at identical clock times.
+
+
 
 

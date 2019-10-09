@@ -457,3 +457,21 @@ We can estimate the variance of :math:`\hat{Y}_h` by replacing :math:`\sigma^2` 
     s^2[\hat{Y}_h] = MSE \left[ \frac{1}{n} + \frac{(X_h - \bar{X})^2}{\sum(X_i - \bar{X})^2} \right]
 
 where the point estimator :math:`s^2[\hat{Y}_h]` is an unbiased estimator of :math:`\sigma^2[\hat{Y}_h]`.
+
+
+Confidence interval for :math:`E[Y_h]`
+----------------------------------------
+
+The  :math:`1-\alpha` confidence interval for :math:`E[Y_h]` is:
+
+.. math::
+
+    [\hat{Y}_h - t(1-\alpha/2; n-2) s[\hat{Y}_h]], \hat{Y}_h + t(1-\alpha/2; n-2) s[\hat{Y}_h]]
+
+
+------------------------------
+Prediction of New Observation
+------------------------------
+The new observation of y to be predicted is viewed as the result of a new trial, independent of the trials on which the regression analysis is based. We denote the level of X for the new trial as :math:`X_h` and the new observation on Y as :math:`Y_{h(new)}`
+
+The difference between estimation of the mean response :math:`E[Y_h]` and prediction of a new response :math:`Y_{h(new)}` is that, the former estimates the *mean* of the distribution of Y, and the latter predicts an *individual outcome* drawn from the distribution of Y.
