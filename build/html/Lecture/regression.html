@@ -6,7 +6,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>Regression Analysis &#8212; Notebook  documentation</title>
+    <title>2019 - SDS384 - Regression Analysis &#8212; Notebook  documentation</title>
     <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
@@ -18,7 +18,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="JavaServer Pages (JSP) Tutorial" href="../Java/jsp.html" />
-    <link rel="prev" title="Neural Networks" href="neural_networks.html" /> 
+    <link rel="prev" title="2019 - CS394N - Neural Networks" href="neural_networks.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -30,7 +30,7 @@
           <a href="../Java/jsp.html" title="JavaServer Pages (JSP) Tutorial"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="neural_networks.html" title="Neural Networks"
+          <a href="neural_networks.html" title="2019 - CS394N - Neural Networks"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
       </ul>
@@ -39,7 +39,7 @@
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">Regression Analysis</a><ul>
+<li><a class="reference internal" href="#">2019 - SDS384 - Regression Analysis</a><ul>
 <li><a class="reference internal" href="#chapter-1-linear-regression-with-one-predictor-variable">Chapter 1: Linear Regression with One Predictor Variable</a><ul>
 <li><a class="reference internal" href="#simple-linear-regression-model">Simple Linear Regression Model</a><ul>
 <li><a class="reference internal" href="#model-definition">Model definition</a></li>
@@ -79,6 +79,14 @@
 </ul>
 </li>
 <li><a class="reference internal" href="#prediction-of-new-observation">Prediction of New Observation</a></li>
+<li><a class="reference internal" href="#confidence-band-for-regression-line">Confidence Band for Regression Line</a></li>
+<li><a class="reference internal" href="#anova-analysis-of-variance-approach-to-regression-analysis">ANOVA (Analysis of Variance) Approach to Regression Analysis</a><ul>
+<li><a class="reference internal" href="#partitioning-of-total-sum-of-squares">Partitioning of Total Sum of Squares</a></li>
+<li><a class="reference internal" href="#breakdown-of-degrees-of-freedom">Breakdown of Degrees of Freedom</a></li>
+<li><a class="reference internal" href="#mean-squares">Mean Squares</a></li>
+<li><a class="reference internal" href="#anova-table">ANOVA table</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -87,7 +95,7 @@
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="neural_networks.html"
-                        title="previous chapter">Neural Networks</a></p>
+                        title="previous chapter">2019 - CS394N - Neural Networks</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../Java/jsp.html"
                         title="next chapter">JavaServer Pages (JSP) Tutorial</a></p>
@@ -116,12 +124,12 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="regression-analysis">
-<h1><a class="toc-backref" href="#id2">Regression Analysis</a><a class="headerlink" href="#regression-analysis" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="sds384-regression-analysis">
+<h1><a class="toc-backref" href="#id2">2019 - SDS384 - Regression Analysis</a><a class="headerlink" href="#sds384-regression-analysis" title="Permalink to this headline">¶</a></h1>
 <div class="contents topic" id="contents">
 <p class="topic-title first">Contents</p>
 <ul class="simple">
-<li><p><a class="reference internal" href="#regression-analysis" id="id2">Regression Analysis</a></p>
+<li><p><a class="reference internal" href="#sds384-regression-analysis" id="id2">2019 - SDS384 - Regression Analysis</a></p>
 <ul>
 <li><p><a class="reference internal" href="#chapter-1-linear-regression-with-one-predictor-variable" id="id3">Chapter 1: Linear Regression with One Predictor Variable</a></p>
 <ul>
@@ -170,6 +178,15 @@
 </ul>
 </li>
 <li><p><a class="reference internal" href="#prediction-of-new-observation" id="id27">Prediction of New Observation</a></p></li>
+<li><p><a class="reference internal" href="#confidence-band-for-regression-line" id="id28">Confidence Band for Regression Line</a></p></li>
+<li><p><a class="reference internal" href="#anova-analysis-of-variance-approach-to-regression-analysis" id="id29">ANOVA (Analysis of Variance) Approach to Regression Analysis</a></p>
+<ul>
+<li><p><a class="reference internal" href="#partitioning-of-total-sum-of-squares" id="id30">Partitioning of Total Sum of Squares</a></p></li>
+<li><p><a class="reference internal" href="#breakdown-of-degrees-of-freedom" id="id31">Breakdown of Degrees of Freedom</a></p></li>
+<li><p><a class="reference internal" href="#mean-squares" id="id32">Mean Squares</a></p></li>
+<li><p><a class="reference internal" href="#anova-table" id="id33">ANOVA table</a></p></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -530,6 +547,142 @@
 <h3><a class="toc-backref" href="#id27">Prediction of New Observation</a><a class="headerlink" href="#prediction-of-new-observation" title="Permalink to this headline">¶</a></h3>
 <p>The new observation of y to be predicted is viewed as the result of a new trial, independent of the trials on which the regression analysis is based. We denote the level of X for the new trial as <span class="math notranslate nohighlight">\(X_h\)</span> and the new observation on Y as <span class="math notranslate nohighlight">\(Y_{h(new)}\)</span></p>
 <p>The difference between estimation of the mean response <span class="math notranslate nohighlight">\(E[Y_h]\)</span> and prediction of a new response <span class="math notranslate nohighlight">\(Y_{h(new)}\)</span> is that, the former estimates the <em>mean</em> of the distribution of Y, and the latter predicts an <em>individual outcome</em> drawn from the distribution of Y.</p>
+<div class="topic">
+<p class="topic-title first">Recap: If the true regression line is known, how to predict new observation?</p>
+<p>Lets assume  the regression parameters are:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    \beta_0 &amp;= 0.10 \quad \beta_1 = 0.95 \\
+    E[Y] &amp;= 0.10 + 0.95 X\\
+    \sigma &amp;= 0.12
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>Given <span class="math notranslate nohighlight">\(X_h = 3.5\)</span>, we have:</p>
+<div class="math notranslate nohighlight">
+\[E[Y_h] = 0.10 + 0.95 \times 3.5 = 3.425\]</div>
+<p>The 99.7% confidence interval includes area that is within 3 standard deviations from the mean. Hence we have:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    3.425 - 3 \times 0.12 &amp;\leq Y_{h(new)} \leq 3.425 + 3 \times 0.12 \\
+    3.065 &amp;\leq Y_{h(new)} \leq 3.785
+\end{split}
+\end{equation}\end{split}\]</div>
+<p>In general, the <span class="math notranslate nohighlight">\(1-\alpha\)</span> prediction limits for <span class="math notranslate nohighlight">\(Y_{h(new)}\)</span> are:</p>
+<div class="math notranslate nohighlight">
+\[E[Y_h] \pm z(1-\alpha/2)\sigma\]</div>
+</div>
+<p>When the true regression line is unknown, we need to take into account two sources of variations:</p>
+<ol class="arabic simple">
+<li><p>Variation of estimated mean of Y given X (where is the distribution of Y located)</p></li>
+<li><p>Variation of Y around a particular mean (variation within the distribution of Y)</p></li>
+</ol>
+<p>Variation 1 comes from the fact that we are estimating the regression line. Recall that the confidence interval for <span class="math notranslate nohighlight">\(E[Y_h]\)</span> is</p>
+<div class="math notranslate nohighlight">
+\[[\hat{Y}_h - t(1-\alpha/2; n-2) s[\hat{Y}_h], \hat{Y}_h + t(1-\alpha/2; n-2) s[\hat{Y}_h]]\]</div>
+<p>Variance 2 comes from the error terms in the regression model.</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure2_5.png"><img alt="../_images/figure2_5.png" src="../_images/figure2_5.png" style="width: 548.8000000000001px; height: 251.20000000000002px;" /></a>
+</div>
+<div class="topic">
+<p class="topic-title first">Theorem: the studentized statistic</p>
+<p><span class="math notranslate nohighlight">\(\frac{Y_{h(new)} - \hat{Y}_h}{s[spred]}\)</span> is distributed as t(n-2) for normal error regression model, and</p>
+<ul>
+<li><p>the <span class="math notranslate nohighlight">\(1-\alpha\)</span> prediction limits are</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[\hat{Y}_h \pm t(1-\alpha/2; n-2) s[pred]\]</div>
+</div></blockquote>
+</li>
+<li><p>the variance of the prediction error is <span class="math notranslate nohighlight">\(\sigma^2[pred] = \sigma^2 + \sigma^2[\hat{Y}_h]\)</span></p></li>
+<li><p>an unbiased estimator of <span class="math notranslate nohighlight">\(\sigma^2 [pred]\)</span> is:</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[s^2[pred] = MSE + s^2[\hat{Y}_h]\]</div>
+</div></blockquote>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="confidence-band-for-regression-line">
+<h3><a class="toc-backref" href="#id28">Confidence Band for Regression Line</a><a class="headerlink" href="#confidence-band-for-regression-line" title="Permalink to this headline">¶</a></h3>
+</div>
+<div class="section" id="anova-analysis-of-variance-approach-to-regression-analysis">
+<h3><a class="toc-backref" href="#id29">ANOVA (Analysis of Variance) Approach to Regression Analysis</a><a class="headerlink" href="#anova-analysis-of-variance-approach-to-regression-analysis" title="Permalink to this headline">¶</a></h3>
+<p>The analysis of variance approach is based on the partitioning of sums of squares and degrees of freedom associated with the response variable Y.</p>
+<div class="section" id="partitioning-of-total-sum-of-squares">
+<h4><a class="toc-backref" href="#id30">Partitioning of Total Sum of Squares</a><a class="headerlink" href="#partitioning-of-total-sum-of-squares" title="Permalink to this headline">¶</a></h4>
+<p>First we define three notions:</p>
+<ol class="arabic">
+<li><p><strong>SSTO</strong>: total sum of squares. This measures the deviation of data <span class="math notranslate nohighlight">\(Y_i\)</span> around their mean <span class="math notranslate nohighlight">\(\hat{Y}\)</span>, disregarding how large <span class="math notranslate nohighlight">\(X\)</span> is.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[SSTO = \sum(Y_i - \bar{Y})^2\]</div>
+</div></blockquote>
+</li>
+<li><p><strong>SSE</strong>: error sum of squares. This reflects the uncertainty of Y around the fitted regression line. In this case, X is taken into account. <span class="math notranslate nohighlight">\(SSE = 0\)</span> if all the observations fall on the fitted regression line.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[SSE = \sum(Y_i - \hat{Y}_i)^2\]</div>
+</div></blockquote>
+</li>
+<li><p><strong>SSR</strong>: regression sum of squares. This is the difference between the fitted value on the regression line and the mean of the fitted values. If the regression line is horizontal and equals to the mean, <span class="math notranslate nohighlight">\(SSR = 0\)</span>.</p>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[SSR = \sum(\hat{Y}_i - \bar{Y})^2\]</div>
+</div></blockquote>
+</li>
+</ol>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure2_7.png"><img alt="../_images/figure2_7.png" src="../_images/figure2_7.png" style="width: 632.8000000000001px; height: 307.20000000000005px;" /></a>
+</div>
+<p>More formally, the total deviation can be partitioned into two parts:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/figure_deviation.png"><img alt="../_images/figure_deviation.png" src="../_images/figure_deviation.png" style="width: 211.20000000000002px; height: 110.4px;" /></a>
+</div>
+<p>As the result, the total sum of squares can also be partitioned into two parts:</p>
+<div class="math notranslate nohighlight">
+\[SSTO = SSR + SSE\]</div>
+</div>
+<div class="section" id="breakdown-of-degrees-of-freedom">
+<h4><a class="toc-backref" href="#id31">Breakdown of Degrees of Freedom</a><a class="headerlink" href="#breakdown-of-degrees-of-freedom" title="Permalink to this headline">¶</a></h4>
+<p>Corresponding to the partitioning of the total sum of squares SSTO, there is a partitioning of the associated degrees of freedom (df):</p>
+<ul class="simple">
+<li><p>SSTO has n - 1 degrees of freedom. One is lost because we use the sample mean <span class="math notranslate nohighlight">\(\bar{Y}\)</span> to estimate the population mean.</p></li>
+<li><p>SSE has n - 2 degrees of freedom. Two are lost because <span class="math notranslate nohighlight">\(\beta_0\)</span> and <span class="math notranslate nohighlight">\(\beta_1\)</span> are estimated.</p></li>
+<li><p>SSR has one degree of freedom. The deviations <span class="math notranslate nohighlight">\(\hat{Y}_i - \bar{Y}\)</span> are calculated from the regression line, which has 2 degrees of freedom, coreesponding to the intercept and the slope. One is lost because <span class="math notranslate nohighlight">\(\bar{Y}\)</span> is estimated.</p></li>
+</ul>
+<p>Note that</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\begin{equation}
+\begin{split}
+    df(SSTO) &amp;= df(SSE) + df(SSR)\\
+    n-1 &amp;= (n+2) + 1
+\end{split}
+\end{equation}\end{split}\]</div>
+</div>
+<div class="section" id="mean-squares">
+<h4><a class="toc-backref" href="#id32">Mean Squares</a><a class="headerlink" href="#mean-squares" title="Permalink to this headline">¶</a></h4>
+<p>A sum of squares divided by its degrees of freedom is called a <em>mean square</em>. We have the following notions:</p>
+<ol class="arabic simple">
+<li><p><strong>MSE</strong>: error mean square.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[MSE = \frac{SSE}{n-2}\]</div>
+<ol class="arabic simple" start="2">
+<li><p><strong>MSR</strong>: regression mean square.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[MSR = \frac{SSR}{1} = SSR\]</div>
+</div>
+<div class="section" id="anova-table">
+<h4><a class="toc-backref" href="#id33">ANOVA table</a><a class="headerlink" href="#anova-table" title="Permalink to this headline">¶</a></h4>
+<p>The above notions are usually summarized in a table:</p>
+<div class="figure align-center">
+<a class="reference internal image-reference" href="../_images/table_2_2.png"><img alt="../_images/table_2_2.png" src="../_images/table_2_2.png" style="width: 627.2px; height: 161.60000000000002px;" /></a>
+</div>
+</div>
 </div>
 </div>
 </div>
@@ -550,7 +703,7 @@
           <a href="../Java/jsp.html" title="JavaServer Pages (JSP) Tutorial"
              >next</a> |</li>
         <li class="right" >
-          <a href="neural_networks.html" title="Neural Networks"
+          <a href="neural_networks.html" title="2019 - CS394N - Neural Networks"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
       </ul>

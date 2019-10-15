@@ -1,6 +1,6 @@
-============================
-Regression Analysis
-============================
+======================================
+2019 - SDS384 - Regression Analysis
+======================================
 
 .. contents::
 
@@ -475,3 +475,171 @@ Prediction of New Observation
 The new observation of y to be predicted is viewed as the result of a new trial, independent of the trials on which the regression analysis is based. We denote the level of X for the new trial as :math:`X_h` and the new observation on Y as :math:`Y_{h(new)}`
 
 The difference between estimation of the mean response :math:`E[Y_h]` and prediction of a new response :math:`Y_{h(new)}` is that, the former estimates the *mean* of the distribution of Y, and the latter predicts an *individual outcome* drawn from the distribution of Y.
+
+.. topic:: Recap: If the true regression line is known, how to predict new observation?
+
+    Lets assume  the regression parameters are:
+
+    .. math::
+
+        \begin{equation} 
+        \begin{split}
+            \beta_0 &= 0.10 \quad \beta_1 = 0.95 \\
+            E[Y] &= 0.10 + 0.95 X\\
+            \sigma &= 0.12
+        \end{split}
+        \end{equation}
+
+    Given :math:`X_h = 3.5`, we have:
+
+    .. math::
+
+        E[Y_h] = 0.10 + 0.95 \times 3.5 = 3.425
+
+    The 99.7% confidence interval includes area that is within 3 standard deviations from the mean. Hence we have:
+
+    .. math::
+
+        \begin{equation} 
+        \begin{split}
+            3.425 - 3 \times 0.12 &\leq Y_{h(new)} \leq 3.425 + 3 \times 0.12 \\
+            3.065 &\leq Y_{h(new)} \leq 3.785
+        \end{split}
+        \end{equation}
+
+    In general, the :math:`1-\alpha` prediction limits for :math:`Y_{h(new)}` are:
+
+    .. math::
+
+        E[Y_h] \pm z(1-\alpha/2)\sigma
+
+
+When the true regression line is unknown, we need to take into account two sources of variations:
+
+1. Variation of estimated mean of Y given X (where is the distribution of Y located)
+2. Variation of Y around a particular mean (variation within the distribution of Y)
+
+Variation 1 comes from the fact that we are estimating the regression line. Recall that the confidence interval for :math:`E[Y_h]` is 
+
+.. math::
+
+    [\hat{Y}_h - t(1-\alpha/2; n-2) s[\hat{Y}_h], \hat{Y}_h + t(1-\alpha/2; n-2) s[\hat{Y}_h]]
+
+Variance 2 comes from the error terms in the regression model.
+
+.. figure:: _static/regression/figure2_5.png 
+    :scale: 40 %
+
+.. topic:: Theorem: the studentized statistic
+
+    :math:`\frac{Y_{h(new)} - \hat{Y}_h}{s[spred]}` is distributed as t(n-2) for normal error regression model, and
+
+    - the :math:`1-\alpha` prediction limits are 
+
+        .. math:: 
+
+            \hat{Y}_h \pm t(1-\alpha/2; n-2) s[pred]
+
+    - the variance of the prediction error is :math:`\sigma^2[pred] = \sigma^2 + \sigma^2[\hat{Y}_h]`
+    - an unbiased estimator of :math:`\sigma^2 [pred]` is:
+
+        .. math::
+
+            s^2[pred] = MSE + s^2[\hat{Y}_h] 
+
+------------------------------------
+Confidence Band for Regression Line
+------------------------------------
+
+-------------------------------------------------------------
+ANOVA (Analysis of Variance) Approach to Regression Analysis
+-------------------------------------------------------------
+
+The analysis of variance approach is based on the partitioning of sums of squares and degrees of freedom associated with the response variable Y.
+
+Partitioning of Total Sum of Squares
+-------------------------------------
+
+First we define three notions:
+
+1. **SSTO**: total sum of squares. This measures the deviation of data :math:`Y_i` around their mean :math:`\hat{Y}`, disregarding how large :math:`X` is.
+
+    .. math::
+
+        SSTO = \sum(Y_i - \bar{Y})^2
+
+2. **SSE**: error sum of squares. This reflects the uncertainty of Y around the fitted regression line. In this case, X is taken into account. :math:`SSE = 0` if all the observations fall on the fitted regression line.
+
+    .. math:: 
+
+        SSE = \sum(Y_i - \hat{Y}_i)^2
+
+3. **SSR**: regression sum of squares. This is the difference between the fitted value on the regression line and the mean of the fitted values. If the regression line is horizontal and equals to the mean, :math:`SSR = 0`.
+
+    .. math:: 
+
+        SSR = \sum(\hat{Y}_i - \bar{Y})^2
+
+.. figure:: _static/regression/figure2_7.png 
+    :scale: 40 %
+
+More formally, the total deviation can be partitioned into two parts:
+
+.. figure:: _static/regression/figure_deviation.png 
+    :scale: 40 %
+
+As the result, the total sum of squares can also be partitioned into two parts:
+
+.. math::
+
+    SSTO = SSR + SSE
+
+
+Breakdown of Degrees of Freedom
+-------------------------------------
+
+Corresponding to the partitioning of the total sum of squares SSTO, there is a partitioning of the associated degrees of freedom (df):
+
+- SSTO has n - 1 degrees of freedom. One is lost because we use the sample mean :math:`\bar{Y}` to estimate the population mean.
+- SSE has n - 2 degrees of freedom. Two are lost because :math:`\beta_0` and :math:`\beta_1` are estimated.
+- SSR has one degree of freedom. The deviations :math:`\hat{Y}_i - \bar{Y}` are calculated from the regression line, which has 2 degrees of freedom, coreesponding to the intercept and the slope. One is lost because :math:`\bar{Y}` is estimated.
+
+Note that
+
+.. math::
+
+    \begin{equation} 
+    \begin{split}
+        df(SSTO) &= df(SSE) + df(SSR)\\
+        n-1 &= (n+2) + 1
+    \end{split}
+    \end{equation}
+
+
+Mean Squares
+--------------
+
+A sum of squares divided by its degrees of freedom is called a *mean square*. We have the following notions:
+
+1. **MSE**: error mean square.
+
+.. math::
+
+    MSE = \frac{SSE}{n-2}
+
+2. **MSR**: regression mean square.
+
+.. math::
+
+    MSR = \frac{SSR}{1} = SSR
+
+
+ANOVA table
+--------------
+
+The above notions are usually summarized in a table:
+
+.. figure:: _static/regression/table_2_2.png 
+    :scale: 40 %
+
+
