@@ -9,6 +9,7 @@ Math equation (with alignment)
 
 .. code-block:: RST
 
+    \usepackage{amsmath}
     \begin{equation*}
     \begin{split}
 
@@ -22,7 +23,8 @@ Code listing
 
 
 .. code-block:: RST
-
+    
+    \usepackage{listings}
     \begin{lstlisting}[language=R]
     \end{lstlisting}
 
@@ -86,6 +88,7 @@ Table
 
 .. code-block:: RST
 
+    %\usepackage{graphicx}
     \begin{table}[]
     \begin{tabular}{lll}
     Summary            & Using formula & Using MC \\
@@ -101,8 +104,41 @@ Appendix
 --------------------------------
 
 .. code-block:: RST
-
+    
+    %\usepackage[toc,page]{appendix}
     \begin{appendices}
     \chapter{Some Appendix}
     The contents...
     \end{appendices}
+
+--------------------------------
+Pseudo code
+--------------------------------
+
+.. code-block:: RST
+  
+    \usepackage{algorithm}
+    \usepackage[noend]{algpseudocode}
+
+    \begin{algorithm}
+    \caption{My algorithm}\label{euclid}
+    \begin{algorithmic}[1]
+    \Procedure{MyProcedure}{}
+    \State $\textit{stringlen} \gets \text{length of }\textit{string}$
+    \State $i \gets \textit{patlen}$
+    \BState \emph{top}:
+    \If {$i > \textit{stringlen}$} \Return false
+    \EndIf
+    \State $j \gets \textit{patlen}$
+    \BState \emph{loop}:
+    \If {$\textit{string}(i) = \textit{path}(j)$}
+    \State $j \gets j-1$.
+    \State $i \gets i-1$.
+    \State \textbf{goto} \emph{loop}.
+    \State \textbf{close};
+    \EndIf
+    \State $i \gets i+\max(\textit{delta}_1(\textit{string}(i)),\textit{delta}_2(j))$.
+    \State \textbf{goto} \emph{top}.
+    \EndProcedure
+    \end{algorithmic}
+    \end{algorithm}
