@@ -54,6 +54,9 @@ Figures
 
 .. code-block:: RST
 
+    \usepackage{caption}
+    \usepackage{subcaption}
+
     \begin{figure}
     \begin{subfigure}{\textwidth}
       \centering
