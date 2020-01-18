@@ -46,6 +46,7 @@
 <li><a class="reference internal" href="#stash-the-changes">Stash the changes</a></li>
 <li><a class="reference internal" href="#see-changes-in-a-commit">See changes in a commit</a></li>
 <li><a class="reference internal" href="#push-specific-commit">Push specific commit</a></li>
+<li><a class="reference internal" href="#delete-git-repository">Delete git repository</a></li>
 </ul>
 </li>
 </ul>
@@ -137,7 +138,7 @@
 <ul class="simple">
 <li><p><cite>git pull</cite> does a <cite>git fetch</cite> to pull down data from the specified remote, and then calls <cite>git merge</cite> to join the changes received with your current branch’s work.</p></li>
 <li><dl class="simple">
-<dt>use <cite>git pull –rebase</cite> to reapply your work on top of the incoming changes.</dt><dd><p><cite>git pull –rebase &lt;remote name&gt; &lt;branch name&gt;</cite></p>
+<dt>Use <cite>git pull –rebase</cite> to reapply your work on top of the incoming changes.</dt><dd><p><cite>git pull –rebase &lt;remote name&gt; &lt;branch name&gt;</cite></p>
 </dd>
 </dl>
 </li>
@@ -146,21 +147,27 @@
 <div class="section" id="stash-the-changes">
 <h2>Stash the changes<a class="headerlink" href="#stash-the-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>use <cite>git stash</cite> to save all the changes.</p></li>
-<li><p>use <cite>git stash apply</cite> to get the latest stashed changes back.</p></li>
+<li><p>Use <cite>git stash</cite> to save all the changes.</p></li>
+<li><p>Use <cite>git stash apply</cite> to get the latest stashed changes back.</p></li>
 </ul>
 </div>
 <div class="section" id="see-changes-in-a-commit">
 <h2>See changes in a commit<a class="headerlink" href="#see-changes-in-a-commit" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>use <cite>git diff-tree –no-commit-id –name-only -r bd61ad98</cite> to see all the files added in a commit</p></li>
-<li><p>use <cite>git diff COMMIT~ COMMIT</cite> to see the changes in a commit</p></li>
+<li><p>Use <cite>git diff-tree –no-commit-id –name-only -r bd61ad98</cite> to see all the files added in a commit</p></li>
+<li><p>Use <cite>git diff COMMIT~ COMMIT</cite> to see the changes in a commit</p></li>
 </ul>
 </div>
 <div class="section" id="push-specific-commit">
 <h2>Push specific commit<a class="headerlink" href="#push-specific-commit" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><cite>git push origin 1d9ec65c09b07661b7daff31c810d365d1c73be4:refs/heads/master</cite></p></li>
+</ul>
+</div>
+<div class="section" id="delete-git-repository">
+<h2>Delete git repository<a class="headerlink" href="#delete-git-repository" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Make a repository no longer a git repository: ` rm -rf .git`</p></li>
 </ul>
 </div>
 </div>

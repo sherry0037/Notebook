@@ -44,26 +44,32 @@ Different ways to do `git pull`
 ----------------------------------
 - `git pull` does a `git fetch` to pull down data from the specified remote, and then calls `git merge` to join the changes received with your current branch’s work. 
 
-- use `git pull --rebase` to reapply your work on top of the incoming changes.
+- Use `git pull --rebase` to reapply your work on top of the incoming changes.
     `git pull --rebase <remote name> <branch name>`
 
 ----------------------------------
 Stash the changes
 ----------------------------------
-- use `git stash` to save all the changes.
+- Use `git stash` to save all the changes.
 
-- use `git stash apply` to get the latest stashed changes back.
+- Use `git stash apply` to get the latest stashed changes back.
 
 
 ----------------------------------
 See changes in a commit
 ----------------------------------
-- use `git diff-tree --no-commit-id --name-only -r bd61ad98` to see all the files added in a commit
+- Use `git diff-tree --no-commit-id --name-only -r bd61ad98` to see all the files added in a commit
 
-- use `git diff COMMIT~ COMMIT` to see the changes in a commit
+- Use `git diff COMMIT~ COMMIT` to see the changes in a commit
 
 
 ----------------------------------
 Push specific commit
 ----------------------------------
 - `git push origin 1d9ec65c09b07661b7daff31c810d365d1c73be4:refs/heads/master`
+
+
+----------------------------------
+Delete git repository
+----------------------------------
+- Make a repository no longer a git repository: ` rm -rf .git`
