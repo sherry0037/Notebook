@@ -48,6 +48,13 @@ Algorithm problems:
 
    Algorithm/*
    
+Finance related stuff:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   Finance/*
 
 
 .. Indices and tables
