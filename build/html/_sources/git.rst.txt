@@ -4,6 +4,11 @@ Git Commands Reference
 Some useful git commands.
 
 ----------------------------------
+Create new branch
+----------------------------------
+`git checkout -b [name_of_your_new_branch]`
+
+----------------------------------
 How to undo commits/add?
 ----------------------------------
 - Undo the latest commit and keep changed files:
