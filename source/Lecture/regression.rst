@@ -1,5 +1,5 @@
 ======================================
-2019 - SDS384 - Regression Analysis
+Regression Analysis
 ======================================
 
 .. contents::
