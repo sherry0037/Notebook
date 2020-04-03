@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Computer Networking &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Computer Networking</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#tcp-ip-five-layer-nerwork-model">TCP/IP Five-Layer Nerwork Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-network-layer">The Network Layer</a></li>
+<li><a class="reference internal" href="#the-transport-and-application-layers">The Transport and Application Layers</a></li>
+<li><a class="reference internal" href="#networking-services">Networking Services</a></li>
+<li><a class="reference internal" href="#connecting-to-the-internet">Connecting to the Internet</a></li>
+<li><a class="reference internal" href="#troubleshooting-and-the-future-of-networking">Troubleshooting and the Future of Networking</a></li>
+</ul>
+</li>
+</ul>
+
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/computer_networking.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="computer-networking">
+<span id="computer-networking-rst"></span><h1>Computer Networking<a class="headerlink" href="#computer-networking" title="Permalink to this headline">¶</a></h1>
+<p>Reference:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.youtube.com/watch?v=QKfk7YFILws">https://www.youtube.com/watch?v=QKfk7YFILws</a></p></li>
+<li><p><a class="reference external" href="https://microchipdeveloper.com/tcpip:tcp-ip-five-layer-model">https://microchipdeveloper.com/tcpip:tcp-ip-five-layer-model</a></p></li>
+</ul>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p><strong>Protocal</strong> is a defined set of standards that computers must follow in order to communicate properly.</p>
+<p>Some of the applications we use requires us to move data across a network from point A to point B. The <strong>Transmission Control Protocol/Internet Protocol</strong> (TCP/IP) network provides a framework for transmitting this data.</p>
+<div class="section" id="tcp-ip-five-layer-nerwork-model">
+<h3>TCP/IP Five-Layer Nerwork Model<a class="headerlink" href="#tcp-ip-five-layer-nerwork-model" title="Permalink to this headline">¶</a></h3>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 4%" />
+<col style="width: 21%" />
+<col style="width: 35%" />
+<col style="width: 17%" />
+<col style="width: 23%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>#</p></th>
+<th class="head"><p>Layer</p></th>
+<th class="head"><p>Protocol</p></th>
+<th class="head"></th>
+<th class="head"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>Application</p></td>
+<td><p>HTTP, SMTP, etc</p></td>
+<td><p>Messages</p></td>
+<td><p>n/a</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>Transport</p></td>
+<td><p>TCP/UDP</p></td>
+<td><p>Segment</p></td>
+<td><p>Port #’s</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>Network</p></td>
+<td><p>IP</p></td>
+<td><p>Datagram</p></td>
+<td><p>IP address</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>Data Link</p></td>
+<td><p>Ethernet, Wi-Fi</p></td>
+<td><p>Frames</p></td>
+<td><p>MAC Address</p></td>
+</tr>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>Physical</p></td>
+<td><p>10 Base T, 801.11</p></td>
+<td><p>Bits</p></td>
+<td><p>n/a</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Physical layer</strong></p>
+<ul class="simple">
+<li><p>represents the physical devices that interconnect computers.</p></li>
+<li><p>this includes specifications for the networking cables and the connectors that join the devices together, and specifications describing how signals are sent through these connectors.</p></li>
+</ul>
+<p><strong>Data link layer</strong></p>
+<ul class="simple">
+<li><p>responsible for defining a common way of interpreting these signals so network devices can communicate.</p></li>
+<li><p>one of the protocol is the <strong>Ethernet</strong>. The Ethernet standards also define a protocol responsible for getting data to nodes on the same network or link.</p></li>
+</ul>
+<p><strong>Network layer</strong></p>
+<ul class="simple">
+<li><p>allows different networks to communicate with each other through devices known as routers.</p></li>
+<li><p>a collection of networks connected together through routers is called <strong>Internetwork</strong>.</p></li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><p>example: the Internet</p></li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p>most common protocol is <strong>IP</strong> (Internet Protocol).</p></li>
+</ul>
+<p><strong>Transport layer</strong></p>
+<ul class="simple">
+<li><p>sorts out which client and server programs are supposed to get the data.</p>
+<ul>
+<li><p>clients send requests, and servers get requests</p></li>
+</ul>
+</li>
+<li><p>most common protocal is <strong>TCP/UDP</strong> (Transmission Control Protocol/User Datagram Protocol)</p>
+<ul>
+<li><p>TCP ensures data is reliably delivered, UDP does not.</p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Application layer</strong></p>
+<ul class="simple">
+<li><p>protocol is specific to application.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="the-network-layer">
+<h2>The Network Layer<a class="headerlink" href="#the-network-layer" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="the-transport-and-application-layers">
+<h2>The Transport and Application Layers<a class="headerlink" href="#the-transport-and-application-layers" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="networking-services">
+<h2>Networking Services<a class="headerlink" href="#networking-services" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="connecting-to-the-internet">
+<h2>Connecting to the Internet<a class="headerlink" href="#connecting-to-the-internet" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="troubleshooting-and-the-future-of-networking">
+<h2>Troubleshooting and the Future of Networking<a class="headerlink" href="#troubleshooting-and-the-future-of-networking" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    </div>
+    
+
+  </body>
+</html>

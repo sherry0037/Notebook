@@ -16,6 +16,13 @@ Welcome to Yixuan's notebook!
    git.rst
    reading.rst
 
+Computer Networking:
+
+.. toctree::
+   :maxdepth: 1
+
+   computer_networking.rst
+
 Lecture notes:
 
 .. toctree::
