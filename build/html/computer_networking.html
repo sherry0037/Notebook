@@ -1,22 +1,23 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Computer Networking &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" /> 
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Dependable System" href="Lecture/dependable_system.html" />
+    <link rel="prev" title="Reading Log and Quotes" href="reading.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -24,7 +25,14 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="Lecture/dependable_system.html" title="Dependable System"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="reading.html" title="Reading Log and Quotes"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Computer Networking</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -45,6 +53,12 @@
 </li>
 </ul>
 
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="reading.html"
+                        title="previous chapter">Reading Log and Quotes</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Lecture/dependable_system.html"
+                        title="next chapter">Dependable System</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -53,15 +67,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -70,20 +84,20 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="computer-networking">
+  <section id="computer-networking">
 <span id="computer-networking-rst"></span><h1>Computer Networking<a class="headerlink" href="#computer-networking" title="Permalink to this headline">¶</a></h1>
 <p>Reference:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.youtube.com/watch?v=QKfk7YFILws">https://www.youtube.com/watch?v=QKfk7YFILws</a></p></li>
 <li><p><a class="reference external" href="https://microchipdeveloper.com/tcpip:tcp-ip-five-layer-model">https://microchipdeveloper.com/tcpip:tcp-ip-five-layer-model</a></p></li>
 </ul>
-<div class="section" id="introduction">
+<section id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <p><strong>Protocal</strong> is a defined set of standards that computers must follow in order to communicate properly.</p>
 <p>Some of the applications we use requires us to move data across a network from point A to point B. The <strong>Transmission Control Protocol/Internet Protocol</strong> (TCP/IP) network provides a framework for transmitting this data.</p>
-<div class="section" id="tcp-ip-five-layer-nerwork-model">
+<section id="tcp-ip-five-layer-nerwork-model">
 <h3>TCP/IP Five-Layer Nerwork Model<a class="headerlink" href="#tcp-ip-five-layer-nerwork-model" title="Permalink to this headline">¶</a></h3>
-<table class="docutils align-center">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 4%" />
 <col style="width: 21%" />
@@ -172,26 +186,27 @@
 <ul class="simple">
 <li><p>protocol is specific to application.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="the-network-layer">
+</section>
+</section>
+<section id="the-network-layer">
 <h2>The Network Layer<a class="headerlink" href="#the-network-layer" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="the-transport-and-application-layers">
+</section>
+<section id="the-transport-and-application-layers">
 <h2>The Transport and Application Layers<a class="headerlink" href="#the-transport-and-application-layers" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="networking-services">
+</section>
+<section id="networking-services">
 <h2>Networking Services<a class="headerlink" href="#networking-services" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="connecting-to-the-internet">
+</section>
+<section id="connecting-to-the-internet">
 <h2>Connecting to the Internet<a class="headerlink" href="#connecting-to-the-internet" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="troubleshooting-and-the-future-of-networking">
+</section>
+<section id="troubleshooting-and-the-future-of-networking">
 <h2>Troubleshooting and the Future of Networking<a class="headerlink" href="#troubleshooting-and-the-future-of-networking" title="Permalink to this headline">¶</a></h2>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -203,13 +218,20 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="right" >
+          <a href="Lecture/dependable_system.html" title="Dependable System"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="reading.html" title="Reading Log and Quotes"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Computer Networking</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 

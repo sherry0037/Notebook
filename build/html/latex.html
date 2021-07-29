@@ -1,20 +1,20 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>\(\LaTeX\) Cheatsheet &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Git Commands Reference" href="git.html" />
@@ -32,7 +32,8 @@
         <li class="right" >
           <a href="rst.html" title="reStructuredText"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -64,15 +65,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -81,9 +82,9 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="latex-cheatsheet">
+  <section id="latex-cheatsheet">
 <h1><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet<a class="headerlink" href="#latex-cheatsheet" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="math-equation-with-alignment">
+<section id="math-equation-with-alignment">
 <h2>Math equation (with alignment)<a class="headerlink" href="#math-equation-with-alignment" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{amsmath}
 \begin{equation*}
@@ -93,16 +94,16 @@
 \end{equation*}
 </pre></div>
 </div>
-</div>
-<div class="section" id="code-listing">
+</section>
+<section id="code-listing">
 <h2>Code listing<a class="headerlink" href="#code-listing" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{listings}
 \begin{lstlisting}[language=R]
 \end{lstlisting}
 </pre></div>
 </div>
-</div>
-<div class="section" id="figures">
+</section>
+<section id="figures">
 <h2>Figures<a class="headerlink" href="#figures" title="Permalink to this headline">¶</a></h2>
 <p><strong>Single figure</strong></p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{graphicx}
@@ -148,8 +149,8 @@
 \end{figure}
 </pre></div>
 </div>
-</div>
-<div class="section" id="table">
+</section>
+<section id="table">
 <h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>%\usepackage{graphicx}
 \begin{table}[]
@@ -162,8 +163,8 @@ $P[\mu \leq 10.0]$ &amp;               &amp;
 \end{table}
 </pre></div>
 </div>
-</div>
-<div class="section" id="appendix">
+</section>
+<section id="appendix">
 <h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>%\usepackage[toc,page]{appendix}
 \begin{appendices}
@@ -172,8 +173,8 @@ The contents...
 \end{appendices}
 </pre></div>
 </div>
-</div>
-<div class="section" id="pseudo-code">
+</section>
+<section id="pseudo-code">
 <h2>Pseudo code<a class="headerlink" href="#pseudo-code" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
@@ -202,10 +203,11 @@ The contents...
 \end{algorithm}
 </pre></div>
 </div>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -223,13 +225,14 @@ The contents...
         <li class="right" >
           <a href="rst.html" title="reStructuredText"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 

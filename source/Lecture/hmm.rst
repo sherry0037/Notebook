@@ -193,7 +193,7 @@ Because :math:`\mathbf{x}_n` is observed, given :math:`\mathbf{\phi}`, :math:`p(
     - We will assume a *homogeneous* model, where the parameters :math:`\mathbf{A}` and :math:`\mathbf{\phi}` are shared.
 
     - A mixture model for an i.i.d. data set corresponds to the case where :math:`A_{jk}` are the same for all j. The conditional distribution :math:`p(\mathbf{z}_n | \mathbf{z}_{n-1})` is independent of :math:`\mathbf{z}_{n-1}`.
-        - corresponds to deleting the horizontal links in :numref:`figure_13.5`.
+        ..- corresponds to deleting the horizontal links in :numref:`figure_13.5`.
 
 
 Specification - Joint probability

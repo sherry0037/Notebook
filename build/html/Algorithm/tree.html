@@ -1,0 +1,371 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Tree &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Retirement Plans" href="../Finance/retirement_plan.html" />
+    <link rel="prev" title="Sliding Windows" href="sliding_windows.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../Finance/retirement_plan.html" title="Retirement Plans"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Tree</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Tree</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#letter-case-permutation">784. Letter Case Permutation</a></li>
+<li><a class="reference internal" href="#find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree">1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree</a></li>
+<li><a class="reference internal" href="#sum-of-nodes-with-even-valued-grandparent">1315. Sum of Nodes with Even-Valued Grandparent</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sliding_windows.html"
+                        title="previous chapter">Sliding Windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../Finance/retirement_plan.html"
+                        title="next chapter">Retirement Plans</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/tree.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="tree">
+<h1><a class="toc-backref" href="#id1">Tree</a><a class="headerlink" href="#tree" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#tree" id="id1">Tree</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#letter-case-permutation" id="id3">784. Letter Case Permutation</a></p></li>
+<li><p><a class="reference internal" href="#find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree" id="id4">1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree</a></p></li>
+<li><p><a class="reference internal" href="#sum-of-nodes-with-even-valued-grandparent" id="id5">1315. Sum of Nodes with Even-Valued Grandparent</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<div class="topic">
+<p class="topic-title">Template</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">private</span> <span class="kt">int</span> <span class="nf">getResult</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">,</span> <span class="n">xx</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Set nextXX for the left iteration and right iteration according to the question</span>
+
+    <span class="c1">// Change rst when constraints are met</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">constraints_are_met</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span> <span class="o">+=</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">rst</span> <span class="o">=</span> <span class="n">getResult</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">nextXX</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+    <span class="n">rst</span> <span class="o">=</span> <span class="n">getResult</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">nextXX</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="letter-case-permutation">
+<h2><a class="toc-backref" href="#id3">784. Letter Case Permutation</a><a class="headerlink" href="#letter-case-permutation" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, return the sum of values of its deepest leaves.</p>
+<div class="topic">
+<p class="topic-title">Examples</p>
+<p>Input:</p>
+<p>1</p>
+<p>2, 3</p>
+<p>4, 5, null, 6</p>
+<p>7, null, null, null, null, null, null, 8</p>
+<p>Output: 7 + 8 = 15</p>
+</div>
+<p>Approach: first traverse the tree to get the maximum depth. Then traverse again, if the depth is equal to the
+maximum depth, return that value.</p>
+<p>Note:</p>
+<ul class="simple">
+<li><p>Depth increment should be done after the <code class="docutils literal notranslate"><span class="pre">root</span> <span class="pre">==</span> <span class="pre">null</span></code> check. Otherwise depth will 1 more.</p></li>
+<li><p>When <code class="docutils literal notranslate"><span class="pre">currentDepth</span> <span class="pre">==</span> <span class="pre">maxDepth</span></code>, just return the current root value.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Definition for a binary tree node.</span>
+<span class="cm"> * public class TreeNode {</span>
+<span class="cm"> *     int val;</span>
+<span class="cm"> *     TreeNode left;</span>
+<span class="cm"> *     TreeNode right;</span>
+<span class="cm"> *     TreeNode() {}</span>
+<span class="cm"> *     TreeNode(int val) { this.val = val; }</span>
+<span class="cm"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span>
+<span class="cm"> *         this.val = val;</span>
+<span class="cm"> *         this.left = left;</span>
+<span class="cm"> *         this.right = right;</span>
+<span class="cm"> *     }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">deepestLeavesSum</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">maxDepth</span> <span class="o">=</span> <span class="n">getMaxDepth</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;maxD: &quot;</span><span class="o">+</span><span class="n">maxDepth</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">getLeavesSum</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">maxDepth</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">getMaxDepth</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">depth</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">depth</span> <span class="o">=</span> <span class="n">depth</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;root: &quot;</span><span class="o">+</span><span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="o">+</span> <span class="s">&quot; currentD: &quot;</span><span class="o">+</span> <span class="n">depth</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">getMaxDepth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">depth</span><span class="p">),</span> <span class="n">getMaxDepth</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">depth</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">getLeavesSum</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentDepth</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxDepth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">currentDepth</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;root: &quot;</span><span class="o">+</span><span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="o">+</span> <span class="s">&quot; currentD: &quot;</span><span class="o">+</span><span class="n">currentDepth</span><span class="p">);</span>
+
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentDepth</span> <span class="o">==</span> <span class="n">maxDepth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">getLeavesSum</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">currentDepth</span><span class="p">,</span> <span class="n">maxDepth</span><span class="p">)</span> <span class="o">+</span>
+            <span class="n">getLeavesSum</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">currentDepth</span><span class="p">,</span> <span class="n">maxDepth</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title">Running result</p>
+<p>root: 1 currentD: 1
+root: 2 currentD: 2
+root: 4 currentD: 3
+root: 7 currentD: 4
+root: 5 currentD: 3
+root: 3 currentD: 2
+root: 6 currentD: 3
+root: 8 currentD: 4
+maxD: 4
+root: 1 currentD: 1
+root: 2 currentD: 2
+root: 4 currentD: 3
+root: 7 currentD: 4
+root: 5 currentD: 3
+root: 3 currentD: 2
+root: 6 currentD: 3
+root: 8 currentD: 4</p>
+</div>
+</section>
+<section id="find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree">
+<h2><a class="toc-backref" href="#id4">1379. Find a Corresponding Node of a Binary Tree in a Clone of That Tree</a><a class="headerlink" href="#find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree" title="Permalink to this headline">¶</a></h2>
+<p>Given two binary trees original and cloned and given a reference to a node target in the original tree.</p>
+<p>The cloned tree is a copy of the original tree.</p>
+<p>Return a reference to the same node in the cloned tree.</p>
+<p>Note that you are not allowed to change any of the two trees or the target node and the answer must be a reference to a node in the cloned tree.</p>
+<p>Follow up: Solve the problem if repeated values on the tree are allowed.</p>
+<p>Constraints:</p>
+<p>The number of nodes in the tree is in the range [1, 10^4].</p>
+<p>The values of the nodes of the tree are unique.</p>
+<p>target node is a node from the original tree and is not null.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Definition for a binary tree node.</span>
+<span class="cm"> * public class TreeNode {</span>
+<span class="cm"> *     int val;</span>
+<span class="cm"> *     TreeNode left;</span>
+<span class="cm"> *     TreeNode right;</span>
+<span class="cm"> *     TreeNode(int x) { val = x; }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kd">final</span> <span class="n">TreeNode</span> <span class="nf">getTargetCopy</span><span class="p">(</span><span class="kd">final</span> <span class="n">TreeNode</span> <span class="n">original</span><span class="p">,</span> <span class="kd">final</span> <span class="n">TreeNode</span> <span class="n">cloned</span><span class="p">,</span> <span class="kd">final</span> <span class="n">TreeNode</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">cloned</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">cloned</span><span class="p">.</span><span class="na">val</span> <span class="o">==</span> <span class="n">target</span><span class="p">.</span><span class="na">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">cloned</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">TreeNode</span> <span class="n">left</span> <span class="o">=</span> <span class="n">getTargetCopy</span><span class="p">(</span><span class="n">original</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">cloned</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">left</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">TreeNode</span> <span class="n">right</span> <span class="o">=</span> <span class="n">getTargetCopy</span><span class="p">(</span><span class="n">original</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">cloned</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">target</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">right</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sum-of-nodes-with-even-valued-grandparent">
+<h2><a class="toc-backref" href="#id5">1315. Sum of Nodes with Even-Valued Grandparent</a><a class="headerlink" href="#sum-of-nodes-with-even-valued-grandparent" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/">https://leetcode.com/problems/sum-of-nodes-with-even-valued-grandparent/</a></p>
+<p>Given a binary tree, return the sum of values of nodes with even-valued grandparent.  (A grandparent of a node is the parent of its parent, if it exists.)</p>
+<p>If there are no nodes with an even-valued grandparent, return 0.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="cm">/**</span>
+<span class="cm"> * Definition for a binary tree node.</span>
+<span class="cm"> * public class TreeNode {</span>
+<span class="cm"> *     int val;</span>
+<span class="cm"> *     TreeNode left;</span>
+<span class="cm"> *     TreeNode right;</span>
+<span class="cm"> *     TreeNode() {}</span>
+<span class="cm"> *     TreeNode(int val) { this.val = val; }</span>
+<span class="cm"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span>
+<span class="cm"> *         this.val = val;</span>
+<span class="cm"> *         this.left = left;</span>
+<span class="cm"> *         this.right = right;</span>
+<span class="cm"> *     }</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumEvenGrandparent</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">getResult</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">getResult</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">parent</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">grandparent</span><span class="p">,</span> <span class="kt">int</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// System.out.println(&quot;root: &quot; + root.val + &quot;, parent: &quot; + parent + &quot;, grandparent: &quot; + grandparent + &quot;, rst: &quot;+ rst);</span>
+
+        <span class="kt">boolean</span> <span class="n">nextParent</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nextParent</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">boolean</span> <span class="n">nextGrandParent</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nextGrandParent</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Grandparent is even</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">grandparent</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span> <span class="o">+=</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">rst</span> <span class="o">=</span> <span class="n">getResult</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">nextParent</span><span class="p">,</span> <span class="n">nextGrandParent</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+        <span class="n">rst</span> <span class="o">=</span> <span class="n">getResult</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">nextParent</span><span class="p">,</span> <span class="n">nextGrandParent</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="topic">
+<p class="topic-title">Running result</p>
+<p>root: 6, parent: false, grandparent: false, rst: 0</p>
+<p>root: 7, parent: true, grandparent: false, rst: 0</p>
+<p>root: 2, parent: false, grandparent: true, rst: 0</p>
+<p>root: 9, parent: true, grandparent: false, rst: 2</p>
+<p>root: 7, parent: false, grandparent: true, rst: 2</p>
+<p>root: 1, parent: false, grandparent: false, rst: 9</p>
+<p>root: 4, parent: false, grandparent: false, rst: 9</p>
+<p>root: 8, parent: true, grandparent: false, rst: 9</p>
+<p>root: 1, parent: true, grandparent: true, rst: 9</p>
+<p>root: 3, parent: true, grandparent: true, rst: 10</p>
+<p>root: 5, parent: false, grandparent: true, rst: 13</p>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../Finance/retirement_plan.html" title="Retirement Plans"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Tree</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>

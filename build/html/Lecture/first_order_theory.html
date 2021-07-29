@@ -1,20 +1,20 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>First-Order Theroies &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Hidden Markov Models" href="hmm.html" />
@@ -32,7 +32,8 @@
         <li class="right" >
           <a href="dependable_system.html" title="Dependable System"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">First-Order Theroies</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -91,15 +92,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -108,11 +109,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="first-order-theroies">
+  <section id="first-order-theroies">
 <h1><a class="toc-backref" href="#id1">First-Order Theroies</a><a class="headerlink" href="#first-order-theroies" title="Permalink to this headline">¶</a></h1>
 <p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>-Automated Logical Reasoning (lecture 10-15, first-order theories and their decision procedures).</p>
 <div class="contents topic" id="contents">
-<p class="topic-title first">Contents</p>
+<p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#first-order-theroies" id="id1">First-Order Theroies</a></p>
 <ul>
@@ -159,7 +160,7 @@
 </li>
 </ul>
 </div>
-<div class="section" id="syntax-and-semantics">
+<section id="syntax-and-semantics">
 <h2><a class="toc-backref" href="#id2">Syntax and Semantics</a><a class="headerlink" href="#syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl class="simple">
@@ -232,10 +233,10 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="commonly-used-first-order-theories">
+</section>
+<section id="commonly-used-first-order-theories">
 <h2><a class="toc-backref" href="#id3">Commonly-Used First-Order Theories</a><a class="headerlink" href="#commonly-used-first-order-theories" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="theory-of-equality-t">
+<section id="theory-of-equality-t">
 <h3><a class="toc-backref" href="#id4">Theory of Equality <span class="math notranslate nohighlight">\(T_=\)</span></a><a class="headerlink" href="#theory-of-equality-t" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -294,8 +295,8 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="peano-arithmetric-t-pa-natural-multiplication-addition">
+</section>
+<section id="peano-arithmetric-t-pa-natural-multiplication-addition">
 <h3><a class="toc-backref" href="#id5">Peano Arithmetric <span class="math notranslate nohighlight">\(T_{PA}\)</span> (natural, multiplication, addition)</a><a class="headerlink" href="#peano-arithmetric-t-pa-natural-multiplication-addition" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -363,8 +364,8 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="presburger-arithmetric-natural-addition">
+</section>
+<section id="presburger-arithmetric-natural-addition">
 <h3><a class="toc-backref" href="#id6">Presburger Arithmetric (natural, addition)</a><a class="headerlink" href="#presburger-arithmetric-natural-addition" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -410,8 +411,8 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="theory-of-integers">
+</section>
+<section id="theory-of-integers">
 <h3><a class="toc-backref" href="#id7">Theory of integers</a><a class="headerlink" href="#theory-of-integers" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -426,8 +427,8 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="theory-of-rationals">
+</section>
+<section id="theory-of-rationals">
 <h3><a class="toc-backref" href="#id8">Theory of rationals</a><a class="headerlink" href="#theory-of-rationals" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -460,8 +461,8 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="theory-of-arrays">
+</section>
+<section id="theory-of-arrays">
 <h3><a class="toc-backref" href="#id9">Theory of arrays</a><a class="headerlink" href="#theory-of-arrays" title="Permalink to this headline">¶</a></h3>
 <ul>
 <li><p><strong>Signature</strong></p>
@@ -506,17 +507,17 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="combined-theories">
+</section>
+<section id="combined-theories">
 <h3><a class="toc-backref" href="#id10">Combined Theories</a><a class="headerlink" href="#combined-theories" title="Permalink to this headline">¶</a></h3>
 <p>Given two theories <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span> that have the <span class="math notranslate nohighlight">\(=\)</span> predicate, we define a combined theory <span class="math notranslate nohighlight">\(T_1 \cup T_2\)</span>:</p>
 <ul class="simple">
 <li><p><strong>Signature</strong>: <span class="math notranslate nohighlight">\(\Sigma_1 \cup \Sigma_2\)</span></p></li>
 <li><p><strong>Axioms</strong> <span class="math notranslate nohighlight">\(A_1 \cup A_2\)</span></p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="decision-procedure-theory-of-equality">
+</section>
+</section>
+<section id="decision-procedure-theory-of-equality">
 <h2><a class="toc-backref" href="#id11">Decision Procedure: Theory of Equality</a><a class="headerlink" href="#decision-procedure-theory-of-equality" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><p><strong>Congruence Closure Algorithm</strong> is the decision procedure for theory of equality. It is used to decide the satisfiability in the <em>quantifier-free</em> fragment of <span class="math notranslate nohighlight">\(T_=\)</span>.</p>
@@ -600,10 +601,10 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </dl>
 </li>
 </ul>
-<div class="section" id="congruence-closure-algorithm">
+<section id="congruence-closure-algorithm">
 <h3><a class="toc-backref" href="#id12">Congruence Closure Algorithm</a><a class="headerlink" href="#congruence-closure-algorithm" title="Permalink to this headline">¶</a></h3>
 <div class="topic">
-<p class="topic-title first">Congruence Closure Algorithm (Basic Idea)</p>
+<p class="topic-title">Congruence Closure Algorithm (Basic Idea)</p>
 <p>Congruence closure algorithm decides satisfiability of</p>
 <div class="math notranslate nohighlight">
 \[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
@@ -658,7 +659,7 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Congruence Closure Algorithm (Full Version)</p>
+<p class="topic-title">Congruence Closure Algorithm (Full Version)</p>
 <p>Congruence closure algorithm decides satisfiability of</p>
 <div class="math notranslate nohighlight">
 \[F: (s_1= t_1) \land ... \land (s_m = t_m) \land (s_{m+1} \neq t_{m+1}) \land ... \land (s_n \neq t_n)\]</div>
@@ -687,15 +688,15 @@ such that <span class="math notranslate nohighlight">\(M, \sigma \vDash F\)</spa
 </dl>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="decision-procedure-theory-of-rationals">
+</section>
+</section>
+<section id="decision-procedure-theory-of-rationals">
 <h2><a class="toc-backref" href="#id13">Decision Procedure: Theory of Rationals</a><a class="headerlink" href="#decision-procedure-theory-of-rationals" title="Permalink to this headline">¶</a></h2>
 <p>We only consider <em>quantifier-free</em> <em>conjuctive</em> <span class="math notranslate nohighlight">\(T_{\mathbb{Q}}\)</span> formulas. Deciding satistiability of qff conjuctive formulas is a special case of <em>linear programming</em>, which can be solved by the <em>Simplex</em> algorithm.</p>
-<div class="section" id="linear-programming">
+<section id="linear-programming">
 <h3><a class="toc-backref" href="#id14">Linear programming</a><a class="headerlink" href="#linear-programming" title="Permalink to this headline">¶</a></h3>
 <div class="topic">
-<p class="topic-title first">Linear Programming</p>
+<p class="topic-title">Linear Programming</p>
 <p>In a <strong>linear programming</strong> problem, we have an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span>, an <span class="math notranslate nohighlight">\(m\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{b}\)</span>, and an <span class="math notranslate nohighlight">\(n\)</span>-dimensional vector <span class="math notranslate nohighlight">\(\vec{c}\)</span></p>
 <p>We want to solve the problem:</p>
 <div class="math notranslate nohighlight">
@@ -739,8 +740,8 @@ Each clause is of the following form:</p>
 </div></blockquote>
 </li>
 </ul>
-</div>
-<div class="section" id="simplex-algorithm">
+</section>
+<section id="simplex-algorithm">
 <h3><a class="toc-backref" href="#id15">Simplex algorithm</a><a class="headerlink" href="#simplex-algorithm" title="Permalink to this headline">¶</a></h3>
 <p>To apply Simplex, a linear inequality system needs to be converted into <em>standard form</em>, and then into <em>slack form</em>.</p>
 <ul class="simple">
@@ -833,7 +834,7 @@ x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i 
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Simplex Phase 2</p>
+<p class="topic-title">Simplex Phase 2</p>
 <p>In phase 2, we start with a feasible basic solution, then each iteration rewrites one slack from into an equivalent slack form (pivot). Geometrically, each iteration walks from one vertex to an adjacent vertex until it reaches a local maximum, which is also the global optimum by convexity.</p>
 <p>We have the problem:</p>
 <div class="math notranslate nohighlight">
@@ -898,7 +899,7 @@ x_i &amp;= b_i - \sum\limits_{x_j\in N}  a_{ij}x_j \quad(\text{for every  } x_i 
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Simplex Phase 1</p>
+<p class="topic-title">Simplex Phase 1</p>
 <p>In phase 1, we want to find a feasible basic solution if it exists.</p>
 <p>To do this, we construct an <em>auxiliary linear program</em> <span class="math notranslate nohighlight">\(L_{aux}\)</span>, which has the properties:</p>
 <blockquote>
@@ -934,9 +935,9 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 <p class="admonition-title">TODO</p>
 <p>add example</p>
 </div>
-</div>
-</div>
-<div class="section" id="decision-procedure-theory-of-integers">
+</section>
+</section>
+<section id="decision-procedure-theory-of-integers">
 <h2><a class="toc-backref" href="#id16">Decision Procedure: Theory of Integers</a><a class="headerlink" href="#decision-procedure-theory-of-integers" title="Permalink to this headline">¶</a></h2>
 <p>Similarly as before, we only consider <em>quantifier-free</em> <span class="math notranslate nohighlight">\(T_{\mathbb{Z}}\)</span> formulas without disjunctions. We want to solve the following problem:</p>
 <p>Given an <span class="math notranslate nohighlight">\(m \times n\)</span> matrix <span class="math notranslate nohighlight">\(A\)</span> with only integer coefficients and a vector <span class="math notranslate nohighlight">\(\vec{b}\)</span> in <span class="math notranslate nohighlight">\(\mathbb{Z}^n\)</span>, does</p>
@@ -944,7 +945,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 \[A\vec{x} \leq \vec{b}\]</div>
 <p>has <strong>integer</strong> solutions?</p>
 <p><em>Note:</em> Finding rational solution is poly-time, but integer problem is NP-complete (without disjunctions).</p>
-<div class="section" id="omega-test">
+<section id="omega-test">
 <h3><a class="toc-backref" href="#id17">Omega Test</a><a class="headerlink" href="#omega-test" title="Permalink to this headline">¶</a></h3>
 <div class="admonition-todo admonition">
 <p class="admonition-title">TODO</p>
@@ -989,7 +990,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Real Shadow (Fourier-Motzkin technique)</p>
+<p class="topic-title">Real Shadow (Fourier-Motzkin technique)</p>
 <p>We ignore requirement that solution must be integer.</p>
 <div class="admonition-todo admonition">
 <p class="admonition-title">TODO</p>
@@ -1018,7 +1019,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Dark Shadow</p>
+<p class="topic-title">Dark Shadow</p>
 <p>Dark shadow only projects those parts of polytope that are <em>at least one unit thick</em> in the x-dimension; thus we are guaranteed to have an interger solution for x if dark shadow has integer solution.</p>
 <p>Consider a pair of inequalities corresponding to lower and upper bounds on <span class="math notranslate nohighlight">\(x\)</span>:</p>
 <div class="math notranslate nohighlight">
@@ -1059,7 +1060,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Gray Shadows</p>
+<p class="topic-title">Gray Shadows</p>
 <p>If real shadow has integer solutions, but dark shadow does not, we still cannot conclude about the original problem. In this case, we construct the gray shadows, which look for integers <em>outside</em> the dark shadow, but <em>inside</em> the real shadow.</p>
 <p>By construction, points inside the real shadow satisfies:</p>
 <div class="math notranslate nohighlight">
@@ -1093,9 +1094,9 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </div></blockquote>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="decision-procedure-combined-theories">
+</section>
+</section>
+<section id="decision-procedure-combined-theories">
 <h2><a class="toc-backref" href="#id18">Decision Procedure: Combined Theories</a><a class="headerlink" href="#decision-procedure-combined-theories" title="Permalink to this headline">¶</a></h2>
 <p>Given decision procedures for quantifier-free <span class="math notranslate nohighlight">\(T_1\)</span> and <span class="math notranslate nohighlight">\(T_2\)</span>, we want a decision procedure to decide satisfiability of formulas in qff <span class="math notranslate nohighlight">\(T_1 \cup T_2\)</span>.</p>
 <p>We use the Nelson-Oppen method. It has the following restrictions:</p>
@@ -1126,7 +1127,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </dl>
 </li>
 </ul>
-<div class="section" id="nelson-oppen-method">
+<section id="nelson-oppen-method">
 <h3><a class="toc-backref" href="#id19">Nelson-Oppen Method</a><a class="headerlink" href="#nelson-oppen-method" title="Permalink to this headline">¶</a></h3>
 <p>Nelson-Oppen method has two phases:</p>
 <ol class="arabic simple">
@@ -1142,7 +1143,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </li>
 </ol>
 <div class="topic">
-<p class="topic-title first">Purification</p>
+<p class="topic-title">Purification</p>
 <p>Given formula <span class="math notranslate nohighlight">\(F\)</span> in <span class="math notranslate nohighlight">\(T_1 \cap T_2\)</span>, goal is to seperate it into two formulas <span class="math notranslate nohighlight">\(F_1\)</span> and <span class="math notranslate nohighlight">\(F_2\)</span> such that:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -1204,7 +1205,7 @@ x_i &amp;= b_i + x_0 - \sum\limits_{x_j\in N}  a_{ij}x_j\end{split}\]</div>
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Equality propagation (Convex)</p>
+<p class="topic-title">Equality propagation (Convex)</p>
 <p>After purification, if either <span class="math notranslate nohighlight">\(F_1\)</span> or <span class="math notranslate nohighlight">\(F_2\)</span> is UNSAT, <span class="math notranslate nohighlight">\(F\)</span> is UNSAT. Otherwise, we need equality propagation. First consider only convex theories.</p>
 <dl class="simple">
 <dt>For each pair of <em>shared</em> variables <span class="math notranslate nohighlight">\(x, y\)</span>, determine if</dt><dd><ol class="arabic simple">
@@ -1238,7 +1239,7 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </li>
 </ul>
 <div class="topic">
-<p class="topic-title first">Equality propagation (Non-Convex)</p>
+<p class="topic-title">Equality propagation (Non-Convex)</p>
 <p>Probelm involving non-convex theories is that a formula might not imply an equality, but imply a <em>disjunction</em> of equalities. However, we can only deal with conjunctions.</p>
 <p>If any of the formula implies <span class="math notranslate nohighlight">\(\bigvee\limits_{i=1}^n x_i = y_i\)</span>, we create n subproblems where we propagate <span class="math notranslate nohighlight">\(x_i = y_i\)</span> in <span class="math notranslate nohighlight">\(i\)</span>’th subproblem.</p>
 <ul class="simple">
@@ -1273,9 +1274,9 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </dl>
 </li>
 </ul>
-</div>
-</div>
-<div class="section" id="smt-solvers-and-dpll-mathcal-t-framework">
+</section>
+</section>
+<section id="smt-solvers-and-dpll-mathcal-t-framework">
 <h2><a class="toc-backref" href="#id20">SMT Solvers and DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework</a><a class="headerlink" href="#smt-solvers-and-dpll-mathcal-t-framework" title="Permalink to this headline">¶</a></h2>
 <p>Previous sections talk about decision procedures for conjunctive formulas in various first-order theories. However, converting a formula to DNF is not feasible because its size can blow-up exponentially. In this section, we want to decide satisfiability in first-order theories without converting to DNF. More specifically, we want to handle <strong>boolean structure</strong> when deciding satisfiability modulo theories.</p>
 <blockquote>
@@ -1349,7 +1350,7 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </dl>
 </li>
 </ul>
-<div class="section" id="off-line-smt-solver">
+<section id="off-line-smt-solver">
 <h3><a class="toc-backref" href="#id21">Off-line SMT Solver</a><a class="headerlink" href="#off-line-smt-solver" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><dl class="simple">
@@ -1392,8 +1393,8 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="on-line-smt-solver-dpll-mathcal-t-framework">
+</section>
+<section id="on-line-smt-solver-dpll-mathcal-t-framework">
 <h3><a class="toc-backref" href="#id22">On-line SMT Solver (DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) Framework)</a><a class="headerlink" href="#on-line-smt-solver-dpll-mathcal-t-framework" title="Permalink to this headline">¶</a></h3>
 <p>Instead of using SMT solver as “blackbox”, the online version integrates theory solver into the CDCL. The combination of DPLL-based SAT solver and decision procedure for conjunctive <span class="math notranslate nohighlight">\(\mathcal{T}\)</span> formula is called DPLL(<span class="math notranslate nohighlight">\(\mathcal{T}\)</span>) framework.</p>
 <a class="reference internal image-reference" href="../_images/DPLL(T).png"><img alt="../_images/DPLL(T).png" src="../_images/DPLL(T).png" style="width: 531.5px; height: 250.0px;" /></a>
@@ -1442,11 +1443,12 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
 </dl>
 </li>
 </ul>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -1464,13 +1466,14 @@ F_2: \quad 1 \leq x \land x \leq 2 \land w_1 = 1 \land w_2 = 2\end{split}\]</div
         <li class="right" >
           <a href="dependable_system.html" title="Dependable System"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">First-Order Theroies</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 

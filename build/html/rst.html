@@ -1,20 +1,20 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>reStructuredText &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="\(\LaTeX\) Cheatsheet" href="latex.html" />
@@ -32,7 +32,8 @@
         <li class="right" >
           <a href="CS394N_personal_ad.html" title="CS394N Personal Ad - Yixuan Ni"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">reStructuredText</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -68,15 +69,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -85,21 +86,21 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="restructuredtext">
+  <section id="restructuredtext">
 <h1>reStructuredText<a class="headerlink" href="#restructuredtext" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="comment">
+<section id="comment">
 <h2>Comment<a class="headerlink" href="#comment" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="cp">.. Lines starting with two dots are special commands. But if no command can be found, the line is considered as a comment</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="table-of-contents">
+</section>
+<section id="table-of-contents">
 <h2>Table of Contents<a class="headerlink" href="#table-of-contents" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">contents</span><span class="p">::</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="text">
+</section>
+<section id="text">
 <h2>Text<a class="headerlink" href="#text" title="Permalink to this headline">¶</a></h2>
 <p>You can  put text in <em>italic</em> or in <strong>bold</strong>, you can “mark” text as code with double backquote <code class="docutils literal notranslate"><span class="pre">print()</span></code>.</p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="ge">*italic*</span>
@@ -107,8 +108,8 @@
 <span class="s">``print()``</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="list">
+</section>
+<section id="list">
 <h2>List<a class="headerlink" href="#list" title="Permalink to this headline">¶</a></h2>
 <p>Lists are as simple as in Markdown:</p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="m">-</span> First item
@@ -122,15 +123,15 @@ or
     <span class="m">*</span> Sub item
 </pre></div>
 </div>
-</div>
-<div class="section" id="figure">
+</section>
+<section id="figure">
 <h2>Figure<a class="headerlink" href="#figure" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">figure</span><span class="p">::</span> _static/regression/figure1_12.png
-    <span class="nc">:scale:</span> <span class="nf">40 %</span>
+    <span class="nc">:scale:</span> 40 %
 </pre></div>
 </div>
-</div>
-<div class="section" id="table">
+</section>
+<section id="table">
 <h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
 <p>Tables are really easy to write:</p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>=========== ========
@@ -141,7 +142,7 @@ Japan       Tokyo
 =========== ========
 </pre></div>
 </div>
-<table class="docutils align-center">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 58%" />
 <col style="width: 42%" />
@@ -174,7 +175,7 @@ Japan       Tokyo
 +------------+------------+-----------+
 </pre></div>
 </div>
-<table class="docutils align-center">
+<table class="docutils align-default">
 <colgroup>
 <col style="width: 34%" />
 <col style="width: 34%" />
@@ -208,8 +209,8 @@ span rows.</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="section" id="hyperlink">
+</section>
+<section id="hyperlink">
 <h2>Hyperlink<a class="headerlink" href="#hyperlink" title="Permalink to this headline">¶</a></h2>
 <p>There are multiple ways to make links:</p>
 <ul>
@@ -227,8 +228,8 @@ span rows.</p></td>
 </div>
 </li>
 </ul>
-</div>
-<div class="section" id="latex">
+</section>
+<section id="latex">
 <h2>Latex<a class="headerlink" href="#latex" title="Permalink to this headline">¶</a></h2>
 <p>How to write Latex:</p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">math</span><span class="p">::</span>
@@ -254,40 +255,41 @@ span rows.</p></td>
   \end{equation}
 </pre></div>
 </div>
-</div>
-<div class="section" id="body-elements">
+</section>
+<section id="body-elements">
 <h2>Body Elements<a class="headerlink" href="#body-elements" title="Permalink to this headline">¶</a></h2>
 <div class="topic">
-<p class="topic-title first">Topic</p>
+<p class="topic-title">Topic</p>
 <p>A topic is like a block quote with a title, or a self-contained section with no subsections. Use the “topic” directive to indicate a self-contained idea that is separate from the flow of the document. Topics may occur anywhere a section or transition may occur. Body elements and topics may not contain nested topics.</p>
 <p><code class="docutils literal notranslate"><span class="pre">..</span> <span class="pre">topic::</span> <span class="pre">[Title]</span></code></p>
 </div>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span><span class="p">..</span> <span class="ow">sidebar</span><span class="p">::</span> Sidebar Title
-   <span class="nc">:subtitle:</span> <span class="nf">Optional Sidebar Subtitle</span>
+   <span class="nc">:subtitle:</span> Optional Sidebar Subtitle
 
    Subsequent indented lines comprise
    the body of the sidebar, and are
    interpreted as body elements.
 </pre></div>
 </div>
-<div class="sidebar">
+<aside class="sidebar">
 <p class="sidebar-title">Sidebar Title</p>
 <p class="sidebar-subtitle">Optional Sidebar Subtitle</p>
 <p>Subsequent indented lines comprise
 the body of the sidebar, and are
 interpreted as body elements.</p>
-</div>
-</div>
-<div class="section" id="documentation-and-sources">
+</aside>
+</section>
+<section id="documentation-and-sources">
 <h2>Documentation and Sources<a class="headerlink" href="#documentation-and-sources" title="Permalink to this headline">¶</a></h2>
 <p>Other useful links:</p>
 <p><a class="reference external" href="http://docutils.sourceforge.net/docs/ref/rst/directives.html#table">reStructuredText Directives</a></p>
 <p><a class="reference external" href="http://docutils.sourceforge.net/docs/user/rst/quickref.html">Quick reStructuredText</a></p>
 <p><a class="reference external" href="http://openalea.gforge.inria.fr/doc/openalea/doc/_build/html/source/sphinx/rest_syntax.html#restructured-text-rest-and-sphinx-cheatsheet">Restructured Text and Sphinx CheatSheet</a></p>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -305,13 +307,14 @@ interpreted as body elements.</p>
         <li class="right" >
           <a href="CS394N_personal_ad.html" title="CS394N Personal Ad - Yixuan Ni"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">reStructuredText</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 

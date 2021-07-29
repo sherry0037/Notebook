@@ -1,20 +1,19 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Neural Networks &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="../_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Regression Analysis" href="regression.html" />
@@ -32,7 +31,8 @@
         <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Neural Networks</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -78,15 +78,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -95,17 +95,17 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="neural-networks">
+  <section id="neural-networks">
 <h1>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="backpropagation">
+<section id="backpropagation">
 <h2>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="backpropagation-through-time-bptt">
+<section id="backpropagation-through-time-bptt">
 <h3>Backpropagation through time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Permalink to this headline">¶</a></h3>
 <p>Reading material: <a class="reference external" href="https://machinelearningmastery.com/gentle-introduction-backpropagation-time/">https://machinelearningmastery.com/gentle-introduction-backpropagation-time/</a></p>
 <p>BPTT is the application of backpropagation training algorithm to recurrent neural network. It works by unrolling all input timesteps. Each timestep has one input timestep, one copy of the network and one output. Errors are calculated for each timestep and accumulated to the end. The network is rolled back up and the weights are updated.</p>
 <p>BPTT is computationally expensive when the number of timesteps is large. It also suffers from the weight vanish/explode problem.</p>
-</div>
-<div class="section" id="truncated-backpropagation-through-time-tbptt">
+</section>
+<section id="truncated-backpropagation-through-time-tbptt">
 <h3>Truncated backpropagation through time (TBPTT)<a class="headerlink" href="#truncated-backpropagation-through-time-tbptt" title="Permalink to this headline">¶</a></h3>
 <p>TBPTT is a modified version of BPTT to solve the problems mentioned above. It is a more practical method.</p>
 <p>TBPTT processes the sequence one timestep at a time. At every k1 timesteps, it runs BPTT for k2 timesteps (parameter updates). The hidden states have been exposed to many timesteps. so may contain useful information about the far past.</p>
@@ -121,9 +121,9 @@
 <li><p>k1: The number of forward-pass timesteps between updates. Generally, this influences how slow or fast training will be, given how often weight updates are performed.</p></li>
 <li><p>k2: The number of timesteps to which to apply BPTT. Generally, it should be large enough to capture the temporal structure in the problem for the network to learn. Too large a value results in vanishing gradients.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="neuroevolution">
+</section>
+</section>
+<section id="neuroevolution">
 <h2>Neuroevolution<a class="headerlink" href="#neuroevolution" title="Permalink to this headline">¶</a></h2>
 <p>Reading material: <a class="reference external" href="http://www.scholarpedia.org/article/Neuroevolution">http://www.scholarpedia.org/article/Neuroevolution</a></p>
 <p>Neuroevolution is a biological-inspired method for creating artificial intelligence. It is motivated by the evolution of biological nervous systems. It can be seen as means to investigate how intelligence evolved in nature, and as a practical method for engineering artificial neural networks.</p>
@@ -146,7 +146,7 @@
 <li><p>evolutionary robotics (controlling mobile robots)</p></li>
 <li><p>artificial life</p></li>
 </ul>
-<div class="section" id="algorithm">
+<section id="algorithm">
 <h3>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
 <p>Goal: evolve a population of genetic encoding of neural networks in order to find a network that solves the given task.</p>
 <p>The generate-and-test loop:</p>
@@ -163,8 +163,8 @@
 </li>
 <li><p>continue until a network with a sufficiently high fitness is found</p></li>
 </ol>
-</div>
-<div class="section" id="advanced-neuroevolution">
+</section>
+<section id="advanced-neuroevolution">
 <h3>Advanced Neuroevolution<a class="headerlink" href="#advanced-neuroevolution" title="Permalink to this headline">¶</a></h3>
 <p>There are some problems with the basic neuroevolution implementation:</p>
 <ul class="simple">
@@ -194,9 +194,9 @@
 <ul class="simple">
 <li><p>instructions for constructing the network evolved</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="self-organizing-map">
+</section>
+</section>
+<section id="self-organizing-map">
 <h2>Self-Organizing Map<a class="headerlink" href="#self-organizing-map" title="Permalink to this headline">¶</a></h2>
 <p>Reading materials:</p>
 <blockquote>
@@ -231,7 +231,7 @@
 <li><p>Not working well for categorical data</p></li>
 <li><p>The time for preparing model is slow, hard to train against slowly evolving data.</p></li>
 </ul>
-<div class="section" id="learning-vector-quantization-lvq">
+<section id="learning-vector-quantization-lvq">
 <h3>Learning Vector Quantization (LVQ)<a class="headerlink" href="#learning-vector-quantization-lvq" title="Permalink to this headline">¶</a></h3>
 <p>Reading materials:</p>
 <blockquote>
@@ -247,8 +247,8 @@
 <li><p>In the language of neural networks, each codebook vector may be called a neuron, each attribute on a codebook vector is called a weight and the collection of codebook vectors is called a network.</p></li>
 </ul>
 </div></blockquote>
-</div>
-<div class="section" id="lvq-algorithm">
+</section>
+<section id="lvq-algorithm">
 <h3>LVQ Algorithm<a class="headerlink" href="#lvq-algorithm" title="Permalink to this headline">¶</a></h3>
 <ol class="arabic">
 <li><p>Initialize reference vectors</p>
@@ -271,19 +271,19 @@
 </li>
 <li><p>Repeat until stopping condition is met (reach the maximum number of epochs or learning rate reduced to zero).</p></li>
 </ol>
-</div>
-<div class="section" id="modifications">
+</section>
+<section id="modifications">
 <h3>Modifications<a class="headerlink" href="#modifications" title="Permalink to this headline">¶</a></h3>
 <p><strong>LVQ2</strong>. Only make correction when input falls in wrong side of the boundary. This algorithm will give a finer tuning of the boundary.</p>
 <p><strong>LVQ3</strong> Make correction whenever input falls within a window. This algorithm is smoother and faster.</p>
-</div>
-</div>
-<div class="section" id="computational-neuroscience">
+</section>
+</section>
+<section id="computational-neuroscience">
 <h2>Computational Neuroscience<a class="headerlink" href="#computational-neuroscience" title="Permalink to this headline">¶</a></h2>
 <p>Reading material: <a class="reference external" href="http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf">http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf</a></p>
 <p>This paper summarizes work to date on an artificial neural network model, RF-LISSOM (Receptive-Field Laterally Interconnected Syn- ergetically Self-Organizing Map), that shows how the neurons’ receptive fields, 2-D columnar organization, and lateral connectivity can be learned from the input based on Hebbian self-organization. These same mechanisms explain how the cortex can remain plastic and adapt to changes in input and to internal lesions. The model suggests that the resulting organization is formed to represent and process visual input efficiently, forming a redundancy-reduced sparse coding of the visual input. The self-organized model can then be used to model various low-level visual phenomena, including tilt aftereffects and segmentation and binding.</p>
 <div class="topic">
-<p class="topic-title first">Hebbian Learning</p>
+<p class="topic-title">Hebbian Learning</p>
 <p>Hebbian learning is one of the oldest learning algorithms, and is based in large part on the dynamics of biological systems. A synapse between two neurons is strengthened when the neurons on either side of the synapse (input and output) have highly correlated outputs. In essence, when an input neuron fires, if it frequently leads to the firing of the output neuron, the synapse is strengthened. Following the analogy to an artificial system, the tap weight is increased with high correlation between two sequential neurons.</p>
 </div>
 <p>Roles of computational model:</p>
@@ -304,14 +304,15 @@
 <li><p>Illusions and aftereffects</p></li>
 <li><p>Visual coding</p></li>
 </ul>
-<div class="section" id="visual-coding">
+<section id="visual-coding">
 <h3>Visual coding<a class="headerlink" href="#visual-coding" title="Permalink to this headline">¶</a></h3>
 <p>The goal of visual coding is to represent the important features of the input and represent more information within a limited system</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -329,13 +330,14 @@
         <li class="right" >
           <a href="hoare_logic.html" title="Hoare Logic"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Neural Networks</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 

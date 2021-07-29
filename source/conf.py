@@ -55,6 +55,9 @@ exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store', 'Amazon/*']
 #html_theme = 'pyramid'
 #html_theme = 'bizstyle'
 html_theme = 'yeen'
+#html_theme = 'topos-theme'
+
+html_theme_path = ['_themes']
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

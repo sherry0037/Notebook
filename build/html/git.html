@@ -1,20 +1,19 @@
 
 
-
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html lang="en">
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Git Commands Reference &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" href="_static/yeen.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Reading Log and Quotes" href="reading.html" />
@@ -32,7 +31,8 @@
         <li class="right" >
           <a href="latex.html" title="\(\LaTeX\) Cheatsheet"
              accesskey="P">previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Git Commands Reference</a></li> 
       </ul>
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
@@ -67,15 +67,15 @@
     </ul>
    </div>
 <div id="searchbox" style="display: none" role="search">
-  <h3>Quick search</h3>
+  <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" />
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
       <input type="submit" value="Go" />
     </form>
     </div>
 </div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+<script>$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -84,14 +84,14 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="git-commands-reference">
+  <section id="git-commands-reference">
 <h1>Git Commands Reference<a class="headerlink" href="#git-commands-reference" title="Permalink to this headline">¶</a></h1>
 <p>Some useful git commands.</p>
-<div class="section" id="create-new-branch">
+<section id="create-new-branch">
 <h2>Create new branch<a class="headerlink" href="#create-new-branch" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">[name_of_your_new_branch]</span></code></p>
-</div>
-<div class="section" id="how-to-undo-commits-add">
+</section>
+<section id="how-to-undo-commits-add">
 <h2>How to undo commits/add?<a class="headerlink" href="#how-to-undo-commits-add" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
@@ -115,8 +115,8 @@
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="how-to-modify-commits">
+</section>
+<section id="how-to-modify-commits">
 <h2>How to modify commits?<a class="headerlink" href="#how-to-modify-commits" title="Permalink to this headline">¶</a></h2>
 <ul>
 <li><dl class="simple">
@@ -138,8 +138,8 @@
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="how-to-get-new-changes-from-master">
+</section>
+<section id="how-to-get-new-changes-from-master">
 <h2>How to get new changes from Master<a class="headerlink" href="#how-to-get-new-changes-from-master" title="Permalink to this headline">¶</a></h2>
 <p>Two options: <code class="docutils literal notranslate"><span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">rebase</span></code>.</p>
 <ul>
@@ -153,8 +153,8 @@
 <p>This moves the entire <code class="docutils literal notranslate"><span class="pre">feature</span></code> branch on the tip of the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch, without leaving a commit message.</p>
 </li>
 </ul>
-</div>
-<div class="section" id="different-ways-to-do-git-pull">
+</section>
+<section id="different-ways-to-do-git-pull">
 <h2>Different ways to do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code><a class="headerlink" href="#different-ways-to-do-git-pull" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> does a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> to pull down data from the specified remote, and then calls <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> to join the changes received with your current branch’s work.</p></li>
@@ -164,36 +164,37 @@
 </dl>
 </li>
 </ul>
-</div>
-<div class="section" id="stash-the-changes">
+</section>
+<section id="stash-the-changes">
 <h2>Stash the changes<a class="headerlink" href="#stash-the-changes" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> to save all the changes.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">apply</span></code> to get the latest stashed changes back.</p></li>
 </ul>
-</div>
-<div class="section" id="see-changes-in-a-commit">
+</section>
+<section id="see-changes-in-a-commit">
 <h2>See changes in a commit<a class="headerlink" href="#see-changes-in-a-commit" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff-tree</span> <span class="pre">--no-commit-id</span> <span class="pre">--name-only</span> <span class="pre">-r</span> <span class="pre">bd61ad98</span></code> to see all the files added in a commit</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">COMMIT~</span> <span class="pre">COMMIT</span></code> to see the changes in a commit</p></li>
 </ul>
-</div>
-<div class="section" id="push-specific-commit">
+</section>
+<section id="push-specific-commit">
 <h2>Push specific commit<a class="headerlink" href="#push-specific-commit" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">1d9ec65c09b07661b7daff31c810d365d1c73be4:refs/heads/master</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="delete-git-repository">
+</section>
+<section id="delete-git-repository">
 <h2>Delete git repository<a class="headerlink" href="#delete-git-repository" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Make a repository no longer a git repository: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">.git</span></code></p></li>
 </ul>
-</div>
-</div>
+</section>
+</section>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -211,13 +212,14 @@
         <li class="right" >
           <a href="latex.html" title="\(\LaTeX\) Cheatsheet"
              >previous</a> |</li>
-        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li> 
+        <li class="nav-item nav-item-0"><a href="index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Git Commands Reference</a></li> 
       </ul>
     </div>
     
     <div class="footer" role="contentinfo">
         &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
     </div>
     
 
