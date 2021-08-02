@@ -348,3 +348,130 @@ It is guaranteed the answer fits on a 32-bit signed integer.
         }
         return rst[s.length()-1][t.length()-1];
     }
+
+-----------------------------------
+124. Binary Tree Maximum Path Sum
+-----------------------------------
+
+A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.
+
+The path sum of a path is the sum of the node's values in the path.
+
+Given the root of a binary tree, return the maximum path sum of any path.
+
+**Approach**
+
+- Given a node A, we need to calculate the path sum assuming A is the root node.
+
+- There are four possible cases (since node values can be negative):
+
+    - A + pathSum of the left child tree
+
+    - A + pathSum of the right child tree
+
+    - Only A
+
+    - A + pathSum of both children trees
+
+- Observe that for A's parent, only the first three cases can be considered (these are the sums that can be used by the parent). Because if a path includes A and both of it's children, this path cannot be added to the path that goes through A's parent (this is the sum that cannot be used by the parent).
+
+- Therefore for each node, we calculate two sums: one is the path sum of A as the root, which cannot be used by the parent; the other one is the max of the first three cases, which can be used by the A's parent.
+
+- We can keep a global variable that keep record of the running maximum. 
+
+- Then when doing tree traversal, return the sum that can be used by the parent for each node. Meanwhile compare the results of the four cases to the global maximum.
+
+.. code-block:: java
+
+    class Solution {
+        int rst = Integer.MIN_VALUE;
+        
+        public int maxPathSum(TreeNode root) {
+            traverse(root);
+            
+            return rst;
+        }
+        
+        private int traverse(TreeNode root) {
+            if (root == null) {
+                return 0;
+            }
+            
+            int leftSum = traverse(root.left);
+            int rightSum = traverse(root.right);
+            
+            // parent can use
+            int sumForParent = Math.max(Math.max(leftSum + root.val, rightSum+root.val), root.val);
+            
+            // parent cannot use
+            int sumNotForParent = leftSum + rightSum + root.val;
+            
+            rst =  Math.max(Math.max(sumForParent, rst), sumNotForParent);
+            
+            return sumForParent;        
+        }
+    }
+
+-------------------
+174. Dungeon Game
+-------------------
+
+The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of m x n rooms laid out in a 2D grid. Our valiant knight was initially positioned in the top-left room and must fight his way through dungeon to rescue the princess.
+
+The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.
+
+Some of the rooms are guarded by demons (represented by negative integers), so the knight loses health upon entering these rooms; other rooms are either empty (represented as 0) or contain magic orbs that increase the knight's health (represented by positive integers).
+
+To reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.
+
+Return the knight's minimum initial health so that he can rescue the princess.
+
+Note that any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room where the princess is imprisoned.
+
+**Approach**
+
+- Keep a 2D array rst where rst[i][j] means the min health it required to enter dungeon[i][j].
+
+- Suppose we are going from room A to room B. The minimum health required to enter room B is t and suppose dungeon[A] is c. Then the health requirement of room A is h + c = t. If c is larger than t, e.g. if we can gain 30 health at room A and B requires only 10 health, the health requirement of A is then 1. So h = max(1, t-c).
+
+- For any room, we can either go right or go down, choose whichever is less or whichever is go-able.
+
+- Then we just traverse from the bottom-right up till top-left then output rst[0][0];
+
+.. code-block:: java
+
+    public int calculateMinimumHP(int[][] dungeon) {
+        int m = dungeon.length;
+        int n = dungeon[0].length;
+        int[][] rst = new int[m][n];
+        
+        //System.out.println("i: "+(m-1)+" j: "+(n-1)+" rst: "+rst[m-1][n-1]);
+        
+        for (int i = m-1; i>=0; i--) {
+            for (int j = n-1; j>=0; j--) {
+                
+                // bottom-right
+                if (j == n-1 && i == m-1) {
+                    rst[i][j] = getH(1, dungeon[i][j]);
+                } else if (j == n-1) {
+                    // can't go right
+                    rst[i][j] = getH(rst[i+1][j], dungeon[i][j]);
+                } else if (i == m-1) {
+                    // can't go down
+                    rst[i][j] = getH(rst[i][j+1], dungeon[i][j]);
+                } else {
+                    //rst[i][j] = Math.min(getH(rst[i+1][j], dungeon[i+1][j]), getH(rst[i][j+1], dungeon[i][j+1]));
+                    rst[i][j] = Math.min(getH(rst[i+1][j], dungeon[i][j]), getH(rst[i][j+1], dungeon[i][j]));
+                }
+                
+                //System.out.println("i: "+i+" j: "+j+" rst: "+rst[i][j]);
+            }
+        }
+        
+        return rst[0][0];
+    }
+    
+    private int getH(int t, int c) {
+        return Math.max(t-c, 1);
+    }
+

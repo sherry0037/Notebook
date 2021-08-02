@@ -44,6 +44,8 @@
 <li><a class="reference internal" href="#jump-game">55. Jump Game</a></li>
 <li><a class="reference internal" href="#edit-distance">72. Edit Distance</a></li>
 <li><a class="reference internal" href="#distinct-subsequences">115. Distinct Subsequences</a></li>
+<li><a class="reference internal" href="#binary-tree-maximum-path-sum">124. Binary Tree Maximum Path Sum</a></li>
+<li><a class="reference internal" href="#dungeon-game">174. Dungeon Game</a></li>
 </ul>
 </li>
 </ul>
@@ -90,6 +92,8 @@
 <li><p><a class="reference internal" href="#jump-game" id="id3">55. Jump Game</a></p></li>
 <li><p><a class="reference internal" href="#edit-distance" id="id4">72. Edit Distance</a></p></li>
 <li><p><a class="reference internal" href="#distinct-subsequences" id="id5">115. Distinct Subsequences</a></p></li>
+<li><p><a class="reference internal" href="#binary-tree-maximum-path-sum" id="id6">124. Binary Tree Maximum Path Sum</a></p></li>
+<li><p><a class="reference internal" href="#dungeon-game" id="id7">174. Dungeon Game</a></p></li>
 </ul>
 </li>
 </ul>
@@ -403,6 +407,112 @@
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">t</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="binary-tree-maximum-path-sum">
+<h2><a class="toc-backref" href="#id6">124. Binary Tree Maximum Path Sum</a><a class="headerlink" href="#binary-tree-maximum-path-sum" title="Permalink to this headline">¶</a></h2>
+<p>A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.</p>
+<p>The path sum of a path is the sum of the node’s values in the path.</p>
+<p>Given the root of a binary tree, return the maximum path sum of any path.</p>
+<p><strong>Approach</strong></p>
+<ul>
+<li><p>Given a node A, we need to calculate the path sum assuming A is the root node.</p></li>
+<li><p>There are four possible cases (since node values can be negative):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>A + pathSum of the left child tree</p></li>
+<li><p>A + pathSum of the right child tree</p></li>
+<li><p>Only A</p></li>
+<li><p>A + pathSum of both children trees</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Observe that for A’s parent, only the first three cases can be considered (these are the sums that can be used by the parent). Because if a path includes A and both of it’s children, this path cannot be added to the path that goes through A’s parent (this is the sum that cannot be used by the parent).</p></li>
+<li><p>Therefore for each node, we calculate two sums: one is the path sum of A as the root, which cannot be used by the parent; the other one is the max of the first three cases, which can be used by the A’s parent.</p></li>
+<li><p>We can keep a global variable that keep record of the running maximum.</p></li>
+<li><p>Then when doing tree traversal, return the sum that can be used by the parent for each node. Meanwhile compare the results of the four cases to the global maximum.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">maxPathSum</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span> <span class="n">leftSum</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">rightSum</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">);</span>
+
+        <span class="c1">// parent can use</span>
+        <span class="kt">int</span> <span class="n">sumForParent</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">leftSum</span> <span class="o">+</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">,</span> <span class="n">rightSum</span><span class="o">+</span><span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">),</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+
+        <span class="c1">// parent cannot use</span>
+        <span class="kt">int</span> <span class="n">sumNotForParent</span> <span class="o">=</span> <span class="n">leftSum</span> <span class="o">+</span> <span class="n">rightSum</span> <span class="o">+</span> <span class="n">root</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+
+        <span class="n">rst</span> <span class="o">=</span>  <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">sumForParent</span><span class="p">,</span> <span class="n">rst</span><span class="p">),</span> <span class="n">sumNotForParent</span><span class="p">);</span>
+
+        <span class="k">return</span> <span class="n">sumForParent</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="dungeon-game">
+<h2><a class="toc-backref" href="#id7">174. Dungeon Game</a><a class="headerlink" href="#dungeon-game" title="Permalink to this headline">¶</a></h2>
+<p>The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of m x n rooms laid out in a 2D grid. Our valiant knight was initially positioned in the top-left room and must fight his way through dungeon to rescue the princess.</p>
+<p>The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.</p>
+<p>Some of the rooms are guarded by demons (represented by negative integers), so the knight loses health upon entering these rooms; other rooms are either empty (represented as 0) or contain magic orbs that increase the knight’s health (represented by positive integers).</p>
+<p>To reach the princess as quickly as possible, the knight decides to move only rightward or downward in each step.</p>
+<p>Return the knight’s minimum initial health so that he can rescue the princess.</p>
+<p>Note that any room can contain threats or power-ups, even the first room the knight enters and the bottom-right room where the princess is imprisoned.</p>
+<p><strong>Approach</strong></p>
+<ul class="simple">
+<li><p>Keep a 2D array rst where rst[i][j] means the min health it required to enter dungeon[i][j].</p></li>
+<li><p>Suppose we are going from room A to room B. The minimum health required to enter room B is t and suppose dungeon[A] is c. Then the health requirement of room A is h + c = t. If c is larger than t, e.g. if we can gain 30 health at room A and B requires only 10 health, the health requirement of A is then 1. So h = max(1, t-c).</p></li>
+<li><p>For any room, we can either go right or go down, choose whichever is less or whichever is go-able.</p></li>
+<li><p>Then we just traverse from the bottom-right up till top-left then output rst[0][0];</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">calculateMinimumHP</span><span class="p">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">dungeon</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">dungeon</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">dungeon</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="c1">//System.out.println(&quot;i: &quot;+(m-1)+&quot; j: &quot;+(n-1)+&quot; rst: &quot;+rst[m-1][n-1]);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+
+            <span class="c1">// bottom-right</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">==</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">getH</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">dungeon</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// can&#39;t go right</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">getH</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">dungeon</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">==</span> <span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// can&#39;t go down</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">getH</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">dungeon</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">//rst[i][j] = Math.min(getH(rst[i+1][j], dungeon[i+1][j]), getH(rst[i][j+1], dungeon[i][j+1]));</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">getH</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">dungeon</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">),</span> <span class="n">getH</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">dungeon</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">));</span>
+            <span class="p">}</span>
+
+            <span class="c1">//System.out.println(&quot;i: &quot;+i+&quot; j: &quot;+j+&quot; rst: &quot;+rst[i][j]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">getH</span><span class="p">(</span><span class="kt">int</span> <span class="n">t</span><span class="p">,</span> <span class="kt">int</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="n">c</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>
