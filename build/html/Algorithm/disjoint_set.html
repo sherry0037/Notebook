@@ -1,0 +1,302 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Disjoint Set &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Programming" href="dynamic_programming.html" />
+    <link rel="prev" title="Backtracking" href="backtracking.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="dynamic_programming.html" title="Dynamic Programming"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Disjoint Set</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Disjoint Set</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a><ul>
+<li><a class="reference internal" href="#operations">Operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#longest-consecutive-sequence">128. Longest Consecutive Sequence</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="backtracking.html"
+                        title="previous chapter">Backtracking</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="dynamic_programming.html"
+                        title="next chapter">Dynamic Programming</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/disjoint_set.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="disjoint-set">
+<h1><a class="toc-backref" href="#id1">Disjoint Set</a><a class="headerlink" href="#disjoint-set" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#disjoint-set" id="id1">Disjoint Set</a></p>
+<ul>
+<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
+<li><p><a class="reference internal" href="#longest-consecutive-sequence" id="id3">128. Longest Consecutive Sequence</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="overview">
+<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Consider a situation with a number of persons and following tasks to be performed on them.</p>
+<p>Add a new friendship relation, i.e., a person x becomes friend of another person y.
+Find whether individual x is a friend of individual y (direct or indirect friend)</p>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>We are given 10 individuals say,</p>
+<blockquote>
+<div><p>a, b, c, d, e, f, g, h, i, j</p>
+</div></blockquote>
+<p>Following are relationships to be added.</p>
+<blockquote>
+<div><p>a &lt;-&gt; b</p>
+<p>b &lt;-&gt; d</p>
+<p>c &lt;-&gt; f</p>
+<p>c &lt;-&gt; i</p>
+<p>j &lt;-&gt; e</p>
+<p>g &lt;-&gt; j</p>
+</div></blockquote>
+<p>And given queries like whether a is a friend of d or not.</p>
+<p>We basically need to create following 4 groups and maintain a quickly accessible connection among group items:</p>
+<blockquote>
+<div><p>G1 = {a, b, d}</p>
+<p>G2 = {c, f, i}</p>
+<p>G3 = {e, g, j}</p>
+<p>G4 = {h}</p>
+</div></blockquote>
+</div>
+<section id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this headline">¶</a></h3>
+<p><strong>Find</strong> : Can be implemented by recursively traversing the parent array until we hit a node who is parent of itself.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Finds the representative of the set</span>
+<span class="c1">// that i is an element of</span>
+<span class="kt">int</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// If i is the parent of itself</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="c1">// Then i is the representative of</span>
+        <span class="c1">// this set</span>
+        <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="c1">// Else if i is not the parent of</span>
+        <span class="c1">// itself, then i is not the</span>
+        <span class="c1">// representative of his set. So we</span>
+        <span class="c1">// recursively call Find on its parent</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Union</strong>: It takes, as input, two elements. And finds the representatives of their sets using the find operation, and finally puts either one of the trees (representing the set) under the root node of the other tree, effectively merging the trees and the sets.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Unites the set that includes i</span>
+<span class="c1">// and the set that includes j</span>
+<span class="kt">void</span> <span class="nf">union</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="c1">// Find the representatives</span>
+    <span class="c1">// (or the root nodes) for the set</span>
+    <span class="c1">// that includes i</span>
+
+    <span class="kt">int</span> <span class="n">irep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">Find</span><span class="p">(</span><span class="n">i</span><span class="p">),</span>
+
+    <span class="c1">// And do the same for the set</span>
+    <span class="c1">// that includes j</span>
+    <span class="kt">int</span> <span class="n">jrep</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="na">Find</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+
+    <span class="c1">// Make the parent of i’s representative</span>
+    <span class="c1">// be j’s  representative effectively</span>
+    <span class="c1">// moving all of i’s set into j’s set)</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">Parent</span><span class="o">[</span><span class="n">irep</span><span class="o">]</span> <span class="o">=</span> <span class="n">jrep</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="longest-consecutive-sequence">
+<h2><a class="toc-backref" href="#id3">128. Longest Consecutive Sequence</a><a class="headerlink" href="#longest-consecutive-sequence" title="Permalink to this headline">¶</a></h2>
+<p>[Note: this is faster using HashSet]</p>
+<p>Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.</p>
+<p>You must write an algorithm that runs in O(n) time.</p>
+<p><strong>Approach</strong>: Add all the nums to a Hash Set. Then for each num, determine if it is the start of a sequence (n-1 is not in the set), then keep counting while n+1 is in the set.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [100,4,200,1,3,2]</p>
+<p>Output: 4</p>
+<p>Explanation: The longest consecutive elements sequence is [1, 2, 3, 4]. Therefore its length is 4.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [0,3,7,2,5,8,4,6,0,1]</p>
+<p>Output: 9</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>0 &lt;= nums.length &lt;= 105</p>
+<p>-109 &lt;= nums[i] &lt;= 109</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">DisjointSet</span> <span class="p">{</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">parent</span><span class="p">;</span>
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">size</span><span class="p">;</span>
+
+        <span class="kd">public</span> <span class="nf">DisjointSet</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">parent</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">size</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="kd">public</span> <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">parent</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="n">size</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Finds the representative of the set that i is an element in</span>
+        <span class="c1">// If i is not in the set, return null</span>
+        <span class="n">Integer</span> <span class="nf">find</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">i</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="n">i</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">parent</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="kc">null</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Combine the set i and set j. Make i&#39;s rep the new rep.</span>
+        <span class="kt">void</span> <span class="nf">union</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">,</span> <span class="kt">int</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">iRep</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="kt">int</span> <span class="n">jRep</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">iRep</span> <span class="o">==</span> <span class="n">jRep</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">parent</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">jRep</span><span class="p">,</span> <span class="n">iRep</span><span class="p">);</span>
+            <span class="n">size</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">iRep</span><span class="p">,</span> <span class="n">size</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">jRep</span><span class="p">)</span><span class="o">+</span><span class="n">size</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">iRep</span><span class="p">));</span>
+            <span class="n">size</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">jRep</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">longestConsecutive</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">DisjointSet</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">DisjointSet</span><span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="n">rst</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Integer</span> <span class="n">iRep</span> <span class="o">=</span> <span class="n">set</span><span class="p">.</span><span class="na">find</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">iRep</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">set</span><span class="p">.</span><span class="na">union</span><span class="p">(</span><span class="n">iRep</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+                <span class="n">rst</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="na">size</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">iRep</span><span class="p">),</span> <span class="n">rst</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+<span class="c1">//         for (int i : set.parent.keySet()) {</span>
+<span class="c1">//           System.out.println(&quot;key: &quot; + i + &quot; value: &quot; + set.parent.get(i));</span>
+<span class="c1">//         }</span>
+
+<span class="c1">//         System.out.println(&quot;============&quot;);</span>
+
+<span class="c1">//         for (int i : set.size.keySet()) {</span>
+<span class="c1">//           System.out.println(&quot;key: &quot; + i + &quot; value: &quot; + set.size.get(i));</span>
+<span class="c1">//         }</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="dynamic_programming.html" title="Dynamic Programming"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Disjoint Set</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>
