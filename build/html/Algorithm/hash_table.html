@@ -42,6 +42,8 @@
 <li><a class="reference internal" href="#">Hash</a><ul>
 <li><a class="reference internal" href="#first-missing-positive">41. First Missing Positive</a></li>
 <li><a class="reference internal" href="#longest-consecutive-sequence">128. Longest Consecutive Sequence</a></li>
+<li><a class="reference internal" href="#friends-of-appropriate-ages">825. Friends Of Appropriate Ages</a></li>
+<li><a class="reference internal" href="#hand-of-straights">846. Hand of Straights</a></li>
 </ul>
 </li>
 </ul>
@@ -86,6 +88,8 @@
 <ul>
 <li><p><a class="reference internal" href="#first-missing-positive" id="id2">41. First Missing Positive</a></p></li>
 <li><p><a class="reference internal" href="#longest-consecutive-sequence" id="id3">128. Longest Consecutive Sequence</a></p></li>
+<li><p><a class="reference internal" href="#friends-of-appropriate-ages" id="id4">825. Friends Of Appropriate Ages</a></p></li>
+<li><p><a class="reference internal" href="#hand-of-straights" id="id5">846. Hand of Straights</a></p></li>
 </ul>
 </li>
 </ul>
@@ -183,6 +187,145 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">maxL</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="friends-of-appropriate-ages">
+<h2><a class="toc-backref" href="#id4">825. Friends Of Appropriate Ages</a><a class="headerlink" href="#friends-of-appropriate-ages" title="Permalink to this headline">¶</a></h2>
+<p>There are n persons on a social media website. You are given an integer array ages where ages[i] is the age of the ith person.</p>
+<p>A Person x will not send a friend request to a person y (x != y) if any of the following conditions is true:</p>
+<div class="topic">
+<p class="topic-title">Conditions</p>
+<p>age[y] &lt;= 0.5 * age[x] + 7</p>
+<p>age[y] &gt; age[x]</p>
+<p>age[y] &gt; 100 &amp;&amp; age[x] &lt; 100</p>
+</div>
+<p>Otherwise, x will send a friend request to y.</p>
+<p>Note that if x sends a request to y, y will not necessarily send a request to x. Also, a person will not send a friend request to themself.</p>
+<p>Return the total number of friend requests made.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: ages = [16,16]</p>
+<p>Output: 2</p>
+<p>Explanation: 2 people friend request each other.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: ages = [16,17,18]</p>
+<p>Output: 2</p>
+<p>Explanation: Friend requests are made 17 -&gt; 16, 18 -&gt; 17.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: ages = [20,30,100,110,120]</p>
+<p>Output: 3</p>
+<p>Explanation: Friend requests are made 110 -&gt; 100, 120 -&gt; 110, 120 -&gt; 100.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == ages.length</p>
+<p>1 &lt;= n &lt;= 2 * 104</p>
+<p>1 &lt;= ages[i] &lt;= 120</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numFriendRequests</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">ages</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">people</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">121</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">a</span> <span class="p">:</span> <span class="n">ages</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">people</span><span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">people</span><span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="o">=</span> <span class="n">people</span><span class="o">[</span><span class="n">a</span><span class="o">]+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">people</span><span class="o">[</span><span class="n">a</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">counts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">x</span> <span class="p">:</span> <span class="n">ages</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//System.out.println(&quot;x: &quot; + x);</span>
+        <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">7</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">max</span> <span class="o">=</span> <span class="n">x</span><span class="o">&lt;</span><span class="mi">100</span><span class="o">?</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span><span class="n">x</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">y</span><span class="o">=</span><span class="n">min</span><span class="p">;</span> <span class="n">y</span><span class="o">&lt;=</span><span class="n">max</span><span class="p">;</span> <span class="n">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//System.out.println(&quot;y: &quot; + y);</span>
+            <span class="n">counts</span> <span class="o">+=</span> <span class="n">people</span><span class="o">[</span><span class="n">y</span><span class="o">]</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">==</span><span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">counts</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="c1">//System.out.println(&quot;C: &quot; + counts);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">counts</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="hand-of-straights">
+<h2><a class="toc-backref" href="#id5">846. Hand of Straights</a><a class="headerlink" href="#hand-of-straights" title="Permalink to this headline">¶</a></h2>
+<p>Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size groupSize, and consists of groupSize consecutive cards.</p>
+<p>Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true if she can rearrange the cards, or false otherwise.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: hand = [1,2,3,6,2,3,4,7,8], groupSize = 3</p>
+<p>Output: true</p>
+<p>Explanation: Alice’s hand can be rearranged as [1,2,3],[2,3,4],[6,7,8]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: hand = [1,2,3,4,5], groupSize = 4</p>
+<p>Output: false</p>
+<p>Explanation: Alice’s hand can not be rearranged into groups of 4.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= hand.length &lt;= 104</p>
+<p>0 &lt;= hand[i] &lt;= 109</p>
+<p>1 &lt;= groupSize &lt;= hand.length</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isNStraightHand</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">hand</span><span class="p">,</span> <span class="kt">int</span> <span class="n">groupSize</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hand</span><span class="p">.</span><span class="na">length</span><span class="o">%</span><span class="n">groupSize</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">counts</span> <span class="o">=</span> <span class="k">new</span> <span class="n">TreeMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">card</span> <span class="p">:</span> <span class="n">hand</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">card</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">counts</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">card</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="n">counts</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">card</span><span class="p">,</span> <span class="n">k</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">counts</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">card</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// print(counts);</span>
+
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">counts</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">iterator</span><span class="p">().</span><span class="na">next</span><span class="p">();</span>
+        <span class="c1">// System.out.println(&quot;i: &quot;+i);</span>
+        <span class="c1">// print(counts);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">groupSize</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">counts</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">groupSize</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">counts</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">counts</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">counts</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">,</span> <span class="n">counts</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="n">TreeMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">counts</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="p">:</span> <span class="n">counts</span><span class="p">.</span><span class="na">keySet</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Key: &quot;</span><span class="o">+</span><span class="n">k</span><span class="o">+</span><span class="s">&quot; value: &quot;</span><span class="o">+</span><span class="n">counts</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">k</span><span class="p">));</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
