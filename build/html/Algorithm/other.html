@@ -1,0 +1,169 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Other &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Sliding Windows" href="sliding_windows.html" />
+    <link rel="prev" title="Hash" href="hash_table.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hash_table.html" title="Hash"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Other</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Other</a><ul>
+<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hash_table.html"
+                        title="previous chapter">Hash</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sliding_windows.html"
+                        title="next chapter">Sliding Windows</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/other.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="other">
+<h1>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h1>
+<section id="find-minimum-in-rotated-sorted-array">
+<h2>153. Find Minimum in Rotated Sorted Array<a class="headerlink" href="#find-minimum-in-rotated-sorted-array" title="Permalink to this headline">¶</a></h2>
+<p><strong>Faster way is to do binary search. See the Binary Search page.</strong></p>
+<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:</p>
+<p>[4,5,6,7,0,1,2] if it was rotated 4 times.</p>
+<p>[0,1,2,4,5,6,7] if it was rotated 7 times.</p>
+<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
+<p>Given the sorted rotated array nums of unique elements, return the minimum element of this array.</p>
+<p>You must write an algorithm that runs in O(log n) time.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [3,4,5,1,2]</p>
+<p>Output: 1</p>
+<p>Explanation: The original array was [1,2,3,4,5] rotated 3 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [4,5,6,7,0,1,2]</p>
+<p>Output: 0</p>
+<p>Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [11,13,15,17]</p>
+<p>Output: 11</p>
+<p>Explanation: The original array was [11,13,15,17] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == nums.length</p>
+<p>1 &lt;= n &lt;= 5000</p>
+<p>-5000 &lt;= nums[i] &lt;= 5000</p>
+<p>All the integers of nums are unique.</p>
+<p>nums is sorted and rotated between 1 and n times.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rotateBack</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateBack</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hash_table.html" title="Hash"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Other</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>

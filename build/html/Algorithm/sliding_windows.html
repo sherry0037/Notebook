@@ -17,7 +17,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Tree" href="tree.html" />
-    <link rel="prev" title="Backtracking" href="backtracking.html" /> 
+    <link rel="prev" title="Other" href="other.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,7 +29,7 @@
           <a href="tree.html" title="Tree"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="backtracking.html" title="Backtracking"
+          <a href="other.html" title="Other"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Sliding Windows</a></li> 
@@ -41,13 +41,14 @@
   <ul>
 <li><a class="reference internal" href="#">Sliding Windows</a><ul>
 <li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#count-number-of-nice-subarrays">1248. Count Number of Nice Subarrays</a></li>
 </ul>
 </li>
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="backtracking.html"
-                        title="previous chapter">Backtracking</a></p>
+  <p class="topless"><a href="other.html"
+                        title="previous chapter">Other</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="tree.html"
                         title="next chapter">Tree</a></p>
@@ -104,6 +105,97 @@
 <li><p>Return result.</p></li>
 </ul>
 </section>
+<section id="count-number-of-nice-subarrays">
+<h2>1248. Count Number of Nice Subarrays<a class="headerlink" href="#count-number-of-nice-subarrays" title="Permalink to this headline">¶</a></h2>
+<p>Given an array of integers nums and an integer k. A continuous subarray is called nice if there are k odd numbers on it.</p>
+<p>Return the number of nice sub-arrays.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,1,2,1,1], k = 3</p>
+<p>Output: 2</p>
+<p>Explanation: The only sub-arrays with 3 odd numbers are [1,1,2,1] and [1,2,1,1].</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [2,4,6], k = 1</p>
+<p>Output: 0</p>
+<p>Explanation: There is no odd numbers in the array.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [2,2,2,1,2,2,1,2,2,2], k = 2</p>
+<p>Output: 16</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 50000</p>
+<p>1 &lt;= nums[i] &lt;= 10^5</p>
+<p>1 &lt;= k &lt;= nums.length</p>
+</div>
+<p><strong>Notes</strong>:</p>
+<ol class="arabic">
+<li><p>We first expand the window to the right until we get k odd numbers.</p></li>
+<li><p>Then we start to reduce the window from the left, at the same time increasing a local counter <code class="docutils literal notranslate"><span class="pre">currentRst</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For example, if our first window is [2, 2, 2, 1, 2, 2, 1]</p></li>
+<li><p>As we move the left pointer, we get [2, 2, 1, 2, 2, 1], [2, 1, 2, 2, 1], [1, 2, 2, 1].</p></li>
+<li><p>Our local counter is now 4.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Now our left counter is right after the first 1, making the window [2, 2, 1]. This means we start to move the right pointer again.</p></li>
+<li><p>If nums[i] is even, that means we need to increase <code class="docutils literal notranslate"><span class="pre">rst</span></code> by <code class="docutils literal notranslate"><span class="pre">currentRst</span></code>. This is because we can append the new even number to the previously obtained currentRst number of sequences to make new currentRst number of sequences.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For example, if <code class="docutils literal notranslate"><span class="pre">i</span></code> is again a 2, we add 4 more counts to <code class="docutils literal notranslate"><span class="pre">rst</span></code>. The 4 new sequences are: [2, 2, 2, 1, 2, 2, 1, 2], [2, 2, 1, 2, 2, 1, 2], [2, 1, 2, 2, 1, 2], [1, 2, 2, 1, 2]. (note we add the 2 to the end of the previous 4 sequences)</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>If nums[i] is odd, we <strong>cannot</strong> increase <code class="docutils literal notranslate"><span class="pre">rst</span></code> by <code class="docutils literal notranslate"><span class="pre">currentRst</span></code>. Instead, we need to reset <code class="docutils literal notranslate"><span class="pre">currentRst</span></code> to 0 because the previous sequences are useless now (if we append an odd number at the end, the count will exceed the limit)</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For example, if <code class="docutils literal notranslate"><span class="pre">i</span></code> is a 1, we need to reset <code class="docutils literal notranslate"><span class="pre">currentRst</span></code> to 0. Because we cannot count [2, 2, 2, 1, 2, 2, 1, 1], [2, 2, 1, 2, 2, 1, 1], [2, 1, 2, 2, 1, 1], [1, 2, 2, 1, 1] to the result.</p></li>
+<li><p>In fact, now the window is a complete new window [2, 2, 1, 1], and in the while loop when we reduce the window, we will count the new sequences induced in this new window.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numberOfSubarrays</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">k</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">currentOdd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">currentRst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//System.out.println(&quot;i: &quot; + i);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">currentOdd</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">currentRst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//System.out.println(&quot;currentOdd!: &quot;+currentOdd);</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="n">currentOdd</span><span class="o">&gt;=</span><span class="n">k</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">currentRst</span><span class="o">++</span><span class="p">;</span>
+            <span class="c1">//System.out.println(&quot;j: &quot; + j);</span>
+            <span class="c1">//System.out.println(&quot;currentRst: &quot;+currentRst);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">currentOdd</span><span class="o">--</span><span class="p">;</span>
+
+            <span class="p">}</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">rst</span> <span class="o">+=</span> <span class="n">currentRst</span><span class="p">;</span>
+
+        <span class="c1">//System.out.println(&quot;rst: &quot;+rst);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -123,7 +215,7 @@
           <a href="tree.html" title="Tree"
              >next</a> |</li>
         <li class="right" >
-          <a href="backtracking.html" title="Backtracking"
+          <a href="other.html" title="Other"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Sliding Windows</a></li> 

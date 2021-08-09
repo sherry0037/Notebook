@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Binary Search &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Disjoint Set" href="disjoint_set.html" />
+    <link rel="prev" title="Backtracking" href="backtracking.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="disjoint_set.html" title="Disjoint Set"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Binary Search</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Binary Search</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#sqrt-x">69. Sqrt(x)</a></li>
+<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="backtracking.html"
+                        title="previous chapter">Backtracking</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="disjoint_set.html"
+                        title="next chapter">Disjoint Set</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/binary_search.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="binary-search">
+<h1>Binary Search<a class="headerlink" href="#binary-search" title="Permalink to this headline">¶</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>.</p>
+</section>
+<section id="sqrt-x">
+<h2>69. Sqrt(x)<a class="headerlink" href="#sqrt-x" title="Permalink to this headline">¶</a></h2>
+<p>Given a non-negative integer x, compute and return the square root of x.</p>
+<p>Since the return type is an integer, the decimal digits are truncated, and only the integer part of the result is returned.</p>
+<p>Note: You are not allowed to use any built-in exponent function or operator, such as pow(x, 0.5) or x ** 0.5.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: x = 4</p>
+<p>Output: 2</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: x = 8</p>
+<p>Output: 2</p>
+<p>Explanation: The square root of 8 is 2.82842…, and since the decimal part is truncated, 2 is returned.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>0 &lt;= x &lt;= 231 - 1</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">mySqrt</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">long</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">long</span> <span class="n">j</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">i</span> <span class="o">+</span> <span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">mid</span> <span class="o">==</span> <span class="n">mid</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// Need to use x/mid instead of mid*mid</span>
+            <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">mid</span> <span class="o">&gt;</span> <span class="n">mid</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="o">/</span><span class="n">mid</span> <span class="o">&lt;</span> <span class="n">mid</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="n">j</span><span class="p">;</span> <span class="c1">// Output is j because when mid^2 &gt; x and j-1, j is left of i</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="find-minimum-in-rotated-sorted-array">
+<h2>153. Find Minimum in Rotated Sorted Array<a class="headerlink" href="#find-minimum-in-rotated-sorted-array" title="Permalink to this headline">¶</a></h2>
+<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:</p>
+<p>[4,5,6,7,0,1,2] if it was rotated 4 times.</p>
+<p>[0,1,2,4,5,6,7] if it was rotated 7 times.</p>
+<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
+<p>Given the sorted rotated array nums of unique elements, return the minimum element of this array.</p>
+<p>You must write an algorithm that runs in O(log n) time.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [3,4,5,1,2]</p>
+<p>Output: 1</p>
+<p>Explanation: The original array was [1,2,3,4,5] rotated 3 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [4,5,6,7,0,1,2]</p>
+<p>Output: 0</p>
+<p>Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [11,13,15,17]</p>
+<p>Output: 11</p>
+<p>Explanation: The original array was [11,13,15,17] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == nums.length</p>
+<p>1 &lt;= n &lt;= 5000</p>
+<p>-5000 &lt;= nums[i] &lt;= 5000</p>
+<p>All the integers of nums are unique.</p>
+<p>nums is sorted and rotated between 1 and n times.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">nums</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">mid</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">nums</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]&lt;</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">mid</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="disjoint_set.html" title="Disjoint Set"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Binary Search</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>
