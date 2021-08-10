@@ -154,3 +154,86 @@ You must write an algorithm that runs in O(log n) time.
         return nums[j];
         
     }
+
+--------------------------------
+287. Find the Duplicate Number
+--------------------------------
+
+Given an array of integers nums containing n + 1 integers where each integer is in the range [1, n] inclusive.
+
+There is only one repeated number in nums, return this repeated number.
+
+You must solve the problem without modifying the array nums and uses only constant extra space.
+
+ 
+
+.. topic:: Example 1
+
+    Input: nums = [1,3,4,2,2]
+
+    Output: 2
+
+.. topic:: Example 2
+
+    Input: nums = [3,1,3,4,2]
+
+    Output: 3
+
+.. topic:: Example 3
+
+    Input: nums = [1,1]
+
+    Output: 1
+
+.. topic:: Example 4
+
+    Input: nums = [1,1,2]
+
+    Output: 1
+ 
+.. topic:: Constraints
+
+    1 <= n <= 105
+
+    nums.length == n + 1
+
+    1 <= nums[i] <= n
+
+    All the integers in nums appear only once except for precisely one integer which appears two or more times.
+
+**Approach**: Use binary search to find the number between 1 to n.
+
+- Given a mid point m, we count the numbers that are less or equal to m. If the number is greater than m, that means our target number must be smaller than m.
+
+    - e.g. For [1, 3, 4, 2, 2], we first test m = 2. There are 3 numbers (1,2,2) less or equal to 2. That means the target number is between 2 to 1 to 2. Because by pigeon hole principle if we want to fit 3 number into 2 boxes, there must be a repetition in them.
+
+    - e.g. For [1, 3, 3, 2, 4], we again test with m = 2. There are 2 numbers (1, 2) less or equal to 2. That means we can fix these two numbers into 2 boxes perfectly and there's no repetition in them. Then repetition can only happen for the other part: from 3 to 4.
+
+.. code-block:: java
+
+    public int findDuplicate(int[] nums) {
+        int i = 0;
+        int j = nums.length-1;
+        int mid;
+        
+        while (i<j) {
+            mid = (i+j)/2;
+            
+            int count = 0;
+            
+            for (int k=0; k<nums.length; k++) {
+                if (nums[k]<=mid) {
+                    count++;
+                }
+            }
+            
+            if (count > mid) {
+                j = mid;
+            } else {
+                i = mid+1;
+            }
+            
+        }
+        return i;
+    }      
+

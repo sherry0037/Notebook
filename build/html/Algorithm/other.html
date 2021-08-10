@@ -41,6 +41,8 @@
   <ul>
 <li><a class="reference internal" href="#">Other</a><ul>
 <li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array</a></li>
+<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array-ii">154. Find Minimum in Rotated Sorted Array II</a></li>
+<li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
 </ul>
 </li>
 </ul>
@@ -129,6 +131,110 @@
         <span class="p">}</span>
         <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="find-minimum-in-rotated-sorted-array-ii">
+<h2>154. Find Minimum in Rotated Sorted Array II<a class="headerlink" href="#find-minimum-in-rotated-sorted-array-ii" title="Permalink to this headline">¶</a></h2>
+<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,4,4,5,6,7] might become:</p>
+<p>[4,5,6,7,0,1,4] if it was rotated 4 times.</p>
+<p>[0,1,4,4,5,6,7] if it was rotated 7 times.</p>
+<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
+<p>Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.</p>
+<p>You must decrease the overall operation steps as much as possible.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,3,5]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [2,2,2,0,1]</p>
+<p>Output: 0</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == nums.length</p>
+<p>1 &lt;= n &lt;= 5000</p>
+<p>-5000 &lt;= nums[i] &lt;= 5000</p>
+<p>nums is sorted and rotated between 1 and n times.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="next-greater-element-i">
+<h2>496. Next Greater Element I<a class="headerlink" href="#next-greater-element-i" title="Permalink to this headline">¶</a></h2>
+<p>The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.</p>
+<p>You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.</p>
+<p>For each 0 &lt;= i &lt; nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.</p>
+<p>Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums1 = [4,1,2], nums2 = [1,3,4,2]</p>
+<p>Output: [-1,3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+<li><p>1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.</p></li>
+<li><p>2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums1 = [2,4], nums2 = [1,2,3,4]</p>
+<p>Output: [3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.</p></li>
+<li><p>4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</p>
+<p>0 &lt;= nums1[i], nums2[i] &lt;= 104</p>
+<p>All integers in nums1 and nums2 are unique.</p>
+<p>All the integers of nums1 also appear in nums2.</p>
+</div>
+<p>Follow up: Could you find an O(nums1.length + nums2.length) solution?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">boolean</span> <span class="n">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">:</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">!=</span><span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
