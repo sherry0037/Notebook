@@ -1,0 +1,255 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Stack &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tree" href="tree.html" />
+    <link rel="prev" title="Sliding Windows" href="sliding_windows.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tree.html" title="Tree"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Stack</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Stack</a><ul>
+<li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
+<li><a class="reference internal" href="#next-greater-element-ii">503. Next Greater Element II</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sliding_windows.html"
+                        title="previous chapter">Sliding Windows</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tree.html"
+                        title="next chapter">Tree</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/stack.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="stack">
+<h1>Stack<a class="headerlink" href="#stack" title="Permalink to this headline">¶</a></h1>
+<section id="next-greater-element-i">
+<h2>496. Next Greater Element I<a class="headerlink" href="#next-greater-element-i" title="Permalink to this headline">¶</a></h2>
+<p>The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.</p>
+<p>You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.</p>
+<p>For each 0 &lt;= i &lt; nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.</p>
+<p>Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums1 = [4,1,2], nums2 = [1,3,4,2]</p>
+<p>Output: [-1,3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+<li><p>1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.</p></li>
+<li><p>2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums1 = [2,4], nums2 = [1,2,3,4]</p>
+<p>Output: [3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.</p></li>
+<li><p>4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</p>
+<p>0 &lt;= nums1[i], nums2[i] &lt;= 104</p>
+<p>All integers in nums1 and nums2 are unique.</p>
+<p>All the integers of nums1 also appear in nums2.</p>
+</div>
+<p>Follow up: Could you find an O(nums1.length + nums2.length) solution?</p>
+<p><strong>Approach:</strong></p>
+<ul>
+<li><p>We set up a LIFO stack to get the next greater element for all of the numbers in nums2. The stack will be in a descending order (the bottom of the stack is always the largest).</p></li>
+<li><p>Traverse from the right of nums2. Suppose the current index is j:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>If the stack is empty, we know that there’s no element greater than the current value nums2[j].</p></li>
+<li><p>If the top of the stack is greater than nums2[j], we know that this is the next greater element for j.</p></li>
+<li><p>If the top of the stack is less than nums2[j], we need to remove the top of the stack until the top of the stack if greater than nums2[j] or is empty.</p></li>
+<li><p>e.g. Suppose nums2 = [3, 4, 1]. When j = 2, the stack is empty so we put 1 in the stack and mark the nge of 1 as -1. Then when j = 1, the stack is [1]; 1 &lt; 4; so we remove 1 and add 4 into the stack and mark 4 as -1. Then when j = 0, the stack is [4]; 3 &lt; 4 so we mark the nge of 3 as 4 and the stack remains as [4]. We can remove the lesser numbers in the stack because say we have 4 at the bottom of the stack, any number to it’s right that is less than 4 will not be considered as the nge of any number before 4. So it’s safe to remove them when we are at 4.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Integer</span><span class="o">&gt;</span> <span class="n">nge</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">nums2</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">nge</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">nums2</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">nums2</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">nge</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">nums2</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">());</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">nums2</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="c1">// for (Map.Entry&lt;Integer, Integer&gt; entry : nge.entrySet()) {</span>
+    <span class="c1">//     System.out.println(entry.getKey() + &quot;/&quot; + entry.getValue());</span>
+    <span class="c1">// }</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span> <span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nge</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="next-greater-element-ii">
+<h2>503. Next Greater Element II<a class="headerlink" href="#next-greater-element-ii" title="Permalink to this headline">¶</a></h2>
+<p>Given a circular integer array nums (i.e., the next element of nums[nums.length - 1] is nums[0]), return the next greater number for every element in nums.</p>
+<p>The next greater number of a number x is the first greater number to its traversing-order next in the array, which means you could search circularly to find its next greater number. If it doesn’t exist, return -1 for this number.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,2,1]</p>
+<p>Output: [2,-1,2]</p>
+<p>Explanation: The first 1’s next greater number is 2;</p>
+<p>The number 2 can’t find next greater number.</p>
+<p>The second 1’s next greater number needs to search circularly, which is also 2.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [1,2,3,4,3]</p>
+<p>Output: [2,3,4,-1,4]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 104</p>
+<p>-109 &lt;= nums[i] &lt;= 109</p>
+</div>
+<p><strong>Approach:</strong> The same idea as 496. Next Greater Element I. For circular check, just duplicate the input array. For example, if nums = [1, 2, 1], we just think of it as [1, 2, 1, 1, 2, 1] then do the calculation just as question 496.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextGreaterElements</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">nge</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+             <span class="n">nge</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span> <span class="o">&gt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">%</span><span class="n">n</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">nge</span><span class="o">[</span><span class="n">j</span><span class="o">%</span><span class="n">n</span><span class="o">]</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">%</span><span class="n">n</span><span class="o">]</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">nge</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tree.html" title="Tree"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sliding_windows.html" title="Sliding Windows"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Stack</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>
