@@ -237,3 +237,123 @@ You must solve the problem without modifying the array nums and uses only consta
         return i;
     }      
 
+------------------------------
+658. Find K Closest Elements
+------------------------------
+
+Given a sorted integer array arr, two integers k and x, return the k closest integers to x in the array. The result should also be sorted in ascending order.
+
+An integer a is closer to x than an integer b if:
+
+\|a - x\| < \|b - x\|, or
+\|a - x\| == \|b - x\| and a < b
+ 
+
+.. topic:: Example 1
+
+    Input: arr = [1,2,3,4,5], k = 4, x = 3
+
+    Output: [1,2,3,4]
+
+.. topic:: Example 2
+
+    Input: arr = [1,2,3,4,5], k = 4, x = -1
+
+    Output: [1,2,3,4]
+ 
+
+.. topic:: Constraints
+
+    1 <= k <= arr.length
+
+    1 <= arr.length <= 104
+
+    arr is sorted in ascending order.
+
+    -104 <= arr[i], x <= 104
+
+**Approach**: Use binary search to find position of x in arr, or if it's not in the arr, find the position of the closest number. Then add this number to the rst. Create two pointers i, j, starting from the left and right of this number. Keep comparing the distance and add the closer one to the rst.
+
+.. code-block:: java
+
+    public List<Integer> findClosestElements(int[] arr, int k, int x) {
+        
+        if (x < arr[0]) {
+            return toList(Arrays.copyOfRange(arr, 0, k));
+        }
+        
+        if (x > arr[arr.length-1]) {
+            return toList(Arrays.copyOfRange(arr, arr.length-k, arr.length));
+        }
+        
+        int px = binarySearch(arr, x);
+        
+        int i = px-1;
+        int j = px+1;
+        int disI = -1;
+        int disJ = -1;
+        List<Integer> rst = new ArrayList<>();
+        rst.add(arr[px]);
+        
+        while (rst.size() < k) {
+            if (i >= 0) {
+                disI = x - arr[i];
+                //System.out.println("i: " + i + " px: "+px + " disI: " + disI);
+            } else {
+                disI = Integer.MAX_VALUE;
+            }
+            
+            if (j <= arr.length - 1) {
+                disJ = arr[j] - x;
+                //System.out.println("j: " + j + " px: "+px + " disJ: " + disJ);
+            } else {
+                disJ = Integer.MAX_VALUE;
+            }
+            
+            if (disI <= disJ) {
+                rst.add(0, arr[i]);
+                i--;
+            } else {
+                rst.add(arr[j]);
+                j++;
+            }   
+        }
+        
+        return rst;
+    }
+    
+    private int binarySearch(int[] arr, int x) {
+        int i = 0;
+        int j = arr.length;
+        int mid;
+        
+        while (i<j) {
+            mid = (i+j)/2;
+            //System.out.println("i: " + i + " j: " + j + " mid: "+mid);
+            if (arr[mid] < x) {
+                i = mid + 1;
+            } else if (arr[mid] > x){
+                j = mid;
+            } else {
+                return mid;
+            }
+        }
+        
+        if (j==arr.length) {
+            return -1;
+        }
+        
+        if (arr[j] - x >= x-arr[j-1]) {
+            return j-1;
+        } else {
+            return j;
+        }
+    }
+    
+    private List<Integer> toList(int[] ints) {
+        List<Integer> intList = new ArrayList<Integer>(ints.length);
+        for (int i : ints) {
+            intList.add(i);
+        }
+        return intList;
+    }
