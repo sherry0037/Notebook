@@ -8,6 +8,79 @@ Overview
 
 .
 
+----------------------------
+35. Search Insert Position
+----------------------------
+
+Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were inserted in order.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+.. topic:: Example 1
+
+    Input: nums = [1,3,5,6], target = 5
+
+    Output: 2
+
+.. topic:: Example 2
+
+    Input: nums = [1,3,5,6], target = 2
+
+    Output: 1
+
+.. topic:: Example 3
+
+    Input: nums = [1,3,5,6], target = 7
+
+    Output: 4
+
+.. topic:: Example 4
+
+    Input: nums = [1,3,5,6], target = 0
+
+    Output: 0
+
+.. topic:: Example 5
+
+    Input: nums = [1], target = 0
+
+    Output: 0
+ 
+.. topic:: Constraints
+
+    1 <= nums.length <= 104
+
+    -104 <= nums[i] <= 104
+
+    nums contains distinct values sorted in ascending order.
+
+    -104 <= target <= 104
+
+**Approach**: Invariant is rst (- [i, j). 
+
+    - Hence j is initialized to nums.length. While loop is (i<j) and j = mid. Finally return j.
+
+.. code-block:: java
+
+    public int searchInsert(int[] nums, int target) {
+        int i = 0;
+        int j = nums.length;
+        int mid;
+        
+        while (i<j) {
+            mid = (i+j)/2;
+            if (nums[mid] == target) {
+                return mid;
+            } else if (nums[mid] < target) {
+                i = mid + 1;
+            } else {
+                j = mid;
+            }
+        }
+        
+        return j;
+    }
+
 -------------
 69. Sqrt(x)
 -------------
@@ -356,4 +429,131 @@ An integer a is closer to x than an integer b if:
             intList.add(i);
         }
         return intList;
+    }
+
+-------------------------------------------------------------
+34. Find First and Last Position of Element in Sorted Array
+-------------------------------------------------------------
+
+Given an array of integers nums sorted in ascending order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+
+.. topic:: Example 1
+
+    Input: nums = [5,7,7,8,8,10], target = 8
+
+    Output: [3,4]
+
+.. topic:: Example 2
+
+    Input: nums = [5,7,7,8,8,10], target = 6
+
+    Output: [-1,-1]
+
+.. topic:: Example 3
+
+    Input: nums = [], target = 0
+
+    Output: [-1,-1]
+
+.. topic:: Constraints
+
+    0 <= nums.length <= 105
+
+    -109 <= nums[i] <= 109
+
+    nums is a non-decreasing array.
+
+    -109 <= target <= 109
+
+**Approach**: Use binary search to find the position of one of the target, then traverse to left and right to find the range of the positions.
+
+.. code-block:: java
+
+    public int[] searchRange(int[] nums, int target) {
+        int i = 0;
+        int j = nums.length;
+        int mid;
+        int t = -1;
+        
+        while (i<j) {
+            mid = (i+j)/2;
+            if (nums[mid] == target) {
+                t = mid;
+                break;
+            } else if (nums[mid] < target) {
+                i = mid + 1;
+            } else {
+                j = mid;
+            }
+        }
+        
+        //System.out.println("t: " + t);
+        
+        if (t == -1) {
+            return new int[]{-1, -1};
+        } else {
+            int[] rst = new int[2];
+            int k = 0;
+            while (t-k >= 0 && nums[t-k] == target) {
+                k++;
+            }
+            rst[0] = t-k+1;
+            
+            k = 0;
+            while (t+k < nums.length && nums[t+k] == target) {
+                k++;
+            }
+            rst[1] = t+k-1;
+            return rst;
+        }
+    }
+
+---------------------------
+367. Valid Perfect Square
+---------------------------
+
+Given a positive integer num, write a function which returns True if num is a perfect square else False.
+
+Follow up: Do not use any built-in library function such as sqrt.
+
+.. topic:: Example 1
+
+    Input: num = 16
+
+    Output: true
+
+.. topic:: Example 2
+
+    Input: num = 14
+
+    Output: false
+ 
+.. topic:: Constraints
+
+    1 <= num <= 2^31 - 1
+
+.. code-block:: java
+
+    public boolean isPerfectSquare(int num) {      
+        int i = 1;
+        int j = num+1;
+        int mid;
+    
+        while (i<j) {
+            mid = (i+j)/2;
+            if (num/(double)mid == mid) {
+                return true;
+            } else if (num/(double)mid > mid) {
+                i = mid+1;
+            } else {
+                j = mid;
+            }
+        }
+        
+        return false;
+        
     }
