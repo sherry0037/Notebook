@@ -557,3 +557,100 @@ Follow up: Do not use any built-in library function such as sqrt.
         return false;
         
     }
+
+--------------------------------
+977. Squares of a Sorted Array
+--------------------------------
+
+**Another solution using pointers only in Array. It's about the same time and space.**
+
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+.. topic:: Example 1
+
+    Input: nums = [-4,-1,0,3,10]
+
+    Output: [0,1,9,16,100]
+
+    Explanation: After squaring, the array becomes [16,1,0,9,100].
+
+    After sorting, it becomes [0,1,9,16,100].
+
+.. topic:: Example 2
+
+    Input: nums = [-7,-3,2,3,11]
+
+    Output: [4,9,9,49,121]
+ 
+.. topic:: Constraints
+
+    1 <= nums.length <= 104
+
+    -104 <= nums[i] <= 104
+
+    nums is sorted in non-decreasing order.
+     
+
+Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?
+
+**Approach**: use binary search to find the first non-negative element in the array. Then start two pointers from there to the left and to the right, keep adding the smallest sqrt to the rst.
+
+.. code-block:: java
+
+    public int[] sortedSquares(int[] nums) {
+        int mid = binaryFindFirstNonNegative(nums);
+        //System.out.println("mid: " + mid);
+        int[] rst = new int[nums.length];
+        
+        int k=0;
+        int j = mid;
+        int i = mid-1;
+        int jsqrt = Integer.MAX_VALUE;
+        int isqrt = Integer.MAX_VALUE;
+        while (k<nums.length) {
+            if (j < nums.length && j >= 0) {
+                jsqrt = nums[j]*nums[j];
+            } else {
+                jsqrt = Integer.MAX_VALUE;
+            }
+            
+            if (i < nums.length && i >= 0) {
+                isqrt = nums[i]*nums[i];
+            } else {
+                isqrt = Integer.MAX_VALUE;
+            }
+            
+            //System.out.println(jsqrt + " " + isqrt);
+            
+            if (jsqrt <= isqrt && jsqrt != Integer.MAX_VALUE) {
+                rst[k] = jsqrt;
+                k++;
+                j++;
+            } else if (jsqrt > isqrt && isqrt != Integer.MAX_VALUE) {
+                rst[k] = isqrt;
+                k++;
+                i--;
+            }
+        }
+        
+        return rst;
+    }
+    
+    private int binaryFindFirstNonNegative(int[] nums) {
+        int i = 0;
+        int j = nums.length;
+        int mid;
+        
+        while (i<j) {
+            mid = (i+j)/2;
+            if (nums[mid] == 0) {
+                return mid;
+            } else if (nums[mid] < 0) {
+                i = mid + 1;
+            } else {
+                j = mid;
+            }
+        }
+        
+        return j;
+    }

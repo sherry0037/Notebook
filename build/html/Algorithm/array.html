@@ -1,0 +1,674 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Array &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Backtracking" href="backtracking.html" />
+    <link rel="prev" title="A Chinese Poetry Translator" href="../Project/poetry.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../Project/poetry.html" title="A Chinese Poetry Translator"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Array</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Array</a><ul>
+<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array</a></li>
+<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array-ii">154. Find Minimum in Rotated Sorted Array II</a></li>
+<li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
+<li><a class="reference internal" href="#next-greater-element-iii">556. Next Greater Element III</a></li>
+<li><a class="reference internal" href="#remove-element">27. Remove Element</a></li>
+<li><a class="reference internal" href="#move-zeroes">283. Move Zeroes</a></li>
+<li><a class="reference internal" href="#backspace-string-compare">844. Backspace String Compare</a></li>
+<li><a class="reference internal" href="#squares-of-a-sorted-array">977. Squares of a Sorted Array</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../Project/poetry.html"
+                        title="previous chapter">A Chinese Poetry Translator</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="backtracking.html"
+                        title="next chapter">Backtracking</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/array.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="array">
+<h1>Array<a class="headerlink" href="#array" title="Permalink to this headline">¶</a></h1>
+<section id="find-minimum-in-rotated-sorted-array">
+<h2>153. Find Minimum in Rotated Sorted Array<a class="headerlink" href="#find-minimum-in-rotated-sorted-array" title="Permalink to this headline">¶</a></h2>
+<p><strong>Faster way is to do binary search. See the Binary Search page.</strong></p>
+<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:</p>
+<p>[4,5,6,7,0,1,2] if it was rotated 4 times.</p>
+<p>[0,1,2,4,5,6,7] if it was rotated 7 times.</p>
+<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
+<p>Given the sorted rotated array nums of unique elements, return the minimum element of this array.</p>
+<p>You must write an algorithm that runs in O(log n) time.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [3,4,5,1,2]</p>
+<p>Output: 1</p>
+<p>Explanation: The original array was [1,2,3,4,5] rotated 3 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [4,5,6,7,0,1,2]</p>
+<p>Output: 0</p>
+<p>Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [11,13,15,17]</p>
+<p>Output: 11</p>
+<p>Explanation: The original array was [11,13,15,17] and it was rotated 4 times.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == nums.length</p>
+<p>1 &lt;= n &lt;= 5000</p>
+<p>-5000 &lt;= nums[i] &lt;= 5000</p>
+<p>All the integers of nums are unique.</p>
+<p>nums is sorted and rotated between 1 and n times.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rotateBack</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateBack</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="find-minimum-in-rotated-sorted-array-ii">
+<h2>154. Find Minimum in Rotated Sorted Array II<a class="headerlink" href="#find-minimum-in-rotated-sorted-array-ii" title="Permalink to this headline">¶</a></h2>
+<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,4,4,5,6,7] might become:</p>
+<p>[4,5,6,7,0,1,4] if it was rotated 4 times.</p>
+<p>[0,1,4,4,5,6,7] if it was rotated 7 times.</p>
+<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
+<p>Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.</p>
+<p>You must decrease the overall operation steps as much as possible.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,3,5]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [2,2,2,0,1]</p>
+<p>Output: 0</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == nums.length</p>
+<p>1 &lt;= n &lt;= 5000</p>
+<p>-5000 &lt;= nums[i] &lt;= 5000</p>
+<p>nums is sorted and rotated between 1 and n times.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="next-greater-element-i">
+<h2>496. Next Greater Element I<a class="headerlink" href="#next-greater-element-i" title="Permalink to this headline">¶</a></h2>
+<p><strong>See Stack for a better solution using stack.</strong></p>
+<p>The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.</p>
+<p>You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.</p>
+<p>For each 0 &lt;= i &lt; nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.</p>
+<p>Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums1 = [4,1,2], nums2 = [1,3,4,2]</p>
+<p>Output: [-1,3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+<li><p>1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.</p></li>
+<li><p>2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums1 = [2,4], nums2 = [1,2,3,4]</p>
+<p>Output: [3,-1]</p>
+<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.</p></li>
+<li><p>4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</p>
+<p>0 &lt;= nums1[i], nums2[i] &lt;= 104</p>
+<p>All integers in nums1 and nums2 are unique.</p>
+<p>All the integers of nums1 also appear in nums2.</p>
+</div>
+<p>Follow up: Could you find an O(nums1.length + nums2.length) solution?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">boolean</span> <span class="n">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">:</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">!=</span><span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="next-greater-element-iii">
+<h2>556. Next Greater Element III<a class="headerlink" href="#next-greater-element-iii" title="Permalink to this headline">¶</a></h2>
+<p>Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.</p>
+<p>Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: n = 12</p>
+<p>Output: 21</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: n = 21</p>
+<p>Output: -1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= n &lt;= 231 - 1</p>
+</div>
+<p><strong>Approach:</strong></p>
+<ul>
+<li><p>First traverse from right to left to find the first digit that is less than the digit at it’s right. We call it <code class="docutils literal notranslate"><span class="pre">first</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. Given 12443322, the result is 13222344. We first locate 2 in 1 <strong>2</strong> 443322.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Then we need to find the next greater element to the right of 2.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. We locate that 3 is the next greater element for 2: 1 <strong>2</strong> 443 <strong>3</strong> 22.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Swap these two</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The digits now becomes 1 <strong>3</strong> 443 <strong>2</strong> 22.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Then all the numbers to the right of <code class="docutils literal notranslate"><span class="pre">first</span></code> need to be swapped to ascending order and we are done.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>13 <strong>443222</strong> needs to be changed to 13 <strong>222344</strong>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Catch 1: if the int is already in descending order, meaning it’s already the largest, then return -1. So if we couldn’t locate <code class="docutils literal notranslate"><span class="pre">first</span></code>, we need to return -1.</p></li>
+<li><p>Catch 2: if result is greater than Integer.MAX_VALUE, we need to return -1. So we need to first convert the result into long, then compare the long version of Integer.MAX_VALUE, then output accordingly.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">digits</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="na">chars</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">).</span><span class="na">toArray</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;=</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">first</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Tried binary search but failed</span>
+<span class="c1">//         int i = first+1;</span>
+<span class="c1">//         int j = digits.length-1;</span>
+<span class="c1">//         int mid;</span>
+<span class="c1">//         while (i&lt;j) {</span>
+<span class="c1">//             mid = (i+j)/2;</span>
+<span class="c1">//             System.out.println(&quot;i: &quot;+i+&quot; j: &quot; + j + &quot; mid: &quot; + mid);</span>
+<span class="c1">//             if (digits[mid] &gt; digits[first]) {</span>
+<span class="c1">//                 i = mid;</span>
+<span class="c1">//             } else {</span>
+<span class="c1">//                 j = mid-1;</span>
+<span class="c1">//             }</span>
+<span class="c1">//         }</span>
+
+<span class="c1">//         int second = i;</span>
+
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">digits</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">digits</span><span class="o">[</span><span class="n">j</span><span class="o">]&lt;=</span><span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+
+    <span class="c1">//System.out.println(&quot;first: &quot;+first+&quot; second: &quot; + second);</span>
+    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">second</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">digits</span><span class="o">[</span><span class="n">second</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">first</span><span class="o">+</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="c1">//System.out.println(&quot;N: &quot;+N);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">temp</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
+        <span class="c1">//System.out.println(&quot;k: &quot; + k + &quot; N-k: &quot;+(N-k));</span>
+        <span class="n">digits</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">digits</span><span class="o">[</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">k</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">k</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="p">))</span> <span class="p">{</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">long</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">arrayToInt</span><span class="p">(</span><span class="n">digits</span><span class="p">);</span>
+    <span class="kt">long</span> <span class="n">max</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">&gt;</span><span class="n">max</span><span class="o">?-</span><span class="mi">1</span><span class="p">:(</span><span class="kt">int</span><span class="p">)</span><span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">long</span> <span class="nf">arrayToInt</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">StringBuilder</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
+         <span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="c1">//System.out.println(s);</span>
+    <span class="k">return</span> <span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="remove-element">
+<h2>27. Remove Element<a class="headerlink" href="#remove-element" title="Permalink to this headline">¶</a></h2>
+<p>Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The relative order of the elements may be changed.</p>
+<p>Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.</p>
+<p>Return k after placing the final result in the first k slots of nums.</p>
+<p>Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [3,2,2,3], val = 3</p>
+<p>Output: 2, nums = [2,2,_,_]</p>
+<p>Explanation: Your function should return k = 2, with the first two elements of nums being 2.</p>
+<p>It does not matter what you leave beyond the returned k (hence they are underscores).</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [0,1,2,2,3,0,4,2], val = 2</p>
+<p>Output: 5, nums = [0,1,4,0,3,_,_,_]</p>
+<p>Explanation: Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.</p>
+<p>Note that the five elements can be returned in any order.</p>
+<p>It does not matter what you leave beyond the returned k (hence they are underscores).</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>0 &lt;= nums.length &lt;= 100</p>
+<p>0 &lt;= nums[i] &lt;= 50</p>
+<p>0 &lt;= val &lt;= 100</p>
+</div>
+<p><strong>Approach</strong>: use two pointers. One to traverse the input nums, one to set the value whenever it’s not equal to val.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">removeElement</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="n">val</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">j</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="move-zeroes">
+<h2>283. Move Zeroes<a class="headerlink" href="#move-zeroes" title="Permalink to this headline">¶</a></h2>
+<p>Given an integer array nums, move all 0’s to the end of it while maintaining the relative order of the non-zero elements.</p>
+<p>Note that you must do this in-place without making a copy of the array.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [0,1,0,3,12]</p>
+<p>Output: [1,3,12,0,0]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [0]</p>
+<p>Output: [0]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 104</p>
+<p>-231 &lt;= nums[i] &lt;= 231 - 1</p>
+</div>
+<p><strong>Approach 1</strong>: Idea is the same as 27. Remove Element: use two pointers, one to traverse the input nums, one to set the value whenever it’s not equal to val.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Approach 2</strong> This is <strong>slower</strong> than approach 1. Traverse from right to left. Find the first zero, then mark the position just right to the first zero as <code class="docutils literal notranslate"><span class="pre">nonZeroPos</span></code>. Then keep traverse until meet another nonzero. Then we move all the things from the right forward.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. For [1, 0, 0, 0, 2, 3], we first find position 4, then find position 1, which means we need to move all the elements starting from 4 forward to position 1, then fill in zeros to the right. This should return [1, 2, 3, 0, 0, 0].</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">void</span> <span class="nf">moveZeroes</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">nonZeroPos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]!=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nonZeroPos</span><span class="o">!=-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// find the leftmost position of zeros</span>
+            <span class="n">moveForward</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nonZeroPos</span><span class="p">,</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+            <span class="n">nonZeroPos</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">nonZeroPos</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// find the first zero</span>
+            <span class="n">nonZeroPos</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nonZeroPos</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">moveForward</span><span class="p">(</span><span class="n">nums</span><span class="p">,</span> <span class="n">nonZeroPos</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">moveForward</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">from</span><span class="p">,</span> <span class="kt">int</span> <span class="n">to</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// [1, 0, 0, 0, 2, 3], from=4, to=1</span>
+    <span class="c1">// return [1, 2, 3, 0, 0, 0]</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">from</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">from</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">||</span> <span class="n">to</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">to</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span>
+       <span class="o">||</span> <span class="n">from</span> <span class="o">&lt;</span> <span class="n">to</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">to</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="n">from</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">to</span><span class="o">+</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">from</span><span class="o">+</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">nums</span><span class="o">[</span><span class="n">to</span><span class="o">+</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="backspace-string-compare">
+<h2>844. Backspace String Compare<a class="headerlink" href="#backspace-string-compare" title="Permalink to this headline">¶</a></h2>
+<p>Given two strings s and t, return true if they are equal when both are typed into empty text editors. ‘#’ means a backspace character.</p>
+<p>Note that after backspacing an empty text, the text will continue empty.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: s = “ab#c”, t = “ad#c”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “ac”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: s = “ab##”, t = “c#d#”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: s = “a##c”, t = “#a#c”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “c”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4</p>
+<p>Input: s = “a#c”, t = “b”</p>
+<p>Output: false</p>
+<p>Explanation: s becomes “c” while t becomes “b”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= s.length, t.length &lt;= 200</p>
+<p>s and t only contain lowercase letters and ‘#’ characters.</p>
+</div>
+<p>Follow up: Can you solve it in O(n) time and O(1) space?</p>
+<p><strong>Approach</strong>: Use two pointers, start from the right of the two strings and move leftward. If sees a ‘#’, keep moving until all the backspace are dealt with.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">backspaceCompare</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="n">String</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">t</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//System.out.println(&quot;i: &quot;+i + &quot; j: &quot;+j);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">==</span><span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">moveLeft</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+            <span class="c1">//System.out.println(&quot;i moved to: &quot;+i);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">moveLeft</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+            <span class="c1">//System.out.println(&quot;j moved to: &quot;+j);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">==</span><span class="n">t</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">j</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+                <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">moveLeft</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">j</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">==</span><span class="sc">&#39;#&#39;</span><span class="p">){</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">moveLeft</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">i</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">(</span><span class="n">i</span><span class="o">==-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">==-</span><span class="mi">1</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">moveLeft</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="kt">int</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">p</span><span class="o">=</span><span class="n">i</span><span class="p">;</span> <span class="n">p</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">p</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">count</span><span class="o">--</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">count</span><span class="o">==</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">&gt;</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">!=</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+                   <span class="k">return</span> <span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="squares-of-a-sorted-array">
+<h2>977. Squares of a Sorted Array<a class="headerlink" href="#squares-of-a-sorted-array" title="Permalink to this headline">¶</a></h2>
+<p><strong>Another solution using binary search. It’s about the same time and space.</strong></p>
+<p>Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [-4,-1,0,3,10]</p>
+<p>Output: [0,1,9,16,100]</p>
+<p>Explanation: After squaring, the array becomes [16,1,0,9,100].</p>
+<p>After sorting, it becomes [0,1,9,16,100].</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [-7,-3,2,3,11]</p>
+<p>Output: [4,9,9,49,121]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 104</p>
+<p>-104 &lt;= nums[i] &lt;= 104</p>
+<p>nums is sorted in non-decreasing order.</p>
+</div>
+<p>Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?</p>
+<p><strong>Approach</strong>: First squaring all of the elements in nums in place. Then start from the left most and right most, fill in the rst with the larger one from the right of rst.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sortedSquares</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span><span class="o">&gt;=</span><span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">k</span><span class="o">--</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="backtracking.html" title="Backtracking"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../Project/poetry.html" title="A Chinese Poetry Translator"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Array</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>

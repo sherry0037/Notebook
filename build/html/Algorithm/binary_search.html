@@ -48,6 +48,7 @@
 <li><a class="reference internal" href="#find-k-closest-elements">658. Find K Closest Elements</a></li>
 <li><a class="reference internal" href="#find-first-and-last-position-of-element-in-sorted-array">34. Find First and Last Position of Element in Sorted Array</a></li>
 <li><a class="reference internal" href="#valid-perfect-square">367. Valid Perfect Square</a></li>
+<li><a class="reference internal" href="#squares-of-a-sorted-array">977. Squares of a Sorted Array</a></li>
 </ul>
 </li>
 </ul>
@@ -555,6 +556,90 @@
 
     <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
 
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="squares-of-a-sorted-array">
+<h2>977. Squares of a Sorted Array<a class="headerlink" href="#squares-of-a-sorted-array" title="Permalink to this headline">¶</a></h2>
+<p><strong>Another solution using pointers only in Array. It’s about the same time and space.</strong></p>
+<p>Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [-4,-1,0,3,10]</p>
+<p>Output: [0,1,9,16,100]</p>
+<p>Explanation: After squaring, the array becomes [16,1,0,9,100].</p>
+<p>After sorting, it becomes [0,1,9,16,100].</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [-7,-3,2,3,11]</p>
+<p>Output: [4,9,9,49,121]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 104</p>
+<p>-104 &lt;= nums[i] &lt;= 104</p>
+<p>nums is sorted in non-decreasing order.</p>
+</div>
+<p>Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?</p>
+<p><strong>Approach</strong>: use binary search to find the first non-negative element in the array. Then start two pointers from there to the left and to the right, keep adding the smallest sqrt to the rst.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">sortedSquares</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">mid</span> <span class="o">=</span> <span class="n">binaryFindFirstNonNegative</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+    <span class="c1">//System.out.println(&quot;mid: &quot; + mid);</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">mid</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">jsqrt</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">isqrt</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">j</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">jsqrt</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]*</span><span class="n">nums</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">jsqrt</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">&amp;&amp;</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">isqrt</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]*</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">isqrt</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="c1">//System.out.println(jsqrt + &quot; &quot; + isqrt);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">jsqrt</span> <span class="o">&lt;=</span> <span class="n">isqrt</span> <span class="o">&amp;&amp;</span> <span class="n">jsqrt</span> <span class="o">!=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">jsqrt</span><span class="p">;</span>
+            <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">j</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">jsqrt</span> <span class="o">&gt;</span> <span class="n">isqrt</span> <span class="o">&amp;&amp;</span> <span class="n">isqrt</span> <span class="o">!=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">isqrt</span><span class="p">;</span>
+            <span class="n">k</span><span class="o">++</span><span class="p">;</span>
+            <span class="n">i</span><span class="o">--</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">binaryFindFirstNonNegative</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">mid</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">mid</span><span class="o">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="n">mid</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">j</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

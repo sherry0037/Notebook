@@ -166,3 +166,89 @@ The next greater number of a number x is the first greater number to its travers
         
         return nge;
     }
+
+-------------------------------
+844. Backspace String Compare
+-------------------------------
+
+Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+
+.. topic:: Example 1
+
+    Input: s = "ab#c", t = "ad#c"
+
+    Output: true
+
+    Explanation: Both s and t become "ac".
+
+.. topic:: Example 2
+
+    Input: s = "ab##", t = "c#d#"
+
+    Output: true
+
+    Explanation: Both s and t become "".
+
+.. topic:: Example 3
+
+    Input: s = "a##c", t = "#a#c"
+
+    Output: true
+
+    Explanation: Both s and t become "c".
+
+.. topic:: Example 4
+
+    Input: s = "a#c", t = "b"
+
+    Output: false
+
+    Explanation: s becomes "c" while t becomes "b".
+
+.. topic:: Constraints
+
+    1 <= s.length, t.length <= 200
+
+    s and t only contain lowercase letters and '#' characters.
+ 
+Follow up: Can you solve it in O(n) time and O(1) space? See Array for an O(1) space solution. It uses more time and more space than this solution though.
+
+**Approach**: Create two stacks and pass the strings to it. If we see a '#', remove the last added element from the stack. Then pop the elements in the two stacks to compare if they are equal.
+
+.. code-block:: java
+
+    public boolean backspaceCompare(String s, String t) {
+        Stack<Character> stackS = new Stack<>();
+        Stack<Character> stackT = new Stack<>();
+        
+        passStack(stackS, s);
+        passStack(stackT, t);
+        
+        while (!stackS.empty() && !stackT.empty()) {
+            Character s0 = stackS.pop();
+            Character t0 = stackT.pop();
+            if (s0 != t0) {
+                return false;
+            }
+        }
+        
+        if (!stackS.empty() || !stackT.empty()) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    
+    private void passStack(Stack<Character> stack, String s) {
+        for (int i=0; i<s.length(); i++) {
+            if (s.charAt(i) == '#') {
+                if (!stack.empty()){
+                    stack.pop();
+                }
+            } else {
+                stack.push(s.charAt(i));
+            }
+        }
+    }

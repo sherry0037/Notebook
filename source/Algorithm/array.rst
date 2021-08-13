@@ -1,5 +1,5 @@
 =======
-Other
+Array
 =======
 
 -------------------------------------------
@@ -338,4 +338,318 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
         }
         //System.out.println(s);
         return Long.parseLong(s.toString());
+    }
+
+--------------------
+27. Remove Element
+--------------------
+
+Given an integer array nums and an integer val, remove all occurrences of val in nums in-place. The relative order of the elements may be changed.
+
+Since it is impossible to change the length of the array in some languages, you must instead have the result be placed in the first part of the array nums. More formally, if there are k elements after removing the duplicates, then the first k elements of nums should hold the final result. It does not matter what you leave beyond the first k elements.
+
+Return k after placing the final result in the first k slots of nums.
+
+Do not allocate extra space for another array. You must do this by modifying the input array in-place with O(1) extra memory.
+
+.. topic:: Example 1
+
+    Input: nums = [3,2,2,3], val = 3
+
+    Output: 2, nums = [2,2,_,_]
+
+    Explanation: Your function should return k = 2, with the first two elements of nums being 2.
+
+    It does not matter what you leave beyond the returned k (hence they are underscores).
+
+.. topic:: Example 2
+
+    Input: nums = [0,1,2,2,3,0,4,2], val = 2
+
+    Output: 5, nums = [0,1,4,0,3,_,_,_]
+
+    Explanation: Your function should return k = 5, with the first five elements of nums containing 0, 0, 1, 3, and 4.
+
+    Note that the five elements can be returned in any order.
+
+    It does not matter what you leave beyond the returned k (hence they are underscores).
+     
+.. topic:: Constraints
+
+    0 <= nums.length <= 100
+
+    0 <= nums[i] <= 50
+
+    0 <= val <= 100
+
+
+**Approach**: use two pointers. One to traverse the input nums, one to set the value whenever it's not equal to val.
+
+.. code-block:: java
+
+    public int removeElement(int[] nums, int val) {
+        int j = 0;
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] != val) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        return j;
+    }
+
+------------------
+283. Move Zeroes
+------------------
+
+Given an integer array nums, move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+Note that you must do this in-place without making a copy of the array.
+
+.. topic:: Example 1
+
+    Input: nums = [0,1,0,3,12]
+
+    Output: [1,3,12,0,0]
+
+.. topic:: Example 2
+
+    Input: nums = [0]
+
+    Output: [0]
+ 
+.. topic:: Constraints
+
+    1 <= nums.length <= 104
+
+    -231 <= nums[i] <= 231 - 1
+
+**Approach 1**: Idea is the same as 27. Remove Element: use two pointers, one to traverse the input nums, one to set the value whenever it's not equal to val.
+
+.. code-block:: java
+
+    public void moveZeroes(int[] nums) {
+        int j = 0;
+        for (int i=0; i<nums.length; i++) {
+            if (nums[i] != 0) {
+                nums[j] = nums[i];
+                j++;
+            }
+        }
+        
+        while (j<nums.length) {
+            nums[j] = 0;
+            j++;
+        }
+    }
+
+**Approach 2** This is **slower** than approach 1. Traverse from right to left. Find the first zero, then mark the position just right to the first zero as ``nonZeroPos``. Then keep traverse until meet another nonzero. Then we move all the things from the right forward.
+
+    - e.g. For [1, 0, 0, 0, 2, 3], we first find position 4, then find position 1, which means we need to move all the elements starting from 4 forward to position 1, then fill in zeros to the right. This should return [1, 2, 3, 0, 0, 0].
+
+.. code-block:: java
+
+    public void moveZeroes(int[] nums) {
+        int nonZeroPos = -1;
+        for (int i = nums.length-1; i>=0; i--) {
+            if (nums[i]!=0 && nonZeroPos!=-1) {
+                // find the leftmost position of zeros
+                moveForward(nums, nonZeroPos, i+1);
+                nonZeroPos = -1;
+            } else if (nums[i] == 0 && nonZeroPos == -1) {
+                // find the first zero
+                nonZeroPos = i+1;
+            }
+        }
+        
+        if (nonZeroPos != -1) {
+            moveForward(nums, nonZeroPos, 0);
+        }
+    }
+    
+    private void moveForward(int[] nums, int from, int to) {
+        // [1, 0, 0, 0, 2, 3], from=4, to=1
+        // return [1, 2, 3, 0, 0, 0]
+        
+        if (from < 0 || from >= nums.length || to < 0 || to >= nums.length
+           || from < to) {
+            return;
+        }
+        
+        for (int i=0; i<nums.length-to; i++) {
+            if (i<nums.length-from) {
+                nums[to+i] = nums[from+i];
+            } else {
+                nums[to+i] = 0;
+            }
+        }
+    }
+
+-------------------------------
+844. Backspace String Compare
+-------------------------------
+
+Given two strings s and t, return true if they are equal when both are typed into empty text editors. '#' means a backspace character.
+
+Note that after backspacing an empty text, the text will continue empty.
+
+.. topic:: Example 1
+
+    Input: s = "ab#c", t = "ad#c"
+
+    Output: true
+
+    Explanation: Both s and t become "ac".
+
+.. topic:: Example 2
+
+    Input: s = "ab##", t = "c#d#"
+
+    Output: true
+
+    Explanation: Both s and t become "".
+
+.. topic:: Example 3
+
+    Input: s = "a##c", t = "#a#c"
+
+    Output: true
+
+    Explanation: Both s and t become "c".
+
+.. topic:: Example 4
+
+    Input: s = "a#c", t = "b"
+
+    Output: false
+
+    Explanation: s becomes "c" while t becomes "b".
+
+.. topic:: Constraints
+
+    1 <= s.length, t.length <= 200
+
+    s and t only contain lowercase letters and '#' characters.
+ 
+Follow up: Can you solve it in O(n) time and O(1) space?
+
+**Approach**: Use two pointers, start from the right of the two strings and move leftward. If sees a '#', keep moving until all the backspace are dealt with. 
+
+.. code-block:: java
+
+    public boolean backspaceCompare(String s, String t) {
+        int i = s.length()-1;
+        int j = t.length()-1;
+        
+        while (i>=0 && j>=0) {
+            //System.out.println("i: "+i + " j: "+j);
+            if (i>=0 && s.charAt(i)=='#') {
+                i = moveLeft(s, i);
+                //System.out.println("i moved to: "+i);
+            }
+            
+            if (j>=0 && t.charAt(j)=='#') {
+                j = moveLeft(t, j);
+                //System.out.println("j moved to: "+j);
+            }
+            
+            if (i>=0 && j>=0) {
+                if (s.charAt(i)==t.charAt(j)) {
+                    i--;
+                    j--;
+                } else {
+                    return false;
+                }
+            }
+        }
+        
+        if (i<0 && j>=0 && t.charAt(j)=='#') {
+            j = moveLeft(t, j);
+        } else if (j<0 && i>=0 && s.charAt(i)=='#'){
+            i = moveLeft(s, i);
+        }
+        
+        return (i==-1 && j==-1);
+    
+    }
+    
+    private int moveLeft(String s, int i) {
+        int count = 0;
+        for (int p=i; p>=0; p--) {
+            if (s.charAt(p) == '#') {
+                count++;
+            } else {
+                count--;
+                if (count==0) {
+                    if (p>0 && s.charAt(p-1) != '#') {
+                       return p-1; 
+                    }
+                }
+            }
+        }
+        
+        return -1;
+    }
+
+--------------------------------
+977. Squares of a Sorted Array
+--------------------------------
+
+**Another solution using binary search. It's about the same time and space.**
+
+Given an integer array nums sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.
+
+.. topic:: Example 1
+
+    Input: nums = [-4,-1,0,3,10]
+
+    Output: [0,1,9,16,100]
+
+    Explanation: After squaring, the array becomes [16,1,0,9,100].
+
+    After sorting, it becomes [0,1,9,16,100].
+
+.. topic:: Example 2
+
+    Input: nums = [-7,-3,2,3,11]
+
+    Output: [4,9,9,49,121]
+ 
+.. topic:: Constraints
+
+    1 <= nums.length <= 104
+
+    -104 <= nums[i] <= 104
+
+    nums is sorted in non-decreasing order.
+     
+
+Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?
+
+**Approach**: First squaring all of the elements in nums in place. Then start from the left most and right most, fill in the rst with the larger one from the right of rst.
+
+.. code-block:: java
+
+    public int[] sortedSquares(int[] nums) {
+        int[] rst = new int[nums.length];
+        for (int i=0; i<nums.length; i++){
+            nums[i] = nums[i]*nums[i];
+        }
+        
+        int i=0;
+        int j=nums.length-1;
+        
+        int k=nums.length-1;
+        while (k>=0 && i<=j) {
+            if (nums[i] >= nums[j]) {
+                rst[k] = nums[i];
+                i++;
+            } else {
+                rst[k] = nums[j];
+                j--;
+            }
+            k--;
+        }
+        
+        return rst;
     }

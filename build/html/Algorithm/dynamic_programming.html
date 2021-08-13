@@ -16,8 +16,8 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Sliding Windows" href="sliding_windows.html" />
-    <link rel="prev" title="Backtracking" href="backtracking.html" /> 
+    <link rel="next" title="Hash" href="hash_table.html" />
+    <link rel="prev" title="Disjoint Set" href="disjoint_set.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -26,10 +26,10 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="sliding_windows.html" title="Sliding Windows"
+          <a href="hash_table.html" title="Hash"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="backtracking.html" title="Backtracking"
+          <a href="disjoint_set.html" title="Disjoint Set"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Dynamic Programming</a></li> 
@@ -40,7 +40,6 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Dynamic Programming</a><ul>
-<li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#jump-game">55. Jump Game</a></li>
 <li><a class="reference internal" href="#edit-distance">72. Edit Distance</a></li>
 <li><a class="reference internal" href="#distinct-subsequences">115. Distinct Subsequences</a></li>
@@ -51,11 +50,11 @@
 </ul>
 
   <h4>Previous topic</h4>
-  <p class="topless"><a href="backtracking.html"
-                        title="previous chapter">Backtracking</a></p>
+  <p class="topless"><a href="disjoint_set.html"
+                        title="previous chapter">Disjoint Set</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="sliding_windows.html"
-                        title="next chapter">Sliding Windows</a></p>
+  <p class="topless"><a href="hash_table.html"
+                        title="next chapter">Hash</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -88,22 +87,17 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#dynamic-programming" id="id1">Dynamic Programming</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#jump-game" id="id3">55. Jump Game</a></p></li>
-<li><p><a class="reference internal" href="#edit-distance" id="id4">72. Edit Distance</a></p></li>
-<li><p><a class="reference internal" href="#distinct-subsequences" id="id5">115. Distinct Subsequences</a></p></li>
-<li><p><a class="reference internal" href="#binary-tree-maximum-path-sum" id="id6">124. Binary Tree Maximum Path Sum</a></p></li>
-<li><p><a class="reference internal" href="#dungeon-game" id="id7">174. Dungeon Game</a></p></li>
+<li><p><a class="reference internal" href="#jump-game" id="id2">55. Jump Game</a></p></li>
+<li><p><a class="reference internal" href="#edit-distance" id="id3">72. Edit Distance</a></p></li>
+<li><p><a class="reference internal" href="#distinct-subsequences" id="id4">115. Distinct Subsequences</a></p></li>
+<li><p><a class="reference internal" href="#binary-tree-maximum-path-sum" id="id5">124. Binary Tree Maximum Path Sum</a></p></li>
+<li><p><a class="reference internal" href="#dungeon-game" id="id6">174. Dungeon Game</a></p></li>
 </ul>
 </li>
 </ul>
 </div>
-<section id="overview">
-<h2><a class="toc-backref" href="#id2">Overview</a><a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>.</p>
-</section>
 <section id="jump-game">
-<h2><a class="toc-backref" href="#id3">55. Jump Game</a><a class="headerlink" href="#jump-game" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2">55. Jump Game</a><a class="headerlink" href="#jump-game" title="Permalink to this headline">¶</a></h2>
 <p>You are given an integer array nums. You are initially positioned at the array’s first index, and each element in the array represents your maximum jump length at that position.</p>
 <p>Return true if you can reach the last index, or false otherwise.</p>
 <div class="topic">
@@ -178,7 +172,7 @@
 </div>
 </section>
 <section id="edit-distance">
-<h2><a class="toc-backref" href="#id4">72. Edit Distance</a><a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3">72. Edit Distance</a><a class="headerlink" href="#edit-distance" title="Permalink to this headline">¶</a></h2>
 <p>Given two strings word1 and word2, return the minimum number of operations required to convert word1 to word2.</p>
 <p>You have the following three operations permitted on a word:</p>
 <p>Insert a character</p>
@@ -284,7 +278,7 @@
 </div>
 </section>
 <section id="distinct-subsequences">
-<h2><a class="toc-backref" href="#id5">115. Distinct Subsequences</a><a class="headerlink" href="#distinct-subsequences" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4">115. Distinct Subsequences</a><a class="headerlink" href="#distinct-subsequences" title="Permalink to this headline">¶</a></h2>
 <p>Given two strings s and t, return the number of distinct subsequences of s which equals t.</p>
 <p>A string’s subsequence is a new string formed from the original string by deleting some (can be none) of the characters without disturbing the remaining characters’ relative positions. (i.e., “ACE” is a subsequence of “ABCDE” while “AEC” is not).</p>
 <p>It is guaranteed the answer fits on a 32-bit signed integer.</p>
@@ -412,7 +406,7 @@
 </div>
 </section>
 <section id="binary-tree-maximum-path-sum">
-<h2><a class="toc-backref" href="#id6">124. Binary Tree Maximum Path Sum</a><a class="headerlink" href="#binary-tree-maximum-path-sum" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id5">124. Binary Tree Maximum Path Sum</a><a class="headerlink" href="#binary-tree-maximum-path-sum" title="Permalink to this headline">¶</a></h2>
 <p>A path in a binary tree is a sequence of nodes where each pair of adjacent nodes in the sequence has an edge connecting them. A node can only appear in the sequence at most once. Note that the path does not need to pass through the root.</p>
 <p>The path sum of a path is the sum of the node’s values in the path.</p>
 <p>Given the root of a binary tree, return the maximum path sum of any path.</p>
@@ -466,7 +460,7 @@
 </div>
 </section>
 <section id="dungeon-game">
-<h2><a class="toc-backref" href="#id7">174. Dungeon Game</a><a class="headerlink" href="#dungeon-game" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id6">174. Dungeon Game</a><a class="headerlink" href="#dungeon-game" title="Permalink to this headline">¶</a></h2>
 <p>The demons had captured the princess and imprisoned her in the bottom-right corner of a dungeon. The dungeon consists of m x n rooms laid out in a 2D grid. Our valiant knight was initially positioned in the top-left room and must fight his way through dungeon to rescue the princess.</p>
 <p>The knight has an initial health point represented by a positive integer. If at any point his health point drops to 0 or below, he dies immediately.</p>
 <p>Some of the rooms are guarded by demons (represented by negative integers), so the knight loses health upon entering these rooms; other rooms are either empty (represented as 0) or contain magic orbs that increase the knight’s health (represented by positive integers).</p>
@@ -533,10 +527,10 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="sliding_windows.html" title="Sliding Windows"
+          <a href="hash_table.html" title="Hash"
              >next</a> |</li>
         <li class="right" >
-          <a href="backtracking.html" title="Backtracking"
+          <a href="disjoint_set.html" title="Disjoint Set"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Dynamic Programming</a></li> 

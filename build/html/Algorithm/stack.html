@@ -42,6 +42,7 @@
 <li><a class="reference internal" href="#">Stack</a><ul>
 <li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
 <li><a class="reference internal" href="#next-greater-element-ii">503. Next Greater Element II</a></li>
+<li><a class="reference internal" href="#backspace-string-compare">844. Backspace String Compare</a></li>
 </ul>
 </li>
 </ul>
@@ -215,6 +216,77 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">nge</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="backspace-string-compare">
+<h2>844. Backspace String Compare<a class="headerlink" href="#backspace-string-compare" title="Permalink to this headline">¶</a></h2>
+<p>Given two strings s and t, return true if they are equal when both are typed into empty text editors. ‘#’ means a backspace character.</p>
+<p>Note that after backspacing an empty text, the text will continue empty.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: s = “ab#c”, t = “ad#c”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “ac”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: s = “ab##”, t = “c#d#”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: s = “a##c”, t = “#a#c”</p>
+<p>Output: true</p>
+<p>Explanation: Both s and t become “c”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4</p>
+<p>Input: s = “a#c”, t = “b”</p>
+<p>Output: false</p>
+<p>Explanation: s becomes “c” while t becomes “b”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= s.length, t.length &lt;= 200</p>
+<p>s and t only contain lowercase letters and ‘#’ characters.</p>
+</div>
+<p>Follow up: Can you solve it in O(n) time and O(1) space? See Array for an O(1) space solution. It uses more time and more space than this solution though.</p>
+<p><strong>Approach</strong>: Create two stacks and pass the strings to it. If we see a ‘#’, remove the last added element from the stack. Then pop the elements in the two stacks to compare if they are equal.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">backspaceCompare</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">,</span> <span class="n">String</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">stackS</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">stackT</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="n">passStack</span><span class="p">(</span><span class="n">stackS</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+    <span class="n">passStack</span><span class="p">(</span><span class="n">stackT</span><span class="p">,</span> <span class="n">t</span><span class="p">);</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stackS</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">stackT</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">Character</span> <span class="n">s0</span> <span class="o">=</span> <span class="n">stackS</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+        <span class="n">Character</span> <span class="n">t0</span> <span class="o">=</span> <span class="n">stackT</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s0</span> <span class="o">!=</span> <span class="n">t0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stackS</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">||</span> <span class="o">!</span><span class="n">stackT</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">passStack</span><span class="p">(</span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">stack</span><span class="p">,</span> <span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="sc">&#39;#&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()){</span>
+                <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

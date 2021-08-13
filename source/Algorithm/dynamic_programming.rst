@@ -4,12 +4,6 @@ Dynamic Programming
 .. contents::
     :depth: 2
 
-----------
-Overview
-----------
-
-.
-
 ---------------
 55. Jump Game
 ---------------
@@ -474,4 +468,3 @@ Note that any room can contain threats or power-ups, even the first room the kni
     private int getH(int t, int c) {
         return Math.max(t-c, 1);
     }
-
