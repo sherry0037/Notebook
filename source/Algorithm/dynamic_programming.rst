@@ -468,3 +468,107 @@ Note that any room can contain threats or power-ups, even the first room the kni
     private int getH(int t, int c) {
         return Math.max(t-c, 1);
     }
+
+---------------------
+70. Climbing Stairs
+---------------------
+
+You are climbing a staircase. It takes n steps to reach the top.
+
+Each time you can either climb 1 or 2 steps. In how many distinct ways can you climb to the top?
+
+.. topic:: Example 1
+
+    Input: n = 2
+
+    Output: 2
+
+    Explanation: There are two ways to climb to the top.
+
+    1. 1 step + 1 step
+
+    2. 2 steps
+
+.. topic:: Example 2
+
+    Input: n = 3
+
+    Output: 3
+
+    Explanation: There are three ways to climb to the top.
+
+    1. 1 step + 1 step + 1 step
+
+    2. 1 step + 2 steps
+
+    3. 2 steps + 1 step
+ 
+
+.. topic:: Constraints
+
+    1 <= n <= 45
+
+.. code-block:: java
+
+    public int climbStairs(int n) {
+        int[] rst = new int[n+1]; // number of ways to get to step k
+
+        for (int i=0; i<= n; i++) {
+            if (i <= 2) {
+                rst[i] = i; // It's the same as setting rst[0] = 1. Because for rst[2], we either jump from step 0 or from step 1.
+            } else {
+                rst[i] = rst[i-1] + rst[i-2];
+            }
+        }
+        
+        return rst[n];
+    }
+
+-------------------------------
+746. Min Cost Climbing Stairs
+-------------------------------
+
+You are given an integer array cost where cost[i] is the cost of ith step on a staircase. Once you pay the cost, you can either climb one or two steps.
+
+You can either start from the step with index 0, or the step with index 1.
+
+Return the minimum cost to reach the top of the floor.
+
+.. topic:: Example 1
+
+    Input: cost = [10,15,20]
+
+    Output: 15
+
+    Explanation: Cheapest is: start on cost[1], pay that cost, and go to the top.
+
+.. topic:: Example 2
+
+    Input: cost = [1,100,1,1,1,100,1,1,100,1]
+
+    Output: 6
+
+    Explanation: Cheapest is: start on cost[0], and only step on 1s, skipping cost[3].
+
+.. topic:: Constraints
+
+    2 <= cost.length <= 1000
+
+    0 <= cost[i] <= 999
+
+
+.. code-block:: java
+
+    public int minCostClimbingStairs(int[] cost) {
+        int[] rst = new int[cost.length+1]; // cost need to pay to go to step k
+        
+        for (int i=0; i<=cost.length; i++) {
+            if (i<=1) {
+                rst[i] = 0;
+            } else {
+                rst[i] = Math.min(rst[i-1] + cost[i-1], rst[i-2] + cost[i-2]);
+            }    
+        }
+        
+        return rst[cost.length];
+    }
