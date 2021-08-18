@@ -572,3 +572,247 @@ Return the minimum cost to reach the top of the floor.
         
         return rst[cost.length];
     }
+
+------------------
+62. Unique Paths
+------------------
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+How many possible unique paths are there?
+
+.. topic:: Example 1:
+
+    Input: m = 3, n = 7
+
+    Output: 28
+
+.. topic:: Example 2:
+
+    Input: m = 3, n = 2
+
+    Output: 3
+
+    Explanation:
+
+    From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:
+
+    1. Right -> Down -> Down
+
+    2. Down -> Down -> Right
+
+    3. Down -> Right -> Down
+
+.. topic:: Example 3:
+
+    Input: m = 7, n = 3
+
+    Output: 28
+
+.. topic:: Example 4:
+
+    Input: m = 3, n = 3
+
+    Output: 6
+ 
+.. topic:: Constraints:
+
+    1 <= m, n <= 100
+
+    It's guaranteed that the answer will be less than or equal to 2 * 109.
+
+.. code-block:: java
+
+    public int uniquePaths(int m, int n) {
+        int[][] rst = new int[m][n]; // rst[i][j] is how many unique ways can go from i, j to m, n
+        
+        //rst[i][j] = rst[i+1][j] (move down) + rst[i][j+1] (move right)
+        
+        // traverse from bottom to top, right to left
+        for (int j=n-1; j>=0; j--){
+            for (int i=m-1; i>=0; i--) {
+                if (j==n-1 && i==m-1) {
+                    // arrived
+                    rst[i][j] = 1;
+                } else if (j==n-1) {
+                    // rightmost column, can only move down
+                    rst[i][j] = rst[i+1][j];
+                } else if (i==m-1) {
+                // bottom column, can only move right
+                    rst[i][j] = rst[i][j+1];
+                } else {
+                    rst[i][j] = rst[i+1][j] + rst[i][j+1];
+                }
+                
+            }
+        }
+        
+        return rst[0][0];
+        
+    }
+
+---------------------
+63. Unique Paths II
+---------------------
+
+A robot is located at the top-left corner of a m x n grid (marked 'Start' in the diagram below).
+
+The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked 'Finish' in the diagram below).
+
+Now consider if some obstacles are added to the grids. How many unique paths would there be?
+
+An obstacle and space is marked as 1 and 0 respectively in the grid.
+
+.. topic:: Example 1:
+
+    Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]
+
+    Output: 2
+
+    Explanation: There is one obstacle in the middle of the 3x3 grid above.
+
+    There are two ways to reach the bottom-right corner:
+
+    1. Right -> Right -> Down -> Down
+
+    2. Down -> Down -> Right -> Right
+
+.. topic:: Example 2:
+
+    Input: obstacleGrid = [[0,1],[0,0]]
+
+    Output: 1
+ 
+.. topic:: Constraints:
+
+    m == obstacleGrid.length
+
+    n == obstacleGrid[i].length
+
+    1 <= m, n <= 100
+
+    obstacleGrid[i][j] is 0 or 1.
+
+.. code-block:: java
+
+    public int uniquePathsWithObstacles(int[][] obstacleGrid) {
+        int n = obstacleGrid[0].length;
+        int m = obstacleGrid.length;
+        int[][] rst = new int[m][n]; // rst[i][j] = how many ways from i,j to m-1, n-1
+        
+        for (int j=n-1; j>=0; j--) {
+            for (int i=m-1; i>=0; i--) {
+                if (obstacleGrid[i][j] == 1) {
+                    rst[i][j] = 0;
+                } else if (i==m-1 && j==n-1) {
+                    rst[i][j] = 1;
+                } else if (i==m-1){
+                    rst[i][j] = rst[i][j+1];
+                } else if (j==n-1) {
+                    rst[i][j] = rst[i+1][j];
+                } else {
+                    // move down and move right
+                    rst[i][j] = rst[i+1][j] + rst[i][j+1];
+                }
+
+            }
+        }
+        
+        return rst[0][0];
+        
+    }
+
+--------------------
+343. Integer Break
+--------------------
+
+Given an integer n, break it into the sum of k positive integers, where k >= 2, and maximize the product of those integers.
+
+Return the maximum product you can get.
+
+.. topic:: Example 1:
+
+    Input: n = 2
+
+    Output: 1
+
+    Explanation: 2 = 1 + 1, 1 × 1 = 1.
+
+.. topic:: Example 2:
+
+    Input: n = 10
+
+    Output: 36
+
+    Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.
+
+.. topic:: Constraints:
+
+    2 <= n <= 58
+
+**Approach:** rst[i] means the maximum product given n == i. We get all the possible 2 splits of i, then calculate the maximum product from them.
+
+  - For example, 7=1+6=2+5=3+4. For 1+6, we already knew rst[1] == 1 and rst[6] == 9. Then this gives 1*9=9. Similar for 2+5, we knew rst[2] == 1, rst[5] == 6, this gives 2*6=12.
+
+.. code-block:: java
+
+    public int integerBreak(int n) {
+        int[] rst = new int[n+1];
+        rst[1] = 1;
+        
+        for (int i=2; i<=n; i++){
+            for (int k=1; k<=i; k++) {
+                int p = i-k;
+                //System.out.println("i: "+i + " k: "+ k + " p: "+ p);
+                rst[i] = Math.max(rst[i], Math.max(k, rst[k]) * Math.max(p, rst[p]));
+                //System.out.println(rst[i]);
+                
+                if (p==k || p==k+1) {
+                    break;
+                }
+            }
+        }
+        
+        return rst[n];
+    }
+
+--------------------------------
+96. Unique Binary Search Trees
+--------------------------------
+
+Given an integer n, return the number of structurally unique BST's (binary search trees) which has exactly n nodes of unique values from 1 to n.
+
+.. topic:: Example 1:
+
+    Input: n = 3
+
+    Output: 5
+
+.. topic:: Example 2:
+
+    Input: n = 1
+
+    Output: 1
+
+.. topic:: Constraints:
+
+    1 <= n <= 19
+
+.. code-block:: java
+
+    public int numTrees(int n) {
+        int[] rst = new int[n+1];
+        rst[0] = 1; 
+        rst[1] = 1;
+         
+        for (int i = 2; i<n+1; i++) {
+            for (int k = 0; k<i; k++) {
+                //System.out.println(" i: " + i + " k: "+k + " " + (i-1-k) );
+                rst[i] = rst[i] + rst[k] * rst[i-1-k];
+            }
+        }
+        return rst[n];
+    }
+

@@ -47,6 +47,10 @@
 <li><a class="reference internal" href="#dungeon-game">174. Dungeon Game</a></li>
 <li><a class="reference internal" href="#climbing-stairs">70. Climbing Stairs</a></li>
 <li><a class="reference internal" href="#min-cost-climbing-stairs">746. Min Cost Climbing Stairs</a></li>
+<li><a class="reference internal" href="#unique-paths">62. Unique Paths</a></li>
+<li><a class="reference internal" href="#unique-paths-ii">63. Unique Paths II</a></li>
+<li><a class="reference internal" href="#integer-break">343. Integer Break</a></li>
+<li><a class="reference internal" href="#unique-binary-search-trees">96. Unique Binary Search Trees</a></li>
 </ul>
 </li>
 </ul>
@@ -96,6 +100,10 @@
 <li><p><a class="reference internal" href="#dungeon-game" id="id6">174. Dungeon Game</a></p></li>
 <li><p><a class="reference internal" href="#climbing-stairs" id="id7">70. Climbing Stairs</a></p></li>
 <li><p><a class="reference internal" href="#min-cost-climbing-stairs" id="id8">746. Min Cost Climbing Stairs</a></p></li>
+<li><p><a class="reference internal" href="#unique-paths" id="id9">62. Unique Paths</a></p></li>
+<li><p><a class="reference internal" href="#unique-paths-ii" id="id10">63. Unique Paths II</a></p></li>
+<li><p><a class="reference internal" href="#integer-break" id="id11">343. Integer Break</a></p></li>
+<li><p><a class="reference internal" href="#unique-binary-search-trees" id="id12">96. Unique Binary Search Trees</a></p></li>
 </ul>
 </li>
 </ul>
@@ -594,6 +602,212 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">cost</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="unique-paths">
+<h2><a class="toc-backref" href="#id9">62. Unique Paths</a><a class="headerlink" href="#unique-paths" title="Permalink to this headline">¶</a></h2>
+<p>A robot is located at the top-left corner of a m x n grid (marked ‘Start’ in the diagram below).</p>
+<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).</p>
+<p>How many possible unique paths are there?</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: m = 3, n = 7</p>
+<p>Output: 28</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: m = 3, n = 2</p>
+<p>Output: 3</p>
+<p>Explanation:</p>
+<p>From the top-left corner, there are a total of 3 ways to reach the bottom-right corner:</p>
+<ol class="arabic simple">
+<li><p>Right -&gt; Down -&gt; Down</p></li>
+<li><p>Down -&gt; Down -&gt; Right</p></li>
+<li><p>Down -&gt; Right -&gt; Down</p></li>
+</ol>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3:</p>
+<p>Input: m = 7, n = 3</p>
+<p>Output: 28</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4:</p>
+<p>Input: m = 3, n = 3</p>
+<p>Output: 6</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>1 &lt;= m, n &lt;= 100</p>
+<p>It’s guaranteed that the answer will be less than or equal to 2 * 109.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">uniquePaths</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">]</span><span class="p">;</span> <span class="c1">// rst[i][j] is how many unique ways can go from i, j to m, n</span>
+
+    <span class="c1">//rst[i][j] = rst[i+1][j] (move down) + rst[i][j+1] (move right)</span>
+
+    <span class="c1">// traverse from bottom to top, right to left</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">==</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// arrived</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// rightmost column, can only move down</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// bottom column, can only move right</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="unique-paths-ii">
+<h2><a class="toc-backref" href="#id10">63. Unique Paths II</a><a class="headerlink" href="#unique-paths-ii" title="Permalink to this headline">¶</a></h2>
+<p>A robot is located at the top-left corner of a m x n grid (marked ‘Start’ in the diagram below).</p>
+<p>The robot can only move either down or right at any point in time. The robot is trying to reach the bottom-right corner of the grid (marked ‘Finish’ in the diagram below).</p>
+<p>Now consider if some obstacles are added to the grids. How many unique paths would there be?</p>
+<p>An obstacle and space is marked as 1 and 0 respectively in the grid.</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: obstacleGrid = [[0,0,0],[0,1,0],[0,0,0]]</p>
+<p>Output: 2</p>
+<p>Explanation: There is one obstacle in the middle of the 3x3 grid above.</p>
+<p>There are two ways to reach the bottom-right corner:</p>
+<ol class="arabic simple">
+<li><p>Right -&gt; Right -&gt; Down -&gt; Down</p></li>
+<li><p>Down -&gt; Down -&gt; Right -&gt; Right</p></li>
+</ol>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: obstacleGrid = [[0,1],[0,0]]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>m == obstacleGrid.length</p>
+<p>n == obstacleGrid[i].length</p>
+<p>1 &lt;= m, n &lt;= 100</p>
+<p>obstacleGrid[i][j] is 0 or 1.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">uniquePathsWithObstacles</span><span class="p">(</span><span class="kt">int</span><span class="o">[][]</span> <span class="n">obstacleGrid</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">obstacleGrid</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">obstacleGrid</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">]</span><span class="p">;</span> <span class="c1">// rst[i][j] = how many ways from i,j to m-1, n-1</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">obstacleGrid</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">==</span><span class="n">m</span><span class="o">-</span><span class="mi">1</span><span class="p">){</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="c1">// move down and move right</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">+</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="integer-break">
+<h2><a class="toc-backref" href="#id11">343. Integer Break</a><a class="headerlink" href="#integer-break" title="Permalink to this headline">¶</a></h2>
+<p>Given an integer n, break it into the sum of k positive integers, where k &gt;= 2, and maximize the product of those integers.</p>
+<p>Return the maximum product you can get.</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: n = 2</p>
+<p>Output: 1</p>
+<p>Explanation: 2 = 1 + 1, 1 × 1 = 1.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: n = 10</p>
+<p>Output: 36</p>
+<p>Explanation: 10 = 3 + 3 + 4, 3 × 3 × 4 = 36.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>2 &lt;= n &lt;= 58</p>
+</div>
+<p><strong>Approach:</strong> rst[i] means the maximum product given n == i. We get all the possible 2 splits of i, then calculate the maximum product from them.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For example, 7=1+6=2+5=3+4. For 1+6, we already knew rst[1] == 1 and rst[6] == 9. Then this gives 1*9=9. Similar for 2+5, we knew rst[2] == 1, rst[5] == 6, this gives 2*6=12.</p></li>
+</ul>
+</div></blockquote>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">integerBreak</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;=</span><span class="n">i</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">p</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">k</span><span class="p">;</span>
+            <span class="c1">//System.out.println(&quot;i: &quot;+i + &quot; k: &quot;+ k + &quot; p: &quot;+ p);</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">)</span> <span class="o">*</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">rst</span><span class="o">[</span><span class="n">p</span><span class="o">]</span><span class="p">));</span>
+            <span class="c1">//System.out.println(rst[i]);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="o">==</span><span class="n">k</span> <span class="o">||</span> <span class="n">p</span><span class="o">==</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="unique-binary-search-trees">
+<h2><a class="toc-backref" href="#id12">96. Unique Binary Search Trees</a><a class="headerlink" href="#unique-binary-search-trees" title="Permalink to this headline">¶</a></h2>
+<p>Given an integer n, return the number of structurally unique BST’s (binary search trees) which has exactly n nodes of unique values from 1 to n.</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: n = 3</p>
+<p>Output: 5</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: n = 1</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>1 &lt;= n &lt;= 19</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numTrees</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+    <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">i</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">//System.out.println(&quot; i: &quot; + i + &quot; k: &quot;+k + &quot; &quot; + (i-1-k) );</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">rst</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">*</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
