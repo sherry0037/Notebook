@@ -51,6 +51,8 @@
 <li><a class="reference internal" href="#unique-paths-ii">63. Unique Paths II</a></li>
 <li><a class="reference internal" href="#integer-break">343. Integer Break</a></li>
 <li><a class="reference internal" href="#unique-binary-search-trees">96. Unique Binary Search Trees</a></li>
+<li><a class="reference internal" href="#partition-equal-subset-sum-0-1-knapsack">416. Partition Equal Subset Sum (0-1 Knapsack)</a></li>
+<li><a class="reference internal" href="#last-stone-weight-ii-0-1-knapsack">Last Stone Weight II (0-1 Knapsack)</a></li>
 </ul>
 </li>
 </ul>
@@ -104,6 +106,8 @@
 <li><p><a class="reference internal" href="#unique-paths-ii" id="id10">63. Unique Paths II</a></p></li>
 <li><p><a class="reference internal" href="#integer-break" id="id11">343. Integer Break</a></p></li>
 <li><p><a class="reference internal" href="#unique-binary-search-trees" id="id12">96. Unique Binary Search Trees</a></p></li>
+<li><p><a class="reference internal" href="#partition-equal-subset-sum-0-1-knapsack" id="id13">416. Partition Equal Subset Sum (0-1 Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#last-stone-weight-ii-0-1-knapsack" id="id14">Last Stone Weight II (0-1 Knapsack)</a></p></li>
 </ul>
 </li>
 </ul>
@@ -808,6 +812,136 @@
         <span class="p">}</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="partition-equal-subset-sum-0-1-knapsack">
+<h2><a class="toc-backref" href="#id13">416. Partition Equal Subset Sum (0-1 Knapsack)</a><a class="headerlink" href="#partition-equal-subset-sum-0-1-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,5,11,5]</p>
+<p>Output: true</p>
+<p>Explanation: The array can be partitioned as [1, 5, 5] and [11].</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [1,2,3,5]</p>
+<p>Output: false</p>
+<p>Explanation: The array cannot be partitioned into equal sum subsets.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 200</p>
+<p>1 &lt;= nums[i] &lt;= 100</p>
+</div>
+<p><strong>Approach</strong>: This problem can be translate to a 0-1 Knapsack problem. First we calculate half of the sum (call it sum). Then we consider sum as the total weight, the given nums as an array of weights, and we try to fill the knapsack with these weights. rst[i][j] means choosing from item 0 to i, get the maximum weights we can fit into the knapsack with capacity j. Then if any value in rst[i][sum] is equal to sum, that means we can fill exactly half of the total sum with some of the items, then we can return true.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">canPartition</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">nums</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">sum</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">+</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">):</span><span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">sum</span><span class="o">/</span><span class="mi">2</span><span class="o">]</span> <span class="o">==</span> <span class="n">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="last-stone-weight-ii-0-1-knapsack">
+<h2><a class="toc-backref" href="#id14">Last Stone Weight II (0-1 Knapsack)</a><a class="headerlink" href="#last-stone-weight-ii-0-1-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>You are given an array of integers stones where stones[i] is the weight of the ith stone.</p>
+<p>We are playing a game with the stones. On each turn, we choose any two stones and smash them together. Suppose the stones have weights x and y with x &lt;= y. The result of this smash is:</p>
+<p>If x == y, both stones are destroyed, and
+If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+At the end of the game, there is at most one stone left.</p>
+<p>Return the smallest possible weight of the left stone. If there are no stones left, return 0.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: stones = [2,7,4,1,8,1]</p>
+<p>Output: 1</p>
+<p>Explanation:</p>
+<p>We can combine 2 and 4 to get 2, so the array converts to [2,7,1,8,1] then,</p>
+<p>we can combine 7 and 8 to get 1, so the array converts to [2,1,1,1] then,</p>
+<p>we can combine 2 and 1 to get 1, so the array converts to [1,1,1] then,</p>
+<p>we can combine 1 and 1 to get 0, so the array converts to [1], then that’s the optimal value.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: stones = [31,26,33,21,40]</p>
+<p>Output: 5</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: stones = [1,2]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= stones.length &lt;= 30</p>
+<p>1 &lt;= stones[i] &lt;= 100</p>
+</div>
+<p><strong>Approach</strong>: We can think of this problem as splitting the input array into 2 subarrays so that the difference between the sums of the two subarrays is minimized. Then the result is the difference between the sums.</p>
+<p>This can be done using 0-1 Knapstack with nums as both values and weights. We calculate all the columns until half of the sum, then when we reach half (ceiling of sum/2), we start evaluate if rst[i][j] == j. If it’s equal, that means some elements can sum to j. Then we calculate the difference between j and sum-j.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>e.g. The half of [31,26,33,21,40] is 76. We will get that rst[3][78] == 78. That is because 31+26+31 == 78. Then sum-78 = 73, which is because 33+40 == 73. Then 78-73 = 5 and we have the answer.</p></li>
+</ul>
+</div></blockquote>
+<p>Some catches:</p>
+<ul class="simple">
+<li><p>We start evaluate from ceiling of sum/s because suppose we have an odd sum 23, and some of the elements sum to 12, the other elements sum to 11, then we can do j- (sum-j) to get the final answer because j &gt; sum-j. Alternatively we can just use half = sum/2 and Math.abs(j - (sum-j)).</p></li>
+<li><p>The inner loop has to be i because we want to get all values calculated for a column j (=half+) and determine if some elements sum to exactly that j, then continue with column j+1, j+2, etc.</p></li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">lastStoneWeightII</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">stones</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">stream</span><span class="p">(</span><span class="n">stones</span><span class="p">).</span><span class="na">sum</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">half</span> <span class="o">=</span> <span class="p">(</span><span class="n">sum</span><span class="o">%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span><span class="o">?</span><span class="p">(</span><span class="n">sum</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span><span class="n">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+
+    <span class="c1">//System.out.println(&quot;half: &quot; + half);</span>
+    <span class="kt">int</span><span class="o">[][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">stones</span><span class="p">.</span><span class="na">length</span><span class="o">][</span><span class="n">sum</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">stones</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">sum</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">stones</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">sum</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">stones</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">stones</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">stones</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">+</span> <span class="n">stones</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">half</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">//System.out.println(&quot;i: &quot; + i + &quot; j: &quot; + j + &quot; rst: &quot;+ rst[i][j]);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">]</span> <span class="o">==</span> <span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="n">j</span><span class="o">-</span> <span class="p">(</span><span class="n">sum</span><span class="o">-</span><span class="n">j</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">sum</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

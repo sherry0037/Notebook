@@ -816,3 +816,158 @@ Given an integer n, return the number of structurally unique BST's (binary searc
         return rst[n];
     }
 
+------------------------------------------------
+416. Partition Equal Subset Sum (0-1 Knapsack)
+------------------------------------------------
+
+Given a non-empty array nums containing only positive integers, find if the array can be partitioned into two subsets such that the sum of elements in both subsets is equal.
+
+.. topic:: Example 1
+
+    Input: nums = [1,5,11,5]
+
+    Output: true
+
+    Explanation: The array can be partitioned as [1, 5, 5] and [11].
+
+.. topic:: Example 2
+
+    Input: nums = [1,2,3,5]
+
+    Output: false
+
+    Explanation: The array cannot be partitioned into equal sum subsets.
+     
+.. topic:: Constraints
+
+    1 <= nums.length <= 200
+
+    1 <= nums[i] <= 100
+
+**Approach**: This problem can be translate to a 0-1 Knapsack problem. First we calculate half of the sum (call it sum). Then we consider sum as the total weight, the given nums as an array of weights, and we try to fill the knapsack with these weights. rst[i][j] means choosing from item 0 to i, get the maximum weights we can fit into the knapsack with capacity j. Then if any value in rst[i][sum] is equal to sum, that means we can fill exactly half of the total sum with some of the items, then we can return true.
+
+.. code-block:: java
+
+    public boolean canPartition(int[] nums) {
+        int sum = Arrays.stream(nums).sum();
+        
+        if (sum%2 == 1) {
+            return false;
+        }
+        
+        int[][] rst = new int[nums.length][sum+1];
+        
+        for (int j=0; j<sum+1; j++) {
+            if (j >= nums[0]) {
+                rst[0][j] = nums[0];
+            }
+        }
+        
+        for (int i=1; i<nums.length; i++) {
+            for (int j=1; j<sum+1; j++) {
+                rst[i][j] = Math.max(rst[i-1][j], (j>nums[i])?(rst[i-1][j-nums[i]] + nums[i]):0);
+            }
+        }
+        
+        for (int i=0; i<nums.length; i++) {
+            if (rst[i][sum/2] == sum/2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+-------------------------------------
+Last Stone Weight II (0-1 Knapsack)
+-------------------------------------
+
+You are given an array of integers stones where stones[i] is the weight of the ith stone.
+
+We are playing a game with the stones. On each turn, we choose any two stones and smash them together. Suppose the stones have weights x and y with x <= y. The result of this smash is:
+
+If x == y, both stones are destroyed, and
+If x != y, the stone of weight x is destroyed, and the stone of weight y has new weight y - x.
+At the end of the game, there is at most one stone left.
+
+Return the smallest possible weight of the left stone. If there are no stones left, return 0.
+
+.. topic:: Example 1
+
+    Input: stones = [2,7,4,1,8,1]
+
+    Output: 1
+
+    Explanation:
+
+    We can combine 2 and 4 to get 2, so the array converts to [2,7,1,8,1] then,
+
+    we can combine 7 and 8 to get 1, so the array converts to [2,1,1,1] then,
+
+    we can combine 2 and 1 to get 1, so the array converts to [1,1,1] then,
+
+    we can combine 1 and 1 to get 0, so the array converts to [1], then that's the optimal value.
+
+.. topic:: Example 2
+
+    Input: stones = [31,26,33,21,40]
+
+    Output: 5
+
+.. topic:: Example 3
+
+    Input: stones = [1,2]
+
+    Output: 1
+
+.. topic:: Constraints
+
+    1 <= stones.length <= 30
+
+    1 <= stones[i] <= 100
+
+**Approach**: We can think of this problem as splitting the input array into 2 subarrays so that the difference between the sums of the two subarrays is minimized. Then the result is the difference between the sums. 
+
+This can be done using 0-1 Knapstack with nums as both values and weights. We calculate all the columns until half of the sum, then when we reach half (ceiling of sum/2), we start evaluate if rst[i][j] == j. If it's equal, that means some elements can sum to j. Then we calculate the difference between j and sum-j.
+
+    - e.g. The half of [31,26,33,21,40] is 76. We will get that rst[3][78] == 78. That is because 31+26+31 == 78. Then sum-78 = 73, which is because 33+40 == 73. Then 78-73 = 5 and we have the answer.
+
+Some catches:
+
+- We start evaluate from ceiling of sum/s because suppose we have an odd sum 23, and some of the elements sum to 12, the other elements sum to 11, then we can do j- (sum-j) to get the final answer because j > sum-j. Alternatively we can just use half = sum/2 and Math.abs(j - (sum-j)).
+
+- The inner loop has to be i because we want to get all values calculated for a column j (=half+) and determine if some elements sum to exactly that j, then continue with column j+1, j+2, etc.
+
+.. code-block:: java
+
+    public int lastStoneWeightII(int[] stones) {
+        int sum = Arrays.stream(stones).sum();
+        int half = (sum%2 == 1)?(sum/2+1):sum/2;
+        
+        //System.out.println("half: " + half);
+        int[][] rst = new int[stones.length][sum+1];
+        
+        for (int j=stones[0]; j<=sum; j++) {
+            rst[0][j] = stones[0];
+        }
+        
+        for (int j=1; j<=sum; j++) {
+            for (int i=1; i<stones.length; i++) {
+                if (j<stones[i]) {
+                    rst[i][j] = rst[i-1][j];
+                } else {
+                    rst[i][j] = Math.max(rst[i-1][j], rst[i-1][j-stones[i]] + stones[i]);
+                }
+                
+                if (j>=half) {
+                    //System.out.println("i: " + i + " j: " + j + " rst: "+ rst[i][j]);
+                    if (rst[i][j] == j) {
+                        return j- (sum-j);
+                    }
+                }
+            }
+        }
+        
+        return sum;
+    }
+
+
