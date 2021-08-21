@@ -971,3 +971,175 @@ Some catches:
     }
 
 
+----------------------------
+494. Target Sum (Knapsack)
+----------------------------
+
+You are given an integer array nums and an integer target.
+
+You want to build an expression out of nums by adding one of the symbols '+' and '-' before each integer in nums and then concatenate all the integers.
+
+For example, if nums = [2, 1], you can add a '+' before 2 and a '-' before 1 and concatenate them to build the expression "+2-1".
+Return the number of different expressions that you can build, which evaluates to target.
+
+.. topic:: Example 1
+
+    Input: nums = [1,1,1,1,1], target = 3
+
+    Output: 5
+
+    Explanation: There are 5 ways to assign symbols to make the sum of nums be target 3.
+
+    -1 + 1 + 1 + 1 + 1 = 3
+
+    +1 - 1 + 1 + 1 + 1 = 3
+
+    +1 + 1 - 1 + 1 + 1 = 3
+
+    +1 + 1 + 1 - 1 + 1 = 3
+
+    +1 + 1 + 1 + 1 - 1 = 3
+
+.. topic:: Example 2
+
+    Input: nums = [1], target = 1
+
+    Output: 1
+     
+.. topic:: Constraints
+
+    1 <= nums.length <= 20
+
+    0 <= nums[i] <= 1000
+
+    0 <= sum(nums[i]) <= 1000
+
+    -1000 <= target <= 1000
+
+**Approach:** This problem can be considered as an "1-1 Knapsack" problem: instead of choosing/not choosing an item, it is plus/minus an item. So the problem is given an array of items, we have a knapsack of capacity "target", we can choose to plus or minus the items in order, how many ways can we fill the knapsack exactly.
+
+Now consider the table rst, where rows are from item 0 to m, and columns are from -sum to sum (sum of nums). Then rst[i][j] means given item 0 to i, how many ways can we fill a knapsack of capacity j.
+
+We can get rst[i][j] = rst[i-1][j-nums[i]] (plus item i) + rst[i-1][j+nums[i]] (minus item i).
+
+    - e.g. nums = [1,1,1,1,1]. rst[1][0] = rst[0][-1] + rst[0][+1] (Given two 1's, how many ways can we get to 0 = given one 1, how many ways can we get to -1 + given one 1, how many ways can we get to +1). 
+
+We need to iterate rows by rows because rst[i] only depends on rst[i-1]. 
+
+The first code snippet is a slightly better implementation. We have two rst tables, rstp and rstn, to store "j= 0 to sum" and "j= 0 to -sum" separately. Then we first calculate for +j, then we calculate for -j. Trick is to get the sign correct and fetch values from the correct table.
+
+The second code snippet improves on that. We notice that rstp and rstn are completely identical (which makes sense because the signs are all symmetric). So we can reduce to just one table and adjust the sign accordingly.
+
+.. code-block:: java
+
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum = Arrays.stream(nums).sum();
+        
+        if (target > sum || target < -sum) {
+            return 0;
+        }
+        
+        int[][] rstp = new int[nums.length][sum+1]; // j = 0 to sum
+        int[][] rstn = new int[nums.length][sum+1]; // j = 0 to -sum
+        
+        // CATCH!! 0 has two ways to get to 0.
+        if (nums[0] != 0) {
+            rstp[0][nums[0]] = 1;
+            rstn[0][nums[0]] = 1;
+        } else {
+            rstp[0][nums[0]] = 2;
+            rstn[0][nums[0]] = 2;
+        }
+        
+            
+        for (int i=1; i<nums.length; i++) {
+            for (int j=0; j<=sum; j++) {
+                // positive j
+                int countp = 0;
+                int countn = 0;
+                
+                if (j-nums[i] <= sum && j-nums[i] >= -sum) {
+                    if (j-nums[i] >= 0) {
+                        countp = rstp[i-1][j-nums[i]];
+                    } else {
+                        countp = rstn[i-1][-(j-nums[i])];
+                    }
+                }
+                
+                if (j+nums[i] <= sum && j+nums[i] >= -sum) {
+                    if (j+nums[i] >= 0) {
+                        countn = rstp[i-1][j+nums[i]];
+                    } else {
+                        countn = rstn[i-1][-(j+nums[i])];
+                    }
+                }
+               
+                rstp[i][j] = countp + countn;
+                
+                // negative j   
+                countp = 0;
+                countn = 0;
+                if (-j-nums[i] <= sum && -j-nums[i] >= -sum) {
+                    if (-j-nums[i] >= 0) {
+                        countp = rstp[i-1][-j-nums[i]];
+                    } else {
+                        countp = rstn[i-1][j+nums[i]]; // reverse order in negative rst
+                    }
+                }
+                
+                if (-j+nums[i] <= sum && -j+nums[i] >= -sum) {
+                    if (-j+nums[i] >= 0) {
+                    countn = rstp[i-1][-j+nums[i]];
+                    } else {
+                        countn = rstn[i-1][-(-j+nums[i])];
+                    }
+                }
+                
+                rstn[i][j] = countp + countn;
+            }
+        }
+        
+        return (target>=0)?rstp[nums.length-1][target]:rstn[nums.length-1][-target];
+        
+    }
+
+
+.. code-block:: java
+
+    public int findTargetSumWays(int[] nums, int target) {
+        int sum = Arrays.stream(nums).sum();
+        
+        if (target > sum || target < -sum) {
+            return 0;
+        }
+        
+        int[][] rst = new int[nums.length][sum+1]; 
+        
+        if (nums[0] != 0) {
+            rst[0][nums[0]] = 1;
+        } else {
+            rst[0][nums[0]] = 2;
+        }
+        
+            
+        for (int i=1; i<nums.length; i++) {
+            for (int j=0; j<=sum; j++) {
+                int countp = 0;
+                int countn = 0;
+                
+                if (Math.abs(j-nums[i]) <= sum) {
+                    countp = rst[i-1][Math.abs(j-nums[i])];
+                }
+                
+                if (Math.abs(j+nums[i]) <= sum) {
+                    countn = rst[i-1][Math.abs(j+nums[i])];
+                }
+               
+                rst[i][j] = countp + countn;
+            }
+        }
+        
+        return rst[nums.length-1][Math.abs(target)];
+        
+    }
+
