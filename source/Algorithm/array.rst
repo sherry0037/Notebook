@@ -653,3 +653,66 @@ Follow up: Squaring each element and sorting the new array is very trivial, coul
         
         return rst;
     }
+
+--------------------------------------------------------
+1481. Least Number of Unique Integers after K Removals
+--------------------------------------------------------
+
+Given an array of integers arr and an integer k. Find the least number of unique integers after removing exactly k elements.
+
+.. topic:: Example 1:
+
+    Input: arr = [5,5,4], k = 1
+
+    Output: 1
+
+    Explanation: Remove the single 4, only 5 is left.
+
+.. topic:: Example 2:
+
+    Input: arr = [4,3,1,1,3,3,2], k = 3
+
+    Output: 2
+
+    Explanation: Remove 4, 2 and either one of the two 1s or three 3s. 1 and 3 will be left.
+
+.. topic:: Constraints
+
+    1 <= arr.length <= 10^5
+
+    1 <= arr[i] <= 10^9
+
+    0 <= k <= arr.length
+
+**Note**: this is an example of using Arrays comparator. Using PriorityQueue is probably faster.
+
+.. code-block:: java
+
+    public int findLeastNumOfUniqueInts(int[] arr, int k) {
+        HashMap<Integer, Integer> counts = new HashMap<>();
+        Integer[] nums = new Integer[arr.length];
+        
+        int j = 0;
+        for (int i : arr) {
+            nums[j] = i;
+            j++;
+            counts.put(i, counts.getOrDefault(i, 0)+1);
+        }
+        
+        Arrays.sort(nums, new Comparator<Integer>() {
+            public int compare(Integer a, Integer b) {
+                int c1 = counts.get(a);
+                int c2 = counts.get(b);
+                return (c1 != c2) ? (c1 - c2) : (a - b);
+            }
+        });  
+        
+        for (int i=0; i<k; i++) {
+            counts.put(nums[i], counts.get(nums[i])-1);
+            if (counts.get(nums[i]) == 0) {
+                counts.remove(nums[i]);
+            }
+        }
+
+        return counts.keySet().size();
+    }
