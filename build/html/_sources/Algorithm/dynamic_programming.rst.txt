@@ -1143,3 +1143,232 @@ The second code snippet improves on that. We notice that rstp and rstn are compl
         
     }
 
+-------------------------------------
+474. Ones and Zeroes (0-1 Knapsack)
+-------------------------------------
+
+You are given an array of binary strings strs and two integers m and n.
+
+Return the size of the largest subset of strs such that there are at most m 0's and n 1's in the subset.
+
+A set x is a subset of a set y if all elements of x are also elements of y.
+
+.. topic:: Example 1
+
+    Input: strs = ["10","0001","111001","1","0"], m = 5, n = 3
+
+    Output: 4
+
+    Explanation: The largest subset with at most 5 0's and 3 1's is {"10", "0001", "1", "0"}, so the answer is 4.
+
+    Other valid but smaller subsets include {"0001", "1"} and {"10", "1", "0"}.
+
+    {"111001"} is an invalid subset because it contains 4 1's, greater than the maximum of 3.
+
+.. topic:: Example 2
+
+    Input: strs = ["10","0","1"], m = 1, n = 1
+
+    Output: 2
+
+    Explanation: The largest subset is {"0", "1"}, so the answer is 2.
+ 
+.. topic:: Constraints
+
+    1 <= strs.length <= 600
+
+    1 <= strs[i].length <= 100
+
+    strs[i] consists only of digits '0' and '1'.
+
+    1 <= m, n <= 100
+
+**Approach:** Need to use the 3-dimensional arrays rst. rst[i][j][k] means the maximum subsets of String 0 to String i that has no more than j 1's and k 0's. Then rst[i][j][k] = Math.max(rst[i-1][j][k] (do not choose i), rst[i-1][j-count0[i]][k-count1[i]] + 1 (choose i)).
+
+.. code-block:: java
+
+    public int findMaxForm(String[] strs, int m, int n) {
+        int[][][] rst = new int[strs.length][m+1][n+1];
+    
+        int[] count0 = new int[strs.length];
+        int[] count1 = new int[strs.length];
+        
+        for (int i=0; i<strs.length; i++) {
+            int c0 = 0;
+            int c1 = 0;
+            for (int j=0; j<strs[i].length(); j++){
+                if (strs[i].charAt(j)=='0') {
+                    c0++;
+                } else {
+                    c1++;
+                }
+            }
+            count0[i] = c0;
+            count1[i] = c1;
+        }
+        
+        for (int j=0; j<m+1; j++) {
+            for (int k=0; k<n+1; k++) {
+                if (j>=count0[0] && k>=count1[0]) {
+                    rst[0][j][k] = 1;
+                }
+            }
+        }
+        
+        for (int i=1; i<strs.length; i++) {
+            for (int j=0; j<m+1; j++) {
+                for (int k=0; k<n+1; k++) {
+                    if (j<count0[i] || k < count1[i]) {
+                        rst[i][j][k] = rst[i-1][j][k];
+                    } else{
+                        rst[i][j][k] = Math.max(rst[i-1][j][k], rst[i-1][j-count0[i]][k-count1[i]] + 1);
+                    }
+                    
+                    //System.out.println("i: "+i + " j: " + j + " k: "+ k + " rst: " + rst[i][j][k]);
+                }
+            }
+        }
+        
+        return rst[strs.length-1][m][n];
+    }
+
+-------------------------------
+518. Coin Change 2 (Knapsack)
+-------------------------------
+
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+
+Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.
+
+You may assume that you have an infinite number of each kind of coin.
+
+The answer is guaranteed to fit into a signed 32-bit integer.
+
+.. topic:: Example 1
+
+    Input: amount = 5, coins = [1,2,5]
+
+    Output: 4
+
+    Explanation: there are four ways to make up the amount:
+
+    5=5
+
+    5=2+2+1
+
+    5=2+1+1+1
+
+    5=1+1+1+1+1
+
+.. topic:: Example 2
+
+    Input: amount = 3, coins = [2]
+
+    Output: 0
+
+    Explanation: the amount of 3 cannot be made up just with coins of 2.
+
+.. topic:: Example 3:
+
+    Input: amount = 10, coins = [10]
+
+    Output: 1
+
+.. topic:: Constraints
+
+    1 <= coins.length <= 300
+
+    1 <= coins[i] <= 5000
+
+    All the values of coins are unique.
+
+    0 <= amount <= 5000
+
+.. code-block:: java
+
+    public int change(int amount, int[] coins) {
+        int[] rst = new int[amount+1];
+        
+        rst[0] = 1;
+        
+        int count;
+        
+        for (int i=0; i<coins.length; i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                rst[j] += rst[j - coins[i]];
+            }
+        }
+        
+        return rst[amount];
+    }
+
+------------------------------------
+377. Combination Sum IV (Knapsack)
+------------------------------------
+
+Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.
+
+The answer is guaranteed to fit in a 32-bit integer.
+
+.. topic:: Example 1:
+
+    Input: nums = [1,2,3], target = 4
+
+    Output: 7
+
+    Explanation:
+
+    The possible combination ways are:
+
+    (1, 1, 1, 1)
+
+    (1, 1, 2)
+
+    (1, 2, 1)
+
+    (1, 3)
+
+    (2, 1, 1)
+
+    (2, 2)
+
+    (3, 1)
+
+    Note that different sequences are counted as different combinations.
+
+.. topic:: Example 2:
+
+    Input: nums = [9], target = 3
+
+    Output: 0
+ 
+.. topic:: Constraints:
+
+    1 <= nums.length <= 200
+
+    1 <= nums[i] <= 1000
+
+    All the elements of nums are unique.
+
+    1 <= target <= 1000
+
+Follow up: What if negative numbers are allowed in the given array? How does it change the problem? What limitation we need to add to the question to allow negative numbers?
+
+.. code-block:: java
+
+    public int combinationSum4(int[] nums, int target) {
+        int[] rst = new int[target+1];
+        
+        rst[0] = 1;
+        
+        for (int j = 0; j <= target; j++) {
+            for (int i = 0; i < nums.length; i++) {
+                if (j - nums[i] >= 0) {
+                    rst[j] += rst[j - nums[i]];
+                }
+                System.out.println("i: "+i + " j: "+j + " rst: "+rst[j]);
+            }
+        }
+        
+        return rst[target];
+    }

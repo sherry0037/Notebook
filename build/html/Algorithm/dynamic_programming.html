@@ -16,7 +16,7 @@
     <script src="../_static/doctools.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Greedy" href="greedy.html" />
+    <link rel="next" title="Graph" href="graph.html" />
     <link rel="prev" title="Disjoint Set" href="disjoint_set.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -26,7 +26,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="greedy.html" title="Greedy"
+          <a href="graph.html" title="Graph"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="disjoint_set.html" title="Disjoint Set"
@@ -54,6 +54,9 @@
 <li><a class="reference internal" href="#partition-equal-subset-sum-0-1-knapsack">416. Partition Equal Subset Sum (0-1 Knapsack)</a></li>
 <li><a class="reference internal" href="#last-stone-weight-ii-0-1-knapsack">Last Stone Weight II (0-1 Knapsack)</a></li>
 <li><a class="reference internal" href="#target-sum-knapsack">494. Target Sum (Knapsack)</a></li>
+<li><a class="reference internal" href="#ones-and-zeroes-0-1-knapsack">474. Ones and Zeroes (0-1 Knapsack)</a></li>
+<li><a class="reference internal" href="#coin-change-2-knapsack">518. Coin Change 2 (Knapsack)</a></li>
+<li><a class="reference internal" href="#combination-sum-iv-knapsack">377. Combination Sum IV (Knapsack)</a></li>
 </ul>
 </li>
 </ul>
@@ -62,8 +65,8 @@
   <p class="topless"><a href="disjoint_set.html"
                         title="previous chapter">Disjoint Set</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="greedy.html"
-                        title="next chapter">Greedy</a></p>
+  <p class="topless"><a href="graph.html"
+                        title="next chapter">Graph</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -110,6 +113,9 @@
 <li><p><a class="reference internal" href="#partition-equal-subset-sum-0-1-knapsack" id="id13">416. Partition Equal Subset Sum (0-1 Knapsack)</a></p></li>
 <li><p><a class="reference internal" href="#last-stone-weight-ii-0-1-knapsack" id="id14">Last Stone Weight II (0-1 Knapsack)</a></p></li>
 <li><p><a class="reference internal" href="#target-sum-knapsack" id="id15">494. Target Sum (Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#ones-and-zeroes-0-1-knapsack" id="id16">474. Ones and Zeroes (0-1 Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#coin-change-2-knapsack" id="id17">518. Coin Change 2 (Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#combination-sum-iv-knapsack" id="id18">377. Combination Sum IV (Knapsack)</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1099,6 +1105,183 @@ Return the number of different expressions that you can build, which evaluates t
 </pre></div>
 </div>
 </section>
+<section id="ones-and-zeroes-0-1-knapsack">
+<h2><a class="toc-backref" href="#id16">474. Ones and Zeroes (0-1 Knapsack)</a><a class="headerlink" href="#ones-and-zeroes-0-1-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>You are given an array of binary strings strs and two integers m and n.</p>
+<p>Return the size of the largest subset of strs such that there are at most m 0’s and n 1’s in the subset.</p>
+<p>A set x is a subset of a set y if all elements of x are also elements of y.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: strs = [“10”,”0001”,”111001”,”1”,”0”], m = 5, n = 3</p>
+<p>Output: 4</p>
+<p>Explanation: The largest subset with at most 5 0’s and 3 1’s is {“10”, “0001”, “1”, “0”}, so the answer is 4.</p>
+<p>Other valid but smaller subsets include {“0001”, “1”} and {“10”, “1”, “0”}.</p>
+<p>{“111001”} is an invalid subset because it contains 4 1’s, greater than the maximum of 3.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: strs = [“10”,”0”,”1”], m = 1, n = 1</p>
+<p>Output: 2</p>
+<p>Explanation: The largest subset is {“0”, “1”}, so the answer is 2.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= strs.length &lt;= 600</p>
+<p>1 &lt;= strs[i].length &lt;= 100</p>
+<p>strs[i] consists only of digits ‘0’ and ‘1’.</p>
+<p>1 &lt;= m, n &lt;= 100</p>
+</div>
+<p><strong>Approach:</strong> Need to use the 3-dimensional arrays rst. rst[i][j][k] means the maximum subsets of String 0 to String i that has no more than j 1’s and k 0’s. Then rst[i][j][k] = Math.max(rst[i-1][j][k] (do not choose i), rst[i-1][j-count0[i]][k-count1[i]] + 1 (choose i)).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMaxForm</span><span class="p">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">strs</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[][][]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="o">][</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="o">][</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">count0</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">count1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">c0</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">c1</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">j</span><span class="o">++</span><span class="p">){</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">strs</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">j</span><span class="p">)</span><span class="o">==</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">c0</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">c1</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">count0</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">c0</span><span class="p">;</span>
+        <span class="n">count1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">c1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;=</span><span class="n">count0</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">&amp;&amp;</span> <span class="n">k</span><span class="o">&gt;=</span><span class="n">count1</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">&lt;</span><span class="n">count0</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">||</span> <span class="n">k</span> <span class="o">&lt;</span> <span class="n">count1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
+                <span class="p">}</span> <span class="k">else</span><span class="p">{</span>
+                    <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">][</span><span class="n">k</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">j</span><span class="o">-</span><span class="n">count0</span><span class="o">[</span><span class="n">i</span><span class="o">]][</span><span class="n">k</span><span class="o">-</span><span class="n">count1</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+                <span class="p">}</span>
+
+                <span class="c1">//System.out.println(&quot;i: &quot;+i + &quot; j: &quot; + j + &quot; k: &quot;+ k + &quot; rst: &quot; + rst[i][j][k]);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">strs</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">][</span><span class="n">m</span><span class="o">][</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="coin-change-2-knapsack">
+<h2><a class="toc-backref" href="#id17">518. Coin Change 2 (Knapsack)</a><a class="headerlink" href="#coin-change-2-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.</p>
+<p>Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.</p>
+<p>You may assume that you have an infinite number of each kind of coin.</p>
+<p>The answer is guaranteed to fit into a signed 32-bit integer.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: amount = 5, coins = [1,2,5]</p>
+<p>Output: 4</p>
+<p>Explanation: there are four ways to make up the amount:</p>
+<p>5=5</p>
+<p>5=2+2+1</p>
+<p>5=2+1+1+1</p>
+<p>5=1+1+1+1+1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: amount = 3, coins = [2]</p>
+<p>Output: 0</p>
+<p>Explanation: the amount of 3 cannot be made up just with coins of 2.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3:</p>
+<p>Input: amount = 10, coins = [10]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= coins.length &lt;= 300</p>
+<p>1 &lt;= coins[i] &lt;= 5000</p>
+<p>All the values of coins are unique.</p>
+<p>0 &lt;= amount &lt;= 5000</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">change</span><span class="p">(</span><span class="kt">int</span> <span class="n">amount</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">coins</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">amount</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">coins</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">amount</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+=</span> <span class="n">rst</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">coins</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">amount</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="combination-sum-iv-knapsack">
+<h2><a class="toc-backref" href="#id18">377. Combination Sum IV (Knapsack)</a><a class="headerlink" href="#combination-sum-iv-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.</p>
+<p>The answer is guaranteed to fit in a 32-bit integer.</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: nums = [1,2,3], target = 4</p>
+<p>Output: 7</p>
+<p>Explanation:</p>
+<p>The possible combination ways are:</p>
+<p>(1, 1, 1, 1)</p>
+<p>(1, 1, 2)</p>
+<p>(1, 2, 1)</p>
+<p>(1, 3)</p>
+<p>(2, 1, 1)</p>
+<p>(2, 2)</p>
+<p>(3, 1)</p>
+<p>Note that different sequences are counted as different combinations.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: nums = [9], target = 3</p>
+<p>Output: 0</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>1 &lt;= nums.length &lt;= 200</p>
+<p>1 &lt;= nums[i] &lt;= 1000</p>
+<p>All the elements of nums are unique.</p>
+<p>1 &lt;= target &lt;= 1000</p>
+</div>
+<p>Follow up: What if negative numbers are allowed in the given array? How does it change the problem? What limitation we need to add to the question to allow negative numbers?</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">combinationSum4</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">,</span> <span class="kt">int</span> <span class="n">target</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">target</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;=</span> <span class="n">target</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">+=</span> <span class="n">rst</span><span class="o">[</span><span class="n">j</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]]</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;i: &quot;</span><span class="o">+</span><span class="n">i</span> <span class="o">+</span> <span class="s">&quot; j: &quot;</span><span class="o">+</span><span class="n">j</span> <span class="o">+</span> <span class="s">&quot; rst: &quot;</span><span class="o">+</span><span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">target</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -1115,7 +1298,7 @@ Return the number of different expressions that you can build, which evaluates t
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="greedy.html" title="Greedy"
+          <a href="graph.html" title="Graph"
              >next</a> |</li>
         <li class="right" >
           <a href="disjoint_set.html" title="Disjoint Set"
