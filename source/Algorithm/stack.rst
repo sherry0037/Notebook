@@ -252,3 +252,158 @@ Follow up: Can you solve it in O(n) time and O(1) space? See Array for an O(1) s
             }
         }
     }
+
+
+-------------------------
+739. Daily Temperatures
+-------------------------
+
+Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+
+.. topic:: Example 1
+
+    Input: temperatures = [73,74,75,71,69,72,76,73]
+
+    Output: [1,1,4,2,1,1,0,0]
+
+.. topic:: Example 2
+
+    Input: temperatures = [30,40,50,60]
+
+    Output: [1,1,1,0]
+
+.. topic:: Example 3
+
+    Input: temperatures = [30,60,90]
+
+    Output: [1,1,0]
+
+.. topic:: Constraints
+
+    1 <= temperatures.length <= 105
+
+    30 <= temperatures[i] <= 100
+
+**Approach**: We keep a monotonically increasing stack that stores the index of temperature: when a new temperature with index i comes, check if it is greater than the top-most element j in the stack. If it is greater, we can pop j and set rst[j] to i-j, because that is how far away i is from j (i.e. how many days we need to wait after j to get to a greater temperature).
+
+.. code-block:: java
+
+    public int[] dailyTemperatures(int[] temperatures) {
+        Stack<Integer> stack = new Stack<>();
+        int[] answer = new int[temperatures.length];
+        
+        for (int i=0; i<temperatures.length; i++) {
+            while (!stack.empty() && temperatures[stack.peek()] < temperatures[i]) {
+                int j = stack.pop();
+                answer[j] = i-j;
+            }
+            stack.push(i);
+           
+        }
+        return answer;
+    }
+
+-------------------------
+42. Trapping Rain Water
+-------------------------
+
+Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+
+.. topic:: Example 1
+
+    Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+
+    Output: 6
+
+    Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+
+.. topic:: Example 2
+
+    Input: height = [4,2,0,3,2,5]
+
+    Output: 9
+ 
+.. topic:: Constraints
+
+    n == height.length
+
+    1 <= n <= 2 * 104
+
+    0 <= height[i] <= 105
+
+**Approach**: use a monotonically decreasing stack storing the index of the bars. We have three situation for a new index i:
+
+- The height of i is lower than the top of the stack: just push i into the stack.
+
+- The height of i is the same as the top of the stack: refresh the top of the stack to i (pop and then push i). Because if two consecutive bars are at the same height, it cannot store waters in-between.
+
+- The height of i is greater than the top of the stack:
+    
+    - the top of the stack now represents the lowest bar to the left of i. So we pop the top of the stack and call it lowest. 
+
+    - then the next top of the stack is the left bar. We want to calculate how many water can store between left bar and right bar (i). So calculate the width (right-left-i) and height (the lower one between left and right bar minus the height of the lowest point), and multiply to get the water and add to rst.
+
+        - if the stack is empty, i now becomes the only element of the stack and we can continue.
+
+.. code-block:: java
+
+    public int trap(int[] height) {
+        Stack<Integer> stack = new Stack<>();
+        int rst = 0;
+        stack.push(0);
+        
+        for (int i=1; i<height.length; i++) {
+            System.out.println("i: " + i);
+            if (!stack.empty() && height[stack.peek()] > height[i]) {
+                stack.push(i);
+            } else if (!stack.empty() && height[stack.peek()] == height[i]) {
+                stack.pop();
+                stack.push(i);
+            } else {
+                while (!stack.empty() && height[stack.peek()] < height[i]) {
+                     int lowest = stack.pop();
+                     System.out.println("lowest: "+ lowest);
+                     if (!stack.empty()) {
+                         int left = stack.peek();
+                         int w = i-left-1;
+                         int h = Math.min(height[i], height[left]) - height[lowest];
+                         System.out.println("w: "+ w + " h: " + h + " i:" + i + " left: " + left);
+                         rst += w*h;
+                     }
+                 }
+                stack.push(i);
+            }
+           
+        }
+        
+        return rst;
+        
+    }
+
+**Simplified version**:
+
+.. code-block:: java
+
+    public int trap(int[] height) {
+        Stack<Integer> stack = new Stack<>();
+        int rst = 0;
+        stack.push(0);
+        
+        for (int i=1; i<height.length; i++) {
+            //System.out.println("i: " + i);
+            while (!stack.empty() && height[stack.peek()] <= height[i]) {
+                int lowest = stack.pop();
+                if (!stack.empty()) {
+                    int left = stack.peek();
+                    int w = i-left-1;
+                    int h = Math.min(height[i], height[left]) - height[lowest];
+                    rst += w*h;
+                }
+            }
+            stack.push(i);
+           
+        }
+        
+        return rst;
+        
+    }

@@ -1236,6 +1236,8 @@ A set x is a subset of a set y if all elements of x are also elements of y.
 518. Coin Change 2 (Knapsack)
 -------------------------------
 
+**Combination**
+
 You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
 
 Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.
@@ -1306,11 +1308,13 @@ The answer is guaranteed to fit into a signed 32-bit integer.
 377. Combination Sum IV (Knapsack)
 ------------------------------------
 
+**Permutation**
+
 Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.
 
 The answer is guaranteed to fit in a 32-bit integer.
 
-.. topic:: Example 1:
+.. topic:: Example 1
 
     Input: nums = [1,2,3], target = 4
 
@@ -1336,13 +1340,13 @@ The answer is guaranteed to fit in a 32-bit integer.
 
     Note that different sequences are counted as different combinations.
 
-.. topic:: Example 2:
+.. topic:: Example 2
 
     Input: nums = [9], target = 3
 
     Output: 0
  
-.. topic:: Constraints:
+.. topic:: Constraints
 
     1 <= nums.length <= 200
 
@@ -1371,4 +1375,175 @@ Follow up: What if negative numbers are allowed in the given array? How does it 
         }
         
         return rst[target];
+    }
+
+---------------------------------
+279. Perfect Squares (Knapsack)    
+---------------------------------
+
+Given an integer n, return the least number of perfect square numbers that sum to n.
+
+A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.
+
+.. topic:: Example 1
+
+    Input: n = 12
+
+    Output: 3
+
+    Explanation: 12 = 4 + 4 + 4.
+
+.. topic:: Example 2
+
+    Input: n = 13
+
+    Output: 2
+
+    Explanation: 13 = 4 + 9.
+
+.. topic:: Constraints
+
+    1 <= n <= 104
+
+.. code-block:: java
+
+    public int numSquares(int n) {
+        int[] rst = new int[n+1];
+        int min = n;
+        
+        for (int j=0; j<=n; j++) {
+            rst[j] = j;
+        }
+        
+        for (int i=2; i*i<=n; i++) {
+            for (int j=i*i; j<=n; j++) {
+                rst[j] = Math.min(rst[j], rst[j-i*i] + 1);
+                //System.out.println("i: "+i + " j: " + j + " rst: "+ rst[j]);
+            }
+        }
+        
+        return rst[n];
+    }
+
+-------------------
+198. House Robber
+-------------------
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+.. topic:: Example 1
+
+    Input: nums = [1,2,3,1]
+
+    Output: 4
+
+    Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+
+    Total amount you can rob = 1 + 3 = 4.
+
+.. topic:: Example 2
+
+    Input: nums = [2,7,9,3,1]
+
+    Output: 12
+
+    Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).
+
+    Total amount you can rob = 2 + 9 + 1 = 12.
+
+.. topic:: Constraints
+
+    1 <= nums.length <= 100
+
+    0 <= nums[i] <= 400
+
+.. code-block:: java
+
+     public int rob(int[] nums) {
+        int prepre = 0;
+        int pre = 0;
+        int current = 0;
+        
+        for (int i=0; i<nums.length; i++) {
+            current = Math.max(nums[i] + prepre, pre);
+            prepre = pre;
+            pre = current;
+        }
+        
+        return current;
+    }
+
+----------------------
+213. House Robber II
+----------------------
+
+You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
+
+Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.
+
+ 
+
+.. topic:: Example 1
+
+    Input: nums = [2,3,2]
+
+    Output: 3
+
+    Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.
+
+.. topic:: Example 2
+
+    Input: nums = [1,2,3,1]
+
+    Output: 4
+
+    Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).
+
+    Total amount you can rob = 1 + 3 = 4.
+
+.. topic:: Example 3
+
+    Input: nums = [1,2,3]
+
+    Output: 3
+
+.. topic:: Constraints:
+
+    1 <= nums.length <= 100
+
+    0 <= nums[i] <= 1000
+
+.. code-block:: java
+
+    public int rob(int[] nums) {
+        int prepre = 0;
+        int pre = 0;
+        
+        if (nums.length == 1) {
+            return nums[0];
+        }
+        
+        int first = 0; 
+        for (int i=1; i<nums.length; i++) {
+            first = Math.max(nums[i] + prepre, pre);
+            prepre = pre;
+            pre = first;
+            //System.out.println("f: " + first);
+        }
+        
+        prepre = 0;
+        pre = 0;
+        int last = 0; 
+        for (int i=0; i<nums.length-1; i++) {
+            last = Math.max(nums[i] + prepre, pre);
+            prepre = pre;
+            pre = last;
+            //System.out.println("l: " + last);
+        }
+        
+        //System.out.println(first + " " + last);
+        
+        return Math.max(first, last);
     }

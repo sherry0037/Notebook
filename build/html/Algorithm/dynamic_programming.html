@@ -57,6 +57,9 @@
 <li><a class="reference internal" href="#ones-and-zeroes-0-1-knapsack">474. Ones and Zeroes (0-1 Knapsack)</a></li>
 <li><a class="reference internal" href="#coin-change-2-knapsack">518. Coin Change 2 (Knapsack)</a></li>
 <li><a class="reference internal" href="#combination-sum-iv-knapsack">377. Combination Sum IV (Knapsack)</a></li>
+<li><a class="reference internal" href="#perfect-squares-knapsack">279. Perfect Squares (Knapsack)</a></li>
+<li><a class="reference internal" href="#house-robber">198. House Robber</a></li>
+<li><a class="reference internal" href="#house-robber-ii">213. House Robber II</a></li>
 </ul>
 </li>
 </ul>
@@ -116,6 +119,9 @@
 <li><p><a class="reference internal" href="#ones-and-zeroes-0-1-knapsack" id="id16">474. Ones and Zeroes (0-1 Knapsack)</a></p></li>
 <li><p><a class="reference internal" href="#coin-change-2-knapsack" id="id17">518. Coin Change 2 (Knapsack)</a></p></li>
 <li><p><a class="reference internal" href="#combination-sum-iv-knapsack" id="id18">377. Combination Sum IV (Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#perfect-squares-knapsack" id="id19">279. Perfect Squares (Knapsack)</a></p></li>
+<li><p><a class="reference internal" href="#house-robber" id="id20">198. House Robber</a></p></li>
+<li><p><a class="reference internal" href="#house-robber-ii" id="id21">213. House Robber II</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1181,6 +1187,7 @@ Return the number of different expressions that you can build, which evaluates t
 </section>
 <section id="coin-change-2-knapsack">
 <h2><a class="toc-backref" href="#id17">518. Coin Change 2 (Knapsack)</a><a class="headerlink" href="#coin-change-2-knapsack" title="Permalink to this headline">¶</a></h2>
+<p><strong>Combination</strong></p>
 <p>You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.</p>
 <p>Return the number of combinations that make up that amount. If that amount of money cannot be made up by any combination of the coins, return 0.</p>
 <p>You may assume that you have an infinite number of each kind of coin.</p>
@@ -1233,10 +1240,11 @@ Return the number of different expressions that you can build, which evaluates t
 </section>
 <section id="combination-sum-iv-knapsack">
 <h2><a class="toc-backref" href="#id18">377. Combination Sum IV (Knapsack)</a><a class="headerlink" href="#combination-sum-iv-knapsack" title="Permalink to this headline">¶</a></h2>
+<p><strong>Permutation</strong></p>
 <p>Given an array of distinct integers nums and a target integer target, return the number of possible combinations that add up to target.</p>
 <p>The answer is guaranteed to fit in a 32-bit integer.</p>
 <div class="topic">
-<p class="topic-title">Example 1:</p>
+<p class="topic-title">Example 1</p>
 <p>Input: nums = [1,2,3], target = 4</p>
 <p>Output: 7</p>
 <p>Explanation:</p>
@@ -1251,12 +1259,12 @@ Return the number of different expressions that you can build, which evaluates t
 <p>Note that different sequences are counted as different combinations.</p>
 </div>
 <div class="topic">
-<p class="topic-title">Example 2:</p>
+<p class="topic-title">Example 2</p>
 <p>Input: nums = [9], target = 3</p>
 <p>Output: 0</p>
 </div>
 <div class="topic">
-<p class="topic-title">Constraints:</p>
+<p class="topic-title">Constraints</p>
 <p>1 &lt;= nums.length &lt;= 200</p>
 <p>1 &lt;= nums[i] &lt;= 1000</p>
 <p>All the elements of nums are unique.</p>
@@ -1278,6 +1286,145 @@ Return the number of different expressions that you can build, which evaluates t
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">target</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="perfect-squares-knapsack">
+<h2><a class="toc-backref" href="#id19">279. Perfect Squares (Knapsack)</a><a class="headerlink" href="#perfect-squares-knapsack" title="Permalink to this headline">¶</a></h2>
+<p>Given an integer n, return the least number of perfect square numbers that sum to n.</p>
+<p>A perfect square is an integer that is the square of an integer; in other words, it is the product of some integer with itself. For example, 1, 4, 9, and 16 are perfect squares while 3 and 11 are not.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: n = 12</p>
+<p>Output: 3</p>
+<p>Explanation: 12 = 4 + 4 + 4.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: n = 13</p>
+<p>Output: 2</p>
+<p>Explanation: 13 = 4 + 9.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= n &lt;= 104</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">numSquares</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">min</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;=</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="o">[</span><span class="n">j</span><span class="o">-</span><span class="n">i</span><span class="o">*</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="c1">//System.out.println(&quot;i: &quot;+i + &quot; j: &quot; + j + &quot; rst: &quot;+ rst[j]);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="house-robber">
+<h2><a class="toc-backref" href="#id20">198. House Robber</a><a class="headerlink" href="#house-robber" title="Permalink to this headline">¶</a></h2>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed, the only constraint stopping you from robbing each of them is that adjacent houses have security systems connected and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
+<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [1,2,3,1]</p>
+<p>Output: 4</p>
+<p>Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).</p>
+<p>Total amount you can rob = 1 + 3 = 4.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [2,7,9,3,1]</p>
+<p>Output: 12</p>
+<p>Explanation: Rob house 1 (money = 2), rob house 3 (money = 9) and rob house 5 (money = 1).</p>
+<p>Total amount you can rob = 2 + 9 + 1 = 12.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 100</p>
+<p>0 &lt;= nums[i] &lt;= 400</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span> <span class="kd">public</span> <span class="kt">int</span> <span class="nf">rob</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">prepre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">current</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">current</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">prepre</span><span class="p">,</span> <span class="n">pre</span><span class="p">);</span>
+        <span class="n">prepre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">current</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="house-robber-ii">
+<h2><a class="toc-backref" href="#id21">213. House Robber II</a><a class="headerlink" href="#house-robber-ii" title="Permalink to this headline">¶</a></h2>
+<p>You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.</p>
+<p>Given an integer array nums representing the amount of money of each house, return the maximum amount of money you can rob tonight without alerting the police.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [2,3,2]</p>
+<p>Output: 3</p>
+<p>Explanation: You cannot rob house 1 (money = 2) and then rob house 3 (money = 2), because they are adjacent houses.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [1,2,3,1]</p>
+<p>Output: 4</p>
+<p>Explanation: Rob house 1 (money = 1) and then rob house 3 (money = 3).</p>
+<p>Total amount you can rob = 1 + 3 = 4.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [1,2,3]</p>
+<p>Output: 3</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>1 &lt;= nums.length &lt;= 100</p>
+<p>0 &lt;= nums[i] &lt;= 1000</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">rob</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">prepre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">first</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">prepre</span><span class="p">,</span> <span class="n">pre</span><span class="p">);</span>
+        <span class="n">prepre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+        <span class="c1">//System.out.println(&quot;f: &quot; + first);</span>
+    <span class="p">}</span>
+
+    <span class="n">prepre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">pre</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">last</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">last</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="n">prepre</span><span class="p">,</span> <span class="n">pre</span><span class="p">);</span>
+        <span class="n">prepre</span> <span class="o">=</span> <span class="n">pre</span><span class="p">;</span>
+        <span class="n">pre</span> <span class="o">=</span> <span class="n">last</span><span class="p">;</span>
+        <span class="c1">//System.out.println(&quot;l: &quot; + last);</span>
+    <span class="p">}</span>
+
+    <span class="c1">//System.out.println(first + &quot; &quot; + last);</span>
+
+    <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 </div>

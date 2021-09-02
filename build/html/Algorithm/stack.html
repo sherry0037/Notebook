@@ -43,6 +43,8 @@
 <li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
 <li><a class="reference internal" href="#next-greater-element-ii">503. Next Greater Element II</a></li>
 <li><a class="reference internal" href="#backspace-string-compare">844. Backspace String Compare</a></li>
+<li><a class="reference internal" href="#daily-temperatures">739. Daily Temperatures</a></li>
+<li><a class="reference internal" href="#trapping-rain-water">42. Trapping Rain Water</a></li>
 </ul>
 </li>
 </ul>
@@ -287,6 +289,147 @@
             <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
         <span class="p">}</span>
     <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="daily-temperatures">
+<h2>739. Daily Temperatures<a class="headerlink" href="#daily-temperatures" title="Permalink to this headline">¶</a></h2>
+<p>Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: temperatures = [73,74,75,71,69,72,76,73]</p>
+<p>Output: [1,1,4,2,1,1,0,0]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: temperatures = [30,40,50,60]</p>
+<p>Output: [1,1,1,0]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: temperatures = [30,60,90]</p>
+<p>Output: [1,1,0]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= temperatures.length &lt;= 105</p>
+<p>30 &lt;= temperatures[i] &lt;= 100</p>
+</div>
+<p><strong>Approach</strong>: We keep a monotonically increasing stack that stores the index of temperature: when a new temperature with index i comes, check if it is greater than the top-most element j in the stack. If it is greater, we can pop j and set rst[j] to i-j, because that is how far away i is from j (i.e. how many days we need to wait after j to get to a greater temperature).</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">dailyTemperatures</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">temperatures</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">answer</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">temperatures</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">temperatures</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">temperatures</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="n">answer</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">j</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">answer</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="trapping-rain-water">
+<h2>42. Trapping Rain Water<a class="headerlink" href="#trapping-rain-water" title="Permalink to this headline">¶</a></h2>
+<p>Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]</p>
+<p>Output: 6</p>
+<p>Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: height = [4,2,0,3,2,5]</p>
+<p>Output: 9</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>n == height.length</p>
+<p>1 &lt;= n &lt;= 2 * 104</p>
+<p>0 &lt;= height[i] &lt;= 105</p>
+</div>
+<p><strong>Approach</strong>: use a monotonically decreasing stack storing the index of the bars. We have three situation for a new index i:</p>
+<ul>
+<li><p>The height of i is lower than the top of the stack: just push i into the stack.</p></li>
+<li><p>The height of i is the same as the top of the stack: refresh the top of the stack to i (pop and then push i). Because if two consecutive bars are at the same height, it cannot store waters in-between.</p></li>
+<li><p>The height of i is greater than the top of the stack:</p>
+<blockquote>
+<div><ul>
+<li><p>the top of the stack now represents the lowest bar to the left of i. So we pop the top of the stack and call it lowest.</p></li>
+<li><p>then the next top of the stack is the left bar. We want to calculate how many water can store between left bar and right bar (i). So calculate the width (right-left-i) and height (the lower one between left and right bar minus the height of the lowest point), and multiply to get the water and add to rst.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>if the stack is empty, i now becomes the only element of the stack and we can continue.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">trap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">height</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;i: &quot;</span> <span class="o">+</span> <span class="n">i</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">height</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">height</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="o">]</span> <span class="o">==</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">height</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+                 <span class="kt">int</span> <span class="n">lowest</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+                 <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;lowest: &quot;</span><span class="o">+</span> <span class="n">lowest</span><span class="p">);</span>
+                 <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+                     <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+                     <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">left</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                     <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span> <span class="n">height</span><span class="o">[</span><span class="n">left</span><span class="o">]</span><span class="p">)</span> <span class="o">-</span> <span class="n">height</span><span class="o">[</span><span class="n">lowest</span><span class="o">]</span><span class="p">;</span>
+                     <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;w: &quot;</span><span class="o">+</span> <span class="n">w</span> <span class="o">+</span> <span class="s">&quot; h: &quot;</span> <span class="o">+</span> <span class="n">h</span> <span class="o">+</span> <span class="s">&quot; i:&quot;</span> <span class="o">+</span> <span class="n">i</span> <span class="o">+</span> <span class="s">&quot; left: &quot;</span> <span class="o">+</span> <span class="n">left</span><span class="p">);</span>
+                     <span class="n">rst</span> <span class="o">+=</span> <span class="n">w</span><span class="o">*</span><span class="n">h</span><span class="p">;</span>
+                 <span class="p">}</span>
+             <span class="p">}</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Simplified version</strong>:</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">trap</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">height</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">height</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">//System.out.println(&quot;i: &quot; + i);</span>
+        <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">height</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="o">]</span> <span class="o">&lt;=</span> <span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">lowest</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+                <span class="kt">int</span> <span class="n">w</span> <span class="o">=</span> <span class="n">i</span><span class="o">-</span><span class="n">left</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+                <span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">height</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">,</span> <span class="n">height</span><span class="o">[</span><span class="n">left</span><span class="o">]</span><span class="p">)</span> <span class="o">-</span> <span class="n">height</span><span class="o">[</span><span class="n">lowest</span><span class="o">]</span><span class="p">;</span>
+                <span class="n">rst</span> <span class="o">+=</span> <span class="n">w</span><span class="o">*</span><span class="n">h</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
 <span class="p">}</span>
 </pre></div>
 </div>
