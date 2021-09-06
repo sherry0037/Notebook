@@ -505,3 +505,174 @@ Tip: using array instead of ArrayList will be much faster (54.95% -> 100%) and s
             return rst;
             
         }
+
+----------------------------------------
+102. Binary Tree Level Order Traversal
+----------------------------------------
+
+Given the root of a binary tree, return the level order traversal of its nodes' values. (i.e., from left to right, level by level).
+
+.. topic::  Example 1
+
+    Input: root = [3,9,20,null,null,15,7]
+
+    Output: [[3],[9,20],[15,7]]
+
+.. topic::  Example 2
+
+    Input: root = [1]
+
+    Output: [[1]]
+
+.. topic::  Example 3
+
+    Input: root = []
+
+    Output: []
+ 
+.. topic::  Constraints
+
+    The number of nodes in the tree is in the range [0, 2000].
+
+    -1000 <= Node.val <= 1000
+
+**Note:** This is BFS. See 107. Binary Tree Level Order Traversal II for DFS solution which will be faster than BFS.
+
+.. code-block:: java
+
+    public List<List<Integer>> levelOrder(TreeNode root) {
+        List<List<Integer>> rst = new ArrayList<>();
+        traverse(root, 0, rst);
+        return rst;
+    }
+    
+    private void traverse(TreeNode root, int level, List<List<Integer>> rst) {
+        if (root == null) {
+            return;
+        }
+        
+        if (rst.size() <= level) {
+            rst.add(new ArrayList<>());
+        }
+        rst.get(level).add(root.val);
+        
+        traverse(root.left, level+1, rst);
+        traverse(root.right, level+1, rst);
+    }
+
+-------------------------------------------
+107. Binary Tree Level Order Traversal II
+-------------------------------------------
+
+Given the root of a binary tree, return the bottom-up level order traversal of its nodes' values. (i.e., from left to right, level by level from leaf to root).
+
+.. topic::  Example 1
+
+    Input: root = [3,9,20,null,null,15,7]
+
+    Output: [[15,7],[9,20],[3]]
+
+.. topic::  Example 2
+
+    Input: root = [1]
+
+    Output: [[1]]
+
+.. topic::  Example 3
+
+    Input: root = []
+
+    Output: []
+ 
+.. topic::  Constraints
+
+    The number of nodes in the tree is in the range [0, 2000].
+
+    -1000 <= Node.val <= 1000
+
+.. code-block:: java
+
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> rst = new ArrayList<>();
+        
+        traverse(root, rst, 0);
+        
+        Collections.reverse(rst);
+        
+        return rst;
+    }
+    
+    private void traverse(TreeNode root, List<List<Integer>> rst, int depth) {
+        if (root == null) {
+            return;
+        }
+        
+        traverse(root.left, rst, depth+1);
+        
+        while (rst.size() <= depth) {
+            rst.add(new ArrayList<Integer>());
+        }
+        
+        rst.get(depth).add(root.val);
+       
+        traverse(root.right, rst, depth+1);
+    }
+
+---------------------------------------
+637. Average of Levels in Binary Tree
+---------------------------------------
+
+Given the root of a binary tree, return the average value of the nodes on each level in the form of an array. Answers within 10-5 of the actual answer will be accepted.
+
+.. topic::  Example 1
+
+    Input: root = [3,9,20,null,15,7]
+
+    Output: [3.00000,14.50000,11.00000]
+
+    Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+
+    Hence return [3, 14.5, 11].
+
+.. topic::  Example 2
+
+    Input: root = [3,9,20,15,7]
+
+    Output: [3.00000,14.50000,11.00000]
+     
+.. topic::  Constraints
+
+    The number of nodes in the tree is in the range [1, 104].
+
+    -231 <= Node.val <= 231 - 1
+
+**Note**: use double to avoid overflow.
+
+.. code-block:: java
+
+    public List<Double> averageOfLevels(TreeNode root) {
+        List<Double> avgs = new ArrayList<>();
+        List<Integer> nNodes = new ArrayList<>();
+        traverse(root, 0, avgs, nNodes);
+        
+        return avgs;
+    }
+    
+    private void traverse(TreeNode root, int depth, List<Double> avgs, List<Integer> nNodes) {
+        if (root == null) {
+            return;
+        }
+        
+        if (avgs.size() <= depth) {
+            avgs.add((double)root.val); // we get to a new level
+            nNodes.add(1);
+        } else {
+            int n = nNodes.get(depth);
+            double a = avgs.get(depth);
+            avgs.set(depth, (a*n + root.val) / (n+1));
+            nNodes.set(depth, n+1);
+        }
+        
+        traverse(root.left, depth + 1, avgs, nNodes);
+        traverse(root.right, depth + 1, avgs, nNodes);
+    }
