@@ -676,3 +676,228 @@ Given the root of a binary tree, return the average value of the nodes on each l
         traverse(root.left, depth + 1, avgs, nNodes);
         traverse(root.right, depth + 1, avgs, nNodes);
     }
+
+---------------------------------------
+429. N-ary Tree Level Order Traversal
+---------------------------------------
+
+Given an n-ary tree, return the level order traversal of its nodes' values.
+
+Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).
+
+.. topic::  Example 1
+
+    Input: root = [1,null,3,2,4,null,5,6]
+
+    Output: [[1],[3,2,4],[5,6]]
+
+.. topic::  Example 2
+
+    Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
+
+    Output: [[1],[2,3,4,5],[6,7,8,9,10],[11,12,13],[14]]
+ 
+.. topic::  Constraints
+
+    The height of the n-ary tree is less than or equal to 1000
+
+    The total number of nodes is between [0, 104]
+
+.. code-block:: java
+
+    /*
+    // Definition for a Node.
+    class Node {
+        public int val;
+        public List<Node> children;
+
+        public Node() {}
+
+        public Node(int _val) {
+            val = _val;
+        }
+
+        public Node(int _val, List<Node> _children) {
+            val = _val;
+            children = _children;
+        }
+    };
+    */
+
+    class Solution {
+        public List<List<Integer>> levelOrder(Node root) {
+            List<List<Integer>> rst = new ArrayList<>();
+            traverse(root, rst, 0);
+            
+            return rst;
+        }
+        
+        private void traverse(Node root, List<List<Integer>> rst, int depth) {
+            if (root == null) {
+                return;
+            }
+            
+            for (Node child : root.children) {
+                traverse(child, rst, depth+1);
+            }
+            
+            while (rst.size() <= depth) {
+                rst.add(new ArrayList<Integer>());
+            }
+            
+            rst.get(depth).add(root.val);
+                
+        }
+    }
+
+------------------------------------------
+515. Find Largest Value in Each Tree Row
+------------------------------------------
+
+Given the root of a binary tree, return an array of the largest value in each row of the tree (0-indexed).
+
+.. topic::  Example 1
+
+    Input: root = [1,3,2,5,3,null,9]
+
+    Output: [1,3,9]
+
+.. topic::  Example 2
+
+    Input: root = [1,2,3]
+
+    Output: [1,3]
+
+.. topic::  Example 3
+
+    Input: root = [1]
+
+    Output: [1]
+
+.. topic::  Example 4
+
+    Input: root = [1,null,2]
+
+    Output: [1,2]
+
+.. topic::  Example 5
+
+    Input: root = []
+
+    Output: []
+ 
+.. topic::  Constraints
+
+    The number of nodes in the tree will be in the range [0, 104].
+
+    -231 <= Node.val <= 231 - 1
+
+.. code-block:: java
+
+    public List<Integer> largestValues(TreeNode root) {
+        List<Integer> maxes = new ArrayList<Integer>();
+        
+        traverse(root, maxes, 0);
+        return maxes;
+    }
+    
+    private void traverse(TreeNode root, List<Integer> maxes, int depth) {
+        if (root == null) {
+            return;
+        }
+        
+        traverse(root.left, maxes, depth+1);
+        
+        while (maxes.size() <= depth) {
+            maxes.add(Integer.MIN_VALUE);
+        }
+        
+        maxes.set(depth, Math.max(maxes.get(depth), root.val));        
+        
+        traverse(root.right, maxes, depth+1);
+        
+    }
+
+--------------------------------------------------
+116. Populating Next Right Pointers in Each Node
+--------------------------------------------------
+
+You are given a perfect binary tree where all leaves are on the same level, and every parent has two children. The binary tree has the following definition:
+
+.. code-block:: java
+
+    struct Node {
+      int val;
+      Node *left;
+      Node *right;
+      Node *next;
+    }
+
+Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.
+
+Initially, all next pointers are set to NULL.
+
+.. topic::  Example 1
+
+    Input: root = [1,2,3,4,5,6,7]
+
+    Output: [1,#,2,3,#,4,5,6,7,#]
+
+    Explanation: Given the above perfect binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with '#' signifying the end of each level.
+
+.. topic::  Example 2
+
+    Input: root = []
+
+    Output: []
+
+.. topic::  Constraints
+
+    The number of nodes in the tree is in the range [0, 212 - 1].
+
+    -1000 <= Node.val <= 1000
+ 
+.. topic::  Follow-up
+
+    You may only use constant extra space.
+
+    The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.
+
+**Approach**: Given a current root node:
+
+- For its left child, the pointer should points to the right child of the root node.
+
+- For its right child, the pointer should points to either null or the left child of root's next node. 
+
+- For example, given 
+
+1
+
+2 3
+
+4 5 6 7
+
+Suppose current node is 2, its left child is 4, which should points to its right child (5). Its right child is 5, which should points to the left child of 5's next node(3)'s child (6). 
+
+.. code-block:: java
+
+    public Node connect(Node root) {
+        traverse(root, null);
+        
+        return root;
+    }
+    
+    private void traverse(Node root, Node right) {
+        if (root == null) {
+            return;
+        }
+        
+        root.next = right;
+        
+        if (right != null) {
+            right = right.left;
+        }
+        
+        traverse(root.right, right);
+        traverse(root.left, root.right);
+    }
