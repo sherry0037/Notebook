@@ -57,6 +57,11 @@
 <li><a class="reference internal" href="#n-ary-tree-level-order-traversal">429. N-ary Tree Level Order Traversal</a></li>
 <li><a class="reference internal" href="#find-largest-value-in-each-tree-row">515. Find Largest Value in Each Tree Row</a></li>
 <li><a class="reference internal" href="#populating-next-right-pointers-in-each-node">116. Populating Next Right Pointers in Each Node</a></li>
+<li><a class="reference internal" href="#populating-next-right-pointers-in-each-node-ii">117. Populating Next Right Pointers in Each Node II</a></li>
+<li><a class="reference internal" href="#invert-binary-tree">226. Invert Binary Tree</a></li>
+<li><a class="reference internal" href="#symmetric-tree">101. Symmetric Tree</a></li>
+<li><a class="reference internal" href="#minimum-depth-of-binary-tree">111. Minimum Depth of Binary Tree</a></li>
+<li><a class="reference internal" href="#balanced-binary-tree">110. Balanced Binary Tree</a></li>
 </ul>
 </li>
 </ul>
@@ -112,6 +117,11 @@
 <li><p><a class="reference internal" href="#n-ary-tree-level-order-traversal" id="id12">429. N-ary Tree Level Order Traversal</a></p></li>
 <li><p><a class="reference internal" href="#find-largest-value-in-each-tree-row" id="id13">515. Find Largest Value in Each Tree Row</a></p></li>
 <li><p><a class="reference internal" href="#populating-next-right-pointers-in-each-node" id="id14">116. Populating Next Right Pointers in Each Node</a></p></li>
+<li><p><a class="reference internal" href="#populating-next-right-pointers-in-each-node-ii" id="id15">117. Populating Next Right Pointers in Each Node II</a></p></li>
+<li><p><a class="reference internal" href="#invert-binary-tree" id="id16">226. Invert Binary Tree</a></p></li>
+<li><p><a class="reference internal" href="#symmetric-tree" id="id17">101. Symmetric Tree</a></p></li>
+<li><p><a class="reference internal" href="#minimum-depth-of-binary-tree" id="id18">111. Minimum Depth of Binary Tree</a></p></li>
+<li><p><a class="reference internal" href="#balanced-binary-tree" id="id19">110. Balanced Binary Tree</a></p></li>
 </ul>
 </li>
 </ul>
@@ -867,7 +877,7 @@ root: 8 currentD: 4</p>
 <p>1</p>
 <p>2 3</p>
 <p>4 5 6 7</p>
-<p>Suppose current node is 2, its left child is 4, which should points to its right child (5). Its right child is 5, which should points to the left child of 5’s next node(3)’s child (6).</p>
+<p>Suppose current node is 2, its left child is 4, which should point to its right child (5). Its right child is 5, which should point to the left child of 5’s next node(3)’s child (6).</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Node</span> <span class="nf">connect</span><span class="p">(</span><span class="n">Node</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
 
@@ -887,6 +897,256 @@ root: 8 currentD: 4</p>
 
     <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">right</span><span class="p">);</span>
     <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="populating-next-right-pointers-in-each-node-ii">
+<h2><a class="toc-backref" href="#id15">117. Populating Next Right Pointers in Each Node II</a><a class="headerlink" href="#populating-next-right-pointers-in-each-node-ii" title="Permalink to this headline">¶</a></h2>
+<p>Given a binary tree</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">struct</span> <span class="n">Node</span> <span class="p">{</span>
+  <span class="kt">int</span> <span class="n">val</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">left</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">right</span><span class="p">;</span>
+  <span class="n">Node</span> <span class="o">*</span><span class="n">next</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Populate each next pointer to point to its next right node. If there is no next right node, the next pointer should be set to NULL.</p>
+<p>Initially, all next pointers are set to NULL.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [1,2,3,4,5,null,7]</p>
+<p>Output: [1,#,2,3,#,4,5,7,#]</p>
+<p>Explanation: Given the above binary tree (Figure A), your function should populate each next pointer to point to its next right node, just like in Figure B. The serialized output is in level order as connected by the next pointers, with ‘#’ signifying the end of each level.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = []</p>
+<p>Output: []</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [0, 6000].</p>
+<p>-100 &lt;= Node.val &lt;= 100</p>
+</div>
+<div class="topic">
+<p class="topic-title">Follow-up</p>
+<p>You may only use constant extra space.</p>
+<p>The recursive approach is fine. You may assume implicit stack space does not count as extra space for this problem.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">Node</span> <span class="nf">connect</span><span class="p">(</span><span class="n">Node</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">pointers</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">pointers</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">Node</span> <span class="n">root</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Node</span><span class="o">&gt;</span> <span class="n">pointers</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">pointers</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">pointers</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="n">root</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">root</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">pointers</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">depth</span><span class="p">);</span>
+        <span class="n">pointers</span><span class="p">.</span><span class="na">set</span><span class="p">(</span><span class="n">depth</span><span class="p">,</span> <span class="n">root</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">pointers</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">pointers</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="invert-binary-tree">
+<h2><a class="toc-backref" href="#id16">226. Invert Binary Tree</a><a class="headerlink" href="#invert-binary-tree" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, invert the tree, and return its root.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [4,2,7,1,3,6,9]</p>
+<p>Output: [4,7,2,9,6,3,1]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [2,1,3]</p>
+<p>Output: [2,3,1]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: root = []</p>
+<p>Output: []</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [0, 100].</p>
+<p>-100 &lt;= Node.val &lt;= 100</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">TreeNode</span> <span class="nf">invertTree</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">root</span><span class="p">;</span>
+    <span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">);</span>
+
+    <span class="n">TreeNode</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">;</span>
+    <span class="n">root</span><span class="p">.</span><span class="na">left</span> <span class="o">=</span> <span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">;</span>
+    <span class="n">root</span><span class="p">.</span><span class="na">right</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="symmetric-tree">
+<h2><a class="toc-backref" href="#id17">101. Symmetric Tree</a><a class="headerlink" href="#symmetric-tree" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, check whether it is a mirror of itself (i.e., symmetric around its center).</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [1,2,2,3,4,4,3]</p>
+<p>Output: true</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [1,2,2,null,3,null,3]</p>
+<p>Output: false</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [1, 1000].</p>
+<p>-100 &lt;= Node.val &lt;= 100</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isSymmetric</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">compare</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">boolean</span> <span class="nf">compare</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">left</span><span class="p">,</span> <span class="n">TreeNode</span> <span class="n">right</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">||</span>
+       <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">left</span> <span class="o">!=</span> <span class="kc">null</span> <span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">right</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="na">val</span> <span class="o">!=</span> <span class="n">right</span><span class="p">.</span><span class="na">val</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">compare</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="na">right</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="n">compare</span><span class="p">(</span><span class="n">left</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">right</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="minimum-depth-of-binary-tree">
+<h2><a class="toc-backref" href="#id18">111. Minimum Depth of Binary Tree</a><a class="headerlink" href="#minimum-depth-of-binary-tree" title="Permalink to this headline">¶</a></h2>
+<p>Given a binary tree, find its minimum depth.</p>
+<p>The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.</p>
+<p>Note: A leaf is a node with no children.</p>
+<div class="topic">
+<p class="topic-title">Example 1:</p>
+<p>Input: root = [3,9,20,null,null,15,7]</p>
+<p>Output: 2</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2:</p>
+<p>Input: root = [2,null,3,null,4,null,5,null,6]</p>
+<p>Output: 5</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints:</p>
+<p>The number of nodes in the tree is in the range [0, 105].</p>
+<p>-1000 &lt;= Node.val &lt;= 1000</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">minDepth</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDepth</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="na">minDepth</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">depth</span> <span class="o">==</span> <span class="k">this</span><span class="p">.</span><span class="na">minDepth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">root</span><span class="p">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">depth</span> <span class="o">&lt;</span> <span class="k">this</span><span class="p">.</span><span class="na">minDepth</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">this</span><span class="p">.</span><span class="na">minDepth</span> <span class="o">=</span> <span class="n">depth</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="balanced-binary-tree">
+<h2><a class="toc-backref" href="#id19">110. Balanced Binary Tree</a><a class="headerlink" href="#balanced-binary-tree" title="Permalink to this headline">¶</a></h2>
+<p>Given a binary tree, determine if it is height-balanced.</p>
+<p>For this problem, a height-balanced binary tree is defined as:</p>
+<p>a binary tree in which the left and right subtrees of every node differ in height by no more than 1.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [3,9,20,null,null,15,7]</p>
+<p>Output: true</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [1,2,2,3,3,null,null,4,4]</p>
+<p>Output: false</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: root = []</p>
+<p>Output: true</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [0, 5000].</p>
+<p>-104 &lt;= Node.val &lt;= 104</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isBalanced</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">getDepth</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">getDepth</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">leftDepth</span> <span class="o">=</span> <span class="n">getDepth</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">leftDepth</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">rightDepth</span> <span class="o">=</span> <span class="n">getDepth</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">rightDepth</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">int</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">leftDepth</span> <span class="o">-</span> <span class="n">rightDepth</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">leftDepth</span><span class="p">,</span> <span class="n">rightDepth</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

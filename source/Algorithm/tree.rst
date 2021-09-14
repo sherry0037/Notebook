@@ -1068,3 +1068,127 @@ Given the root of a binary tree, check whether it is a mirror of itself (i.e., s
         return compare(left.left, right.right) && compare(left.right, right.left);
     }
  
+------------------------------------
+ 111. Minimum Depth of Binary Tree
+------------------------------------
+
+Given a binary tree, find its minimum depth.
+
+The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf node.
+
+Note: A leaf is a node with no children.
+
+.. topic::  Example 1:
+
+    Input: root = [3,9,20,null,null,15,7]
+
+    Output: 2
+
+.. topic::  Example 2:
+
+    Input: root = [2,null,3,null,4,null,5,null,6]
+
+    Output: 5
+ 
+.. topic::  Constraints:
+
+    The number of nodes in the tree is in the range [0, 105].
+
+    -1000 <= Node.val <= 1000
+
+.. code-block:: java
+
+    class Solution {
+        int minDepth = Integer.MAX_VALUE;
+        
+        public int minDepth(TreeNode root) {     
+            if (root == null) {
+                return 0;
+            }
+            traverse(root, 1);
+            return this.minDepth;
+        }
+        
+        private void traverse(TreeNode root, int depth) {
+            if (root == null) {
+                return;
+            }
+            
+            if (depth == this.minDepth) {
+                return;
+            }
+            
+            traverse(root.left, depth+1);
+            
+            if (root.left == null && root.right == null) {
+                if (depth < this.minDepth) {
+                    this.minDepth = depth;
+                }
+            }
+            
+            traverse(root.right, depth+1);
+            
+        }
+    }
+
+---------------------------
+110. Balanced Binary Tree
+---------------------------
+
+Given a binary tree, determine if it is height-balanced.
+
+For this problem, a height-balanced binary tree is defined as:
+
+a binary tree in which the left and right subtrees of every node differ in height by no more than 1.
+
+.. topic:: Example 1
+
+    Input: root = [3,9,20,null,null,15,7]
+
+    Output: true
+
+.. topic:: Example 2
+
+    Input: root = [1,2,2,3,3,null,null,4,4]
+
+    Output: false
+
+.. topic:: Example 3
+
+    Input: root = []
+
+    Output: true
+
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [0, 5000].
+
+    -104 <= Node.val <= 104
+
+.. code-block:: java
+
+    public boolean isBalanced(TreeNode root) {
+        return getDepth(root) != -1;
+    }
+    
+    private int getDepth(TreeNode node) {
+        if (node == null) {
+            return 0;
+        }
+        int leftDepth = getDepth(node.left);
+        if (leftDepth == -1) {
+            return -1;
+        }
+        int rightDepth = getDepth(node.right);
+        if (rightDepth == -1) {
+            return -1;
+        }
+        int result;
+        if (Math.abs(leftDepth - rightDepth) > 1) {
+            result = -1;
+        } else {
+            result = 1 + Math.max(leftDepth, rightDepth);
+        }
+
+        return result;
+    }
