@@ -40,10 +40,7 @@
   <h3><a href="../index.html">Table of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Other</a><ul>
-<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array">153. Find Minimum in Rotated Sorted Array</a></li>
-<li><a class="reference internal" href="#find-minimum-in-rotated-sorted-array-ii">154. Find Minimum in Rotated Sorted Array II</a></li>
-<li><a class="reference internal" href="#next-greater-element-i">496. Next Greater Element I</a></li>
-<li><a class="reference internal" href="#next-greater-element-iii">556. Next Greater Element III</a></li>
+<li><a class="reference internal" href="#robot-bounded-in-circle">1041. Robot Bounded In Circle</a></li>
 </ul>
 </li>
 </ul>
@@ -80,294 +77,143 @@
           <div class="body" role="main">
             
   <section id="other">
-<h1>Other<a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h1>
-<section id="find-minimum-in-rotated-sorted-array">
-<h2>153. Find Minimum in Rotated Sorted Array<a class="headerlink" href="#find-minimum-in-rotated-sorted-array" title="Permalink to this headline">¶</a></h2>
-<p><strong>Faster way is to do binary search. See the Binary Search page.</strong></p>
-<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,2,4,5,6,7] might become:</p>
-<p>[4,5,6,7,0,1,2] if it was rotated 4 times.</p>
-<p>[0,1,2,4,5,6,7] if it was rotated 7 times.</p>
-<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
-<p>Given the sorted rotated array nums of unique elements, return the minimum element of this array.</p>
-<p>You must write an algorithm that runs in O(log n) time.</p>
+<h1><a class="toc-backref" href="#id1">Other</a><a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#other" id="id1">Other</a></p>
+<ul>
+<li><p><a class="reference internal" href="#robot-bounded-in-circle" id="id2">1041. Robot Bounded In Circle</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<section id="robot-bounded-in-circle">
+<h2><a class="toc-backref" href="#id2">1041. Robot Bounded In Circle</a><a class="headerlink" href="#robot-bounded-in-circle" title="Permalink to this headline">¶</a></h2>
+<p>On an infinite plane, a robot initially stands at (0, 0) and faces north. The robot can receive one of three instructions:</p>
+<p>“G”: go straight 1 unit;</p>
+<p>“L”: turn 90 degrees to the left;</p>
+<p>“R”: turn 90 degrees to the right.</p>
+<p>The robot performs the instructions given in order, and repeats them forever.</p>
+<p>Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.</p>
 <div class="topic">
 <p class="topic-title">Example 1</p>
-<p>Input: nums = [3,4,5,1,2]</p>
-<p>Output: 1</p>
-<p>Explanation: The original array was [1,2,3,4,5] rotated 3 times.</p>
+<p>Input: instructions = “GGLLGG”</p>
+<p>Output: true</p>
+<p>Explanation: The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).</p>
+<p>When repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.</p>
 </div>
 <div class="topic">
 <p class="topic-title">Example 2</p>
-<p>Input: nums = [4,5,6,7,0,1,2]</p>
-<p>Output: 0</p>
-<p>Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.</p>
+<p>Input: instructions = “GG”</p>
+<p>Output: false</p>
+<p>Explanation: The robot moves north indefinitely.</p>
 </div>
 <div class="topic">
 <p class="topic-title">Example 3</p>
-<p>Input: nums = [11,13,15,17]</p>
-<p>Output: 11</p>
-<p>Explanation: The original array was [11,13,15,17] and it was rotated 4 times.</p>
+<p>Input: instructions = “GL”</p>
+<p>Output: true</p>
+<p>Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0) -&gt; (0, 0) -&gt; …</p>
 </div>
 <div class="topic">
 <p class="topic-title">Constraints</p>
-<p>n == nums.length</p>
-<p>1 &lt;= n &lt;= 5000</p>
-<p>-5000 &lt;= nums[i] &lt;= 5000</p>
-<p>All the integers of nums are unique.</p>
-<p>nums is sorted and rotated between 1 and n times.</p>
+<p>1 &lt;= instructions.length &lt;= 100</p>
+<p>instructions[i] is ‘G’, ‘L’ or, ‘R’.</p>
 </div>
+<p><strong>Approach:</strong> There are two circumstances that the robots will return to the starting point:</p>
+<ol class="arabic simple">
+<li><p>After it goes through one round of the instructions, it is at the origin.</p></li>
+<li><p>After it goes through one round of the instructions, it is not at the origin, but is facing DOWN, LEFT or RIGHT. If it is facing DOWN, then it only takes another round of instructions to make it go back to the origin. If it is facing LEFT or RIGHT, then it takes another three rounds of instructions to make ti go back to the origin. On the other hand, if it is facing UP, the robot can only go away from the origin infinitely.</p></li>
+</ol>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">while</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rotateBack</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
-        <span class="p">}</span>
-
-        <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+    <span class="kd">enum</span> <span class="n">Direction</span> <span class="p">{</span>
+        <span class="n">LEFT</span><span class="p">,</span>
+        <span class="n">UP</span><span class="p">,</span>
+        <span class="n">RIGHT</span><span class="p">,</span>
+        <span class="n">DOWN</span>
     <span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">rotateBack</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">nums</span><span class="o">[</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="find-minimum-in-rotated-sorted-array-ii">
-<h2>154. Find Minimum in Rotated Sorted Array II<a class="headerlink" href="#find-minimum-in-rotated-sorted-array-ii" title="Permalink to this headline">¶</a></h2>
-<p>Suppose an array of length n sorted in ascending order is rotated between 1 and n times. For example, the array nums = [0,1,4,4,5,6,7] might become:</p>
-<p>[4,5,6,7,0,1,4] if it was rotated 4 times.</p>
-<p>[0,1,4,4,5,6,7] if it was rotated 7 times.</p>
-<p>Notice that rotating an array [a[0], a[1], a[2], …, a[n-1]] 1 time results in the array [a[n-1], a[0], a[1], a[2], …, a[n-2]].</p>
-<p>Given the sorted rotated array nums that may contain duplicates, return the minimum element of this array.</p>
-<p>You must decrease the overall operation steps as much as possible.</p>
-<div class="topic">
-<p class="topic-title">Example 1</p>
-<p>Input: nums = [1,3,5]</p>
-<p>Output: 1</p>
-</div>
-<div class="topic">
-<p class="topic-title">Example 2</p>
-<p>Input: nums = [2,2,2,0,1]</p>
-<p>Output: 0</p>
-</div>
-<div class="topic">
-<p class="topic-title">Constraints</p>
-<p>n == nums.length</p>
-<p>1 &lt;= n &lt;= 5000</p>
-<p>-5000 &lt;= nums[i] &lt;= 5000</p>
-<p>nums is sorted and rotated between 1 and n times.</p>
-</div>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findMin</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="next-greater-element-i">
-<h2>496. Next Greater Element I<a class="headerlink" href="#next-greater-element-i" title="Permalink to this headline">¶</a></h2>
-<p><strong>See Stack for a better solution using stack.</strong></p>
-<p>The next greater element of some element x in an array is the first greater element that is to the right of x in the same array.</p>
-<p>You are given two distinct 0-indexed integer arrays nums1 and nums2, where nums1 is a subset of nums2.</p>
-<p>For each 0 &lt;= i &lt; nums1.length, find the index j such that nums1[i] == nums2[j] and determine the next greater element of nums2[j] in nums2. If there is no next greater element, then the answer for this query is -1.</p>
-<p>Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.</p>
-<div class="topic">
-<p class="topic-title">Example 1</p>
-<p>Input: nums1 = [4,1,2], nums2 = [1,3,4,2]</p>
-<p>Output: [-1,3,-1]</p>
-<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>4 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
-<li><p>1 is underlined in nums2 = [1,3,4,2]. The next greater element is 3.</p></li>
-<li><p>2 is underlined in nums2 = [1,3,4,2]. There is no next greater element, so the answer is -1.</p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="topic">
-<p class="topic-title">Example 2</p>
-<p>Input: nums1 = [2,4], nums2 = [1,2,3,4]</p>
-<p>Output: [3,-1]</p>
-<p>Explanation: The next greater element for each value of nums1 is as follows:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.</p></li>
-<li><p>4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.</p></li>
-</ul>
-</div></blockquote>
-</div>
-<div class="topic">
-<p class="topic-title">Constraints</p>
-<p>1 &lt;= nums1.length &lt;= nums2.length &lt;= 1000</p>
-<p>0 &lt;= nums1[i], nums2[i] &lt;= 104</p>
-<p>All integers in nums1 and nums2 are unique.</p>
-<p>All the integers of nums1 also appear in nums2.</p>
-</div>
-<p>Follow up: Could you find an O(nums1.length + nums2.length) solution?</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums1</span><span class="p">,</span> <span class="kt">int</span><span class="o">[]</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRobotBounded</span><span class="p">(</span><span class="n">String</span> <span class="n">instructions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">currentLocation</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
+        <span class="n">Direction</span> <span class="n">currentDirection</span> <span class="o">=</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
 
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">instructions</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">char</span> <span class="n">inst</span> <span class="o">=</span> <span class="n">instructions</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">inst</span> <span class="o">==</span> <span class="sc">&#39;G&#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">currentLocation</span> <span class="o">=</span> <span class="n">nextLocation</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+                <span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">currentDirection</span> <span class="o">=</span> <span class="n">nextDirection</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span> <span class="n">inst</span><span class="p">);</span>
+                <span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">nums1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">boolean</span> <span class="n">found</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="p">:</span> <span class="n">nums2</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">found</span> <span class="o">&amp;&amp;</span> <span class="n">j</span><span class="o">!=</span><span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">continue</span><span class="p">;</span>
             <span class="p">}</span>
+        <span class="p">}</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">==</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">found</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-                <span class="k">continue</span><span class="p">;</span>
-            <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">currentDirection</span> <span class="o">==</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+        <span class="p">}</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">j</span> <span class="o">&gt;</span> <span class="n">nums1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextLocation</span><span class="p">(</span><span class="n">Direction</span> <span class="n">direction</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentX</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentY</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="n">currentX</span><span class="p">,</span> <span class="n">currentY</span><span class="p">};</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
+                <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
                 <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
+                <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentX</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
+                <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentY</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
+                <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentY</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="k">default</span><span class="p">:</span>
+                <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="n">Direction</span> <span class="nf">nextDirection</span><span class="p">(</span><span class="n">Direction</span> <span class="n">currentDirection</span><span class="p">,</span> <span class="kt">char</span> <span class="n">instruction</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">instruction</span> <span class="o">==</span> <span class="sc">&#39;L&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
+                <span class="k">default</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
             <span class="p">}</span>
         <span class="p">}</span>
-    <span class="p">}</span>
 
-    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-</div>
-</section>
-<section id="next-greater-element-iii">
-<h2>556. Next Greater Element III<a class="headerlink" href="#next-greater-element-iii" title="Permalink to this headline">¶</a></h2>
-<p>Given a positive integer n, find the smallest integer which has exactly the same digits existing in the integer n and is greater in value than n. If no such positive integer exists, return -1.</p>
-<p>Note that the returned integer should fit in 32-bit integer, if there is a valid answer but it does not fit in 32-bit integer, return -1.</p>
-<div class="topic">
-<p class="topic-title">Example 1</p>
-<p>Input: n = 12</p>
-<p>Output: 21</p>
-</div>
-<div class="topic">
-<p class="topic-title">Example 2</p>
-<p>Input: n = 21</p>
-<p>Output: -1</p>
-</div>
-<div class="topic">
-<p class="topic-title">Constraints</p>
-<p>1 &lt;= n &lt;= 231 - 1</p>
-</div>
-<p><strong>Approach:</strong></p>
-<ul>
-<li><p>First traverse from right to left to find the first digit that is less than the digit at it’s right. We call it <code class="docutils literal notranslate"><span class="pre">first</span></code>.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>e.g. Given 12443322, the result is 13222344. We first locate 2 in 1 <strong>2</strong> 443322.</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Then we need to find the next greater element to the right of 2.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>e.g. We locate that 3 is the next greater element for 2: 1 <strong>2</strong> 443 <strong>3</strong> 22.</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Swap these two</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>The digits now becomes 1 <strong>3</strong> 443 <strong>2</strong> 22.</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Then all the numbers to the right of <code class="docutils literal notranslate"><span class="pre">first</span></code> need to be swapped to ascending order and we are done.</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>13 <strong>443222</strong> needs to be changed to 13 <strong>222344</strong>.</p></li>
-</ul>
-</div></blockquote>
-</li>
-<li><p>Catch 1: if the int is already in descending order, meaning it’s already the largest, then return -1. So if we couldn’t locate <code class="docutils literal notranslate"><span class="pre">first</span></code>, we need to return -1.</p></li>
-<li><p>Catch 2: if result is greater than Integer.MAX_VALUE, we need to return -1. So we need to first convert the result into long, then compare the long version of Integer.MAX_VALUE, then output accordingly.</p></li>
-</ul>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">nextGreaterElement</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="kt">int</span><span class="o">[]</span> <span class="n">digits</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">n</span><span class="p">).</span><span class="na">chars</span><span class="p">().</span><span class="na">map</span><span class="p">(</span><span class="n">c</span> <span class="o">-&gt;</span> <span class="n">c</span><span class="o">-</span><span class="sc">&#39;0&#39;</span><span class="p">).</span><span class="na">toArray</span><span class="p">();</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;=</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kt">int</span> <span class="n">first</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">digits</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">first</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
-            <span class="k">break</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">instruction</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">switch</span> <span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
+                <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
+                <span class="k">default</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
+            <span class="p">}</span>
         <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
     <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Tried binary search but failed</span>
-<span class="c1">//         int i = first+1;</span>
-<span class="c1">//         int j = digits.length-1;</span>
-<span class="c1">//         int mid;</span>
-<span class="c1">//         while (i&lt;j) {</span>
-<span class="c1">//             mid = (i+j)/2;</span>
-<span class="c1">//             System.out.println(&quot;i: &quot;+i+&quot; j: &quot; + j + &quot; mid: &quot; + mid);</span>
-<span class="c1">//             if (digits[mid] &gt; digits[first]) {</span>
-<span class="c1">//                 i = mid;</span>
-<span class="c1">//             } else {</span>
-<span class="c1">//                 j = mid-1;</span>
-<span class="c1">//             }</span>
-<span class="c1">//         }</span>
-
-<span class="c1">//         int second = i;</span>
-
-    <span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="n">digits</span><span class="p">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="n">j</span><span class="o">&gt;</span><span class="n">first</span> <span class="o">&amp;&amp;</span> <span class="n">digits</span><span class="o">[</span><span class="n">j</span><span class="o">]&lt;=</span><span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">j</span><span class="o">--</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kt">int</span> <span class="n">second</span> <span class="o">=</span> <span class="n">j</span><span class="p">;</span>
-
-    <span class="c1">//System.out.println(&quot;first: &quot;+first+&quot; second: &quot; + second);</span>
-    <span class="kt">int</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span><span class="p">;</span>
-    <span class="n">digits</span><span class="o">[</span><span class="n">first</span><span class="o">]</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">second</span><span class="o">]</span><span class="p">;</span>
-    <span class="n">digits</span><span class="o">[</span><span class="n">second</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-
-    <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">first</span><span class="o">+</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
-    <span class="c1">//System.out.println(&quot;N: &quot;+N);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">first</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">k</span><span class="o">&lt;</span><span class="n">digits</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">temp</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
-        <span class="c1">//System.out.println(&quot;k: &quot; + k + &quot; N-k: &quot;+(N-k));</span>
-        <span class="n">digits</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">digits</span><span class="o">[</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">digits</span><span class="o">[</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">((</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="p">)</span><span class="o">-</span><span class="n">k</span> <span class="o">==</span> <span class="mi">1</span> <span class="o">||</span> <span class="n">k</span> <span class="o">==</span> <span class="p">(</span><span class="n">N</span><span class="o">-</span><span class="n">k</span><span class="p">))</span> <span class="p">{</span>
-            <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="kt">long</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">arrayToInt</span><span class="p">(</span><span class="n">digits</span><span class="p">);</span>
-    <span class="kt">long</span> <span class="n">max</span> <span class="o">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">Integer</span><span class="p">.</span><span class="na">MAX_VALUE</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="n">rst</span><span class="o">&gt;</span><span class="n">max</span><span class="o">?-</span><span class="mi">1</span><span class="p">:(</span><span class="kt">int</span><span class="p">)</span><span class="n">rst</span><span class="p">;</span>
-
-<span class="p">}</span>
-
-<span class="kd">private</span> <span class="kt">long</span> <span class="nf">arrayToInt</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">StringBuilder</span> <span class="n">s</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StringBuilder</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">arr</span><span class="p">)</span> <span class="p">{</span>
-         <span class="n">s</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="c1">//System.out.println(s);</span>
-    <span class="k">return</span> <span class="n">Long</span><span class="p">.</span><span class="na">parseLong</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
 <span class="p">}</span>
 </pre></div>
 </div>
