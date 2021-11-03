@@ -49,6 +49,7 @@
 <li><a class="reference internal" href="#backspace-string-compare">844. Backspace String Compare</a></li>
 <li><a class="reference internal" href="#squares-of-a-sorted-array">977. Squares of a Sorted Array</a></li>
 <li><a class="reference internal" href="#least-number-of-unique-integers-after-k-removals">1481. Least Number of Unique Integers after K Removals</a></li>
+<li><a class="reference internal" href="#minimum-difference-between-largest-and-smallest-value-in-three-moves">1509. Minimum Difference Between Largest and Smallest Value in Three Moves</a></li>
 </ul>
 </li>
 </ul>
@@ -688,6 +689,60 @@
     <span class="p">}</span>
 
     <span class="k">return</span> <span class="n">counts</span><span class="p">.</span><span class="na">keySet</span><span class="p">().</span><span class="na">size</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="minimum-difference-between-largest-and-smallest-value-in-three-moves">
+<h2>1509. Minimum Difference Between Largest and Smallest Value in Three Moves<a class="headerlink" href="#minimum-difference-between-largest-and-smallest-value-in-three-moves" title="Permalink to this headline">¶</a></h2>
+<p>Given an array nums, you are allowed to choose one element of nums and change it by any value in one move.</p>
+<p>Return the minimum difference between the largest and smallest value of nums after perfoming at most 3 moves.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: nums = [5,3,2,4]</p>
+<p>Output: 0</p>
+<p>Explanation: Change the array [5,3,2,4] to [2,2,2,2].</p>
+<p>The difference between the maximum and minimum is 2-2 = 0.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: nums = [1,5,0,10,14]</p>
+<p>Output: 1</p>
+<p>Explanation: Change the array [1,5,0,10,14] to [1,1,0,1,1].</p>
+<p>The difference between the maximum and minimum is 1-0 = 1.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: nums = [6,6,0,1,1,4,6]</p>
+<p>Output: 2</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4</p>
+<p>Input: nums = [1,5,6,14,15]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= nums.length &lt;= 10^5</p>
+<p>-10^9 &lt;= nums[i] &lt;= 10^9</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">minDifference</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">nums</span><span class="p">.</span><span class="na">length</span> <span class="o">&lt;=</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">Arrays</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">nums</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">;</span>
+
+    <span class="c1">// Remove 0, 1, 2</span>
+    <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">nums</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+    <span class="c1">// Remove 0, 1, -1</span>
+    <span class="n">rst</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="o">]</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+    <span class="c1">// Remove 0, -1, -2</span>
+    <span class="n">rst</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">3</span><span class="o">]</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+    <span class="c1">// Remove -1, -2, -3</span>
+    <span class="n">rst</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="n">nums</span><span class="o">[</span><span class="n">n</span><span class="o">-</span><span class="mi">4</span><span class="o">]</span> <span class="o">-</span> <span class="n">nums</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
