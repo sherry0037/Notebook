@@ -45,6 +45,7 @@
 <li><a class="reference internal" href="#backspace-string-compare">844. Backspace String Compare</a></li>
 <li><a class="reference internal" href="#daily-temperatures">739. Daily Temperatures</a></li>
 <li><a class="reference internal" href="#trapping-rain-water">42. Trapping Rain Water</a></li>
+<li><a class="reference internal" href="#asteroid-collision">735. Asteroid Collision</a></li>
 </ul>
 </li>
 </ul>
@@ -430,6 +431,90 @@
 
     <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
 
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="asteroid-collision">
+<h2>735. Asteroid Collision<a class="headerlink" href="#asteroid-collision" title="Permalink to this headline">¶</a></h2>
+<p>We are given an array asteroids of integers representing asteroids in a row.</p>
+<p>For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.</p>
+<p>Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: asteroids = [5,10,-5]</p>
+<p>Output: [5,10]</p>
+<p>Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: asteroids = [8,-8]</p>
+<p>Output: []</p>
+<p>Explanation: The 8 and -8 collide exploding each other.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: asteroids = [10,2,-5]</p>
+<p>Output: [10]</p>
+<p>Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4</p>
+<p>Input: asteroids = [-2,-1,1,2]</p>
+<p>Output: [-2,-1,1,2]</p>
+<p>Explanation: The -2 and -1 are moving left, while the 1 and 2 are moving right. Asteroids moving the same direction never meet, so no asteroids will meet each other.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>2 &lt;= asteroids.length &lt;= 104</p>
+<p>-1000 &lt;= asteroids[i] &lt;= 1000</p>
+<p>asteroids[i] != 0</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">asteroidCollision</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">asteroids</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Stack</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">asteroids</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">);</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">asteroids</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Integer</span> <span class="n">curr</span> <span class="o">=</span> <span class="n">asteroids</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+
+        <span class="c1">// No existing asteroid</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">asteroids</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">);</span>
+            <span class="k">continue</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="n">Integer</span> <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span><span class="p">)</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Pre: &quot;</span> <span class="o">+</span> <span class="n">pre</span> <span class="o">+</span>  <span class="s">&quot; Curr: &quot;</span> <span class="o">+</span> <span class="n">curr</span> <span class="p">);</span>
+
+        <span class="c1">// Incoming asteroid is larger</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">pre</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">-</span><span class="n">curr</span> <span class="o">&gt;</span> <span class="n">pre</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">empty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">pre</span> <span class="o">=</span> <span class="p">(</span><span class="n">Integer</span><span class="p">)</span> <span class="n">stack</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;pre: &quot;</span> <span class="o">+</span> <span class="n">pre</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Incoming asteroid is the same</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pre</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="o">-</span><span class="n">curr</span> <span class="o">==</span> <span class="n">pre</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Asteroids are moving away from each other</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">pre</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">curr</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
+
+    <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">stack</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">]</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">stack</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>

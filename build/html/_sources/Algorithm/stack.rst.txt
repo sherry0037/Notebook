@@ -407,3 +407,103 @@ Given n non-negative integers representing an elevation map where the width of e
         return rst;
         
     }
+
+-------------------------
+735. Asteroid Collision
+-------------------------
+
+We are given an array asteroids of integers representing asteroids in a row.
+
+For each asteroid, the absolute value represents its size, and the sign represents its direction (positive meaning right, negative meaning left). Each asteroid moves at the same speed.
+
+Find out the state of the asteroids after all collisions. If two asteroids meet, the smaller one will explode. If both are the same size, both will explode. Two asteroids moving in the same direction will never meet.
+
+.. topic:: Example 1
+
+    Input: asteroids = [5,10,-5]
+
+    Output: [5,10]
+
+    Explanation: The 10 and -5 collide resulting in 10. The 5 and 10 never collide.
+
+.. topic:: Example 2
+
+    Input: asteroids = [8,-8]
+
+    Output: []
+
+    Explanation: The 8 and -8 collide exploding each other.
+
+.. topic:: Example 3
+
+    Input: asteroids = [10,2,-5]
+
+    Output: [10]
+
+    Explanation: The 2 and -5 collide resulting in -5. The 10 and -5 collide resulting in 10.
+
+.. topic:: Example 4
+
+    Input: asteroids = [-2,-1,1,2]
+
+    Output: [-2,-1,1,2]
+
+    Explanation: The -2 and -1 are moving left, while the 1 and 2 are moving right. Asteroids moving the same direction never meet, so no asteroids will meet each other.
+ 
+
+.. topic:: Constraints
+
+    2 <= asteroids.length <= 104
+
+    -1000 <= asteroids[i] <= 1000
+
+    asteroids[i] != 0
+
+.. code-block:: java
+    
+    public int[] asteroidCollision(int[] asteroids) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(asteroids[0]);
+        
+        for (int i=1; i<asteroids.length; i++) {
+            Integer curr = asteroids[i];
+            
+            // No existing asteroid
+            if (stack.empty()) {
+                stack.push(asteroids[i]);
+                continue;
+            }
+            Integer pre = (Integer) stack.peek();
+            
+            System.out.println("Pre: " + pre +  " Curr: " + curr );
+            
+            // Incoming asteroid is larger
+            while (pre > 0 && -curr > pre && !stack.empty()) {
+                stack.pop();
+                if (stack.empty()) {
+                    stack.push(curr);
+                    break;
+                }
+                pre = (Integer) stack.peek();
+                System.out.println("pre: " + pre);
+            } 
+            
+            // Incoming asteroid is the same
+            if (pre > 0 && -curr == pre) {
+                stack.pop();
+            } 
+            
+            // Asteroids are moving away from each other
+            if (pre < 0 || curr > 0) {
+                stack.push(curr);
+            }
+            
+        }
+        
+        int[] rst = new int[stack.size()];
+        for (int i=stack.size()-1; i>=0; i--) {
+            rst[i] = stack.pop();
+        }
+        
+        return rst;
+    }
