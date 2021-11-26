@@ -336,7 +336,7 @@ bool shouldPrintMessage(int timestamp, string message) Returns true if the messa
 
     logger.shouldPrintMessage(11, "foo"); // 11 >= 11, return true, next allowed timestamp for "foo" is 11 + 10 = 21
 
-.. topic:: Constraints:
+.. topic:: Constraints
 
     0 <= timestamp <= 109
 
@@ -363,5 +363,154 @@ bool shouldPrintMessage(int timestamp, string message) Returns true if the messa
                 logs.put(message, timestamp);
                 return true;
             }
+        }
+    }
+
+----------------
+146. LRU Cache
+----------------
+
+Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.
+
+Implement the LRUCache class:
+
+LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
+
+int get(int key) Return the value of the key if the key exists, otherwise return -1.
+
+void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the 
+cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
+
+The functions get and put must each run in O(1) average time complexity.
+
+.. topic:: Example 1
+
+    Input
+
+    ["LRUCache", "put", "put", "get", "put", "get", "put", "get", "get", "get"]
+
+    [[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]
+
+    Output
+
+    [null, null, null, 1, null, -1, null, -1, 3, 4]
+
+    Explanation
+
+    LRUCache lRUCache = new LRUCache(2);
+
+    lRUCache.put(1, 1); // cache is {1=1}
+
+    lRUCache.put(2, 2); // cache is {1=1, 2=2}
+
+    lRUCache.get(1);    // return 1
+
+    lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}
+
+    lRUCache.get(2);    // returns -1 (not found)
+
+    lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}
+
+    lRUCache.get(1);    // return -1 (not found)
+
+    lRUCache.get(3);    // return 3
+
+    lRUCache.get(4);    // return 4
+ 
+.. topic:: Constraints
+
+    1 <= capacity <= 3000
+
+    0 <= key <= 104
+
+    0 <= value <= 105
+
+    At most 2 * 105 calls will be made to get and put.
+
+**Approach** use HashMap and doubly-linked list 
+
+.. code-block:: java
+
+    class LRUCache {
+        
+        class Node {
+            int key;
+            int value;
+            Node prev;
+            Node next;
+            
+            public Node(int key, int value) {
+                this.key = key;
+                this.value = value;
+            }
+            
+            public Node() {
+                this(0, 0);
+            }
+        }
+        
+        int capacity;
+        int count;
+        Node head;
+        Node tail;
+        Map<Integer, Node> map;
+
+        public LRUCache(int capacity) {
+            this.capacity = capacity;
+            this.count = 0;
+            this.head = new Node();
+            this.tail = new Node();
+            head.next = tail;
+            tail.prev = head;
+            this.map = new HashMap<>();
+        }
+        
+        public int get(int key) {
+            if (map.containsKey(key)) {
+                Node node = map.get(key);
+                update(node);
+                return node.value;
+            } else {
+                return -1;
+            }
+        }
+        
+        public void put(int key, int value) {
+            if (map.containsKey(key)) {
+                Node node = map.get(key);
+                update(node);
+                node.value = value;
+            } else {
+                Node node = new Node(key, value);
+                add(node);
+                map.put(key, node);
+                count++;
+            }
+            if (count > capacity) {
+                    Node toDelete = tail.prev;
+                    remove(toDelete);
+                    map.remove(toDelete.key);
+                    count--;
+                }
+        }
+        
+        private void update(Node node) {
+            remove(node);
+            add(node);
+        }
+        
+        private void add(Node node) {
+            Node temp = head.next;
+            head.next = node;
+            node.prev = head;
+            node.next = temp;
+            temp.prev = node;
+        }
+        
+        private void remove(Node node) {
+            Node before = node.prev;
+            Node after = node.next;
+            before.next = after;
+            after.prev = before;
         }
     }

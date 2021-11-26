@@ -45,6 +45,7 @@
 <li><a class="reference internal" href="#friends-of-appropriate-ages">825. Friends Of Appropriate Ages</a></li>
 <li><a class="reference internal" href="#hand-of-straights">846. Hand of Straights</a></li>
 <li><a class="reference internal" href="#logger-rate-limiter">359. Logger Rate Limiter</a></li>
+<li><a class="reference internal" href="#lru-cache">146. LRU Cache</a></li>
 </ul>
 </li>
 </ul>
@@ -92,6 +93,7 @@
 <li><p><a class="reference internal" href="#friends-of-appropriate-ages" id="id4">825. Friends Of Appropriate Ages</a></p></li>
 <li><p><a class="reference internal" href="#hand-of-straights" id="id5">846. Hand of Straights</a></p></li>
 <li><p><a class="reference internal" href="#logger-rate-limiter" id="id6">359. Logger Rate Limiter</a></p></li>
+<li><p><a class="reference internal" href="#lru-cache" id="id7">146. LRU Cache</a></p></li>
 </ul>
 </li>
 </ul>
@@ -356,7 +358,7 @@ bool shouldPrintMessage(int timestamp, string message) Returns true if the messa
 <p>logger.shouldPrintMessage(11, “foo”); // 11 &gt;= 11, return true, next allowed timestamp for “foo” is 11 + 10 = 21</p>
 </div>
 <div class="topic">
-<p class="topic-title">Constraints:</p>
+<p class="topic-title">Constraints</p>
 <p>0 &lt;= timestamp &lt;= 109</p>
 <p>Every timestamp will be passed in non-decreasing order (chronological order).</p>
 <p>1 &lt;= message.length &lt;= 30</p>
@@ -377,6 +379,128 @@ bool shouldPrintMessage(int timestamp, string message) Returns true if the messa
             <span class="n">logs</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">message</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">);</span>
             <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
         <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="lru-cache">
+<h2><a class="toc-backref" href="#id7">146. LRU Cache</a><a class="headerlink" href="#lru-cache" title="Permalink to this headline">¶</a></h2>
+<p>Design a data structure that follows the constraints of a Least Recently Used (LRU) cache.</p>
+<p>Implement the LRUCache class:</p>
+<p>LRUCache(int capacity) Initialize the LRU cache with positive size capacity.</p>
+<p>int get(int key) Return the value of the key if the key exists, otherwise return -1.</p>
+<p>void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the
+cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.</p>
+<p>The functions get and put must each run in O(1) average time complexity.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input</p>
+<p>[“LRUCache”, “put”, “put”, “get”, “put”, “get”, “put”, “get”, “get”, “get”]</p>
+<p>[[2], [1, 1], [2, 2], [1], [3, 3], [2], [4, 4], [1], [3], [4]]</p>
+<p>Output</p>
+<p>[null, null, null, 1, null, -1, null, -1, 3, 4]</p>
+<p>Explanation</p>
+<p>LRUCache lRUCache = new LRUCache(2);</p>
+<p>lRUCache.put(1, 1); // cache is {1=1}</p>
+<p>lRUCache.put(2, 2); // cache is {1=1, 2=2}</p>
+<p>lRUCache.get(1);    // return 1</p>
+<p>lRUCache.put(3, 3); // LRU key was 2, evicts key 2, cache is {1=1, 3=3}</p>
+<p>lRUCache.get(2);    // returns -1 (not found)</p>
+<p>lRUCache.put(4, 4); // LRU key was 1, evicts key 1, cache is {4=4, 3=3}</p>
+<p>lRUCache.get(1);    // return -1 (not found)</p>
+<p>lRUCache.get(3);    // return 3</p>
+<p>lRUCache.get(4);    // return 4</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= capacity &lt;= 3000</p>
+<p>0 &lt;= key &lt;= 104</p>
+<p>0 &lt;= value &lt;= 105</p>
+<p>At most 2 * 105 calls will be made to get and put.</p>
+</div>
+<p><strong>Approach</strong> use HashMap and doubly-linked list</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">LRUCache</span> <span class="p">{</span>
+
+    <span class="kd">class</span> <span class="nc">Node</span> <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">key</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">value</span><span class="p">;</span>
+        <span class="n">Node</span> <span class="n">prev</span><span class="p">;</span>
+        <span class="n">Node</span> <span class="n">next</span><span class="p">;</span>
+
+        <span class="kd">public</span> <span class="nf">Node</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">key</span> <span class="o">=</span> <span class="n">key</span><span class="p">;</span>
+            <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kd">public</span> <span class="nf">Node</span><span class="p">()</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kt">int</span> <span class="n">capacity</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">count</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="n">head</span><span class="p">;</span>
+    <span class="n">Node</span> <span class="n">tail</span><span class="p">;</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">Integer</span><span class="p">,</span> <span class="n">Node</span><span class="o">&gt;</span> <span class="n">map</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="nf">LRUCache</span><span class="p">(</span><span class="kt">int</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">capacity</span> <span class="o">=</span> <span class="n">capacity</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">head</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">tail</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">();</span>
+        <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">tail</span><span class="p">;</span>
+        <span class="n">tail</span><span class="p">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="na">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">get</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+            <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="na">value</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="p">(</span><span class="kt">int</span> <span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">key</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+            <span class="n">update</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+            <span class="n">node</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">Node</span> <span class="n">node</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Node</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">);</span>
+            <span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+            <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">node</span><span class="p">);</span>
+            <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">count</span> <span class="o">&gt;</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">Node</span> <span class="n">toDelete</span> <span class="o">=</span> <span class="n">tail</span><span class="p">.</span><span class="na">prev</span><span class="p">;</span>
+                <span class="n">remove</span><span class="p">(</span><span class="n">toDelete</span><span class="p">);</span>
+                <span class="n">map</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">toDelete</span><span class="p">.</span><span class="na">key</span><span class="p">);</span>
+                <span class="n">count</span><span class="o">--</span><span class="p">;</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">update</span><span class="p">(</span><span class="n">Node</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">remove</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+        <span class="n">add</span><span class="p">(</span><span class="n">node</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">add</span><span class="p">(</span><span class="n">Node</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Node</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">head</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="n">head</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+        <span class="n">node</span><span class="p">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">head</span><span class="p">;</span>
+        <span class="n">node</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+        <span class="n">temp</span><span class="p">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">node</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">remove</span><span class="p">(</span><span class="n">Node</span> <span class="n">node</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">Node</span> <span class="n">before</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">prev</span><span class="p">;</span>
+        <span class="n">Node</span> <span class="n">after</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+        <span class="n">before</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="n">after</span><span class="p">;</span>
+        <span class="n">after</span><span class="p">.</span><span class="na">prev</span> <span class="o">=</span> <span class="n">before</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
