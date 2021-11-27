@@ -42,6 +42,7 @@
 <li><a class="reference internal" href="#">Other</a><ul>
 <li><a class="reference internal" href="#robot-bounded-in-circle">1041. Robot Bounded In Circle</a></li>
 <li><a class="reference internal" href="#angle-between-hands-of-a-clock">1344. Angle Between Hands of a Clock</a></li>
+<li><a class="reference internal" href="#reverse-words-in-a-string">151. Reverse Words in a String</a></li>
 </ul>
 </li>
 </ul>
@@ -86,6 +87,7 @@
 <ul>
 <li><p><a class="reference internal" href="#robot-bounded-in-circle" id="id2">1041. Robot Bounded In Circle</a></p></li>
 <li><p><a class="reference internal" href="#angle-between-hands-of-a-clock" id="id3">1344. Angle Between Hands of a Clock</a></p></li>
+<li><p><a class="reference internal" href="#reverse-words-in-a-string" id="id4">151. Reverse Words in a String</a></p></li>
 </ul>
 </li>
 </ul>
@@ -275,6 +277,78 @@
     <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">360</span><span class="o">-</span><span class="n">rst</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
 
 <span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="reverse-words-in-a-string">
+<h2><a class="toc-backref" href="#id4">151. Reverse Words in a String</a><a class="headerlink" href="#reverse-words-in-a-string" title="Permalink to this headline">¶</a></h2>
+<p>Given an input string s, reverse the order of the words.</p>
+<p>A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.</p>
+<p>Return a string of the words in reverse order concatenated by a single space.</p>
+<p>Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: s = “the sky is blue”</p>
+<p>Output: “blue is sky the”</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: s = ”  hello world  “</p>
+<p>Output: “world hello”</p>
+<p>Explanation: Your reversed string should not contain leading or trailing spaces.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: s = “a good   example”</p>
+<p>Output: “example good a”</p>
+<p>Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 4</p>
+<p>Input: s = ”  Bob    Loves  Alice   “</p>
+<p>Output: “Alice Loves Bob”</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 5</p>
+<p>Input: s = “Alice does not even like bob”</p>
+<p>Output: “bob like even not does Alice”</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= s.length &lt;= 104</p>
+<p>s contains English letters (upper-case and lower-case), digits, and spaces ‘ ‘.</p>
+<p>There is at least one word in s.</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">trim</span><span class="p">();</span>
+
+        <span class="n">String</span> <span class="n">word</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">//System.out.println(word);</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">word</span><span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">){</span>
+                    <span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+                <span class="p">}</span>
+                <span class="n">word</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">word</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+
+        <span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+
+        <span class="n">Collections</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
+
+        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+    <span class="p">}</span>
 </pre></div>
 </div>
 </section>
