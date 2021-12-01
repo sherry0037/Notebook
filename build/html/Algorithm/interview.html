@@ -1,0 +1,450 @@
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Interview &#8212; Notebook  documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Other" href="other.html" />
+    <link rel="prev" title="Hash" href="hash.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="other.html" title="Other"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hash.html" title="Hash"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Interview</a></li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Interview</a><ul>
+<li><a class="reference internal" href="#google">11/29/2021 - Google</a><ul>
+<li><a class="reference internal" href="#transaddition">1. TransAddition</a></li>
+<li><a class="reference internal" href="#shortest-path">2. Shortest Path</a></li>
+<li><a class="reference internal" href="#maze">3. Maze</a></li>
+<li><a class="reference internal" href="#gliding-keyboard">4. Gliding keyboard</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hash.html"
+                        title="previous chapter">Hash</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="other.html"
+                        title="next chapter">Other</a></p>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/Algorithm/interview.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="interview">
+<h1>Interview<a class="headerlink" href="#interview" title="Permalink to this headline">¶</a></h1>
+<section id="google">
+<h2>11/29/2021 - Google<a class="headerlink" href="#google" title="Permalink to this headline">¶</a></h2>
+<section id="transaddition">
+<h3>1. TransAddition<a class="headerlink" href="#transaddition" title="Permalink to this headline">¶</a></h3>
+<p>A word A is a trans-addition of another word B if by adding 1 letter and mutate the letters in B we can get A. Write a function f which takes two words and determines if the second word is a trans-addition of the first word.</p>
+<div class="topic">
+<p class="topic-title">Examples</p>
+<p>f(“ACT”, “TACK”) -&gt; true</p>
+<p>f(“ACT”, “TACT”) -&gt; true</p>
+<p>f(“ACT”, “CART”) -&gt; true</p>
+<p>f(“TACK”, “ACT”) -&gt; false</p>
+<p>f(“ACE”, “TACK”) -&gt; false</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">transAddition</span><span class="p">(</span><span class="n">String</span> <span class="n">word1</span><span class="p">,</span> <span class="n">String</span> <span class="n">word2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">-</span> <span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word1</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kt">boolean</span> <span class="n">notInSet</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> <span class="p">{</span>
+            <span class="c1">// K</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">notInSet</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">notInSet</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+            <span class="p">}</span>
+
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Follow up 1: Given two lists of words, return a list of words from the second list such that the words are trans-addition of the first list.</p>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>f([“ACT”, “SET”, “FOO”], [“TACK”, “TEST”, “BAR”]) -&gt; [“TEST”, “TACK”]</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="c1">// word2, isAddedInResult</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">continue</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+                <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList3</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Find all the trans-addition of the first list by adding all of the alphabet</span>
+    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">Character</span> <span class="n">a</span> <span class="p">:</span> <span class="n">ALPHABET</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">String</span> <span class="n">newWord</span> <span class="o">=</span> <span class="n">word1</span> <span class="o">+</span> <span class="n">a</span><span class="p">;</span>
+            <span class="n">newWord</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+            <span class="n">word1Set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newWord</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">word2</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Follow up 2: Write a function to return the maximum length of trans-addition chain in a list.</p>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>f([“A”, “AT” “ACT”, “TACK”, “CART”, “GOOGLE”]) -&gt; [“TACK”, “CART”]</p>
+</div>
+</section>
+<section id="shortest-path">
+<h3>2. Shortest Path<a class="headerlink" href="#shortest-path" title="Permalink to this headline">¶</a></h3>
+<p>Given N locations (named 0, 1, … N-1) and a set of connections, find the length of the shortest path from the starting point S to the end point E.</p>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>N = 10
+connections = {(0, 1), (1, 2), (3, 4), (5,9), (7, 8)}
+S = 0
+E = 8</p>
+</div>
+<p><strong>Approach</strong>: Generate a hash map with key being a location and value being a list of locations the key is connected to. Then do a BFS traversal (use queue to implement) to find the length from S to E.</p>
+</section>
+<section id="maze">
+<h3>3. Maze<a class="headerlink" href="#maze" title="Permalink to this headline">¶</a></h3>
+<p>Write a program that takes a map of a maze as input, and outputs the length of the longest path from the top to the bottom.</p>
+<p>Conditions and constraints:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The map is a two-dimensional, rectangular board.</p></li>
+<li><p>You can only visit each cell once.</p></li>
+<li><p>You are not allowed to go up, only left, right or down.</p></li>
+<li><p>You can start on any cell at the top row that is not a wall.</p></li>
+<li><p>You can exit on any cell at the bottom row that is not a wall.</p></li>
+</ul>
+</div></blockquote>
+<p># .  #  .  .  #
+# .  #  .  .  #
+# .  #  #  .  #
+# .  .  #  .  #
+# .  .  #  .  #
+# .  .  #  .  #</p>
+<p>result: 9</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>public int getLongestPath(int[][] maze) {
+  // 1 = wall
+  // 0 = cell
+  int n = maze.size; // number of rows
+  int m = maze[0].size; // number of columns
+  int[] firstRow = maze[0];
+
+  int rst = Integer.MIN_VALUE;
+
+  for (int y : firstRow) {
+      if (maze[0][y] == 0) {
+          int[][] visited = new int[n][m];
+          int[][] lengths = new int[n][m];
+          int length = DFS(maze, visited, 0, i, lengths);
+          rst = Math.max(length, rst);
+      }
+  }
+
+  return rst;
+}
+
+private int DFS(int[][] maze, int[][] visited, int sx, int sy, int[][] lengths) {
+    int n = maze.size; // number of rows
+    int m = maze[0].size; // number of columns
+    Stack&lt;List&lt;Integer&gt;&gt; stack = new Stack&lt;&gt;()&#39;
+    ArrayList&lt;Integer&gt; first = new ArrayList&lt;&gt;();
+    first.add(sx);
+    first.add(sy);
+
+    stack.add(first);
+
+    while(!stack.isEmpty()) {
+          ArrayList&lt;Integer&gt; current = stack.pop();
+          visited[current.get(0)][current.get(1)] = 1;
+
+          List&lt;List&lt;Integer&gt;&gt; nextSteps = getNextStep(current, maze);
+
+          if (nextSteps.length() == 0) {
+               if (current.get(1) == n) {
+                    return lengths[current.get(0)][current.get(1)];
+               } else {
+                    continue;
+               }
+          }
+
+          for (List&lt;Integer&gt; point : nextSteps) {
+              stack.add(point);
+              lengths[point.get(0)][point.get(1)] = lengths[current.get(0)][current.get(1)] + 1;
+          }
+    }
+
+    return -1;
+}
+
+private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; current, int[][] maze) {
+    int n = maze.size; // number of rows
+    int m = maze[0].size; // number of columns
+    List&lt;List&lt;Integer&gt;&gt; rst = new ArrayList&lt;&gt;();
+    // left
+    if ((current.get(0) - 1) &gt;=0 &amp;&amp; (current.get(0) - 1)&lt;n &amp;&amp; maze[current.get(0) - 1][current.get(1)]) {
+        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
+        rst.add(current.get(0) - 1);
+        rst.add(current.get(1));
+    }
+
+    // right
+    if ((current.get(0) + 1) &gt;=0 &amp;&amp; (current.get(0) + 1)&lt;n &amp;&amp; maze[current.get(0) + 1][current.get(1)]) {
+        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
+        rst.add(current.get(0) + 1);
+        rst.add(current.get(1));
+    }
+
+    // down
+    if ((current.get(1) + 1) &gt;=0 &amp;&amp; (current.get(1) + 1)&lt;m &amp;&amp; maze[current.get(0)][current.get(1) + 1]) {
+        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
+        rst.add(current.get(0));
+        rst.add(current.get(1) + 1);
+    }
+
+    return rst;
+}
+</pre></div>
+</div>
+<p>time complexity O(mn)
+space           O(mn)</p>
+</section>
+<section id="gliding-keyboard">
+<h3>4. Gliding keyboard<a class="headerlink" href="#gliding-keyboard" title="Permalink to this headline">¶</a></h3>
+<p>For phone keyboard, there is a gliding feature that user can start with one letter and without lifting the finger, finishing typing the whole word. Write a function that given a user input string and a dictionary, output all the possible words the user wants to type.</p>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>Dictionary:</p>
+<p>‘apple’</p>
+<p>orange’</p>
+<p>‘swipe’</p>
+<p>‘app’</p>
+<p>‘ale’</p>
+<p>input = “sewertyuiopoiuytre”, output = “swipe”.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example</p>
+<p>input = “apccccple” -&gt; ‘apple’, ‘ale’</p>
+</div>
+<p>Assumption: start of the input will be the start of the word, end will be the end</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Class</span> <span class="nf">WordNode</span><span class="p">()</span> <span class="p">{</span>
+  <span class="n">Character</span> <span class="n">value</span><span class="p">;</span>
+  <span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span> <span class="n">nexts</span><span class="p">;</span>
+  <span class="n">WordNode</span> <span class="n">previous</span><span class="p">;</span>
+  <span class="kt">boolean</span> <span class="n">isEnd</span><span class="p">;</span>
+
+  <span class="kd">public</span> <span class="nf">WordNode</span><span class="p">(</span><span class="n">Character</span> <span class="n">c</span><span class="p">){</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">isEnd</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="k">this</span><span class="p">.</span><span class="na">previous</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
+      <span class="c1">// return the word as String</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="n">input</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span> <span class="n">wordDict</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+  <span class="c1">// construct the wordDict</span>
+
+
+  <span class="c1">// find matching</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">WordNode</span> <span class="n">root</span> <span class="p">:</span> <span class="n">wordDict</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span> <span class="o">+=</span> <span class="n">findMatchWords</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findMatchWords</span><span class="p">(</span><span class="n">WordNode</span> <span class="n">root</span><span class="p">,</span> <span class="n">String</span> <span class="n">word</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//WordNode current = root;</span>
+    <span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
+
+    <span class="c1">//for (int i=0; i&lt;word.length(); i++) {</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">())</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="n">Character</span> <span class="n">c</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">value</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">isEnd</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">==</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// got a match word</span>
+                <span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+            <span class="p">}</span>
+
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+
+            <span class="c1">//Stack&lt;Pair&lt;WordNode, Integer&gt;&gt; stack = new Stack&lt;&gt;();</span>
+            <span class="c1">//for (WordNode next : current.next) {</span>
+                <span class="c1">// 1. none of the nexts match i</span>
+                <span class="c1">// 2. some of the nexts match i (1, multiple)</span>
+                <span class="c1">//stack.add(new Pair&lt;&gt;(next, i));</span>
+            <span class="c1">//}</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">WordNode</span> <span class="n">next</span> <span class="p">:</span> <span class="n">root</span><span class="p">.</span><span class="na">next</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// Find matching for current.next, word[i, end];</span>
+                <span class="n">rst</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">findMatchWords</span><span class="p">(</span><span class="n">next</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="na">subString</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()),</span> <span class="n">rst</span><span class="p">));</span>
+            <span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="other.html" title="Other"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hash.html" title="Hash"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Interview</a></li> 
+      </ul>
+    </div>
+    
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    </div>
+    
+
+  </body>
+</html>
