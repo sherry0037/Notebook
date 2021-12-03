@@ -840,3 +840,128 @@ Given an integer n, return any array containing n unique integers such that they
         return rst;
     }
     
+-------------------
+54. Spiral Matrix
+-------------------
+
+Given an m x n matrix, return all elements of the matrix in spiral order.
+
+.. topic:: Example 1
+
+    Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+
+    Output: [1,2,3,6,9,8,7,4,5]
+
+.. topic:: Example 2
+
+    Input: matrix = [[1,2,3,4],[5,6,7,8],[9,10,11,12]]
+
+    Output: [1,2,3,4,8,12,11,10,9,5,6,7]
+
+.. topic:: Constraints
+
+    m == matrix.length
+
+    n == matrix[i].length
+
+    1 <= m, n <= 10
+
+    -100 <= matrix[i][j] <= 100
+
+.. code-block:: java
+
+    class Solution {
+        enum Direction {
+            LEFT,
+            RIGHT,
+            UP,
+            DOWN
+        }
+        
+        public List<Integer> spiralOrder(int[][] matrix) {
+            List<Integer> rst = new ArrayList<>();
+            
+            int x = 0;
+            int y = 0;
+            int count = 0;
+            
+            rst.add(matrix[0][0]);
+            matrix[0][0] = 101;
+            Direction direction = Direction.RIGHT;
+            
+            while (count<4) {
+                int[] next = get(direction, x, y, matrix);
+                int nextValue = next[0];
+                x = next[1];
+                y = next[2];
+                // System.out.println("x: " + x + " y: " + y + " value: "+ nextValue + " direction: " + direction);
+                if (nextValue == 101) {
+                    direction = getNextDirection(direction);
+                    count++;
+                } else {
+                    rst.add(nextValue);
+                    count = 0;
+                }
+            }
+            
+            return rst;
+           
+        }
+        
+        private Direction getNextDirection(Direction current) {
+            switch(current) {
+                case LEFT:
+                    return Direction.UP;
+                case RIGHT:
+                    return Direction.DOWN;
+                case UP:
+                    return Direction.RIGHT;
+                case DOWN:
+                    return Direction.LEFT;
+            }
+            
+            return null;
+        }
+        
+        private int getNextY(Direction direction, int y) {
+            switch(direction) {
+                case LEFT:
+                    return y -1;
+                case RIGHT:
+                    return y + 1;
+                default:
+                    return y;
+            }
+        }
+            
+        private int getNextX(Direction direction, int x) {
+            switch(direction) {
+                case UP:
+                    return x -1;
+                case DOWN:
+                    return x + 1;
+                default:
+                    return x;
+            }
+        }
+        
+        private int[] get(Direction direction, int x0, int y0, int[][] matrix) {
+            int m = matrix.length;
+            int n = matrix[0].length;
+            int x = getNextX(direction, x0);
+            int y = getNextY(direction, y0);
+            int[] rst = new int[3];
+            if (x>=m || x<0 || y>=n || y<0 || matrix[x][y] == 101) {
+                rst[0] = 101;
+                rst[1] = x0;
+                rst[2] = y0;
+                return rst;
+            } else {
+                rst[0] = matrix[x][y];
+                rst[1] = x;
+                rst[2] = y;
+                matrix[x][y] = 101;
+                return rst;
+            }
+        }
+    }
