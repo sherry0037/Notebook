@@ -167,18 +167,23 @@ Conditions and constraints:
   - You can start on any cell at the top row that is not a wall.
 
   - You can exit on any cell at the bottom row that is not a wall.
-    
-# .  #  .  .  # 
-# .  #  .  .  #
-# .  #  #  .  #
-# .  .  #  .  #
-# .  .  #  .  #
-# .  .  #  .  #
+
+    # .  #  .  .  # 
+
+    # .  #  .  .  #
+
+    # .  #  #  .  #
+
+    # .  .  #  .  #
+
+    # .  .  #  .  #
+
+    # .  .  #  .  #
 
 result: 9
 
 .. code-block:: java
-  
+
     public int getLongestPath(int[][] maze) {
       // 1 = wall
       // 0 = cell
@@ -261,8 +266,10 @@ result: 9
         return rst;
     }
 
-time complexity O(mn)
-space           O(mn)
+
+time complexity: O(mn)
+
+space:           O(mn)
 
 4. Gliding keyboard
 ---------------------
@@ -360,5 +367,239 @@ Assumption: start of the input will be the start of the word, end will be the en
       return rst;
     }
 
+------------------------
+01/18/2022 - Microsoft
+------------------------
 
+1.1 Print Binary Search Tree
+------------------------------
+
+Print out the values of a binary search tree in ascending order if the tree is valid. If it is not valid, do not print.
+
+1.2 Recover Binary Search Tree with 2 Nodes Swapped
+-----------------------------------------------------
+
+See :ref:`question and solutions <99-recover-binary-search-tree>`.
+
+2. Array of Products
+-----------------------
+
+Given an array A, produce an array B such that each element of B is the product of all the other elements in A except for the element at this index.
+
+For example, A = [1, 2, 3], then B = [2*3, 1*3, 1*2] = [6, 3, 2].
+
+**Approach**: Create two arrays, one to calculate the product from left, the other one to calculate the product from right, then times them together. To further simplify, use one array to first calculate from left, then calculate in place from right.
+
+.. code-block:: java
+
+    public class Solution {
+
+        public static void main(String [] args) {
+            // you can write to stdout for debugging purposes, e.g.
+            System.out.println("This is a debug message");
+
+            // A = [1,2,3]
+            int[] A1 = new int[3];
+            A1[0] = 1;
+            A1[1] = 2;
+            A1[2] = 3;
+
+            // B = [6, 3, 2]
+            //int[] B1 = getProduct(A1);
+            int[] B1 = getProduct1(A1);
+
+            //print(B1);
+
+            int[] A2 = new int[0];
+            int[] B2 = getProduct1(A2);
+            print(B2);
+
+        }
+
+        public static void print(int[] B1) {
+            for (int i=0; i<B1.length; i++) {
+                System.out.print(B1[i] + " ");
+            }
+        }
+
+        public static int[] getProduct(int[] arrayA) {
+            int[] arrayB = new int[arrayA.length];
+            for (int i=0; i<arrayA.length; i++) {
+                int product = 1;
+                for(int j=0; j<arrayA.length; j++) {
+                    if (j==i) {
+                        continue;
+                    }
+
+                    product *= arrayA[j];
+                }
+
+                arrayB[i] = product;
+            }
+            return arrayB;
+        }
+
+        public static int[] getProduct1(int[] arrayA) {
+            int[] left = new int[arrayA.length];
+            int leftProduct = 1;
+            left[0] = 1;
+            for (int i=1; i<arrayA.length; i++) {
+                leftProduct *= arrayA[i-1];
+                left[i] = leftProduct;
+            }
+
+            int[] right = new int[arrayA.length];
+            int rightProduct = 1;
+            right[arrayA.length-1] = 1;
+            for (int i=arrayA.length-2; i>=0; i--) {
+                rightProduct *= arrayA[i+1];
+                right[i] = rightProduct;
+            }
+
+            int[] arrayB = new int[arrayA.length];
+            for (int i=0; i<arrayA.length; i++) {
+                arrayB[i] = left[i] * right[i];
+            }
+
+            return arrayB;
+        }
+    }
+
+
+3. Compress and Uncompress
+----------------------------
+
+Write a compress and an uncompress algorithms as follows:
+
+input: aaaabbddddddcc
+
+compressed: a4b2d6c2
+
+Assumptions:
+
+1. There are only characters in the input string.
+
+2. Case-sensitive.
+
+.. code-block:: java
+
+    public class Solution {
+
+        public static void main(String [] args) {
+            // you can write to stdout for debugging purposes, e.g.
+            // System.out.println("This is a debug message");
+            String test1 = "aaabbccccdeeeaA";
+            String rst1 = compress(test1);
+            System.out.println(rst1);
+
+            String test2 = "aaabbccccdeeeaAAAAA";
+            System.out.println(compress(test2));
+
+            String test3 = "aaaa";
+            System.out.println(compress(test3));
+
+            String test4 = "";
+            System.out.println(compress(test4));
+
+            String test5 = "a3b2c4d1e3a1A5";
+            System.out.println(unCompress(test5));
+
+            System.out.println(unCompress(compress(test1)).equals(test1));
+            System.out.println(unCompress(compress(test2)).equals(test2));
+            System.out.println(unCompress(compress(test3)).equals(test3));
+            System.out.println(unCompress(compress(test4)).equals(test4));
+
+            String test6 = "aabbcc";
+            System.out.println(unCompress(test6));
+        }
+
+        public static String compress(String s1) {
+            if (s1.length() < 1) {
+                return s1;
+            }
+
+            Character prev = s1.charAt(0);
+            int count = 1;
+            String rst = "";
+
+            for (int i=1; i<s1.length(); i++) {
+                // if (digits.contains(s1.charAt(i))) {
+                //      return s1;
+                // }
+                if (s1.charAt(i) == prev) {
+                    count++;
+                } else {
+                    rst += prev;
+                    rst += count;
+
+                    prev = s1.charAt(i);
+                    count = 1;
+                }
+            }
+
+            rst += prev;
+            rst += count;
+
+            return rst;
+        }
+
+        public static String unCompress(String s1) {
+            if (s1.length() < 1) {
+                return s1;
+            }
+
+            String rst = "";
+            char prev = s1.charAt(0);
+            List<Character> count = new ArrayList<>();
+            Set<Character> digits = new HashSet<>();
+            digits.add('1');
+            digits.add('2');
+            digits.add('3');
+            digits.add('4');
+            digits.add('5');
+            digits.add('6');
+            digits.add('7');
+            digits.add('8');
+            digits.add('9');
+            digits.add('0');
+
+            for (int i=0; i<s1.length(); i++) {
+                Character current = s1.charAt(i);
+                if (digits.contains(current)) {
+                    count.add(current);
+                } else {
+                    int n = getCount(count);
+                    for (int j=0; j<n; j++) {
+                        rst += prev;
+                    }
+                    prev = current;
+                    count = new ArrayList<>();
+                }
+            }
+
+            int n = getCount(count);
+            for (int j=0; j<n; j++) {
+                rst += prev;
+            }
+
+            return rst;
+        }
+
+        private static int getCount(List<Character> count) {
+            // [1, 2, 3] -> 123
+            int rst = 0;
+            int multiplier = 1;
+            for (int i = count.size()-1; i>= 0; i--) {
+                int k = Character.getNumericValue(count.get(i));
+                rst += multiplier * k;
+                multiplier *= 10;
+            }
+            return rst;
+        }
+    }
+
+4. Stock Transaction
+----------------------
+
+Similar to Leetcode 188: https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/ where k=4 and prices.length = 10.
 

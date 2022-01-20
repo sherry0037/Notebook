@@ -47,6 +47,14 @@
 <li><a class="reference internal" href="#gliding-keyboard">4. Gliding keyboard</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#microsoft">01/18/2022 - Microsoft</a><ul>
+<li><a class="reference internal" href="#print-binary-search-tree">1.1 Print Binary Search Tree</a></li>
+<li><a class="reference internal" href="#recover-binary-search-tree-with-2-nodes-swapped">1.2 Recover Binary Search Tree with 2 Nodes Swapped</a></li>
+<li><a class="reference internal" href="#array-of-products">2. Array of Products</a></li>
+<li><a class="reference internal" href="#compress-and-uncompress">3. Compress and Uncompress</a></li>
+<li><a class="reference internal" href="#stock-transaction">4. Stock Transaction</a></li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -224,20 +232,21 @@ E = 8</p>
 <p>Write a program that takes a map of a maze as input, and outputs the length of the longest path from the top to the bottom.</p>
 <p>Conditions and constraints:</p>
 <blockquote>
-<div><ul class="simple">
+<div><ul>
 <li><p>The map is a two-dimensional, rectangular board.</p></li>
 <li><p>You can only visit each cell once.</p></li>
 <li><p>You are not allowed to go up, only left, right or down.</p></li>
 <li><p>You can start on any cell at the top row that is not a wall.</p></li>
-<li><p>You can exit on any cell at the bottom row that is not a wall.</p></li>
+<li><p>You can exit on any cell at the bottom row that is not a wall.</p>
+<p># .  #  .  .  #</p>
+<p># .  #  .  .  #</p>
+<p># .  #  #  .  #</p>
+<p># .  .  #  .  #</p>
+<p># .  .  #  .  #</p>
+<p># .  .  #  .  #</p>
+</li>
 </ul>
 </div></blockquote>
-<p># .  #  .  .  #
-# .  #  .  .  #
-# .  #  #  .  #
-# .  .  #  .  #
-# .  .  #  .  #
-# .  .  #  .  #</p>
 <p>result: 9</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span>public int getLongestPath(int[][] maze) {
   // 1 = wall
@@ -322,8 +331,8 @@ private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; cur
 }
 </pre></div>
 </div>
-<p>time complexity O(mn)
-space           O(mn)</p>
+<p>time complexity: O(mn)</p>
+<p>space:           O(mn)</p>
 </section>
 <section id="gliding-keyboard">
 <h3>4. Gliding keyboard<a class="headerlink" href="#gliding-keyboard" title="Permalink to this headline">¶</a></h3>
@@ -412,6 +421,228 @@ space           O(mn)</p>
 <span class="p">}</span>
 </pre></div>
 </div>
+</section>
+</section>
+<section id="microsoft">
+<h2>01/18/2022 - Microsoft<a class="headerlink" href="#microsoft" title="Permalink to this headline">¶</a></h2>
+<section id="print-binary-search-tree">
+<h3>1.1 Print Binary Search Tree<a class="headerlink" href="#print-binary-search-tree" title="Permalink to this headline">¶</a></h3>
+<p>Print out the values of a binary search tree in ascending order if the tree is valid. If it is not valid, do not print.</p>
+</section>
+<section id="recover-binary-search-tree-with-2-nodes-swapped">
+<h3>1.2 Recover Binary Search Tree with 2 Nodes Swapped<a class="headerlink" href="#recover-binary-search-tree-with-2-nodes-swapped" title="Permalink to this headline">¶</a></h3>
+<p>See <a class="reference internal" href="tree.html#recover-binary-search-tree"><span class="std std-ref">question and solutions</span></a>.</p>
+</section>
+<section id="array-of-products">
+<h3>2. Array of Products<a class="headerlink" href="#array-of-products" title="Permalink to this headline">¶</a></h3>
+<p>Given an array A, produce an array B such that each element of B is the product of all the other elements in A except for the element at this index.</p>
+<p>For example, A = [1, 2, 3], then B = [2*3, 1*3, 1*2] = [6, 3, 2].</p>
+<p><strong>Approach</strong>: Create two arrays, one to calculate the product from left, the other one to calculate the product from right, then times them together. To further simplify, use one array to first calculate from left, then calculate in place from right.</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This is a debug message&quot;</span><span class="p">);</span>
+
+        <span class="c1">// A = [1,2,3]</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">A1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+        <span class="n">A1</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">A1</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+        <span class="n">A1</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+
+        <span class="c1">// B = [6, 3, 2]</span>
+        <span class="c1">//int[] B1 = getProduct(A1);</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">B1</span> <span class="o">=</span> <span class="n">getProduct1</span><span class="p">(</span><span class="n">A1</span><span class="p">);</span>
+
+        <span class="c1">//print(B1);</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">A2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">B2</span> <span class="o">=</span> <span class="n">getProduct1</span><span class="p">(</span><span class="n">A2</span><span class="p">);</span>
+        <span class="n">print</span><span class="p">(</span><span class="n">B2</span><span class="p">);</span>
+
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">B1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">B1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">B1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProduct</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arrayA</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrayB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">continue</span><span class="p">;</span>
+                <span class="p">}</span>
+
+                <span class="n">product</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">product</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">arrayB</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProduct1</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arrayA</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">leftProduct</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">left</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">leftProduct</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">leftProduct</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">rightProduct</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">right</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rightProduct</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+            <span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">rightProduct</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrayB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">*</span> <span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">arrayB</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="compress-and-uncompress">
+<h3>3. Compress and Uncompress<a class="headerlink" href="#compress-and-uncompress" title="Permalink to this headline">¶</a></h3>
+<p>Write a compress and an uncompress algorithms as follows:</p>
+<p>input: aaaabbddddddcc</p>
+<p>compressed: a4b2d6c2</p>
+<p>Assumptions:</p>
+<ol class="arabic simple">
+<li><p>There are only characters in the input string.</p></li>
+<li><p>Case-sensitive.</p></li>
+</ol>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
+        <span class="c1">// System.out.println(&quot;This is a debug message&quot;);</span>
+        <span class="n">String</span> <span class="n">test1</span> <span class="o">=</span> <span class="s">&quot;aaabbccccdeeeaA&quot;</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">rst1</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">);</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rst1</span><span class="p">);</span>
+
+        <span class="n">String</span> <span class="n">test2</span> <span class="o">=</span> <span class="s">&quot;aaabbccccdeeeaAAAAA&quot;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
+
+        <span class="n">String</span> <span class="n">test3</span> <span class="o">=</span> <span class="s">&quot;aaaa&quot;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
+
+        <span class="n">String</span> <span class="n">test4</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
+
+        <span class="n">String</span> <span class="n">test5</span> <span class="o">=</span> <span class="s">&quot;a3b2c4d1e3a1A5&quot;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test5</span><span class="p">));</span>
+
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test1</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
+
+        <span class="n">String</span> <span class="n">test6</span> <span class="o">=</span> <span class="s">&quot;aabbcc&quot;</span><span class="p">;</span>
+        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test6</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">compress</span><span class="p">(</span><span class="n">String</span> <span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">s1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">Character</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// if (digits.contains(s1.charAt(i))) {</span>
+            <span class="c1">//      return s1;</span>
+            <span class="c1">// }</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">prev</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
+                <span class="n">rst</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+
+                <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
+        <span class="n">rst</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">unCompress</span><span class="p">(</span><span class="n">String</span> <span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">s1</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+        <span class="kt">char</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+        <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">digits</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;2&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;6&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;8&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;9&#39;</span><span class="p">);</span>
+        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">Character</span> <span class="n">current</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">current</span><span class="p">))</span> <span class="p">{</span>
+                <span class="n">count</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
+                <span class="p">}</span>
+                <span class="n">prev</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getCount</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// [1, 2, 3] -&gt; 123</span>
+        <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">count</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">Character</span><span class="p">.</span><span class="na">getNumericValue</span><span class="p">(</span><span class="n">count</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+            <span class="n">rst</span> <span class="o">+=</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>
+            <span class="n">multiplier</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="stock-transaction">
+<h3>4. Stock Transaction<a class="headerlink" href="#stock-transaction" title="Permalink to this headline">¶</a></h3>
+<p>Similar to Leetcode 188: <a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/</a> where k=4 and prices.length = 10.</p>
 </section>
 </section>
 </section>

@@ -309,6 +309,8 @@ If there are no nodes with an even-valued grandparent, return 0.
 
 
 
+.. _99-recover-binary-search-tree:
+
 --------------------------------
 99. Recover Binary Search Tree
 --------------------------------
