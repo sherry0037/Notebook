@@ -66,6 +66,9 @@
 <li><a class="reference internal" href="#minimum-depth-of-binary-tree">111. Minimum Depth of Binary Tree</a></li>
 <li><a class="reference internal" href="#balanced-binary-tree">110. Balanced Binary Tree</a></li>
 <li><a class="reference internal" href="#count-good-nodes-in-binary-tree">1448. Count Good Nodes in Binary Tree</a></li>
+<li><a class="reference internal" href="#binary-tree-paths">257. Binary Tree Paths</a></li>
+<li><a class="reference internal" href="#sum-of-left-leaves">404. Sum of Left Leaves</a></li>
+<li><a class="reference internal" href="#find-bottom-left-tree-value">513. Find Bottom Left Tree Value</a></li>
 </ul>
 </li>
 </ul>
@@ -131,6 +134,9 @@
 <li><p><a class="reference internal" href="#minimum-depth-of-binary-tree" id="id19">111. Minimum Depth of Binary Tree</a></p></li>
 <li><p><a class="reference internal" href="#balanced-binary-tree" id="id20">110. Balanced Binary Tree</a></p></li>
 <li><p><a class="reference internal" href="#count-good-nodes-in-binary-tree" id="id21">1448. Count Good Nodes in Binary Tree</a></p></li>
+<li><p><a class="reference internal" href="#binary-tree-paths" id="id22">257. Binary Tree Paths</a></p></li>
+<li><p><a class="reference internal" href="#sum-of-left-leaves" id="id23">404. Sum of Left Leaves</a></p></li>
+<li><p><a class="reference internal" href="#find-bottom-left-tree-value" id="id24">513. Find Bottom Left Tree Value</a></p></li>
 </ul>
 </li>
 </ul>
@@ -1237,6 +1243,169 @@ root: 8 currentD: 4</p>
     <span class="n">count</span> <span class="o">+=</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">val</span> <span class="o">&gt;=</span> <span class="n">max</span><span class="p">)</span><span class="o">?</span><span class="mi">1</span><span class="p">:</span><span class="mi">0</span><span class="p">;</span>
 
     <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="binary-tree-paths">
+<h2><a class="toc-backref" href="#id22">257. Binary Tree Paths</a><a class="headerlink" href="#binary-tree-paths" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, return all root-to-leaf paths in any order.</p>
+<p>A leaf is a node with no children.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [1,2,3,null,5]</p>
+<p>Output: [“1-&gt;2-&gt;5”,”1-&gt;3”]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [1]</p>
+<p>Output: [“1”]</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [1, 100].</p>
+<p>-100 &lt;= Node.val &lt;= 100</p>
+</div>
+<p><strong>Approach</strong> use backtracking</p>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">binaryTreePaths</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">rst</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">temp</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">temp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;&quot;</span> <span class="o">+</span> <span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">);</span>
+        <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+        <span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+        <span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="sum-of-left-leaves">
+<h2><a class="toc-backref" href="#id23">404. Sum of Left Leaves</a><a class="headerlink" href="#sum-of-left-leaves" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, return the sum of all left leaves.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [3,9,20,null,null,15,7]</p>
+<p>Output: 24</p>
+<p>Explanation: There are two left leaves in the binary tree, with values 9 and 15 respectively.</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [1]</p>
+<p>Output: 0</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [1, 1000].</p>
+<p>-1000 &lt;= Node.val &lt;= 1000</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">sumOfLeftLeaves</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="kt">int</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">,</span> <span class="kt">boolean</span> <span class="n">isLeft</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">isLeft</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="kc">true</span><span class="p">)</span> <span class="o">+</span> <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="find-bottom-left-tree-value">
+<h2><a class="toc-backref" href="#id24">513. Find Bottom Left Tree Value</a><a class="headerlink" href="#find-bottom-left-tree-value" title="Permalink to this headline">¶</a></h2>
+<p>Given the root of a binary tree, return the leftmost value in the last row of the tree.</p>
+<div class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: root = [2,1,3]</p>
+<p>Output: 1</p>
+</div>
+<div class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: root = [1,2,3,4,null,5,6,null,null,7]</p>
+<p>Output: 7</p>
+</div>
+<div class="topic">
+<p class="topic-title">Constraints</p>
+<p>The number of nodes in the tree is in the range [1, 104].</p>
+<p>-231 &lt;= Node.val &lt;= 231 - 1</p>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">int</span> <span class="nf">findBottomLeftValue</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="p">(),</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">rst</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">rst</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">rst</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">rst</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">rst</span> <span class="o">=</span> <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">rst</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxDepth</span><span class="p">;</span>
+    <span class="kd">private</span> <span class="kt">int</span> <span class="n">maxLeft</span><span class="p">;</span>
+
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">findBottomLeftValue</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">maxLeft</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">,</span> <span class="kt">int</span> <span class="n">depth</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">depth</span> <span class="o">&gt;</span> <span class="n">maxDepth</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">maxLeft</span> <span class="o">=</span> <span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">;</span>
+            <span class="n">maxDepth</span> <span class="o">=</span> <span class="n">depth</span><span class="p">;</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">depth</span><span class="o">+</span><span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

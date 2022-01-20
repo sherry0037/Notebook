@@ -1293,3 +1293,188 @@ Return the number of good nodes in the binary tree.
         
         return count;
     }
+
+------------------------------------------------
+257. Binary Tree Paths
+------------------------------------------------
+
+Given the root of a binary tree, return all root-to-leaf paths in any order.
+
+A leaf is a node with no children.
+
+.. topic:: Example 1
+
+    Input: root = [1,2,3,null,5]
+
+    Output: ["1->2->5","1->3"]
+
+.. topic:: Example 2
+
+    Input: root = [1]
+
+    Output: ["1"]
+
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [1, 100].
+
+    -100 <= Node.val <= 100
+
+**Approach** use backtracking
+
+.. code-block:: java
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> rst = new ArrayList<>();
+        traverse(root, new ArrayList<>(), rst);
+        return rst;
+    }
+    
+    private void traverse(TreeNode node, List<String> temp, List<String> rst) { 
+        temp.add("" + node.val);
+        if (node.left == null && node.right == null) {
+            String s = String.join("->", temp);
+            rst.add(s);
+            return;
+        }
+        
+        if (node.left != null) {
+            traverse(node.left, temp, rst);
+            temp.remove(temp.size()-1);
+        }
+        
+        if (node.right != null) {
+            traverse(node.right, temp, rst);
+            temp.remove(temp.size()-1);
+        }
+            
+    }
+
+------------------------------------------------
+404. Sum of Left Leaves
+------------------------------------------------
+
+Given the root of a binary tree, return the sum of all left leaves.
+
+.. topic:: Example 1
+
+    Input: root = [3,9,20,null,null,15,7]
+
+    Output: 24
+
+    Explanation: There are two left leaves in the binary tree, with values 9 and 15 respectively.
+
+.. topic:: Example 2
+
+    Input: root = [1]
+
+    Output: 0
+
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [1, 1000].
+
+    -1000 <= Node.val <= 1000
+
+.. code-block:: java
+
+    public int sumOfLeftLeaves(TreeNode root) {
+        return traverse(root, false);
+    }
+    
+    private int traverse(TreeNode node, boolean isLeft) {
+        if (node == null) {
+            return 0;
+        }
+        
+        if (node.left == null && node.right == null && isLeft) {
+            return node.val;
+        }
+        
+        return traverse(node.left, true) + traverse(node.right, false);
+    }
+
+------------------------------------------------
+513. Find Bottom Left Tree Value
+------------------------------------------------
+
+Given the root of a binary tree, return the leftmost value in the last row of the tree.
+
+.. topic:: Example 1
+
+    Input: root = [2,1,3]
+
+    Output: 1
+
+.. topic:: Example 2
+
+    Input: root = [1,2,3,4,null,5,6,null,null,7]
+
+    Output: 7
+ 
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [1, 104].
+
+    -231 <= Node.val <= 231 - 1
+
+.. code-block:: java
+
+    public int findBottomLeftValue(TreeNode root) {
+        List<Integer> rst = traverse(root, new ArrayList<Integer>(), 1);
+        return rst.get(rst.size()-1);
+    }
+    
+    private List<Integer> traverse(TreeNode node, List<Integer> rst, int depth) {
+        if (node == null) {
+            return rst;
+        }
+        
+        if (rst.size() < depth) {
+            rst.add(node.val);
+        }
+        
+        if (node.left != null) {
+            rst = traverse(node.left, rst, depth+1);
+        }
+        
+        if (node.right != null) {
+            rst = traverse(node.right, rst, depth+1);
+        }
+        
+        return rst;
+        
+    }
+
+.. code-block:: java
+
+    class Solution {
+
+        private int maxDepth;
+        private int maxLeft;
+
+        public int findBottomLeftValue(TreeNode root) {
+            traverse(root, 0);
+            return maxLeft;
+        }
+    
+        private void traverse(TreeNode node, int depth) {
+            if (node == null) {
+                return;
+            }
+            
+            if (node.left == null && node.right == null && depth > maxDepth) {
+                maxLeft = node.val;
+                maxDepth = depth;
+            }
+            
+            if (node.left != null) {
+                traverse(node.left, depth+1);
+            }
+            
+            if (node.right != null) {
+                traverse(node.right, depth+1);
+            }
+            
+        }
+    }

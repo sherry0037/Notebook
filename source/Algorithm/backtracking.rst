@@ -242,3 +242,59 @@ When the size of the head is same as the input length, this List is finished and
 
 Things to do:
     - check how to use stream: ``stack = Arrays.stream( nums ).boxed().collect( Collectors.toCollection(LinkedList::new) );``
+
+========================
+257. Binary Tree Paths
+========================
+
+Given the root of a binary tree, return all root-to-leaf paths in any order.
+
+A leaf is a node with no children.
+
+.. topic:: Example 1
+
+    Input: root = [1,2,3,null,5]
+
+    Output: ["1->2->5","1->3"]
+
+.. topic:: Example 2
+
+    Input: root = [1]
+
+    Output: ["1"]
+
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [1, 100].
+
+    -100 <= Node.val <= 100
+
+**Approach** use backtracking
+
+.. code-block:: java
+
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> rst = new ArrayList<>();
+        traverse(root, new ArrayList<>(), rst);
+        return rst;
+    }
+    
+    private void traverse(TreeNode node, List<String> temp, List<String> rst) { 
+        temp.add("" + node.val);
+        if (node.left == null && node.right == null) {
+            String s = String.join("->", temp);
+            rst.add(s);
+            return;
+        }
+        
+        if (node.left != null) {
+            traverse(node.left, temp, rst);
+            temp.remove(temp.size()-1);
+        }
+        
+        if (node.right != null) {
+            traverse(node.right, temp, rst);
+            temp.remove(temp.size()-1);
+        }
+            
+    }
