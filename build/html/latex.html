@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>\(\LaTeX\) Cheatsheet &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css?v=ed2c6189" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -38,8 +36,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#"><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet</a><ul>
 <li><a class="reference internal" href="#math-equation-with-alignment">Math equation (with alignment)</a></li>
 <li><a class="reference internal" href="#code-listing">Code listing</a></li>
@@ -51,12 +50,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="rst.html"
-                        title="previous chapter">reStructuredText</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="git.html"
-                        title="next chapter">Git Commands Reference</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="rst.html"
+                          title="previous chapter">reStructuredText</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="git.html"
+                          title="next chapter">Git Commands Reference</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -64,7 +68,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -72,8 +76,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -83,9 +87,9 @@
           <div class="body" role="main">
             
   <section id="latex-cheatsheet">
-<h1><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet<a class="headerlink" href="#latex-cheatsheet" title="Permalink to this headline">¶</a></h1>
+<h1><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet<a class="headerlink" href="#latex-cheatsheet" title="Link to this heading">¶</a></h1>
 <section id="math-equation-with-alignment">
-<h2>Math equation (with alignment)<a class="headerlink" href="#math-equation-with-alignment" title="Permalink to this headline">¶</a></h2>
+<h2>Math equation (with alignment)<a class="headerlink" href="#math-equation-with-alignment" title="Link to this heading">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{amsmath}
 \begin{equation*}
 \begin{split}
@@ -96,7 +100,7 @@
 </div>
 </section>
 <section id="code-listing">
-<h2>Code listing<a class="headerlink" href="#code-listing" title="Permalink to this headline">¶</a></h2>
+<h2>Code listing<a class="headerlink" href="#code-listing" title="Link to this heading">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{listings}
 \begin{lstlisting}[language=R]
 \end{lstlisting}
@@ -104,11 +108,11 @@
 </div>
 </section>
 <section id="figures">
-<h2>Figures<a class="headerlink" href="#figures" title="Permalink to this headline">¶</a></h2>
+<h2>Figures<a class="headerlink" href="#figures" title="Link to this heading">¶</a></h2>
 <p><strong>Single figure</strong></p>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{graphicx}
 
-<span class="cp">...</span>
+<span class="c">...</span>
 
 \begin{figure}{}
   \centering
@@ -151,7 +155,7 @@
 </div>
 </section>
 <section id="table">
-<h2>Table<a class="headerlink" href="#table" title="Permalink to this headline">¶</a></h2>
+<h2>Table<a class="headerlink" href="#table" title="Link to this heading">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>%\usepackage{graphicx}
 \begin{table}[]
 \begin{tabular}{lll}
@@ -165,7 +169,7 @@ $P[\mu \leq 10.0]$ &amp;               &amp;
 </div>
 </section>
 <section id="appendix">
-<h2>Appendix<a class="headerlink" href="#appendix" title="Permalink to this headline">¶</a></h2>
+<h2>Appendix<a class="headerlink" href="#appendix" title="Link to this heading">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>%\usepackage[toc,page]{appendix}
 \begin{appendices}
 \chapter{Some Appendix}
@@ -175,7 +179,7 @@ The contents...
 </div>
 </section>
 <section id="pseudo-code">
-<h2>Pseudo code<a class="headerlink" href="#pseudo-code" title="Permalink to this headline">¶</a></h2>
+<h2>Pseudo code<a class="headerlink" href="#pseudo-code" title="Link to this heading">¶</a></h2>
 <div class="highlight-RST notranslate"><div class="highlight"><pre><span></span>\usepackage{algorithm}
 \usepackage[noend]{algpseudocode}
 
@@ -231,8 +235,8 @@ The contents...
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

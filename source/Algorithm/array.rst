@@ -2,6 +2,68 @@
 Array
 =======
 
+----------------
+Useful Methods
+----------------
+
+^^^^^^^^^^^^^^^^
+Initialization
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    int[] intArray = new int[]{1,2,3,4,5};
+    int[] intArray = IntStream.range(1, 100).toArray();
+
+^^^^^^^^^^^^^^^^
+Subarray
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    Arrays.copyOfRange(array, beginning, end + 1);
+
+^^^^^^^^^^^^^^^^
+Sort
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    Arrays.sort(array);
+    Arrays.sort(array, Collections.reverseOrder());
+
+^^^^^^^^^^^^^^^^
+Sum
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    int sum = Arrays.stream(array).sum();
+
+^^^^^^^^^^^^^^^^
+Print
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    private void printArray(int[] nums) {
+        System.out.print("[");
+        for (int i : nums) {
+            System.out.print(i + " ");
+        }
+        System.out.println("]");
+    }
+
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Convert an Int to Array of Digits
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+    int num = 1234567;
+    int[] digits = Integer.toString(num).chars().map(c -> c-'0').toArray();
+
+
 -------------------------------------------
 153. Find Minimum in Rotated Sorted Array
 -------------------------------------------
@@ -43,8 +105,8 @@ You must write an algorithm that runs in O(log n) time.
 
     Output: 11
 
-    Explanation: The original array was [11,13,15,17] and it was rotated 4 times. 
- 
+    Explanation: The original array was [11,13,15,17] and it was rotated 4 times.
+
 .. topic:: Constraints
 
     n == nums.length
@@ -64,10 +126,10 @@ You must write an algorithm that runs in O(log n) time.
             while (nums[nums.length-1] < nums[0]) {
                 rotateBack(nums);
             }
-            
+
             return nums[0];
         }
-    
+
         private void rotateBack(int[] nums) {
             int temp = nums[0];
             for (int i=1; i<nums.length; i++) {
@@ -142,7 +204,7 @@ For each 0 <= i < nums1.length, find the index j such that nums1[i] == nums2[j] 
 
 Return an array ans of length nums1.length such that ans[i] is the next greater element as described above.
 
- 
+
 
 .. topic:: Example 1
 
@@ -169,7 +231,7 @@ Return an array ans of length nums1.length such that ans[i] is the next greater 
         - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
 
         - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
- 
+
 
 .. topic:: Constraints
 
@@ -180,7 +242,7 @@ Return an array ans of length nums1.length such that ans[i] is the next greater 
     All integers in nums1 and nums2 are unique.
 
     All the integers of nums1 also appear in nums2.
-     
+
 
 Follow up: Could you find an O(nums1.length + nums2.length) solution?
 
@@ -188,8 +250,8 @@ Follow up: Could you find an O(nums1.length + nums2.length) solution?
 
     public int[] nextGreaterElement(int[] nums1, int[] nums2) {
         int[] rst = new int[nums1.length];
-        
-        
+
+
         for (int i=0; i<nums1.length; i++) {
             boolean found = false;
             rst[i] = -1;
@@ -197,12 +259,12 @@ Follow up: Could you find an O(nums1.length + nums2.length) solution?
                 if (!found && j!=nums1[i]) {
                     continue;
                 }
-                
+
                 if (j == nums1[i]) {
                     found = true;
                     continue;
                 }
-                
+
                 if (j > nums1[i]) {
                     rst[i] = j;
                     break;
@@ -232,7 +294,7 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
     Input: n = 21
 
     Output: -1
- 
+
 .. topic:: Constraints
 
     1 <= n <= 231 - 1
@@ -242,7 +304,7 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
 
 - First traverse from right to left to find the first digit that is less than the digit at it's right. We call it ``first``.
 
-    - e.g. Given 12443322, the result is 13222344. We first locate 2 in 1 **2** 443322. 
+    - e.g. Given 12443322, the result is 13222344. We first locate 2 in 1 **2** 443322.
 
 - Then we need to find the next greater element to the right of 2.
 
@@ -263,26 +325,26 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
 .. code-block:: java
 
     public int nextGreaterElement(int n) {
-        
+
         int[] digits = Integer.toString(n).chars().map(c -> c-'0').toArray();
-        
+
         if (digits.length <=1) {
             return -1;
         }
-        
+
         int first = -1;
-        
+
         for (int i=digits.length-2; i>=0; i--) {
             if (digits[i] < digits[i+1]) {
                 first = i;
                 break;
             }
         }
-        
+
         if (first == -1) {
             return -1;
         }
-    
+
         // Tried binary search but failed
     //         int i = first+1;
     //         int j = digits.length-1;
@@ -296,22 +358,22 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
     //                 j = mid-1;
     //             }
     //         }
-                
-    //         int second = i;  
-        
+
+    //         int second = i;
+
         int j = digits.length - 1;
-        
+
         while (j>first && digits[j]<=digits[first]) {
             j--;
         }
-        
+
         int second = j;
-        
-        //System.out.println("first: "+first+" second: " + second);    
+
+        //System.out.println("first: "+first+" second: " + second);
         int temp = digits[first];
         digits[first] = digits[second];
         digits[second] = temp;
-        
+
         int N = first+digits.length;
         //System.out.println("N: "+N);
         for (int k = first+1; k<digits.length; k++) {
@@ -323,16 +385,16 @@ Note that the returned integer should fit in 32-bit integer, if there is a valid
                 break;
             }
         }
-        
+
         long rst = arrayToInt(digits);
         long max = (long)Integer.MAX_VALUE;
-        
+
         return rst>max?-1:(int)rst;
-            
+
     }
-    
+
     private long arrayToInt(int[] arr) {
-        StringBuilder s = new StringBuilder(); 
+        StringBuilder s = new StringBuilder();
         for (int i : arr) {
              s.append(i);
         }
@@ -373,7 +435,7 @@ Do not allocate extra space for another array. You must do this by modifying the
     Note that the five elements can be returned in any order.
 
     It does not matter what you leave beyond the returned k (hence they are underscores).
-     
+
 .. topic:: Constraints
 
     0 <= nums.length <= 100
@@ -417,7 +479,7 @@ Note that you must do this in-place without making a copy of the array.
     Input: nums = [0]
 
     Output: [0]
- 
+
 .. topic:: Constraints
 
     1 <= nums.length <= 104
@@ -436,7 +498,7 @@ Note that you must do this in-place without making a copy of the array.
                 j++;
             }
         }
-        
+
         while (j<nums.length) {
             nums[j] = 0;
             j++;
@@ -461,21 +523,21 @@ Note that you must do this in-place without making a copy of the array.
                 nonZeroPos = i+1;
             }
         }
-        
+
         if (nonZeroPos != -1) {
             moveForward(nums, nonZeroPos, 0);
         }
     }
-    
+
     private void moveForward(int[] nums, int from, int to) {
         // [1, 0, 0, 0, 2, 3], from=4, to=1
         // return [1, 2, 3, 0, 0, 0]
-        
+
         if (from < 0 || from >= nums.length || to < 0 || to >= nums.length
            || from < to) {
             return;
         }
-        
+
         for (int i=0; i<nums.length-to; i++) {
             if (i<nums.length-from) {
                 nums[to+i] = nums[from+i];
@@ -530,29 +592,29 @@ Note that after backspacing an empty text, the text will continue empty.
     1 <= s.length, t.length <= 200
 
     s and t only contain lowercase letters and '#' characters.
- 
+
 Follow up: Can you solve it in O(n) time and O(1) space?
 
-**Approach**: Use two pointers, start from the right of the two strings and move leftward. If sees a '#', keep moving until all the backspace are dealt with. 
+**Approach**: Use two pointers, start from the right of the two strings and move leftward. If sees a '#', keep moving until all the backspace are dealt with.
 
 .. code-block:: java
 
     public boolean backspaceCompare(String s, String t) {
         int i = s.length()-1;
         int j = t.length()-1;
-        
+
         while (i>=0 && j>=0) {
             //System.out.println("i: "+i + " j: "+j);
             if (i>=0 && s.charAt(i)=='#') {
                 i = moveLeft(s, i);
                 //System.out.println("i moved to: "+i);
             }
-            
+
             if (j>=0 && t.charAt(j)=='#') {
                 j = moveLeft(t, j);
                 //System.out.println("j moved to: "+j);
             }
-            
+
             if (i>=0 && j>=0) {
                 if (s.charAt(i)==t.charAt(j)) {
                     i--;
@@ -562,17 +624,17 @@ Follow up: Can you solve it in O(n) time and O(1) space?
                 }
             }
         }
-        
+
         if (i<0 && j>=0 && t.charAt(j)=='#') {
             j = moveLeft(t, j);
         } else if (j<0 && i>=0 && s.charAt(i)=='#'){
             i = moveLeft(s, i);
         }
-        
+
         return (i==-1 && j==-1);
-    
+
     }
-    
+
     private int moveLeft(String s, int i) {
         int count = 0;
         for (int p=i; p>=0; p--) {
@@ -582,12 +644,12 @@ Follow up: Can you solve it in O(n) time and O(1) space?
                 count--;
                 if (count==0) {
                     if (p>0 && s.charAt(p-1) != '#') {
-                       return p-1; 
+                       return p-1;
                     }
                 }
             }
         }
-        
+
         return -1;
     }
 
@@ -614,7 +676,7 @@ Given an integer array nums sorted in non-decreasing order, return an array of t
     Input: nums = [-7,-3,2,3,11]
 
     Output: [4,9,9,49,121]
- 
+
 .. topic:: Constraints
 
     1 <= nums.length <= 104
@@ -622,7 +684,7 @@ Given an integer array nums sorted in non-decreasing order, return an array of t
     -104 <= nums[i] <= 104
 
     nums is sorted in non-decreasing order.
-     
+
 
 Follow up: Squaring each element and sorting the new array is very trivial, could you find an O(n) solution using a different approach?
 
@@ -635,10 +697,10 @@ Follow up: Squaring each element and sorting the new array is very trivial, coul
         for (int i=0; i<nums.length; i++){
             nums[i] = nums[i]*nums[i];
         }
-        
+
         int i=0;
         int j=nums.length-1;
-        
+
         int k=nums.length-1;
         while (k>=0 && i<=j) {
             if (nums[i] >= nums[j]) {
@@ -650,7 +712,7 @@ Follow up: Squaring each element and sorting the new array is very trivial, coul
             }
             k--;
         }
-        
+
         return rst;
     }
 
@@ -691,22 +753,22 @@ Given an array of integers arr and an integer k. Find the least number of unique
     public int findLeastNumOfUniqueInts(int[] arr, int k) {
         HashMap<Integer, Integer> counts = new HashMap<>();
         Integer[] nums = new Integer[arr.length];
-        
+
         int j = 0;
         for (int i : arr) {
             nums[j] = i;
             j++;
             counts.put(i, counts.getOrDefault(i, 0)+1);
         }
-        
+
         Arrays.sort(nums, new Comparator<Integer>() {
             public int compare(Integer a, Integer b) {
                 int c1 = counts.get(a);
                 int c2 = counts.get(b);
                 return (c1 != c2) ? (c1 - c2) : (a - b);
             }
-        });  
-        
+        });
+
         for (int i=0; i<k; i++) {
             counts.put(nums[i], counts.get(nums[i])-1);
             if (counts.get(nums[i]) == 0) {
@@ -741,7 +803,7 @@ Return the minimum difference between the largest and smallest value of nums aft
 
     Output: 1
 
-    Explanation: Change the array [1,5,0,10,14] to [1,1,0,1,1]. 
+    Explanation: Change the array [1,5,0,10,14] to [1,1,0,1,1].
 
     The difference between the maximum and minimum is 1-0 = 1.
 
@@ -771,7 +833,7 @@ Return the minimum difference between the largest and smallest value of nums aft
         }
         Arrays.sort(nums);
         int n = nums.length;
-        
+
         // Remove 0, 1, 2
         int rst = nums[n-1] - nums[3];
         // Remove 0, 1, -1
@@ -780,7 +842,7 @@ Return the minimum difference between the largest and smallest value of nums aft
         rst = Math.min(nums[n-3] - nums[1], rst);
         // Remove -1, -2, -3
         rst = Math.min(nums[n-4] - nums[0], rst);
-        
+
         return rst;
     }
 
@@ -818,7 +880,7 @@ Given an integer n, return any array containing n unique integers such that they
 
     public int[] sumZero(int n) {
         int[] rst = new int[n];
-        
+
         if (n%2 == 1) {
             for (int i = 1; i<=n; i++) {
                 if (i%2 == 0) {
@@ -836,10 +898,10 @@ Given an integer n, return any array containing n unique integers such that they
                 }
             }
         }
-        
+
         return rst;
     }
-    
+
 -------------------
 54. Spiral Matrix
 -------------------
@@ -877,18 +939,18 @@ Given an m x n matrix, return all elements of the matrix in spiral order.
             UP,
             DOWN
         }
-        
+
         public List<Integer> spiralOrder(int[][] matrix) {
             List<Integer> rst = new ArrayList<>();
-            
+
             int x = 0;
             int y = 0;
             int count = 0;
-            
+
             rst.add(matrix[0][0]);
             matrix[0][0] = 101;
             Direction direction = Direction.RIGHT;
-            
+
             while (count<4) {
                 int[] next = get(direction, x, y, matrix);
                 int nextValue = next[0];
@@ -903,11 +965,11 @@ Given an m x n matrix, return all elements of the matrix in spiral order.
                     count = 0;
                 }
             }
-            
+
             return rst;
-           
+
         }
-        
+
         private Direction getNextDirection(Direction current) {
             switch(current) {
                 case LEFT:
@@ -919,10 +981,10 @@ Given an m x n matrix, return all elements of the matrix in spiral order.
                 case DOWN:
                     return Direction.LEFT;
             }
-            
+
             return null;
         }
-        
+
         private int getNextY(Direction direction, int y) {
             switch(direction) {
                 case LEFT:
@@ -933,7 +995,7 @@ Given an m x n matrix, return all elements of the matrix in spiral order.
                     return y;
             }
         }
-            
+
         private int getNextX(Direction direction, int x) {
             switch(direction) {
                 case UP:
@@ -944,7 +1006,7 @@ Given an m x n matrix, return all elements of the matrix in spiral order.
                     return x;
             }
         }
-        
+
         private int[] get(Direction direction, int x0, int y0, int[][] matrix) {
             int m = matrix.length;
             int n = matrix[0].length;

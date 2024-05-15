@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Neural Networks &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Regression Analysis" href="regression.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Neural Networks</a><ul>
 <li><a class="reference internal" href="#backpropagation">Backpropagation</a><ul>
 <li><a class="reference internal" href="#backpropagation-through-time-bptt">Backpropagation through time (BPTT)</a></li>
@@ -64,12 +63,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hoare_logic.html"
-                        title="previous chapter">Hoare Logic</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="regression.html"
-                        title="next chapter">Regression Analysis</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hoare_logic.html"
+                          title="previous chapter">Hoare Logic</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="regression.html"
+                          title="next chapter">Regression Analysis</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -77,7 +81,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -85,8 +89,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -96,17 +100,17 @@
           <div class="body" role="main">
             
   <section id="neural-networks">
-<h1>Neural Networks<a class="headerlink" href="#neural-networks" title="Permalink to this headline">¶</a></h1>
+<h1>Neural Networks<a class="headerlink" href="#neural-networks" title="Link to this heading">¶</a></h1>
 <section id="backpropagation">
-<h2>Backpropagation<a class="headerlink" href="#backpropagation" title="Permalink to this headline">¶</a></h2>
+<h2>Backpropagation<a class="headerlink" href="#backpropagation" title="Link to this heading">¶</a></h2>
 <section id="backpropagation-through-time-bptt">
-<h3>Backpropagation through time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Permalink to this headline">¶</a></h3>
+<h3>Backpropagation through time (BPTT)<a class="headerlink" href="#backpropagation-through-time-bptt" title="Link to this heading">¶</a></h3>
 <p>Reading material: <a class="reference external" href="https://machinelearningmastery.com/gentle-introduction-backpropagation-time/">https://machinelearningmastery.com/gentle-introduction-backpropagation-time/</a></p>
 <p>BPTT is the application of backpropagation training algorithm to recurrent neural network. It works by unrolling all input timesteps. Each timestep has one input timestep, one copy of the network and one output. Errors are calculated for each timestep and accumulated to the end. The network is rolled back up and the weights are updated.</p>
 <p>BPTT is computationally expensive when the number of timesteps is large. It also suffers from the weight vanish/explode problem.</p>
 </section>
 <section id="truncated-backpropagation-through-time-tbptt">
-<h3>Truncated backpropagation through time (TBPTT)<a class="headerlink" href="#truncated-backpropagation-through-time-tbptt" title="Permalink to this headline">¶</a></h3>
+<h3>Truncated backpropagation through time (TBPTT)<a class="headerlink" href="#truncated-backpropagation-through-time-tbptt" title="Link to this heading">¶</a></h3>
 <p>TBPTT is a modified version of BPTT to solve the problems mentioned above. It is a more practical method.</p>
 <p>TBPTT processes the sequence one timestep at a time. At every k1 timesteps, it runs BPTT for k2 timesteps (parameter updates). The hidden states have been exposed to many timesteps. so may contain useful information about the far past.</p>
 <p>We can summarize the algorithm as follows:</p>
@@ -124,7 +128,7 @@
 </section>
 </section>
 <section id="neuroevolution">
-<h2>Neuroevolution<a class="headerlink" href="#neuroevolution" title="Permalink to this headline">¶</a></h2>
+<h2>Neuroevolution<a class="headerlink" href="#neuroevolution" title="Link to this heading">¶</a></h2>
 <p>Reading material: <a class="reference external" href="http://www.scholarpedia.org/article/Neuroevolution">http://www.scholarpedia.org/article/Neuroevolution</a></p>
 <p>Neuroevolution is a biological-inspired method for creating artificial intelligence. It is motivated by the evolution of biological nervous systems. It can be seen as means to investigate how intelligence evolved in nature, and as a practical method for engineering artificial neural networks.</p>
 <p>Neuroevolution has the following advantages:</p>
@@ -147,7 +151,7 @@
 <li><p>artificial life</p></li>
 </ul>
 <section id="algorithm">
-<h3>Algorithm<a class="headerlink" href="#algorithm" title="Permalink to this headline">¶</a></h3>
+<h3>Algorithm<a class="headerlink" href="#algorithm" title="Link to this heading">¶</a></h3>
 <p>Goal: evolve a population of genetic encoding of neural networks in order to find a network that solves the given task.</p>
 <p>The generate-and-test loop:</p>
 <ol class="arabic">
@@ -165,7 +169,7 @@
 </ol>
 </section>
 <section id="advanced-neuroevolution">
-<h3>Advanced Neuroevolution<a class="headerlink" href="#advanced-neuroevolution" title="Permalink to this headline">¶</a></h3>
+<h3>Advanced Neuroevolution<a class="headerlink" href="#advanced-neuroevolution" title="Link to this heading">¶</a></h3>
 <p>There are some problems with the basic neuroevolution implementation:</p>
 <ul class="simple">
 <li><p>the population converges and loses diversity</p></li>
@@ -197,7 +201,7 @@
 </section>
 </section>
 <section id="self-organizing-map">
-<h2>Self-Organizing Map<a class="headerlink" href="#self-organizing-map" title="Permalink to this headline">¶</a></h2>
+<h2>Self-Organizing Map<a class="headerlink" href="#self-organizing-map" title="Link to this heading">¶</a></h2>
 <p>Reading materials:</p>
 <blockquote>
 <div><ul class="simple">
@@ -232,7 +236,7 @@
 <li><p>The time for preparing model is slow, hard to train against slowly evolving data.</p></li>
 </ul>
 <section id="learning-vector-quantization-lvq">
-<h3>Learning Vector Quantization (LVQ)<a class="headerlink" href="#learning-vector-quantization-lvq" title="Permalink to this headline">¶</a></h3>
+<h3>Learning Vector Quantization (LVQ)<a class="headerlink" href="#learning-vector-quantization-lvq" title="Link to this heading">¶</a></h3>
 <p>Reading materials:</p>
 <blockquote>
 <div><ul class="simple">
@@ -249,7 +253,7 @@
 </div></blockquote>
 </section>
 <section id="lvq-algorithm">
-<h3>LVQ Algorithm<a class="headerlink" href="#lvq-algorithm" title="Permalink to this headline">¶</a></h3>
+<h3>LVQ Algorithm<a class="headerlink" href="#lvq-algorithm" title="Link to this heading">¶</a></h3>
 <ol class="arabic">
 <li><p>Initialize reference vectors</p>
 <blockquote>
@@ -273,19 +277,19 @@
 </ol>
 </section>
 <section id="modifications">
-<h3>Modifications<a class="headerlink" href="#modifications" title="Permalink to this headline">¶</a></h3>
+<h3>Modifications<a class="headerlink" href="#modifications" title="Link to this heading">¶</a></h3>
 <p><strong>LVQ2</strong>. Only make correction when input falls in wrong side of the boundary. This algorithm will give a finer tuning of the boundary.</p>
 <p><strong>LVQ3</strong> Make correction whenever input falls within a window. This algorithm is smoother and faster.</p>
 </section>
 </section>
 <section id="computational-neuroscience">
-<h2>Computational Neuroscience<a class="headerlink" href="#computational-neuroscience" title="Permalink to this headline">¶</a></h2>
+<h2>Computational Neuroscience<a class="headerlink" href="#computational-neuroscience" title="Link to this heading">¶</a></h2>
 <p>Reading material: <a class="reference external" href="http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf">http://nn.cs.utexas.edu/downloads/papers/miikkulainen.iconip98.pdf</a></p>
 <p>This paper summarizes work to date on an artificial neural network model, RF-LISSOM (Receptive-Field Laterally Interconnected Syn- ergetically Self-Organizing Map), that shows how the neurons’ receptive fields, 2-D columnar organization, and lateral connectivity can be learned from the input based on Hebbian self-organization. These same mechanisms explain how the cortex can remain plastic and adapt to changes in input and to internal lesions. The model suggests that the resulting organization is formed to represent and process visual input efficiently, forming a redundancy-reduced sparse coding of the visual input. The self-organized model can then be used to model various low-level visual phenomena, including tilt aftereffects and segmentation and binding.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Hebbian Learning</p>
 <p>Hebbian learning is one of the oldest learning algorithms, and is based in large part on the dynamics of biological systems. A synapse between two neurons is strengthened when the neurons on either side of the synapse (input and output) have highly correlated outputs. In essence, when an input neuron fires, if it frequently leads to the firing of the output neuron, the synapse is strengthened. Following the analogy to an artificial system, the tap weight is increased with high correlation between two sequential neurons.</p>
-</div>
+</aside>
 <p>Roles of computational model:</p>
 <ul class="simple">
 <li><p>test hypotheses and make predictions</p></li>
@@ -305,7 +309,7 @@
 <li><p>Visual coding</p></li>
 </ul>
 <section id="visual-coding">
-<h3>Visual coding<a class="headerlink" href="#visual-coding" title="Permalink to this headline">¶</a></h3>
+<h3>Visual coding<a class="headerlink" href="#visual-coding" title="Link to this heading">¶</a></h3>
 <p>The goal of visual coding is to represent the important features of the input and represent more information within a limited system</p>
 </section>
 </section>
@@ -336,8 +340,8 @@
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

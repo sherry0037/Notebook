@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Hoare Logic &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -38,8 +36,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Hoare Logic</a><ul>
 <li><a class="reference internal" href="#program-specification">Program Specification</a></li>
 <li><a class="reference internal" href="#hoare-logic-syntax-and-semantics">Hoare Logic - Syntax and Semantics</a></li>
@@ -51,12 +50,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hmm.html"
-                        title="previous chapter">Hidden Markov Models</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="neural_networks.html"
-                        title="next chapter">Neural Networks</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hmm.html"
+                          title="previous chapter">Hidden Markov Models</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="neural_networks.html"
+                          title="next chapter">Neural Networks</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -64,7 +68,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -72,8 +76,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -83,19 +87,14 @@
           <div class="body" role="main">
             
   <section id="hoare-logic">
-<span id="hoare-rst"></span><h1>Hoare Logic<a class="headerlink" href="#hoare-logic" title="Permalink to this headline">¶</a></h1>
+<span id="hoare-rst"></span><h1>Hoare Logic<a class="headerlink" href="#hoare-logic" title="Link to this heading">¶</a></h1>
 <p>A summary of the lecture notes of <a class="reference external" href="http://www.cs.utexas.edu/~isil/cs389L/">CS389L</a>.-Automated Logical Reasoning and <a class="reference external" href="https://d1b10bmlvqabco.cloudfront.net/attach/jr59i2jepb42au/hwwp1awd4r52zc/jud9gj29h04g/HoareLogicNotes.pdf">notes</a>.</p>
 <section id="program-specification">
-<h2>Program Specification<a class="headerlink" href="#program-specification" title="Permalink to this headline">¶</a></h2>
+<h2>Program Specification<a class="headerlink" href="#program-specification" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Syntax and Semantics</p></li>
 </ul>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 18%" />
-<col style="width: 66%" />
-<col style="width: 16%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"></th>
 <th class="head"><p>Syntax</p></th>
@@ -160,10 +159,10 @@
 </ul>
 </section>
 <section id="hoare-logic-syntax-and-semantics">
-<h2>Hoare Logic - Syntax and Semantics<a class="headerlink" href="#hoare-logic-syntax-and-semantics" title="Permalink to this headline">¶</a></h2>
+<h2>Hoare Logic - Syntax and Semantics<a class="headerlink" href="#hoare-logic-syntax-and-semantics" title="Link to this heading">¶</a></h2>
 </section>
 <section id="axioms-and-rules">
-<h2>Axioms and Rules<a class="headerlink" href="#axioms-and-rules" title="Permalink to this headline">¶</a></h2>
+<h2>Axioms and Rules<a class="headerlink" href="#axioms-and-rules" title="Link to this heading">¶</a></h2>
 <ul>
 <li><p>Assignment</p>
 <blockquote>
@@ -203,13 +202,13 @@
 \[\frac{\vdash \{P \land C\} S \{P\} } {\vdash \{P\} \text{while C do S} \{P \land \lnot C\} }\]</div>
 </section>
 <section id="soundness-and-completeness">
-<h2>Soundness and Completeness<a class="headerlink" href="#soundness-and-completeness" title="Permalink to this headline">¶</a></h2>
+<h2>Soundness and Completeness<a class="headerlink" href="#soundness-and-completeness" title="Link to this heading">¶</a></h2>
 </section>
 <section id="automated-reasoning">
-<h2>Automated Reasoning<a class="headerlink" href="#automated-reasoning" title="Permalink to this headline">¶</a></h2>
+<h2>Automated Reasoning<a class="headerlink" href="#automated-reasoning" title="Link to this heading">¶</a></h2>
 </section>
 <section id="abstract-interpretation">
-<h2>Abstract Interpretation<a class="headerlink" href="#abstract-interpretation" title="Permalink to this headline">¶</a></h2>
+<h2>Abstract Interpretation<a class="headerlink" href="#abstract-interpretation" title="Link to this heading">¶</a></h2>
 </section>
 </section>
 
@@ -238,8 +237,8 @@
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

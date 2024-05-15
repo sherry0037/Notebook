@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Interview &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Linked List" href="linked_list.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Interview</a><ul>
 <li><a class="reference internal" href="#google">11/29/2021 - Google</a><ul>
 <li><a class="reference internal" href="#transaddition">1. TransAddition</a></li>
@@ -59,12 +58,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hash.html"
-                        title="previous chapter">Hash</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="linked_list.html"
-                        title="next chapter">Linked List</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="hash.html"
+                          title="previous chapter">Hash</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="linked_list.html"
+                          title="next chapter">Linked List</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -72,7 +76,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -80,8 +84,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -91,144 +95,144 @@
           <div class="body" role="main">
             
   <section id="interview">
-<h1>Interview<a class="headerlink" href="#interview" title="Permalink to this headline">¶</a></h1>
+<h1>Interview<a class="headerlink" href="#interview" title="Link to this heading">¶</a></h1>
 <section id="google">
-<h2>11/29/2021 - Google<a class="headerlink" href="#google" title="Permalink to this headline">¶</a></h2>
+<h2>11/29/2021 - Google<a class="headerlink" href="#google" title="Link to this heading">¶</a></h2>
 <section id="transaddition">
-<h3>1. TransAddition<a class="headerlink" href="#transaddition" title="Permalink to this headline">¶</a></h3>
+<h3>1. TransAddition<a class="headerlink" href="#transaddition" title="Link to this heading">¶</a></h3>
 <p>A word A is a trans-addition of another word B if by adding 1 letter and mutate the letters in B we can get A. Write a function f which takes two words and determines if the second word is a trans-addition of the first word.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Examples</p>
 <p>f(“ACT”, “TACK”) -&gt; true</p>
 <p>f(“ACT”, “TACT”) -&gt; true</p>
 <p>f(“ACT”, “CART”) -&gt; true</p>
 <p>f(“TACK”, “ACT”) -&gt; false</p>
 <p>f(“ACE”, “TACK”) -&gt; false</p>
-</div>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">transAddition</span><span class="p">(</span><span class="n">String</span> <span class="n">word1</span><span class="p">,</span> <span class="n">String</span> <span class="n">word2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">-</span> <span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-    <span class="p">}</span>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">transAddition</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word1</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word1</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kt">boolean</span> <span class="n">notInSet</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">boolean</span><span class="w"> </span><span class="n">notInSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
 
-    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span> <span class="p">{</span>
-            <span class="c1">// K</span>
-            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">notInSet</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">notInSet</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-            <span class="p">}</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">.</span><span class="na">chatAt</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// K</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">notInSet</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">notInSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
 
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Follow up 1: Given two lists of words, return a list of words from the second list such that the words are trans-addition of the first list.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>f([“ACT”, “SET”, “FOO”], [“TACK”, “TEST”, “BAR”]) -&gt; [“TEST”, “TACK”]</p>
-</div>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">transAdditionList</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words1</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-
-<span class="p">}</span>
-
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span> <span class="n">Boolean</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="c1">// word2, isAddedInResult</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span> <span class="kc">false</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
-                <span class="k">continue</span><span class="p">;</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span> <span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-                <span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
-
-    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 
 <span class="p">}</span>
 
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">transAdditionList3</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words1</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Find all the trans-addition of the first list by adding all of the alphabet</span>
-    <span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">set</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word1</span> <span class="p">:</span> <span class="n">words1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">Character</span> <span class="n">a</span> <span class="p">:</span> <span class="n">ALPHABET</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">String</span> <span class="n">newWord</span> <span class="o">=</span> <span class="n">word1</span> <span class="o">+</span> <span class="n">a</span><span class="p">;</span>
-            <span class="n">newWord</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
-            <span class="n">word1Set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newWord</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">transAdditionList2</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words1</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Boolean</span><span class="o">&gt;</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// word2, isAddedInResult</span>
 
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">word2</span> <span class="p">:</span> <span class="n">words2</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">word2</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span> <span class="p">{</span>
-            <span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">map</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 
-    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">transAddition</span><span class="p">(</span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">map</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">word2</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">                </span><span class="n">set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">set</span><span class="p">);</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+
+<span class="p">}</span>
+
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">transAdditionList3</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words1</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Find all the trans-addition of the first list by adding all of the alphabet</span>
+<span class="w">    </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word1</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Character</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">ALPHABET</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">newWord</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
+<span class="w">            </span><span class="n">newWord</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+<span class="w">            </span><span class="n">word1Set</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newWord</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">words2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">word2</span><span class="p">.</span><span class="na">sort</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">set</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">word2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Follow up 2: Write a function to return the maximum length of trans-addition chain in a list.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>f([“A”, “AT” “ACT”, “TACK”, “CART”, “GOOGLE”]) -&gt; [“TACK”, “CART”]</p>
-</div>
+</aside>
 </section>
 <section id="shortest-path">
-<h3>2. Shortest Path<a class="headerlink" href="#shortest-path" title="Permalink to this headline">¶</a></h3>
+<h3>2. Shortest Path<a class="headerlink" href="#shortest-path" title="Link to this heading">¶</a></h3>
 <p>Given N locations (named 0, 1, … N-1) and a set of connections, find the length of the shortest path from the starting point S to the end point E.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>N = 10
 connections = {(0, 1), (1, 2), (3, 4), (5,9), (7, 8)}
 S = 0
 E = 8</p>
-</div>
+</aside>
 <p><strong>Approach</strong>: Generate a hash map with key being a location and value being a list of locations the key is connected to. Then do a BFS traversal (use queue to implement) to find the length from S to E.</p>
 </section>
 <section id="maze">
-<h3>3. Maze<a class="headerlink" href="#maze" title="Permalink to this headline">¶</a></h3>
+<h3>3. Maze<a class="headerlink" href="#maze" title="Link to this heading">¶</a></h3>
 <p>Write a program that takes a map of a maze as input, and outputs the length of the longest path from the top to the bottom.</p>
 <p>Conditions and constraints:</p>
 <blockquote>
@@ -248,96 +252,96 @@ E = 8</p>
 </ul>
 </div></blockquote>
 <p>result: 9</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span>public int getLongestPath(int[][] maze) {
-  // 1 = wall
-  // 0 = cell
-  int n = maze.size; // number of rows
-  int m = maze[0].size; // number of columns
-  int[] firstRow = maze[0];
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getLongestPath</span><span class="p">(</span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">maze</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// 1 = wall</span>
+<span class="w">  </span><span class="c1">// 0 = cell</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of rows</span>
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of columns</span>
+<span class="w">  </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">firstRow</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
 
-  int rst = Integer.MIN_VALUE;
+<span class="w">  </span><span class="kt">int</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">MIN_VALUE</span><span class="p">;</span>
 
-  for (int y : firstRow) {
-      if (maze[0][y] == 0) {
-          int[][] visited = new int[n][m];
-          int[][] lengths = new int[n][m];
-          int length = DFS(maze, visited, 0, i, lengths);
-          rst = Math.max(length, rst);
-      }
-  }
+<span class="w">  </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">firstRow</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">][</span><span class="n">y</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">visited</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">m</span><span class="o">]</span><span class="p">;</span>
+<span class="w">          </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">lengths</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">n</span><span class="o">][</span><span class="n">m</span><span class="o">]</span><span class="p">;</span>
+<span class="w">          </span><span class="kt">int</span><span class="w"> </span><span class="n">length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">DFS</span><span class="p">(</span><span class="n">maze</span><span class="p">,</span><span class="w"> </span><span class="n">visited</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">lengths</span><span class="p">);</span>
+<span class="w">          </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">max</span><span class="p">(</span><span class="n">length</span><span class="p">,</span><span class="w"> </span><span class="n">rst</span><span class="p">);</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 
-  return rst;
-}
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
 
-private int DFS(int[][] maze, int[][] visited, int sx, int sy, int[][] lengths) {
-    int n = maze.size; // number of rows
-    int m = maze[0].size; // number of columns
-    Stack&lt;List&lt;Integer&gt;&gt; stack = new Stack&lt;&gt;()&#39;
-    ArrayList&lt;Integer&gt; first = new ArrayList&lt;&gt;();
-    first.add(sx);
-    first.add(sy);
+<span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">DFS</span><span class="p">(</span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">maze</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">visited</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sx</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">sy</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">lengths</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of rows</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of columns</span>
+<span class="w">    </span><span class="n">Stack</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">stack</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Stack</span><span class="o">&lt;&gt;</span><span class="p">()</span><span class="err">&#39;</span>
+<span class="w">    </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">first</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sx</span><span class="p">);</span>
+<span class="w">    </span><span class="n">first</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sy</span><span class="p">);</span>
 
-    stack.add(first);
+<span class="w">    </span><span class="n">stack</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">first</span><span class="p">);</span>
 
-    while(!stack.isEmpty()) {
-          ArrayList&lt;Integer&gt; current = stack.pop();
-          visited[current.get(0)][current.get(1)] = 1;
+<span class="w">    </span><span class="k">while</span><span class="p">(</span><span class="o">!</span><span class="n">stack</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">          </span><span class="n">visited</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
 
-          List&lt;List&lt;Integer&gt;&gt; nextSteps = getNextStep(current, maze);
+<span class="w">          </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">nextSteps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getNextStep</span><span class="p">(</span><span class="n">current</span><span class="p">,</span><span class="w"> </span><span class="n">maze</span><span class="p">);</span>
 
-          if (nextSteps.length() == 0) {
-               if (current.get(1) == n) {
-                    return lengths[current.get(0)][current.get(1)];
-               } else {
-                    continue;
-               }
-          }
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">nextSteps</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">               </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">lengths</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="p">;</span>
+<span class="w">               </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">               </span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
 
-          for (List&lt;Integer&gt; point : nextSteps) {
-              stack.add(point);
-              lengths[point.get(0)][point.get(1)] = lengths[current.get(0)][current.get(1)] + 1;
-          }
-    }
+<span class="w">          </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">nextSteps</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="n">stack</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">point</span><span class="p">);</span>
+<span class="w">              </span><span class="n">lengths</span><span class="o">[</span><span class="n">point</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">][</span><span class="n">point</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">lengths</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return -1;
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
 
-private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; current, int[][] maze) {
-    int n = maze.size; // number of rows
-    int m = maze[0].size; // number of columns
-    List&lt;List&lt;Integer&gt;&gt; rst = new ArrayList&lt;&gt;();
-    // left
-    if ((current.get(0) - 1) &gt;=0 &amp;&amp; (current.get(0) - 1)&lt;n &amp;&amp; maze[current.get(0) - 1][current.get(1)]) {
-        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
-        rst.add(current.get(0) - 1);
-        rst.add(current.get(1));
-    }
+<span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">getNextStep</span><span class="p">(</span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">current</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="o">[][]</span><span class="w"> </span><span class="n">maze</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of rows</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">.</span><span class="na">size</span><span class="p">;</span><span class="w"> </span><span class="c1">// number of columns</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="c1">// left</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="n">n</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // right
-    if ((current.get(0) + 1) &gt;=0 &amp;&amp; (current.get(0) + 1)&lt;n &amp;&amp; maze[current.get(0) + 1][current.get(1)]) {
-        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
-        rst.add(current.get(0) + 1);
-        rst.add(current.get(1));
-    }
+<span class="w">    </span><span class="c1">// right</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="n">n</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-    // down
-    if ((current.get(1) + 1) &gt;=0 &amp;&amp; (current.get(1) + 1)&lt;m &amp;&amp; maze[current.get(0)][current.get(1) + 1]) {
-        List&lt;Integer&gt; point = new ArrayList&lt;&gt;();
-        rst.add(current.get(0));
-        rst.add(current.get(1) + 1);
-    }
+<span class="w">    </span><span class="c1">// down</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">((</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">&gt;=</span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="o">&lt;</span><span class="n">m</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">maze</span><span class="o">[</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">][</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="o">]</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">point</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">));</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    return rst;
-}
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 <p>time complexity: O(mn)</p>
 <p>space:           O(mn)</p>
 </section>
 <section id="gliding-keyboard">
-<h3>4. Gliding keyboard<a class="headerlink" href="#gliding-keyboard" title="Permalink to this headline">¶</a></h3>
+<h3>4. Gliding keyboard<a class="headerlink" href="#gliding-keyboard" title="Link to this heading">¶</a></h3>
 <p>For phone keyboard, there is a gliding feature that user can start with one letter and without lifting the finger, finishing typing the whole word. Write a function that given a user input string and a dictionary, output all the possible words the user wants to type.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>Dictionary:</p>
 <p>‘apple’</p>
@@ -346,175 +350,175 @@ private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; cur
 <p>‘app’</p>
 <p>‘ale’</p>
 <p>input = “sewertyuiopoiuytre”, output = “swipe”.</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>input = “apccccple” -&gt; ‘apple’, ‘ale’</p>
-</div>
+</aside>
 <p>Assumption: start of the input will be the start of the word, end will be the end</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Class</span> <span class="nf">WordNode</span><span class="p">()</span> <span class="p">{</span>
-  <span class="n">Character</span> <span class="n">value</span><span class="p">;</span>
-  <span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span> <span class="n">nexts</span><span class="p">;</span>
-  <span class="n">WordNode</span> <span class="n">previous</span><span class="p">;</span>
-  <span class="kt">boolean</span> <span class="n">isEnd</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="n">Class</span><span class="w"> </span><span class="nf">WordNode</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">Character</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
+<span class="w">  </span><span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">nexts</span><span class="p">;</span>
+<span class="w">  </span><span class="n">WordNode</span><span class="w"> </span><span class="n">previous</span><span class="p">;</span>
+<span class="w">  </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isEnd</span><span class="p">;</span>
 
-  <span class="kd">public</span> <span class="nf">WordNode</span><span class="p">(</span><span class="n">Character</span> <span class="n">c</span><span class="p">){</span>
-      <span class="k">this</span><span class="p">.</span><span class="na">value</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>
-      <span class="k">this</span><span class="p">.</span><span class="na">next</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-      <span class="k">this</span><span class="p">.</span><span class="na">isEnd</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-      <span class="k">this</span><span class="p">.</span><span class="na">previous</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="nf">WordNode</span><span class="p">(</span><span class="n">Character</span><span class="w"> </span><span class="n">c</span><span class="p">){</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">isEnd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">      </span><span class="k">this</span><span class="p">.</span><span class="na">previous</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 
-  <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="p">()</span> <span class="p">{</span>
-      <span class="c1">// return the word as String</span>
-  <span class="p">}</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">toString</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// return the word as String</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="n">input</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">dictionary</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span> <span class="n">wordDict</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dictionary</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">WordNode</span><span class="o">&gt;</span><span class="w"> </span><span class="n">wordDict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-  <span class="c1">// construct the wordDict</span>
+<span class="w">  </span><span class="c1">// construct the wordDict</span>
 
 
-  <span class="c1">// find matching</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">WordNode</span> <span class="n">root</span> <span class="p">:</span> <span class="n">wordDict</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">rst</span> <span class="o">+=</span> <span class="n">findMatchWords</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">input</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">  </span><span class="c1">// find matching</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">WordNode</span><span class="w"> </span><span class="n">root</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">wordDict</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">findMatchWords</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">input</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">findMatchWords</span><span class="p">(</span><span class="n">WordNode</span> <span class="n">root</span><span class="p">,</span> <span class="n">String</span> <span class="n">word</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">//WordNode current = root;</span>
-    <span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
+<span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">findMatchWords</span><span class="p">(</span><span class="n">WordNode</span><span class="w"> </span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">//WordNode current = root;</span>
+<span class="w">    </span><span class="c1">//List&lt;String&gt; rst = new ArrayList&lt;&gt;();</span>
 
-    <span class="c1">//for (int i=0; i&lt;word.length(); i++) {</span>
-    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">())</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="c1">//for (int i=0; i&lt;word.length(); i++) {</span>
+<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">&gt;=</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="n">Character</span> <span class="n">c</span> <span class="o">=</span> <span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">value</span> <span class="o">==</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">isEnd</span> <span class="o">&amp;&amp;</span> <span class="n">i</span><span class="o">==</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// got a match word</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
-            <span class="p">}</span>
+<span class="w">    </span><span class="n">Character</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">&lt;</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">value</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">c</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">isEnd</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">i</span><span class="o">==</span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// got a match word</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">append</span><span class="p">(</span><span class="n">root</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+<span class="w">            </span><span class="p">}</span>
 
-            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
 
-            <span class="c1">//Stack&lt;Pair&lt;WordNode, Integer&gt;&gt; stack = new Stack&lt;&gt;();</span>
-            <span class="c1">//for (WordNode next : current.next) {</span>
-                <span class="c1">// 1. none of the nexts match i</span>
-                <span class="c1">// 2. some of the nexts match i (1, multiple)</span>
-                <span class="c1">//stack.add(new Pair&lt;&gt;(next, i));</span>
-            <span class="c1">//}</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">WordNode</span> <span class="n">next</span> <span class="p">:</span> <span class="n">root</span><span class="p">.</span><span class="na">next</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">// Find matching for current.next, word[i, end];</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">findMatchWords</span><span class="p">(</span><span class="n">next</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="na">subString</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()),</span> <span class="n">rst</span><span class="p">));</span>
-            <span class="p">}</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">i</span><span class="o">++</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="w">            </span><span class="c1">//Stack&lt;Pair&lt;WordNode, Integer&gt;&gt; stack = new Stack&lt;&gt;();</span>
+<span class="w">            </span><span class="c1">//for (WordNode next : current.next) {</span>
+<span class="w">                </span><span class="c1">// 1. none of the nexts match i</span>
+<span class="w">                </span><span class="c1">// 2. some of the nexts match i (1, multiple)</span>
+<span class="w">                </span><span class="c1">//stack.add(new Pair&lt;&gt;(next, i));</span>
+<span class="w">            </span><span class="c1">//}</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">WordNode</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">root</span><span class="p">.</span><span class="na">next</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Find matching for current.next, word[i, end];</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">findMatchWords</span><span class="p">(</span><span class="n">next</span><span class="p">,</span><span class="w"> </span><span class="n">word</span><span class="p">.</span><span class="na">subString</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">()),</span><span class="w"> </span><span class="n">rst</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">i</span><span class="o">++</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 </section>
 <section id="microsoft">
-<h2>01/18/2022 - Microsoft<a class="headerlink" href="#microsoft" title="Permalink to this headline">¶</a></h2>
+<h2>01/18/2022 - Microsoft<a class="headerlink" href="#microsoft" title="Link to this heading">¶</a></h2>
 <section id="print-binary-search-tree">
-<h3>1.1 Print Binary Search Tree<a class="headerlink" href="#print-binary-search-tree" title="Permalink to this headline">¶</a></h3>
+<h3>1.1 Print Binary Search Tree<a class="headerlink" href="#print-binary-search-tree" title="Link to this heading">¶</a></h3>
 <p>Print out the values of a binary search tree in ascending order if the tree is valid. If it is not valid, do not print.</p>
 </section>
 <section id="recover-binary-search-tree-with-2-nodes-swapped">
-<h3>1.2 Recover Binary Search Tree with 2 Nodes Swapped<a class="headerlink" href="#recover-binary-search-tree-with-2-nodes-swapped" title="Permalink to this headline">¶</a></h3>
+<h3>1.2 Recover Binary Search Tree with 2 Nodes Swapped<a class="headerlink" href="#recover-binary-search-tree-with-2-nodes-swapped" title="Link to this heading">¶</a></h3>
 <p>See <a class="reference internal" href="tree.html#recover-binary-search-tree"><span class="std std-ref">question and solutions</span></a>.</p>
 </section>
 <section id="array-of-products">
-<h3>2. Array of Products<a class="headerlink" href="#array-of-products" title="Permalink to this headline">¶</a></h3>
+<h3>2. Array of Products<a class="headerlink" href="#array-of-products" title="Link to this heading">¶</a></h3>
 <p>Given an array A, produce an array B such that each element of B is the product of all the other elements in A except for the element at this index.</p>
 <p>For example, A = [1, 2, 3], then B = [2*3, 1*3, 1*2] = [6, 3, 2].</p>
 <p><strong>Approach</strong>: Create two arrays, one to calculate the product from left, the other one to calculate the product from right, then times them together. To further simplify, use one array to first calculate from left, then calculate in place from right.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This is a debug message&quot;</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;This is a debug message&quot;</span><span class="p">);</span>
 
-        <span class="c1">// A = [1,2,3]</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">A1</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
-        <span class="n">A1</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">A1</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-        <span class="n">A1</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="w">        </span><span class="c1">// A = [1,2,3]</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">A1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">3</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">A1</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">A1</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">;</span>
+<span class="w">        </span><span class="n">A1</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
 
-        <span class="c1">// B = [6, 3, 2]</span>
-        <span class="c1">//int[] B1 = getProduct(A1);</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">B1</span> <span class="o">=</span> <span class="n">getProduct1</span><span class="p">(</span><span class="n">A1</span><span class="p">);</span>
+<span class="w">        </span><span class="c1">// B = [6, 3, 2]</span>
+<span class="w">        </span><span class="c1">//int[] B1 = getProduct(A1);</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">B1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getProduct1</span><span class="p">(</span><span class="n">A1</span><span class="p">);</span>
 
-        <span class="c1">//print(B1);</span>
+<span class="w">        </span><span class="c1">//print(B1);</span>
 
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">A2</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">B2</span> <span class="o">=</span> <span class="n">getProduct1</span><span class="p">(</span><span class="n">A2</span><span class="p">);</span>
-        <span class="n">print</span><span class="p">(</span><span class="n">B2</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">A2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">B2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getProduct1</span><span class="p">(</span><span class="n">A2</span><span class="p">);</span>
+<span class="w">        </span><span class="n">print</span><span class="p">(</span><span class="n">B2</span><span class="p">);</span>
 
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">B1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">B1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">B1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">print</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">B1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">B1</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">print</span><span class="p">(</span><span class="n">B1</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProduct</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arrayA</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrayB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">int</span> <span class="n">product</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">continue</span><span class="p">;</span>
-                <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">getProduct</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arrayA</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arrayB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">product</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">j</span><span class="o">==</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">continue</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
 
-                <span class="n">product</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
-            <span class="p">}</span>
+<span class="w">                </span><span class="n">product</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">arrayA</span><span class="o">[</span><span class="n">j</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 
-            <span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">product</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">arrayB</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">            </span><span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">product</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">arrayB</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">getProduct1</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">arrayA</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">left</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">leftProduct</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">left</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">leftProduct</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
-            <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">leftProduct</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">getProduct1</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arrayA</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">leftProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">left</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">leftProduct</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">leftProduct</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">right</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">rightProduct</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">right</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rightProduct</span> <span class="o">*=</span> <span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
-            <span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">rightProduct</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">rightProduct</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">right</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">-</span><span class="mi">2</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rightProduct</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="n">arrayA</span><span class="o">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">]</span><span class="p">;</span>
+<span class="w">            </span><span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rightProduct</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">arrayB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">*</span> <span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">arrayB</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">arrayA</span><span class="p">.</span><span class="na">length</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">arrayB</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">left</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">right</span><span class="o">[</span><span class="n">i</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">arrayB</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">arrayB</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="compress-and-uncompress">
-<h3>3. Compress and Uncompress<a class="headerlink" href="#compress-and-uncompress" title="Permalink to this headline">¶</a></h3>
+<h3>3. Compress and Uncompress<a class="headerlink" href="#compress-and-uncompress" title="Link to this heading">¶</a></h3>
 <p>Write a compress and an uncompress algorithms as follows:</p>
 <p>input: aaaabbddddddcc</p>
 <p>compressed: a4b2d6c2</p>
@@ -523,125 +527,125 @@ private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; cur
 <li><p>There are only characters in the input string.</p></li>
 <li><p>Case-sensitive.</p></li>
 </ol>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="p">(</span><span class="n">String</span> <span class="o">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
-        <span class="c1">// System.out.println(&quot;This is a debug message&quot;);</span>
-        <span class="n">String</span> <span class="n">test1</span> <span class="o">=</span> <span class="s">&quot;aaabbccccdeeeaA&quot;</span><span class="p">;</span>
-        <span class="n">String</span> <span class="n">rst1</span> <span class="o">=</span> <span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">);</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rst1</span><span class="p">);</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">main</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="o">[]</span><span class="w"> </span><span class="n">args</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// you can write to stdout for debugging purposes, e.g.</span>
+<span class="w">        </span><span class="c1">// System.out.println(&quot;This is a debug message&quot;);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;aaabbccccdeeeaA&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">rst1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">rst1</span><span class="p">);</span>
 
-        <span class="n">String</span> <span class="n">test2</span> <span class="o">=</span> <span class="s">&quot;aaabbccccdeeeaAAAAA&quot;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;aaabbccccdeeeaAAAAA&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
 
-        <span class="n">String</span> <span class="n">test3</span> <span class="o">=</span> <span class="s">&quot;aaaa&quot;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;aaaa&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
 
-        <span class="n">String</span> <span class="n">test4</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
 
-        <span class="n">String</span> <span class="n">test5</span> <span class="o">=</span> <span class="s">&quot;a3b2c4d1e3a1A5&quot;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test5</span><span class="p">));</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;a3b2c4d1e3a1A5&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test5</span><span class="p">));</span>
 
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test1</span><span class="p">));</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test1</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test1</span><span class="p">));</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test2</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test2</span><span class="p">));</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test3</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test3</span><span class="p">));</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">compress</span><span class="p">(</span><span class="n">test4</span><span class="p">)).</span><span class="na">equals</span><span class="p">(</span><span class="n">test4</span><span class="p">));</span>
 
-        <span class="n">String</span> <span class="n">test6</span> <span class="o">=</span> <span class="s">&quot;aabbcc&quot;</span><span class="p">;</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test6</span><span class="p">));</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">test6</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;aabbcc&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="n">unCompress</span><span class="p">(</span><span class="n">test6</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">compress</span><span class="p">(</span><span class="n">String</span> <span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">s1</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">compress</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="n">Character</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="kt">int</span> <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Character</span><span class="w"> </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// if (digits.contains(s1.charAt(i))) {</span>
-            <span class="c1">//      return s1;</span>
-            <span class="c1">// }</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">==</span> <span class="n">prev</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">count</span><span class="o">++</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
-                <span class="n">rst</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// if (digits.contains(s1.charAt(i))) {</span>
+<span class="w">            </span><span class="c1">//      return s1;</span>
+<span class="w">            </span><span class="c1">// }</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">prev</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">count</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
+<span class="w">                </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
 
-                <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-                <span class="n">count</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">                </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">                </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
-        <span class="n">rst</span> <span class="o">+=</span> <span class="n">count</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
+<span class="w">        </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">count</span><span class="p">;</span>
 
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kd">static</span> <span class="n">String</span> <span class="nf">unCompress</span><span class="p">(</span><span class="n">String</span> <span class="n">s1</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="n">s1</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">unCompress</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-        <span class="kt">char</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">digits</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;2&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;6&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;8&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;9&#39;</span><span class="p">);</span>
-        <span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">char</span><span class="w"> </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">digits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashSet</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;1&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;2&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;3&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;4&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;5&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;6&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;7&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;8&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;9&#39;</span><span class="p">);</span>
+<span class="w">        </span><span class="n">digits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">);</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">Character</span> <span class="n">current</span> <span class="o">=</span> <span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">current</span><span class="p">))</span> <span class="p">{</span>
-                <span class="n">count</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
-                <span class="p">}</span>
-                <span class="n">prev</span> <span class="o">=</span> <span class="n">current</span><span class="p">;</span>
-                <span class="n">count</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">s1</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">Character</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s1</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">digits</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">current</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">count</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current</span><span class="p">;</span>
+<span class="w">                </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">rst</span> <span class="o">+=</span> <span class="n">prev</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCount</span><span class="p">(</span><span class="n">count</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">&lt;</span><span class="n">n</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">prev</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kd">static</span> <span class="kt">int</span> <span class="nf">getCount</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">count</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// [1, 2, 3] -&gt; 123</span>
-        <span class="kt">int</span> <span class="n">rst</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="kt">int</span> <span class="n">multiplier</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">count</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span><span class="o">&gt;=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">int</span> <span class="n">k</span> <span class="o">=</span> <span class="n">Character</span><span class="p">.</span><span class="na">getNumericValue</span><span class="p">(</span><span class="n">count</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
-            <span class="n">rst</span> <span class="o">+=</span> <span class="n">multiplier</span> <span class="o">*</span> <span class="n">k</span><span class="p">;</span>
-            <span class="n">multiplier</span> <span class="o">*=</span> <span class="mi">10</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="nf">getCount</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">count</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// [1, 2, 3] -&gt; 123</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">        </span><span class="kt">int</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">count</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&gt;=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">--</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Character</span><span class="p">.</span><span class="na">getNumericValue</span><span class="p">(</span><span class="n">count</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">            </span><span class="n">rst</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">multiplier</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">k</span><span class="p">;</span>
+<span class="w">            </span><span class="n">multiplier</span><span class="w"> </span><span class="o">*=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="stock-transaction">
-<h3>4. Stock Transaction<a class="headerlink" href="#stock-transaction" title="Permalink to this headline">¶</a></h3>
+<h3>4. Stock Transaction<a class="headerlink" href="#stock-transaction" title="Link to this heading">¶</a></h3>
 <p>Similar to Leetcode 188: <a class="reference external" href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/">https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/</a> where k=4 and prices.length = 10.</p>
 </section>
 </section>
@@ -672,8 +676,8 @@ private List&lt;List&lt;Integer&gt;&gt; getNextStep(ArrayList&lt;Integer&gt; cur
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

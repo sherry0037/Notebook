@@ -1,23 +1,21 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Other &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Sliding Windows" href="sliding_windows.html" />
-    <link rel="prev" title="Hash" href="hash.html" /> 
+    <link rel="prev" title="Linked List" href="linked_list.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -29,7 +27,7 @@
           <a href="sliding_windows.html" title="Sliding Windows"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="hash.html" title="Hash"
+          <a href="linked_list.html" title="Linked List"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Other</a></li> 
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Other</a><ul>
 <li><a class="reference internal" href="#robot-bounded-in-circle">1041. Robot Bounded In Circle</a></li>
 <li><a class="reference internal" href="#angle-between-hands-of-a-clock">1344. Angle Between Hands of a Clock</a></li>
@@ -47,12 +46,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="hash.html"
-                        title="previous chapter">Hash</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="sliding_windows.html"
-                        title="next chapter">Sliding Windows</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="linked_list.html"
+                          title="previous chapter">Linked List</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="sliding_windows.html"
+                          title="next chapter">Sliding Windows</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -60,7 +64,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -68,8 +72,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -79,8 +83,8 @@
           <div class="body" role="main">
             
   <section id="other">
-<h1><a class="toc-backref" href="#id1">Other</a><a class="headerlink" href="#other" title="Permalink to this headline">¶</a></h1>
-<div class="contents topic" id="contents">
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Other</a><a class="headerlink" href="#other" title="Link to this heading">¶</a></h1>
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#other" id="id1">Other</a></p>
@@ -91,264 +95,264 @@
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <section id="robot-bounded-in-circle">
-<h2><a class="toc-backref" href="#id2">1041. Robot Bounded In Circle</a><a class="headerlink" href="#robot-bounded-in-circle" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">1041. Robot Bounded In Circle</a><a class="headerlink" href="#robot-bounded-in-circle" title="Link to this heading">¶</a></h2>
 <p>On an infinite plane, a robot initially stands at (0, 0) and faces north. The robot can receive one of three instructions:</p>
 <p>“G”: go straight 1 unit;</p>
 <p>“L”: turn 90 degrees to the left;</p>
 <p>“R”: turn 90 degrees to the right.</p>
 <p>The robot performs the instructions given in order, and repeats them forever.</p>
 <p>Return true if and only if there exists a circle in the plane such that the robot never leaves the circle.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example 1</p>
 <p>Input: instructions = “GGLLGG”</p>
 <p>Output: true</p>
 <p>Explanation: The robot moves from (0,0) to (0,2), turns 180 degrees, and then returns to (0,0).</p>
 <p>When repeating these instructions, the robot remains in the circle of radius 2 centered at the origin.</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 2</p>
 <p>Input: instructions = “GG”</p>
 <p>Output: false</p>
 <p>Explanation: The robot moves north indefinitely.</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 3</p>
 <p>Input: instructions = “GL”</p>
 <p>Output: true</p>
 <p>Explanation: The robot moves from (0, 0) -&gt; (0, 1) -&gt; (-1, 1) -&gt; (-1, 0) -&gt; (0, 0) -&gt; …</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Constraints</p>
 <p>1 &lt;= instructions.length &lt;= 100</p>
 <p>instructions[i] is ‘G’, ‘L’ or, ‘R’.</p>
-</div>
+</aside>
 <p><strong>Approach:</strong> There are two circumstances that the robots will return to the starting point:</p>
 <ol class="arabic simple">
 <li><p>After it goes through one round of the instructions, it is at the origin.</p></li>
 <li><p>After it goes through one round of the instructions, it is not at the origin, but is facing DOWN, LEFT or RIGHT. If it is facing DOWN, then it only takes another round of instructions to make it go back to the origin. If it is facing LEFT or RIGHT, then it takes another three rounds of instructions to make ti go back to the origin. On the other hand, if it is facing UP, the robot can only go away from the origin infinitely.</p></li>
 </ol>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">enum</span> <span class="n">Direction</span> <span class="p">{</span>
-        <span class="n">LEFT</span><span class="p">,</span>
-        <span class="n">UP</span><span class="p">,</span>
-        <span class="n">RIGHT</span><span class="p">,</span>
-        <span class="n">DOWN</span>
-    <span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">enum</span><span class="w"> </span><span class="n">Direction</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LEFT</span><span class="p">,</span>
+<span class="w">        </span><span class="n">UP</span><span class="p">,</span>
+<span class="w">        </span><span class="n">RIGHT</span><span class="p">,</span>
+<span class="w">        </span><span class="n">DOWN</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isRobotBounded</span><span class="p">(</span><span class="n">String</span> <span class="n">instructions</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">currentLocation</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">};</span>
-        <span class="n">Direction</span> <span class="n">currentDirection</span> <span class="o">=</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">isRobotBounded</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">instructions</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">currentLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">};</span>
+<span class="w">        </span><span class="n">Direction</span><span class="w"> </span><span class="n">currentDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">instructions</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">char</span> <span class="n">inst</span> <span class="o">=</span> <span class="n">instructions</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">inst</span> <span class="o">==</span> <span class="sc">&#39;G&#39;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">currentLocation</span> <span class="o">=</span> <span class="n">nextLocation</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
-                <span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                <span class="n">currentDirection</span> <span class="o">=</span> <span class="n">nextDirection</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span> <span class="n">inst</span><span class="p">);</span>
-                <span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">instructions</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">inst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instructions</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">inst</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;G&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">currentLocation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextLocation</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span><span class="w"> </span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">currentDirection</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">nextDirection</span><span class="p">(</span><span class="n">currentDirection</span><span class="p">,</span><span class="w"> </span><span class="n">inst</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">//System.out.println(&quot;inst: &quot; + inst + &quot; x: &quot; + currentLocation[0] + &quot; y: &quot;+currentLocation[1] + &quot; facing: &quot;+currentDirection);</span>
 
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">currentDirection</span> <span class="o">==</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">currentLocation</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">currentDirection</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">nextLocation</span><span class="p">(</span><span class="n">Direction</span> <span class="n">direction</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentX</span><span class="p">,</span> <span class="kt">int</span> <span class="n">currentY</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span><span class="o">[]</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="n">currentX</span><span class="p">,</span> <span class="n">currentY</span><span class="p">};</span>
-        <span class="k">switch</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
-                <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentX</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
-                <span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentX</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
-                <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentY</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
-                <span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">currentY</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
-                <span class="k">break</span><span class="p">;</span>
-            <span class="k">default</span><span class="p">:</span>
-                <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="nf">nextLocation</span><span class="p">(</span><span class="n">Direction</span><span class="w"> </span><span class="n">direction</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentX</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">currentY</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="kt">int</span><span class="o">[]</span><span class="p">{</span><span class="n">currentX</span><span class="p">,</span><span class="w"> </span><span class="n">currentY</span><span class="p">};</span>
+<span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">direction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">LEFT</span><span class="p">:</span>
+<span class="w">                </span><span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentX</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">RIGHT</span><span class="p">:</span>
+<span class="w">                </span><span class="n">rst</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentX</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">UP</span><span class="p">:</span>
+<span class="w">                </span><span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentY</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">case</span><span class="w"> </span><span class="n">DOWN</span><span class="p">:</span>
+<span class="w">                </span><span class="n">rst</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">currentY</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">            </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="n">Direction</span> <span class="nf">nextDirection</span><span class="p">(</span><span class="n">Direction</span> <span class="n">currentDirection</span><span class="p">,</span> <span class="kt">char</span> <span class="n">instruction</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">instruction</span> <span class="o">==</span> <span class="sc">&#39;L&#39;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">switch</span> <span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
-                <span class="k">default</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">Direction</span><span class="w"> </span><span class="nf">nextDirection</span><span class="p">(</span><span class="n">Direction</span><span class="w"> </span><span class="n">currentDirection</span><span class="p">,</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="n">instruction</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instruction</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;L&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">LEFT</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">RIGHT</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">UP</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">DOWN</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
+<span class="w">                </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">currentDirection</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">if</span> <span class="p">(</span><span class="n">instruction</span> <span class="o">==</span> <span class="sc">&#39;R&#39;</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">switch</span> <span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="k">case</span> <span class="n">LEFT</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">RIGHT</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">UP</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
-                <span class="k">case</span> <span class="n">DOWN</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
-                <span class="k">default</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">instruction</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;R&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">switch</span><span class="w"> </span><span class="p">(</span><span class="n">currentDirection</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="k">case</span><span class="w"> </span><span class="n">LEFT</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">UP</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">RIGHT</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">DOWN</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">UP</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">RIGHT</span><span class="p">;</span>
+<span class="w">                </span><span class="k">case</span><span class="w"> </span><span class="n">DOWN</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">Direction</span><span class="p">.</span><span class="na">LEFT</span><span class="p">;</span>
+<span class="w">                </span><span class="k">default</span><span class="p">:</span>
+<span class="w">                    </span><span class="k">return</span><span class="w"> </span><span class="n">currentDirection</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">return</span> <span class="n">currentDirection</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">currentDirection</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="angle-between-hands-of-a-clock">
-<h2><a class="toc-backref" href="#id3">1344. Angle Between Hands of a Clock</a><a class="headerlink" href="#angle-between-hands-of-a-clock" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">1344. Angle Between Hands of a Clock</a><a class="headerlink" href="#angle-between-hands-of-a-clock" title="Link to this heading">¶</a></h2>
 <p>Given two numbers, hour and minutes. Return the smaller angle (in degrees) formed between the hour and the minute hand.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example 1</p>
 <p>Input: hour = 12, minutes = 30</p>
 <p>Output: 165</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 2</p>
 <p>Input: hour = 3, minutes = 30</p>
 <p>Output: 75</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 3</p>
 <p>Input: hour = 3, minutes = 15</p>
 <p>Output: 7.5</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 4</p>
 <p>Input: hour = 4, minutes = 50</p>
 <p>Output: 155</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 5</p>
 <p>Input: hour = 12, minutes = 0</p>
 <p>Output: 0</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Constraints</p>
 <p>1 &lt;= hour &lt;= 12</p>
 <p>0 &lt;= minutes &lt;= 59</p>
 <p>Answers within 10^-5 of the actual value will be accepted as correct.</p>
-</div>
+</aside>
 <p><strong>Approach</strong>: first calculate the degree between hour hand (exact hour) and minute hand, starting from hour hand, clock-wise, up to the minute hand. Then use this degree to minus the degree between hour hand actual position and the hour (for example for 12:30, the hour hand moves to half way between 12 and 1, so the movement is 15 degree).</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kt">double</span> <span class="nf">angleClock</span><span class="p">(</span><span class="kt">int</span> <span class="n">hour</span><span class="p">,</span> <span class="kt">int</span> <span class="n">minutes</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">double</span> <span class="n">h</span> <span class="o">=</span> <span class="p">(</span><span class="n">hour</span><span class="o">==</span><span class="mi">12</span><span class="p">)</span><span class="o">?</span><span class="mi">0</span><span class="p">:</span><span class="n">hour</span><span class="p">;</span>
-    <span class="kt">double</span> <span class="n">m</span> <span class="o">=</span> <span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">minutes</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kt">double</span><span class="w"> </span><span class="nf">angleClock</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">hour</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">minutes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">hour</span><span class="o">==</span><span class="mi">12</span><span class="p">)</span><span class="o">?</span><span class="mi">0</span><span class="p">:</span><span class="n">hour</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">double</span><span class="p">)</span><span class="n">minutes</span><span class="o">/</span><span class="mi">5</span><span class="p">;</span>
 
-    <span class="kt">double</span> <span class="n">diff</span><span class="p">;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="o">&gt;</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="n">m</span><span class="o">-</span><span class="n">h</span><span class="p">;</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">h</span><span class="p">){</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="mi">12</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">m</span><span class="p">);</span>
-    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        <span class="n">diff</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">diff</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="o">&gt;</span><span class="n">h</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">m</span><span class="o">-</span><span class="n">h</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="o">&lt;</span><span class="n">h</span><span class="p">){</span>
+<span class="w">        </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="o">-</span><span class="p">(</span><span class="n">h</span><span class="o">-</span><span class="n">m</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">diff</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kt">double</span> <span class="n">move</span> <span class="o">=</span> <span class="p">(</span><span class="n">minutes</span><span class="o">/</span><span class="mf">60.0</span><span class="p">)</span><span class="o">*</span><span class="mf">30.0</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">move</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">minutes</span><span class="o">/</span><span class="mf">60.0</span><span class="p">)</span><span class="o">*</span><span class="mf">30.0</span><span class="p">;</span>
 
-    <span class="kt">double</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">diff</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">-</span> <span class="n">move</span><span class="p">);</span>
+<span class="w">    </span><span class="kt">double</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">abs</span><span class="p">(</span><span class="n">diff</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">30</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">move</span><span class="p">);</span>
 
-    <span class="k">return</span> <span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">360</span><span class="o">-</span><span class="n">rst</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">Math</span><span class="p">.</span><span class="na">min</span><span class="p">(</span><span class="mi">360</span><span class="o">-</span><span class="n">rst</span><span class="p">,</span><span class="w"> </span><span class="n">rst</span><span class="p">);</span>
 
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="reverse-words-in-a-string">
-<h2><a class="toc-backref" href="#id4">151. Reverse Words in a String</a><a class="headerlink" href="#reverse-words-in-a-string" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">151. Reverse Words in a String</a><a class="headerlink" href="#reverse-words-in-a-string" title="Link to this heading">¶</a></h2>
 <p>Given an input string s, reverse the order of the words.</p>
 <p>A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.</p>
 <p>Return a string of the words in reverse order concatenated by a single space.</p>
 <p>Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example 1</p>
 <p>Input: s = “the sky is blue”</p>
 <p>Output: “blue is sky the”</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 2</p>
-<p>Input: s = ”  hello world  “</p>
+<p>Input: s = “  hello world  “</p>
 <p>Output: “world hello”</p>
 <p>Explanation: Your reversed string should not contain leading or trailing spaces.</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 3</p>
 <p>Input: s = “a good   example”</p>
 <p>Output: “example good a”</p>
 <p>Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 4</p>
-<p>Input: s = ”  Bob    Loves  Alice   “</p>
+<p>Input: s = “  Bob    Loves  Alice   “</p>
 <p>Output: “Alice Loves Bob”</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 5</p>
 <p>Input: s = “Alice does not even like bob”</p>
 <p>Output: “bob like even not does Alice”</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Constraints</p>
 <p>1 &lt;= s.length &lt;= 104</p>
 <p>s contains English letters (upper-case and lower-case), digits, and spaces ‘ ‘.</p>
 <p>There is at least one word in s.</p>
-</div>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">String</span> <span class="nf">reverseWords</span><span class="p">(</span><span class="n">String</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">trim</span><span class="p">();</span>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">reverseWords</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">trim</span><span class="p">();</span>
 
-        <span class="n">String</span> <span class="n">word</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-        <span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">words</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ArrayList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">words</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
 
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">char</span> <span class="n">c</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">&lt;</span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
 
-            <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">==</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="c1">//System.out.println(word);</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">word</span><span class="o">!=</span> <span class="s">&quot;&quot;</span><span class="p">){</span>
-                    <span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
-                <span class="p">}</span>
-                <span class="n">word</span> <span class="o">=</span> <span class="s">&quot;&quot;</span><span class="p">;</span>
-            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">c</span> <span class="o">!=</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">word</span> <span class="o">+=</span> <span class="n">c</span><span class="p">;</span>
-            <span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">//System.out.println(word);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">word</span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">){</span>
+<span class="w">                    </span><span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="n">word</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="sc">&#39; &#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">word</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">c</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
 
-        <span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
+<span class="w">        </span><span class="n">words</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">word</span><span class="p">);</span>
 
-        <span class="n">Collections</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Collections</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">words</span><span class="p">);</span>
 
-        <span class="n">String</span> <span class="n">rst</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span> <span class="n">words</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="n">words</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 </pre></div>
 </div>
 </section>
@@ -371,7 +375,7 @@
           <a href="sliding_windows.html" title="Sliding Windows"
              >next</a> |</li>
         <li class="right" >
-          <a href="hash.html" title="Hash"
+          <a href="linked_list.html" title="Linked List"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="../index.html">Notebook  documentation</a> &#187;</li>
         <li class="nav-item nav-item-this"><a href="">Other</a></li> 
@@ -379,8 +383,8 @@
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

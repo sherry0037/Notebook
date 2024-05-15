@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Web Crawling using PySpider &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="A Chinese Poetry Translator" href="poetry.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Web Crawling using PySpider</a><ul>
 <li><a class="reference internal" href="#quickstart">Quickstart</a><ul>
 <li><a class="reference internal" href="#if-you-don-t-have-phantomjs">If you don’t have phantomjs</a></li>
@@ -52,12 +51,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="meal_planner.html"
-                        title="previous chapter">MealPlanner 0.1</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="poetry.html"
-                        title="next chapter">A Chinese Poetry Translator</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="meal_planner.html"
+                          title="previous chapter">MealPlanner 0.1</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="poetry.html"
+                          title="next chapter">A Chinese Poetry Translator</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -65,7 +69,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -73,8 +77,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -84,16 +88,16 @@
           <div class="body" role="main">
             
   <section id="web-crawling-using-pyspider">
-<h1>Web Crawling using PySpider<a class="headerlink" href="#web-crawling-using-pyspider" title="Permalink to this headline">¶</a></h1>
+<h1>Web Crawling using PySpider<a class="headerlink" href="#web-crawling-using-pyspider" title="Link to this heading">¶</a></h1>
 <p>I want to collect some data for an NLP project and this is an attempt to “crawl” the data from the web. Although I am probably not going to use it soon, there is a simple guide of how to setup PySpider with some useful links.</p>
 <section id="quickstart">
-<h2>Quickstart<a class="headerlink" href="#quickstart" title="Permalink to this headline">¶</a></h2>
+<h2>Quickstart<a class="headerlink" href="#quickstart" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Install: <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">pyspider</span></code></p></li>
 <li><p>Run: <code class="docutils literal notranslate"><span class="pre">pyspider</span></code>, visit <a class="reference external" href="http://localhost:5000/">http://localhost:5000/</a></p></li>
 </ul>
 <section id="if-you-don-t-have-phantomjs">
-<h3>If you don’t have phantomjs<a class="headerlink" href="#if-you-don-t-have-phantomjs" title="Permalink to this headline">¶</a></h3>
+<h3>If you don’t have phantomjs<a class="headerlink" href="#if-you-don-t-have-phantomjs" title="Link to this heading">¶</a></h3>
 <p>Follow the guide from <a class="reference external" href="https://stackoverflow.com/questions/36993962/installing-phantomjs-on-mac/53308472">StackOverflow</a></p>
 <ol class="arabic simple">
 <li><p>Download phantomjs latest version (ex: phantomjs-2.1.1-macosx.zip) from <a class="reference external" href="http://phantomjs.org/download.html">http://phantomjs.org/download.html</a></p></li>
@@ -105,11 +109,11 @@
 </ol>
 </section>
 <section id="if-raised-invalid-configuration-error">
-<h3>If raised Invalid configuration error …<a class="headerlink" href="#if-raised-invalid-configuration-error" title="Permalink to this headline">¶</a></h3>
+<h3>If raised Invalid configuration error …<a class="headerlink" href="#if-raised-invalid-configuration-error" title="Link to this heading">¶</a></h3>
 <p>Error message:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>raise ValueError<span class="o">(</span><span class="s2">&quot;Invalid configuration:\n  - &quot;</span> + <span class="s2">&quot;\n  - &quot;</span>.join<span class="o">(</span>errors<span class="o">))</span>
-   ValueError: Invalid configuration:
-   - Deprecated option <span class="s1">&#39;domaincontroller&#39;</span>: use <span class="s1">&#39;http_authenticator.domain_controller&#39;</span> instead.
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>raise<span class="w"> </span>ValueError<span class="o">(</span><span class="s2">&quot;Invalid configuration:\n  - &quot;</span><span class="w"> </span>+<span class="w"> </span><span class="s2">&quot;\n  - &quot;</span>.join<span class="o">(</span>errors<span class="o">))</span>
+<span class="w">   </span>ValueError:<span class="w"> </span>Invalid<span class="w"> </span>configuration:
+<span class="w">   </span>-<span class="w"> </span>Deprecated<span class="w"> </span>option<span class="w"> </span><span class="s1">&#39;domaincontroller&#39;</span>:<span class="w"> </span>use<span class="w"> </span><span class="s1">&#39;http_authenticator.domain_controller&#39;</span><span class="w"> </span>instead.
 </pre></div>
 </div>
 <p>Solution:</p>
@@ -121,15 +125,15 @@
 <p><a class="reference external" href="https://github.com/binux/pyspider/issues/889">reference 1</a></p>
 </section>
 <section id="if-raise-error-could-not-create-web-server-listening-on-port-25555">
-<h3>If raise “Error: Could not create web server listening on port 25555”<a class="headerlink" href="#if-raise-error-could-not-create-web-server-listening-on-port-25555" title="Permalink to this headline">¶</a></h3>
+<h3>If raise “Error: Could not create web server listening on port 25555”<a class="headerlink" href="#if-raise-error-could-not-create-web-server-listening-on-port-25555" title="Link to this heading">¶</a></h3>
 <p>This is because the port has been used (maybe didn’t terminate the process correctly last time)</p>
 <p>Solution:</p>
 <ol class="arabic simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">lsof</span> <span class="pre">-i:25555</span></code></p></li>
 <li><p>Something like this shows up:</p></li>
 </ol>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>COMMAND     PID   USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
-phantomjs <span class="m">46971</span>   xxx   12u  IPv4 0xe4d24cdcaf5e481f      0t0  TCP *:25555 <span class="o">(</span>LISTEN<span class="o">)</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>COMMAND<span class="w">     </span>PID<span class="w">   </span>USER<span class="w">   </span>FD<span class="w">   </span>TYPE<span class="w">             </span>DEVICE<span class="w"> </span>SIZE/OFF<span class="w"> </span>NODE<span class="w"> </span>NAME
+phantomjs<span class="w"> </span><span class="m">46971</span><span class="w">   </span>xxx<span class="w">   </span>12u<span class="w">  </span>IPv4<span class="w"> </span>0xe4d24cdcaf5e481f<span class="w">      </span>0t0<span class="w">  </span>TCP<span class="w"> </span>*:25555<span class="w"> </span><span class="o">(</span>LISTEN<span class="o">)</span>
 </pre></div>
 </div>
 <ol class="arabic simple" start="3">
@@ -138,7 +142,7 @@ phantomjs <span class="m">46971</span>   xxx   12u  IPv4 0xe4d24cdcaf5e481f     
 <p><a class="reference external" href="https://www.crifan.com/pyspider_run_error_could_not_create_web_server_listening_on_por_25555/">reference 2</a></p>
 </section>
 <section id="if-raise-oserror-errno-48-address-already-in-use">
-<h3>If raise “OSError: [Errno 48] Address already in use”<a class="headerlink" href="#if-raise-oserror-errno-48-address-already-in-use" title="Permalink to this headline">¶</a></h3>
+<h3>If raise “OSError: [Errno 48] Address already in use”<a class="headerlink" href="#if-raise-oserror-errno-48-address-already-in-use" title="Link to this heading">¶</a></h3>
 <p>Solution:</p>
 <ol class="arabic simple">
 <li><p>Run <code class="docutils literal notranslate"><span class="pre">ps</span> <span class="pre">-fA</span> <span class="pre">|</span> <span class="pre">grep</span> <span class="pre">python</span></code></p></li>
@@ -148,7 +152,7 @@ phantomjs <span class="m">46971</span>   xxx   12u  IPv4 0xe4d24cdcaf5e481f     
 </section>
 </section>
 <section id="tutorials">
-<h2>Tutorials<a class="headerlink" href="#tutorials" title="Permalink to this headline">¶</a></h2>
+<h2>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">¶</a></h2>
 <p>Here are some tutorials to get you started:</p>
 <ul class="simple">
 <li><p><a class="reference external" href="http://docs.pyspider.org/en/latest/tutorial/HTML-and-CSS-Selector/">An official guide</a></p></li>
@@ -182,8 +186,8 @@ phantomjs <span class="m">46971</span>   xxx   12u  IPv4 0xe4d24cdcaf5e481f     
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

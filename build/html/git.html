@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="./">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Git Commands Reference &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="_static/yeen.css" />
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="_static/yeen.css?v=ed2c6189" />
+    <script src="_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
     <link rel="next" title="Reading Log and Quotes" href="reading.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Git Commands Reference</a><ul>
 <li><a class="reference internal" href="#create-new-branch">Create new branch</a></li>
 <li><a class="reference internal" href="#how-to-undo-commits-add">How to undo commits/add?</a></li>
@@ -53,12 +52,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="latex.html"
-                        title="previous chapter"><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="reading.html"
-                        title="next chapter">Reading Log and Quotes</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="latex.html"
+                          title="previous chapter"><span class="math notranslate nohighlight">\(\LaTeX\)</span> Cheatsheet</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="reading.html"
+                          title="next chapter">Reading Log and Quotes</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -66,7 +70,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="search.html" method="get">
@@ -74,8 +78,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -85,14 +89,14 @@
           <div class="body" role="main">
             
   <section id="git-commands-reference">
-<h1>Git Commands Reference<a class="headerlink" href="#git-commands-reference" title="Permalink to this headline">¶</a></h1>
+<h1>Git Commands Reference<a class="headerlink" href="#git-commands-reference" title="Link to this heading">¶</a></h1>
 <p>Some useful git commands.</p>
 <section id="create-new-branch">
-<h2>Create new branch<a class="headerlink" href="#create-new-branch" title="Permalink to this headline">¶</a></h2>
+<h2>Create new branch<a class="headerlink" href="#create-new-branch" title="Link to this heading">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">checkout</span> <span class="pre">-b</span> <span class="pre">[name_of_your_new_branch]</span></code></p>
 </section>
 <section id="how-to-undo-commits-add">
-<h2>How to undo commits/add?<a class="headerlink" href="#how-to-undo-commits-add" title="Permalink to this headline">¶</a></h2>
+<h2>How to undo commits/add?<a class="headerlink" href="#how-to-undo-commits-add" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><dl class="simple">
 <dt>Undo the latest commit and keep changed files:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">reset</span> <span class="pre">--soft</span> <span class="pre">HEAD~1</span></code></p>
@@ -117,7 +121,7 @@
 </ul>
 </section>
 <section id="how-to-modify-commits">
-<h2>How to modify commits?<a class="headerlink" href="#how-to-modify-commits" title="Permalink to this headline">¶</a></h2>
+<h2>How to modify commits?<a class="headerlink" href="#how-to-modify-commits" title="Link to this heading">¶</a></h2>
 <ul>
 <li><dl class="simple">
 <dt>Modify most recent commit:</dt><dd><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">commit</span> <span class="pre">--amend</span></code></p>
@@ -140,7 +144,7 @@
 </ul>
 </section>
 <section id="how-to-get-new-changes-from-master">
-<h2>How to get new changes from Master<a class="headerlink" href="#how-to-get-new-changes-from-master" title="Permalink to this headline">¶</a></h2>
+<h2>How to get new changes from Master<a class="headerlink" href="#how-to-get-new-changes-from-master" title="Link to this heading">¶</a></h2>
 <p>Two options: <code class="docutils literal notranslate"><span class="pre">merge</span></code> and <code class="docutils literal notranslate"><span class="pre">rebase</span></code>.</p>
 <ul>
 <li><p>You can merge the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch into the <code class="docutils literal notranslate"><span class="pre">feature</span></code> branch using:</p>
@@ -155,7 +159,7 @@
 </ul>
 </section>
 <section id="different-ways-to-do-git-pull">
-<h2>Different ways to do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code><a class="headerlink" href="#different-ways-to-do-git-pull" title="Permalink to this headline">¶</a></h2>
+<h2>Different ways to do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code><a class="headerlink" href="#different-ways-to-do-git-pull" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">pull</span></code> does a <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> to pull down data from the specified remote, and then calls <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">merge</span></code> to join the changes received with your current branch’s work.</p></li>
 <li><dl class="simple">
@@ -166,27 +170,27 @@
 </ul>
 </section>
 <section id="stash-the-changes">
-<h2>Stash the changes<a class="headerlink" href="#stash-the-changes" title="Permalink to this headline">¶</a></h2>
+<h2>Stash the changes<a class="headerlink" href="#stash-the-changes" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span></code> to save all the changes.</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">stash</span> <span class="pre">apply</span></code> to get the latest stashed changes back.</p></li>
 </ul>
 </section>
 <section id="see-changes-in-a-commit">
-<h2>See changes in a commit<a class="headerlink" href="#see-changes-in-a-commit" title="Permalink to this headline">¶</a></h2>
+<h2>See changes in a commit<a class="headerlink" href="#see-changes-in-a-commit" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff-tree</span> <span class="pre">--no-commit-id</span> <span class="pre">--name-only</span> <span class="pre">-r</span> <span class="pre">bd61ad98</span></code> to see all the files added in a commit</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">diff</span> <span class="pre">COMMIT~</span> <span class="pre">COMMIT</span></code> to see the changes in a commit</p></li>
 </ul>
 </section>
 <section id="push-specific-commit">
-<h2>Push specific commit<a class="headerlink" href="#push-specific-commit" title="Permalink to this headline">¶</a></h2>
+<h2>Push specific commit<a class="headerlink" href="#push-specific-commit" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span> <span class="pre">origin</span> <span class="pre">1d9ec65c09b07661b7daff31c810d365d1c73be4:refs/heads/master</span></code></p></li>
 </ul>
 </section>
 <section id="delete-git-repository">
-<h2>Delete git repository<a class="headerlink" href="#delete-git-repository" title="Permalink to this headline">¶</a></h2>
+<h2>Delete git repository<a class="headerlink" href="#delete-git-repository" title="Link to this heading">¶</a></h2>
 <ul class="simple">
 <li><p>Make a repository no longer a git repository: <code class="docutils literal notranslate"><span class="pre">rm</span> <span class="pre">-rf</span> <span class="pre">.git</span></code></p></li>
 </ul>
@@ -218,8 +222,8 @@
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

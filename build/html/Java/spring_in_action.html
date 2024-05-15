@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Spring in Action - Notes &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="MealPlanner 0.1" href="../Project/meal_planner.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Spring in Action - Notes</a><ul>
 <li><a class="reference internal" href="#basic-concepts">Basic concepts</a></li>
 <li><a class="reference internal" href="#wiring-beans">Wiring beans</a><ul>
@@ -57,12 +56,17 @@
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="jsp.html"
-                        title="previous chapter">JavaServer Pages (JSP) Tutorial</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="../Project/meal_planner.html"
-                        title="next chapter">MealPlanner 0.1</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="jsp.html"
+                          title="previous chapter">JavaServer Pages (JSP) Tutorial</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="../Project/meal_planner.html"
+                          title="next chapter">MealPlanner 0.1</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -70,7 +74,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -78,8 +82,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -89,9 +93,9 @@
           <div class="body" role="main">
             
   <section id="spring-in-action-notes">
-<h1><a class="toc-backref" href="#id1">Spring in Action - Notes</a><a class="headerlink" href="#spring-in-action-notes" title="Permalink to this headline">¶</a></h1>
+<h1><a class="toc-backref" href="#id1" role="doc-backlink">Spring in Action - Notes</a><a class="headerlink" href="#spring-in-action-notes" title="Link to this heading">¶</a></h1>
 <p>Reading notes of the book <em>Spring in Action - 4th edition by Craig Walls</em>.</p>
-<div class="contents topic" id="contents">
+<nav class="contents" id="contents">
 <p class="topic-title">Contents</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#spring-in-action-notes" id="id1">Spring in Action - Notes</a></p>
@@ -114,21 +118,21 @@
 </ul>
 </li>
 </ul>
-</div>
+</nav>
 <section id="basic-concepts">
-<h2><a class="toc-backref" href="#id2">Basic concepts</a><a class="headerlink" href="#basic-concepts" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Basic concepts</a><a class="headerlink" href="#basic-concepts" title="Link to this heading">¶</a></h2>
 </section>
 <section id="wiring-beans">
-<h2><a class="toc-backref" href="#id3">Wiring beans</a><a class="headerlink" href="#wiring-beans" title="Permalink to this headline">¶</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Wiring beans</a><a class="headerlink" href="#wiring-beans" title="Link to this heading">¶</a></h2>
 <section id="why-do-we-need-bean-wiring">
-<h3><a class="toc-backref" href="#id4">Why do we need bean-wiring?</a><a class="headerlink" href="#why-do-we-need-bean-wiring" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Why do we need bean-wiring?</a><a class="headerlink" href="#why-do-we-need-bean-wiring" title="Link to this heading">¶</a></h3>
 <p>An application (at least a non-trivial one) is made up of several objects, each has its own funtionalities. These objects must be aware of one another and communicate with one another to get their jobs done.</p>
 <p>These associations between objects are created via constuction or lookup in the traditional way, leading to complicated code that’s difficult to reuse or unit-test. The ojects do more work the they should (like initializing other objects) and are highly coupled to one another.</p>
 <p>This is when <strong>wiring</strong>, or <strong>dependency injection</strong> (DI), comes handy. Remeber, beans can be seen as just Plain Old Java Objects (POJOs) and the ojects are created and wired by <em>Spring application context</em> (container). Wiring means that, instead of letting the object to initialize it’s own instance of other objects, we will inject the instance into this object either using the <em>constructor</em> or a <em>setter</em>. In spring, the container will do this for you.</p>
 <p>There are several ways to wire beans in Java. The three major ones are: autowiring, JavaConfig and XML.</p>
 </section>
 <section id="spring-s-configuration-options">
-<h3><a class="toc-backref" href="#id5">Spring’s configuration options</a><a class="headerlink" href="#spring-s-configuration-options" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Spring’s configuration options</a><a class="headerlink" href="#spring-s-configuration-options" title="Link to this heading">¶</a></h3>
 <p>We need to tell Spring which beans to create and how to wire them together. There are three major approaches to write a bean wiring specification:</p>
 <ul class="simple">
 <li><p>Explicit configuration in XML</p></li>
@@ -138,45 +142,45 @@
 <p>The author recommends to use automatic wiring as much as possible. But you can use whichever you want, even mix them.</p>
 </section>
 <section id="automatically-wiring-beans">
-<h3><a class="toc-backref" href="#id6">Automatically wiring beans</a><a class="headerlink" href="#automatically-wiring-beans" title="Permalink to this headline">¶</a></h3>
+<h3><a class="toc-backref" href="#id6" role="doc-backlink">Automatically wiring beans</a><a class="headerlink" href="#automatically-wiring-beans" title="Link to this heading">¶</a></h3>
 <p>Spring attacks automatic wiring from two angles:</p>
 <ul class="simple">
 <li><p><em>Component scanning</em>: Spring automatically discovers beans to be created in the application context.</p></li>
 <li><p><em>Autowiring</em>: Spring automatically satisfies bean dependencies.</p></li>
 </ul>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">A Stereo System</p>
 <p>To demonstrate Spring’s autowiring mechanism, we will create a stereo system. To start, we will create a <code class="docutils literal notranslate"><span class="pre">CompactDisc</span></code> class, and let Spring to discover and create it as a bean. Then we will have a <code class="docutils literal notranslate"><span class="pre">CDPlayer</span></code> class, also have Spring to discover it, and inject a CD bean into it.</p>
-</div>
+</aside>
 <section id="creating-beans">
-<h4><a class="toc-backref" href="#id7">Creating beans</a><a class="headerlink" href="#creating-beans" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id7" role="doc-backlink">Creating beans</a><a class="headerlink" href="#creating-beans" title="Link to this heading">¶</a></h4>
 <p>First, let’s write an interface for <code class="docutils literal notranslate"><span class="pre">CompactDisc</span></code>. Using interface keeps the coupling between any CD player implementation and the CD itself to a minimum.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">interface</span> <span class="nc">CompactDisc</span><span class="p">{</span>
-    <span class="kt">void</span> <span class="nf">play</span><span class="p">();</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">interface</span> <span class="nc">CompactDisc</span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">play</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>Now we write a specific implementation, <code class="docutils literal notranslate"><span class="pre">SgtPeppers</span></code>, of <code class="docutils literal notranslate"><span class="pre">CompactDisc</span></code>.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">SgtPeppers</span> <span class="kd">implements</span> <span class="n">CompactDisc</span> <span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">SgtPeppers</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">CompactDisc</span><span class="w"> </span><span class="p">{</span>
 
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">title</span> <span class="o">=</span> <span class="s">&quot;Sgt. Pepper&#39;s Lonely Hearts Club Band&quot;</span><span class="p">;</span>
-    <span class="kd">private</span> <span class="n">String</span> <span class="n">artist</span> <span class="o">=</span> <span class="s">&quot;The Beatles&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Sgt. Pepper&#39;s Lonely Hearts Club Band&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">artist</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;The Beatles&quot;</span><span class="p">;</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">play</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Playing &quot;</span> <span class="o">+</span> <span class="n">title</span> <span class="o">+</span> <span class="s">&quot; by &quot;</span> <span class="o">+</span> <span class="n">artist</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">play</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">System</span><span class="p">.</span><span class="na">out</span><span class="p">.</span><span class="na">println</span><span class="p">(</span><span class="s">&quot;Playing &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot; by &quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">artist</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Note</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">SgtPeppers</span></code> class is annotated with <em>&#64;Component</em>. This identifies this class as a component class and tells Spring that a bean should be created for it. We don’t need to explicitly configure a <code class="docutils literal notranslate"><span class="pre">SgtPeppers</span></code> bean.</p>
-</div>
+</aside>
 <p>Spring needs to seek out classes annotated with &#64;Component and create beans from them. We write a configuration to tell it to do so.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Configuration</span>
 <span class="nd">@ComponentScan</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CDPlayerConfig</span> <span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CDPlayerConfig</span><span class="w"> </span><span class="p">{</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -184,15 +188,15 @@
 <p>Now we can write a simple JUnit test that creates a Spring application context and asserts that the <code class="docutils literal notranslate"><span class="pre">CompactDisc</span></code> bean is created.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@RunWith</span><span class="p">(</span><span class="n">StringJUnit4ClassRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <span class="nd">@ContextConfiguration</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">CDPlayerConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CDPlayerTest</span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CDPlayerTest</span><span class="p">{</span>
 
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">CompactDisc</span> <span class="n">cd</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CompactDisc</span><span class="w"> </span><span class="n">cd</span><span class="p">;</span>
 
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cdShouldNotBeNull</span><span class="p">(){</span>
-        <span class="n">assertNotNull</span><span class="p">(</span><span class="n">cd</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cdShouldNotBeNull</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">cd</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -211,7 +215,7 @@
 </ul>
 </section>
 <section id="setting-a-base-package-for-component-scanning">
-<h4><a class="toc-backref" href="#id8">Setting a base package for component scanning</a><a class="headerlink" href="#setting-a-base-package-for-component-scanning" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id8" role="doc-backlink">Setting a base package for component scanning</a><a class="headerlink" href="#setting-a-base-package-for-component-scanning" title="Link to this heading">¶</a></h4>
 <p>When using <code class="docutils literal notranslate"><span class="pre">&#64;ComponentScan</span></code> with no attributes, it will default to the configuration class’s package as its base package.
 We want to explictitly set the base package, so that we can keep all of the configuration code in a package of its own.
 There are several ways to do it:</p>
@@ -222,39 +226,39 @@ There are several ways to do it:</p>
 </pre></div>
 </div>
 <p>To dpecify multiple base packages:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackages</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;soundsystem&quot;</span><span class="p">,</span> <span class="s">&quot;video&quot;</span><span class="p">})</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackages</span><span class="o">=</span><span class="p">{</span><span class="s">&quot;soundsystem&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;video&quot;</span><span class="p">})</span>
 </pre></div>
 </div>
 <p>Or you can use classes/interfaces instead of strings:</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackageClasses</span><span class="o">=</span><span class="p">{</span><span class="n">CDPlayer</span><span class="p">.</span><span class="na">class</span><span class="p">,</span> <span class="n">DVDPlayer</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@ComponentScan</span><span class="p">(</span><span class="n">basePackageClasses</span><span class="o">=</span><span class="p">{</span><span class="n">CDPlayer</span><span class="p">.</span><span class="na">class</span><span class="p">,</span><span class="w"> </span><span class="n">DVDPlayer</span><span class="p">.</span><span class="na">class</span><span class="p">})</span>
 </pre></div>
 </div>
 </section>
 <section id="annotating-beans-to-be-automatically-wired">
-<h4><a class="toc-backref" href="#id9">Annotating beans to be automatically wired</a><a class="headerlink" href="#annotating-beans-to-be-automatically-wired" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id9" role="doc-backlink">Annotating beans to be automatically wired</a><a class="headerlink" href="#annotating-beans-to-be-automatically-wired" title="Link to this heading">¶</a></h4>
 <p>Autowiring is a means of letting Spring automatically satisfy a bean’s dependencies by finding other beans in the application context that are a match to the bean’s needs. <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> annotation is used for this case.</p>
 <p>There are two basic methods to wire a bean: by constructor or by setter method. However, <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> can be applied to any method. Let’s first see how to autowire through constructors:</p>
 <p>Consider a <code class="docutils literal notranslate"><span class="pre">CDPlayer</span></code> class:</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Component</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CDPlayer</span> <span class="kd">implements</span> <span class="n">MediaPlayer</span> <span class="p">{</span>
-    <span class="kd">private</span> <span class="n">CompactDisc</span> <span class="n">cd</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CDPlayer</span><span class="w"> </span><span class="kd">implements</span><span class="w"> </span><span class="n">MediaPlayer</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CompactDisc</span><span class="w"> </span><span class="n">cd</span><span class="p">;</span>
 
-    <span class="nd">@Autowired</span>
-    <span class="kd">public</span> <span class="nf">CDPlayer</span><span class="p">(</span><span class="n">CompactDisc</span> <span class="n">cd</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">this</span><span class="p">.</span><span class="na">cd</span> <span class="o">=</span> <span class="n">cd</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">CDPlayer</span><span class="p">(</span><span class="n">CompactDisc</span><span class="w"> </span><span class="n">cd</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">cd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cd</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">play</span><span class="p">(){</span>
-        <span class="n">cd</span><span class="p">.</span><span class="na">play</span><span class="p">();</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">play</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">cd</span><span class="p">.</span><span class="na">play</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 <p>The constructor of the <code class="docutils literal notranslate"><span class="pre">CDPlayer</span></code> class is annotated with <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code>. When Spring initialize the <code class="docutils literal notranslate"><span class="pre">CDPlayer</span></code> bean via the constructor, it passes a <code class="docutils literal notranslate"><span class="pre">CompactDisc</span></code> bean into it.</p>
 <p>Another way to use <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code> is on a property’s setter method.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@Autowired</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCompactDisc</span><span class="p">(</span><span class="n">CompactDisc</span> <span class="n">cd</span><span class="p">){</span>
-    <span class="k">this</span><span class="p">.</span><span class="na">cd</span> <span class="o">=</span> <span class="n">cd</span><span class="p">;</span>
+<span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">setCompactDisc</span><span class="p">(</span><span class="n">CompactDisc</span><span class="w"> </span><span class="n">cd</span><span class="p">){</span>
+<span class="w">    </span><span class="k">this</span><span class="p">.</span><span class="na">cd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cd</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -268,41 +272,41 @@ There are several ways to do it:</p>
 <p>You can use <code class="docutils literal notranslate"><span class="pre">&#64;Inject</span></code> instead of <code class="docutils literal notranslate"><span class="pre">&#64;Autowired</span></code>. They are interchangeable in many cases.</p>
 </section>
 <section id="verifying-automatic-configuration">
-<h4><a class="toc-backref" href="#id10">Verifying automatic configuration</a><a class="headerlink" href="#verifying-automatic-configuration" title="Permalink to this headline">¶</a></h4>
+<h4><a class="toc-backref" href="#id10" role="doc-backlink">Verifying automatic configuration</a><a class="headerlink" href="#verifying-automatic-configuration" title="Link to this heading">¶</a></h4>
 <p>Let’s change <code class="docutils literal notranslate"><span class="pre">CDPlayerTest</span></code> to play the compact disc through the <code class="docutils literal notranslate"><span class="pre">CDPlayer</span></code> bean.</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="nd">@RunWith</span><span class="p">(</span><span class="n">StringJUnit4ClassRunner</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
 <span class="nd">@ContextConfiguration</span><span class="p">(</span><span class="n">classes</span><span class="o">=</span><span class="n">CDPlayerConfig</span><span class="p">.</span><span class="na">class</span><span class="p">)</span>
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">CDPlayerTest</span><span class="p">{</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">CDPlayerTest</span><span class="p">{</span>
 
-    <span class="nd">@Rule</span>
-    <span class="kd">public</span> <span class="kd">final</span> <span class="n">StandardOutputStreamLog</span> <span class="n">log</span> <span class="o">=</span> <span class="k">new</span> <span class="n">StandardOutputStreamLog</span><span class="p">();</span>
+<span class="w">    </span><span class="nd">@Rule</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">StandardOutputStreamLog</span><span class="w"> </span><span class="n">log</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StandardOutputStreamLog</span><span class="p">();</span>
 
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">MediaPlayer</span> <span class="n">player</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MediaPlayer</span><span class="w"> </span><span class="n">player</span><span class="p">;</span>
 
-    <span class="nd">@Autowired</span>
-    <span class="kd">private</span> <span class="n">CompactDisc</span> <span class="n">cd</span><span class="p">;</span>
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">CompactDisc</span><span class="w"> </span><span class="n">cd</span><span class="p">;</span>
 
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">cdShouldNotBeNull</span><span class="p">(){</span>
-        <span class="n">assertNotNull</span><span class="p">(</span><span class="n">cd</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">cdShouldNotBeNull</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">cd</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="nd">@Test</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">play</span><span class="p">(){</span>
-        <span class="n">player</span><span class="p">.</span><span class="na">play</span><span class="p">();</span>
-        <span class="n">assertEquals</span><span class="p">(</span>
-            <span class="s">&quot;Playing Sgt. Pepper&#39;s Lonely Hearts Club Band by The Beatles \n&quot;</span><span class="p">,</span>
-            <span class="n">log</span><span class="p">.</span><span class="na">getLog</span><span class="p">();</span>
-        <span class="p">)</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">play</span><span class="p">(){</span>
+<span class="w">        </span><span class="n">player</span><span class="p">.</span><span class="na">play</span><span class="p">();</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span>
+<span class="w">            </span><span class="s">&quot;Playing Sgt. Pepper&#39;s Lonely Hearts Club Band by The Beatles \n&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="n">log</span><span class="p">.</span><span class="na">getLog</span><span class="p">();</span>
+<span class="w">        </span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Note</p>
 <p>Testing code that uses <code class="docutils literal notranslate"><span class="pre">System.out.println()</span></code> is tricky. <code class="docutils literal notranslate"><span class="pre">StandardOutputStreamLog</span></code> is a JUnit rule from the System Rule library that lets you make assertions against whatever is written to the console.</p>
-</div>
+</aside>
 </section>
 </section>
 </section>
@@ -333,8 +337,8 @@ There are several ways to do it:</p>
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

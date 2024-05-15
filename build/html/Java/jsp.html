@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>JavaServer Pages (JSP) Tutorial &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Spring in Action - Notes" href="spring_in_action.html" />
@@ -37,20 +35,26 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">JavaServer Pages (JSP) Tutorial</a><ul>
 <li><a class="reference internal" href="#jsp-and-servlets-overview">JSP and Servlets Overview</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../Lecture/regression.html"
-                        title="previous chapter">Regression Analysis</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="spring_in_action.html"
-                        title="next chapter">Spring in Action - Notes</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="../Lecture/regression.html"
+                          title="previous chapter">Regression Analysis</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="spring_in_action.html"
+                          title="next chapter">Spring in Action - Notes</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -58,7 +62,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -66,8 +70,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -77,25 +81,19 @@
           <div class="body" role="main">
             
   <section id="javaserver-pages-jsp-tutorial">
-<h1>JavaServer Pages (JSP) Tutorial<a class="headerlink" href="#javaserver-pages-jsp-tutorial" title="Permalink to this headline">¶</a></h1>
+<h1>JavaServer Pages (JSP) Tutorial<a class="headerlink" href="#javaserver-pages-jsp-tutorial" title="Link to this heading">¶</a></h1>
 <p>A summary of the <a class="reference external" href="https://www.youtube.com/watch?v=40KM8IdneLg&amp;list=PLEAQNNR8IlB588DQvb2wbKFQh2DviPApl&amp;index=1">JavaServer Pages Tutorial</a>.</p>
 <section id="jsp-and-servlets-overview">
-<h2>JSP and Servlets Overview<a class="headerlink" href="#jsp-and-servlets-overview" title="Permalink to this headline">¶</a></h2>
+<h2>JSP and Servlets Overview<a class="headerlink" href="#jsp-and-servlets-overview" title="Link to this heading">¶</a></h2>
 <ul>
 <li><dl>
-<dt>What are Web Applications?</dt><dd><blockquote>
-<div><ul class="simple">
+<dt>What are Web Applications?</dt><dd><ul class="simple">
 <li><p>A web site where the HTML pages are generated dynamically</p></li>
 <li><p>Based on the user’s actions</p></li>
 <li><p>E.g. Expedia: when user searches for hotels/flights, the website is generated on the fly when the use clicks the button</p></li>
 </ul>
-<img alt="../_images/web_applications.png" src="../_images/web_applications.png" />
-<dl class="field-list simple">
-<dt class="field-odd">scale</dt>
-<dd class="field-odd"><p>47 %</p>
-</dd>
-</dl>
-</div></blockquote>
+<a class="reference internal image-reference" href="../_images/web_applications.png"><img alt="../_images/web_applications.png" src="../_images/web_applications.png" style="width: 396.67999999999995px; height: 165.91px;" />
+</a>
 <ul class="simple">
 <li><p>Can build Web Apps using JSP, Servlets, Dot Net, PHP technologies, and so on</p></li>
 </ul>
@@ -146,8 +144,8 @@
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 

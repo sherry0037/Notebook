@@ -1,19 +1,17 @@
 
-
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Backtracking &#8212; Notebook  documentation</title>
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/yeen.css" />
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8e8a900e" />
+    <link rel="stylesheet" type="text/css" href="../_static/yeen.css?v=ed2c6189" />
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Binary Search" href="binary_search.html" />
@@ -37,8 +35,9 @@
     </div>
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table of Contents</a></h3>
-  <ul>
+  <div>
+    <h3><a href="../index.html">Table of Contents</a></h3>
+    <ul>
 <li><a class="reference internal" href="#">Backtracking</a><ul>
 <li><a class="reference internal" href="#letter-case-permutation-09-03-19">784. Letter Case Permutation (09/03/19)</a></li>
 <li><a class="reference internal" href="#binary-watch-09-03-19">401. Binary Watch (09/03/19)</a></li>
@@ -48,12 +47,17 @@
 <li><a class="reference internal" href="#binary-tree-paths">257. Binary Tree Paths</a></li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="array.html"
-                        title="previous chapter">Array</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="binary_search.html"
-                        title="next chapter">Binary Search</a></p>
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="array.html"
+                          title="previous chapter">Array</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="binary_search.html"
+                          title="next chapter">Binary Search</a></p>
+  </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
@@ -61,7 +65,7 @@
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
-<div id="searchbox" style="display: none" role="search">
+<search id="searchbox" style="display: none" role="search">
   <h3 id="searchlabel">Quick search</h3>
     <div class="searchformwrapper">
     <form class="search" action="../search.html" method="get">
@@ -69,8 +73,8 @@
       <input type="submit" value="Go" />
     </form>
     </div>
-</div>
-<script>$('#searchbox').show(0);</script>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
         </div>
       </div>
 
@@ -80,11 +84,11 @@
           <div class="body" role="main">
             
   <section id="backtracking">
-<h1>Backtracking<a class="headerlink" href="#backtracking" title="Permalink to this headline">¶</a></h1>
+<h1>Backtracking<a class="headerlink" href="#backtracking" title="Link to this heading">¶</a></h1>
 <section id="letter-case-permutation-09-03-19">
-<h2>784. Letter Case Permutation (09/03/19)<a class="headerlink" href="#letter-case-permutation-09-03-19" title="Permalink to this headline">¶</a></h2>
+<h2>784. Letter Case Permutation (09/03/19)<a class="headerlink" href="#letter-case-permutation-09-03-19" title="Link to this heading">¶</a></h2>
 <p>Given a string S, we can transform every letter individually to be lowercase or uppercase to create another string.  Return a list of all possible strings we could create.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Examples</p>
 <p>Input: S = “a1b2”
 Output: [“a1b2”, “a1B2”, “A1b2”, “A1B2”]</p>
@@ -92,67 +96,67 @@ Output: [“a1b2”, “a1B2”, “A1b2”, “A1B2”]</p>
 Output: [“3z4”, “3Z4”]</p>
 <p>Input: S = “12345”
 Output: [“12345”]</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Notes</p>
 <ul class="simple">
 <li><p>S will be a string with length between 1 and 12.</p></li>
 <li><p>S will consist only of letters or digits.</p></li>
 </ul>
-</div>
+</aside>
 <p><strong>1st Attempt:</strong></p>
 <p>Assuming that we’ve already dealt with all the chars except for the last character. Say, for <code class="docutils literal notranslate"><span class="pre">S</span> <span class="pre">=</span> <span class="pre">&quot;a1b2c&quot;</span></code>, we already have <code class="docutils literal notranslate"><span class="pre">[&quot;a1b2&quot;,</span> <span class="pre">&quot;a1B2&quot;,</span> <span class="pre">&quot;A1b2&quot;,</span> <span class="pre">&quot;A1B2&quot;]</span></code>, and we want to append <code class="docutils literal notranslate"><span class="pre">c</span></code> to the Strings. If the character is a letter, we need to add both upper case and lower case; if it’s a digit, we just need to add a letter. In this case, we will obtain <code class="docutils literal notranslate"><span class="pre">[&quot;a1b2c&quot;,</span> <span class="pre">&quot;a1B2c&quot;,</span> <span class="pre">&quot;A1b2c&quot;,</span> <span class="pre">&quot;A1B2c&quot;,</span> <span class="pre">&quot;a1b2C&quot;,</span> <span class="pre">&quot;a1B2C&quot;,</span> <span class="pre">&quot;A1b2C&quot;,</span> <span class="pre">&quot;A1B2C&quot;]</span></code>. A simple helper function will do this. Start with a List of an empty String, and traverse through the input String to add each character one by one.</p>
 <p>See <em>Approach #1: Recursion</em> in Solution for different implementation using StringBuilder.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">letterCasePermutation</span><span class="p">(</span><span class="n">String</span> <span class="n">S</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">inputList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">inputList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
-        <span class="kt">char</span><span class="o">[]</span> <span class="n">inputArray</span> <span class="o">=</span> <span class="n">S</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">ch</span> <span class="p">:</span> <span class="n">inputArray</span><span class="p">){</span>
-            <span class="n">inputList</span> <span class="o">=</span> <span class="n">helper</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span> <span class="n">inputList</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">inputList</span><span class="p">;</span>
-    <span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">letterCasePermutation</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">S</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">inputList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">);</span>
+<span class="w">        </span><span class="kt">char</span><span class="o">[]</span><span class="w"> </span><span class="n">inputArray</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">S</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">ch</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">inputArray</span><span class="p">){</span>
+<span class="w">            </span><span class="n">inputList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">helper</span><span class="p">(</span><span class="n">ch</span><span class="p">,</span><span class="w"> </span><span class="n">inputList</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">inputList</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">helper</span><span class="p">(</span><span class="kt">char</span> <span class="n">c</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">inputList</span><span class="p">){</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">toAdd</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">isLetter</span><span class="p">(</span><span class="n">c</span><span class="p">)){</span>
-            <span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
-            <span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
-        <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-            <span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">helper</span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">c</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputList</span><span class="p">){</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span><span class="w"> </span><span class="n">toAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">isLetter</span><span class="p">(</span><span class="n">c</span><span class="p">)){</span>
+<span class="w">            </span><span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toLowerCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">            </span><span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">toUpperCase</span><span class="p">(</span><span class="n">c</span><span class="p">));</span>
+<span class="w">        </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">            </span><span class="n">toAdd</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">c</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
 
-        <span class="k">for</span> <span class="p">(</span><span class="n">String</span> <span class="n">s</span> <span class="p">:</span> <span class="n">inputList</span><span class="p">){</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">char</span> <span class="n">newChar</span> <span class="p">:</span> <span class="n">toAdd</span><span class="p">){</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">Character</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">newChar</span><span class="p">));</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">inputList</span><span class="p">){</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="n">newChar</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">toAdd</span><span class="p">){</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="o">+</span><span class="n">Character</span><span class="p">.</span><span class="na">toString</span><span class="p">(</span><span class="n">newChar</span><span class="p">));</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="binary-watch-09-03-19">
-<h2>401. Binary Watch (09/03/19)<a class="headerlink" href="#binary-watch-09-03-19" title="Permalink to this headline">¶</a></h2>
+<h2>401. Binary Watch (09/03/19)<a class="headerlink" href="#binary-watch-09-03-19" title="Link to this heading">¶</a></h2>
 <p>A binary watch has 4 LEDs on the top which represent the hours (0-11), and the 6 LEDs on the bottom represent the minutes (0-59).</p>
 <p>Each LED represents a zero or one, with the least significant bit on the right.</p>
 <p>Given a non-negative integer n which represents the number of LEDs that are currently on, return all possible times the watch could represent.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Examples</p>
 <p>Input: n = 1
 Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”, “0:04”, “0:08”, “0:16”, “0:32”]</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Notes</p>
 <ul class="simple">
 <li><p>The order of output does not matter.</p></li>
 <li><p>The hour must not contain a leading zero, for example “01:00” is not valid, it should be “1:00”.</p></li>
 <li><p>The minute must be consist of two digits and may contain a leading zero, for example “10:2” is not valid, it should be “10:02”.</p></li>
 </ul>
-</div>
+</aside>
 <p><strong>1st Attempt:</strong></p>
 <p>The core of this problem is a combination problem. Suppose we know how many lights are on for hours/minutes, we need to find all possible combinations for lights that are on. For example, if we use [8, 4, 2, 1] to represent the hours, and 2 lights are on, then the combinations are [[8, 4], [8, 2], [8, 1], [4, 2], [4, 1], [2, 1]]. The corresponding time is [12, 10, 9, 6, 5, 3]. We can do the same thing for minutes. We can write a <code class="docutils literal notranslate"><span class="pre">choose()</span></code> method to compute this. Then remove any number that is not in the range, and convert them to proper Strings to get the final anser.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">choose()</span></code> method takes two Lists of Integers, representing the lights, and the number of lights <code class="docutils literal notranslate"><span class="pre">K</span></code> to choose. For more ways to generate combination, read this <a class="reference external" href="https://www.baeldung.com/java-combinations-algorithm">article</a>. The high level idea of the method I used is: suppose we are choosing <code class="docutils literal notranslate"><span class="pre">K</span></code> elements from a List of size <code class="docutils literal notranslate"><span class="pre">N</span></code>, for the first element, we can decide if we want to keep it or not. If keep it, the question reduces to choosing <code class="docutils literal notranslate"><span class="pre">K-1</span></code> elements from the List without the first element (size <code class="docutils literal notranslate"><span class="pre">N-1</span></code>); otherwise, the question reduces to choosing <code class="docutils literal notranslate"><span class="pre">K</span></code> elements from List without the first element (size <code class="docutils literal notranslate"><span class="pre">N-1</span></code>). Then we can use any recursive method to implement this.</p>
@@ -164,101 +168,97 @@ Return: [“1:00”, “2:00”, “4:00”, “8:00”, “0:01”, “0:02”,
 </ul>
 </dd>
 </dl>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">readBinaryWatch</span><span class="p">(</span><span class="kt">int</span> <span class="n">num</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">num</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-            <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;0:00&quot;</span><span class="p">);</span>
-            <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">HOURS</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">HOURS</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">MINUTES</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">MINUTES</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span> <span class="n">h</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kt">int</span> <span class="n">m</span> <span class="o">=</span> <span class="n">num</span><span class="o">-</span><span class="n">h</span><span class="p">;</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">hours_time</span> <span class="o">=</span> <span class="n">getSums</span><span class="p">(</span><span class="n">choose</span><span class="p">(</span><span class="n">HOURS</span><span class="p">,</span> <span class="n">h</span><span class="p">),</span> <span class="mi">11</span><span class="p">);</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">minutes_time</span> <span class="o">=</span> <span class="n">getSums</span><span class="p">(</span><span class="n">choose</span><span class="p">(</span><span class="n">MINUTES</span><span class="p">,</span> <span class="n">m</span><span class="p">),</span> <span class="mi">59</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">h</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-                <span class="n">hours_time</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-                <span class="n">minutes_time</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">hour</span> <span class="p">:</span> <span class="n">hours_time</span><span class="p">){</span>
-                <span class="n">String</span> <span class="n">h_str</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">hour</span><span class="p">);</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">minute</span> <span class="p">:</span> <span class="n">minutes_time</span><span class="p">){</span>
-                    <span class="n">String</span> <span class="n">m_str</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">minute</span><span class="p">);</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="n">minute</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">){</span>
-                        <span class="n">m_str</span> <span class="o">=</span> <span class="s">&quot;0&quot;</span> <span class="o">+</span> <span class="n">m_str</span><span class="p">;</span>
-                    <span class="p">}</span>
-                    <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">h_str</span> <span class="o">+</span> <span class="s">&quot;:&quot;</span> <span class="o">+</span> <span class="n">m_str</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">readBinaryWatch</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">num</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">num</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">            </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;0:00&quot;</span><span class="p">);</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">HOURS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">HOURS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">8</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">MINUTES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">MINUTES</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="mi">32</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">h</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">num</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="w"> </span><span class="n">h</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">num</span><span class="o">-</span><span class="n">h</span><span class="p">;</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">hours_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSums</span><span class="p">(</span><span class="n">choose</span><span class="p">(</span><span class="n">HOURS</span><span class="p">,</span><span class="w"> </span><span class="n">h</span><span class="p">),</span><span class="w"> </span><span class="mi">11</span><span class="p">);</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">minutes_time</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getSums</span><span class="p">(</span><span class="n">choose</span><span class="p">(</span><span class="n">MINUTES</span><span class="p">,</span><span class="w"> </span><span class="n">m</span><span class="p">),</span><span class="w"> </span><span class="mi">59</span><span class="p">);</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">h</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                </span><span class="n">hours_time</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">m</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">                </span><span class="n">minutes_time</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">hours_time</span><span class="p">){</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">h_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">hour</span><span class="p">);</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">minute</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">minutes_time</span><span class="p">){</span>
+<span class="w">                    </span><span class="n">String</span><span class="w"> </span><span class="n">m_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">minute</span><span class="p">);</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">minute</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">){</span>
+<span class="w">                        </span><span class="n">m_str</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;0&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_str</span><span class="p">;</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                    </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">h_str</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;:&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">m_str</span><span class="p">);</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
 
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">choose</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">inputList</span><span class="p">,</span> <span class="kt">int</span> <span class="n">K</span><span class="p">){</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">K</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">){</span>
-            <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">K</span> <span class="o">==</span> <span class="mi">1</span><span class="p">){</span>
-            <span class="k">for</span> <span class="p">(</span><span class="n">Integer</span> <span class="n">i</span> <span class="p">:</span> <span class="n">inputList</span><span class="p">){</span>
-                <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">newList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-                <span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newList</span><span class="p">);</span>
-            <span class="p">}</span>
-            <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="n">Integer</span> <span class="n">first</span> <span class="o">=</span> <span class="n">inputList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">included</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">inputList</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span> <span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">notIncluded</span> <span class="o">=</span> <span class="n">choose</span><span class="p">(</span><span class="n">inputList</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span> <span class="n">K</span><span class="p">);</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">previousList</span> <span class="p">:</span> <span class="n">included</span><span class="p">){</span>
-            <span class="n">previousList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">first</span><span class="p">);</span>
-            <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">previousList</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">previousList</span> <span class="p">:</span> <span class="n">notIncluded</span><span class="p">){</span>
-            <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">previousList</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">choose</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">inputList</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">K</span><span class="p">){</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">){</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">K</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">){</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">Integer</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">inputList</span><span class="p">){</span>
+<span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">newList</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Integer</span><span class="w"> </span><span class="n">first</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">inputList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">included</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">choose</span><span class="p">(</span><span class="n">inputList</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span><span class="w"> </span><span class="n">K</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">notIncluded</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">choose</span><span class="p">(</span><span class="n">inputList</span><span class="p">.</span><span class="na">subList</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">inputList</span><span class="p">.</span><span class="na">size</span><span class="p">()),</span><span class="w"> </span><span class="n">K</span><span class="p">);</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">previousList</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">included</span><span class="p">){</span>
+<span class="w">            </span><span class="n">previousList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">first</span><span class="p">);</span>
+<span class="w">            </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">previousList</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">previousList</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">notIncluded</span><span class="p">){</span>
+<span class="w">            </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">previousList</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="kd">private</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="nf">getSums</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">inputList</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxSum</span><span class="p">){</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">for</span> <span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">intList</span> <span class="p">:</span> <span class="n">inputList</span><span class="p">){</span>
-            <span class="kt">int</span> <span class="n">sum</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="p">:</span> <span class="n">intList</span><span class="p">){</span>
-                <span class="n">sum</span> <span class="o">+=</span> <span class="n">i</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">sum</span> <span class="o">&lt;=</span> <span class="n">maxSum</span><span class="p">){</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">rst</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getSums</span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">inputList</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">maxSum</span><span class="p">){</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">intList</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">inputList</span><span class="p">){</span>
+<span class="w">            </span><span class="kt">int</span><span class="w"> </span><span class="n">sum</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">intList</span><span class="p">){</span>
+<span class="w">                </span><span class="n">sum</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sum</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">maxSum</span><span class="p">){</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">sum</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">rst</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
 </section>
 <section id="permutations-09-04-19">
-<h2>46. Permutations (09/04/19)<a class="headerlink" href="#permutations-09-04-19" title="Permalink to this headline">¶</a></h2>
+<h2>46. Permutations (09/04/19)<a class="headerlink" href="#permutations-09-04-19" title="Link to this heading">¶</a></h2>
 <p>Given a collection of <strong>distinct</strong> integers, return all possible permutations.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example</p>
 <p>Input: [1,2,3]
 Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]</p>
-</div>
+</aside>
 <p><strong>1st Attempt:</strong></p>
 <p>We can use a stack to keep adding elements to Lists. At the first step, the stack is <code class="docutils literal notranslate"><span class="pre">[[1],</span> <span class="pre">[2],</span> <span class="pre">[3]]</span></code>. We pop out the head of the stack, in this case <code class="docutils literal notranslate"><span class="pre">[1]</span></code>, iterate through the input nums. For each element, check wether it is contained in the head. If not, add this element to a copy of the head, and push it back to the stack. So the stack changes as follows:</p>
 <table class="docutils align-default">
-<colgroup>
-<col style="width: 8%" />
-<col style="width: 92%" />
-</colgroup>
 <thead>
 <tr class="row-odd"><th class="head"><p>head</p></th>
 <th class="head"><p>stack</p></th>
@@ -298,36 +298,36 @@ Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]</p>
 </tbody>
 </table>
 <p>When the size of the head is same as the input length, this List is finished and can be added to the final result.</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-    <span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="nf">permute</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">nums</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span> <span class="n">stack</span>  <span class="o">=</span> <span class="k">new</span> <span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">:</span><span class="n">nums</span><span class="p">){</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">l</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-            <span class="n">l</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-            <span class="n">stack</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>
-        <span class="p">}</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="nf">permute</span><span class="p">(</span><span class="kt">int</span><span class="o">[]</span><span class="w"> </span><span class="n">nums</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">stack</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="n">nums</span><span class="p">){</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">l</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">            </span><span class="n">l</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">stack</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">l</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
 
-        <span class="k">while</span> <span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
-            <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">current</span> <span class="o">=</span> <span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">){</span>
-                <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
-            <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="p">:</span><span class="n">nums</span><span class="p">){</span>
-                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">current</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">i</span><span class="p">)){</span>
-                        <span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span> <span class="n">newList</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-                        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span><span class="p">:</span><span class="n">current</span><span class="p">){</span>
-                            <span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
-                        <span class="p">}</span>
-                        <span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-                        <span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">newList</span><span class="p">);</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">stack</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">0</span><span class="p">){</span>
+<span class="w">            </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">stack</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">current</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">nums</span><span class="p">.</span><span class="na">length</span><span class="p">){</span>
+<span class="w">                </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">current</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="k">else</span><span class="p">{</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="p">:</span><span class="n">nums</span><span class="p">){</span>
+<span class="w">                    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">current</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">i</span><span class="p">)){</span>
+<span class="w">                        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">newList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">                        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="p">:</span><span class="n">current</span><span class="p">){</span>
+<span class="w">                            </span><span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">j</span><span class="p">);</span>
+<span class="w">                        </span><span class="p">}</span>
+<span class="w">                        </span><span class="n">newList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">                        </span><span class="n">stack</span><span class="p">.</span><span class="na">push</span><span class="p">(</span><span class="n">newList</span><span class="p">);</span>
+<span class="w">                    </span><span class="p">}</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 
-    <span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -340,48 +340,48 @@ Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]</p>
 </section>
 </section>
 <section id="binary-tree-paths">
-<h1>257. Binary Tree Paths<a class="headerlink" href="#binary-tree-paths" title="Permalink to this headline">¶</a></h1>
+<h1>257. Binary Tree Paths<a class="headerlink" href="#binary-tree-paths" title="Link to this heading">¶</a></h1>
 <p>Given the root of a binary tree, return all root-to-leaf paths in any order.</p>
 <p>A leaf is a node with no children.</p>
-<div class="topic">
+<aside class="topic">
 <p class="topic-title">Example 1</p>
 <p>Input: root = [1,2,3,null,5]</p>
 <p>Output: [“1-&gt;2-&gt;5”,”1-&gt;3”]</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Example 2</p>
 <p>Input: root = [1]</p>
 <p>Output: [“1”]</p>
-</div>
-<div class="topic">
+</aside>
+<aside class="topic">
 <p class="topic-title">Constraints</p>
 <p>The number of nodes in the tree is in the range [1, 100].</p>
 <p>-100 &lt;= Node.val &lt;= 100</p>
-</div>
+</aside>
 <p><strong>Approach</strong> use backtracking</p>
-<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">binaryTreePaths</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">root</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
-    <span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="k">new</span> <span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span> <span class="n">rst</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">rst</span><span class="p">;</span>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">binaryTreePaths</span><span class="p">(</span><span class="n">TreeNode</span><span class="w"> </span><span class="n">root</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">    </span><span class="n">traverse</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">rst</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kd">private</span> <span class="kt">void</span> <span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span> <span class="n">node</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">temp</span><span class="p">,</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">rst</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">temp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;&quot;</span> <span class="o">+</span> <span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">==</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">String</span> <span class="n">s</span> <span class="o">=</span> <span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="n">temp</span><span class="p">);</span>
-        <span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
-        <span class="k">return</span><span class="p">;</span>
-    <span class="p">}</span>
+<span class="kd">private</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">traverse</span><span class="p">(</span><span class="n">TreeNode</span><span class="w"> </span><span class="n">node</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">rst</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">temp</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">val</span><span class="p">);</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot;-&gt;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">);</span>
+<span class="w">        </span><span class="n">rst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">s</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
-        <span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">left</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">rst</span><span class="p">);</span>
+<span class="w">        </span><span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
-    <span class="k">if</span> <span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span> <span class="n">temp</span><span class="p">,</span> <span class="n">rst</span><span class="p">);</span>
-        <span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
-    <span class="p">}</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="kc">null</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">traverse</span><span class="p">(</span><span class="n">node</span><span class="p">.</span><span class="na">right</span><span class="p">,</span><span class="w"> </span><span class="n">temp</span><span class="p">,</span><span class="w"> </span><span class="n">rst</span><span class="p">);</span>
+<span class="w">        </span><span class="n">temp</span><span class="p">.</span><span class="na">remove</span><span class="p">(</span><span class="n">temp</span><span class="p">.</span><span class="na">size</span><span class="p">()</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -413,8 +413,8 @@ Output: [[1,2,3], [1,3,2], [2,1,3], [2,3,1], [3,1,2], [3,2,1]]</p>
     </div>
     
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2019, Yixuan Ni.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.1.2.
+    &#169; Copyright 2019, Yixuan Ni.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.3.7.
     </div>
     
 
