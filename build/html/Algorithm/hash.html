@@ -45,6 +45,7 @@
 <li><a class="reference internal" href="#hand-of-straights">846. Hand of Straights</a></li>
 <li><a class="reference internal" href="#logger-rate-limiter">359. Logger Rate Limiter</a></li>
 <li><a class="reference internal" href="#lru-cache">146. LRU Cache</a></li>
+<li><a class="reference internal" href="#determine-if-two-strings-are-close-medium">1657. Determine if Two Strings Are Close (Medium)</a></li>
 </ul>
 </li>
 </ul>
@@ -98,6 +99,7 @@
 <li><p><a class="reference internal" href="#hand-of-straights" id="id5">846. Hand of Straights</a></p></li>
 <li><p><a class="reference internal" href="#logger-rate-limiter" id="id6">359. Logger Rate Limiter</a></p></li>
 <li><p><a class="reference internal" href="#lru-cache" id="id7">146. LRU Cache</a></p></li>
+<li><p><a class="reference internal" href="#determine-if-two-strings-are-close-medium" id="id8">1657. Determine if Two Strings Are Close (Medium)</a></p></li>
 </ul>
 </li>
 </ul>
@@ -506,6 +508,88 @@ cache. If the number of keys exceeds the capacity from this operation, evict the
 <span class="w">        </span><span class="n">before</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">after</span><span class="p">;</span>
 <span class="w">        </span><span class="n">after</span><span class="p">.</span><span class="na">prev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">before</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="determine-if-two-strings-are-close-medium">
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">1657. Determine if Two Strings Are Close (Medium)</a><a class="headerlink" href="#determine-if-two-strings-are-close-medium" title="Link to this heading">¶</a></h2>
+<p>Two strings are considered close if you can attain one from the other using the following operations:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>Operation 1: Swap any two existing characters.</dt><dd><p>For example, abcde -&gt; aecdb</p>
+</dd>
+<dt>Operation 2: Transform every occurrence of one existing character into another existing character, and do the same with the other character.</dt><dd><p>For example, aacabb -&gt; bbcbaa (all a’s turn into b’s, and all b’s turn into a’s)</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>You can use the operations on either string as many times as necessary.</p>
+<p>Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.</p>
+<aside class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: word1 = “abc”, word2 = “bca”
+Output: true
+Explanation: You can attain word2 from word1 in 2 operations.
+Apply Operation 1: “abc” -&gt; “acb”
+Apply Operation 1: “acb” -&gt; “bca”</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: word1 = “a”, word2 = “aa”
+Output: false
+Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: word1 = “cabbba”, word2 = “abbccc”
+Output: true
+Explanation: You can attain word2 from word1 in 3 operations.
+Apply Operation 1: “cabbba” -&gt; “caabbb”
+Apply Operation 2: “caabbb” -&gt; “baaccc”
+Apply Operation 2: “baaccc” -&gt; “abbccc”</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= word1.length, word2.length &lt;= 105
+word1 and word2 contain only lowercase English letters.</p>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="nf">closeStrings</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word1</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">word2</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">word1</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">word2</span><span class="p">.</span><span class="na">length</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+
+<span class="w">      </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">counts1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCounts</span><span class="p">(</span><span class="n">word1</span><span class="p">);</span>
+<span class="w">      </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">counts2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">getCounts</span><span class="p">(</span><span class="n">word2</span><span class="p">);</span>
+
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">counts1</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+<span class="w">      </span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">values1</span><span class="p">);</span>
+<span class="w">      </span><span class="n">List</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">values2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">(</span><span class="n">counts2</span><span class="p">.</span><span class="na">values</span><span class="p">());</span>
+<span class="w">      </span><span class="n">Collections</span><span class="p">.</span><span class="na">sort</span><span class="p">(</span><span class="n">values2</span><span class="p">);</span>
+
+<span class="w">      </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keys1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counts1</span><span class="p">.</span><span class="na">keySet</span><span class="p">();</span>
+<span class="w">      </span><span class="n">Set</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">keys2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">counts2</span><span class="p">.</span><span class="na">keySet</span><span class="p">();</span>
+
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">values1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">values2</span><span class="p">)</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">keys1</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="n">keys2</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="kc">true</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="k">return</span><span class="w"> </span><span class="kc">false</span><span class="p">;</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="kd">private</span><span class="w"> </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="nf">getCounts</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">word</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="p">,</span><span class="w"> </span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">dict</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HashMap</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">word</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="n">String</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">word</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">          </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dict</span><span class="p">.</span><span class="na">containsKey</span><span class="p">(</span><span class="n">key</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="n">dict</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">dict</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">          </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">              </span><span class="n">dict</span><span class="p">.</span><span class="na">put</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">dict</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

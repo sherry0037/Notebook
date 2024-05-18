@@ -23,7 +23,7 @@ You must implement an algorithm that runs in O(n) time and uses constant extra s
 .. topic:: Example 2
 
 	Input: nums = [3,4,-1,1]
-	
+
 	Output: 2
 
 .. topic:: Example 3
@@ -31,7 +31,7 @@ You must implement an algorithm that runs in O(n) time and uses constant extra s
 	Input: nums = [7,8,9,11,12]
 
 	Output: 1
- 
+
 
 .. topic:: Constraints
 
@@ -39,26 +39,26 @@ You must implement an algorithm that runs in O(n) time and uses constant extra s
 
 	-231 <= nums[i] <= 231 - 1
 
-**Approach**: Given an array of length n, the missing positive integer must be 1 - n+1. For example, for length 5, to get the largest missing positive integer, the array must be [1,2,3,4,5], then the rst is 6. So we can create a array of length n, where index i means i+1 is not missing. For example, rst[0] = 1 means 1 is given. rst[1] = 0 means 2 is not given. Then we traverse nums once to fill in rst, then traverse rst to get the first index with 0. 
+**Approach**: Given an array of length n, the missing positive integer must be 1 - n+1. For example, for length 5, to get the largest missing positive integer, the array must be [1,2,3,4,5], then the rst is 6. So we can create a array of length n, where index i means i+1 is not missing. For example, rst[0] = 1 means 1 is given. rst[1] = 0 means 2 is not given. Then we traverse nums once to fill in rst, then traverse rst to get the first index with 0.
 
 .. code-block:: java
 
     public int firstMissingPositive(int[] nums) {
         int n = nums.length;
         int[] rst = new int[n];
-        
+
         for (int i : nums) {
             if (i<=n && i >= 1) {
                 rst[i-1] = 1;
             }
         }
-        
+
         for (int j=0; j<n; j++) {
             if (rst[j] == 0) {
                 return j+1;
             }
         }
-        
+
         return n+1;
     }
 
@@ -72,7 +72,7 @@ You must write an algorithm that runs in O(n) time.
 
 **Approach**: Add all the nums to a Hash Set. Then for each num, determine if it is the start of a sequence (n-1 is not in the set), then keep counting while n+1 is in the set.
 
- 
+
 .. topic:: Example 1
 
     Input: nums = [100,4,200,1,3,2]
@@ -87,7 +87,7 @@ You must write an algorithm that runs in O(n) time.
     Input: nums = [0,3,7,2,5,8,4,6,0,1]
 
     Output: 9
- 
+
 
 .. topic:: Constraints
 
@@ -100,13 +100,13 @@ You must write an algorithm that runs in O(n) time.
 
     public int longestConsecutive(int[] nums) {
         HashSet<Integer> count = new HashSet<Integer>();
-        
+
         for (int n : nums) {
             count.add(n);
         }
-        
+
         int maxL = 0;
-        
+
         for (int n : nums) {
             // this step is very important: we only count the sequence that starts with n.
             if (count.contains(n-1)) {
@@ -118,11 +118,11 @@ You must write an algorithm that runs in O(n) time.
                 currentL++;
                 current++;
             }
-            
+
             maxL = Math.max(currentL, maxL);
-            
+
         }
-        
+
         return maxL;
     }
 
@@ -172,7 +172,7 @@ Return the total number of friend requests made.
     Output: 3
 
     Explanation: Friend requests are made 110 -> 100, 120 -> 110, 120 -> 100.
- 
+
 
 .. topic:: Constraints
 
@@ -186,7 +186,7 @@ Return the total number of friend requests made.
 
     public int numFriendRequests(int[] ages) {
         int[] people = new int[121];
-        
+
         for (int a : ages) {
             if (people[a] != 0) {
                 people[a] = people[a]+1;
@@ -194,9 +194,9 @@ Return the total number of friend requests made.
                 people[a] = 1;
             }
         }
-        
+
         int counts = 0;
-        
+
         for (int x : ages) {
             //System.out.println("x: " + x);
             int min = x/2 + 7 + 1;
@@ -210,7 +210,7 @@ Return the total number of friend requests made.
                 //System.out.println("C: " + counts);
             }
         }
-        
+
         return counts;
     }
 
@@ -221,7 +221,7 @@ Return the total number of friend requests made.
 Alice has some number of cards and she wants to rearrange the cards into groups so that each group is of size groupSize, and consists of groupSize consecutive cards.
 
 Given an integer array hand where hand[i] is the value written on the ith card and an integer groupSize, return true if she can rearrange the cards, or false otherwise.
- 
+
 
 .. topic:: Example 1
 
@@ -250,12 +250,12 @@ Given an integer array hand where hand[i] is the value written on the ith card a
 .. code-block:: java
 
     public boolean isNStraightHand(int[] hand, int groupSize) {
-        
+
         if (hand.length%groupSize != 0) {
             return false;
         }
         TreeMap<Integer, Integer> counts = new TreeMap<>();
-        
+
         for (int card : hand) {
             if (counts.containsKey(card)) {
                 int k = counts.get(card) + 1;
@@ -265,8 +265,8 @@ Given an integer array hand where hand[i] is the value written on the ith card a
             }
         }
         // print(counts);
-        
-    
+
+
         while (counts.keySet().size() > 0) {
             int i = counts.keySet().iterator().next();
             // System.out.println("i: "+i);
@@ -276,7 +276,7 @@ Given an integer array hand where hand[i] is the value written on the ith card a
                     return false;
                 }
             }
-        
+
             for (int k=0; k<groupSize; k++) {
                 if (counts.get(i+k) == 1) {
                     counts.remove(i+k);
@@ -285,10 +285,10 @@ Given an integer array hand where hand[i] is the value written on the ith card a
                 }
             }
         }
-        
+
         return true;
     }
-    
+
     private void print(TreeMap<Integer, Integer> counts) {
         for (int k : counts.keySet()) {
             System.out.println("Key: "+k+" value: "+counts.get(k));
@@ -307,7 +307,7 @@ Implement the Logger class:
 
 Logger() Initializes the logger object.
 bool shouldPrintMessage(int timestamp, string message) Returns true if the message should be printed in the given timestamp, otherwise returns false.
- 
+
 .. topic:: Example 1
 
     Input
@@ -349,13 +349,13 @@ bool shouldPrintMessage(int timestamp, string message) Returns true if the messa
 .. code-block:: java
 
     class Logger {
-        
+
         HashMap<String, Integer> logs;
 
         public Logger() {
             this.logs = new HashMap<String, Integer>();
         }
-        
+
         public boolean shouldPrintMessage(int timestamp, String message) {
             if (this.logs.containsKey(message) && timestamp < this.logs.get(message) + 10) {
                 return false;
@@ -378,7 +378,7 @@ LRUCache(int capacity) Initialize the LRU cache with positive size capacity.
 
 int get(int key) Return the value of the key if the key exists, otherwise return -1.
 
-void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the 
+void put(int key, int value) Update the value of the key if the key exists. Otherwise, add the key-value pair to the
 cache. If the number of keys exceeds the capacity from this operation, evict the least recently used key.
 
 The functions get and put must each run in O(1) average time complexity.
@@ -416,7 +416,7 @@ The functions get and put must each run in O(1) average time complexity.
     lRUCache.get(3);    // return 3
 
     lRUCache.get(4);    // return 4
- 
+
 .. topic:: Constraints
 
     1 <= capacity <= 3000
@@ -427,28 +427,28 @@ The functions get and put must each run in O(1) average time complexity.
 
     At most 2 * 105 calls will be made to get and put.
 
-**Approach** use HashMap and doubly-linked list 
+**Approach** use HashMap and doubly-linked list
 
 .. code-block:: java
 
     class LRUCache {
-        
+
         class Node {
             int key;
             int value;
             Node prev;
             Node next;
-            
+
             public Node(int key, int value) {
                 this.key = key;
                 this.value = value;
             }
-            
+
             public Node() {
                 this(0, 0);
             }
         }
-        
+
         int capacity;
         int count;
         Node head;
@@ -464,7 +464,7 @@ The functions get and put must each run in O(1) average time complexity.
             tail.prev = head;
             this.map = new HashMap<>();
         }
-        
+
         public int get(int key) {
             if (map.containsKey(key)) {
                 Node node = map.get(key);
@@ -474,7 +474,7 @@ The functions get and put must each run in O(1) average time complexity.
                 return -1;
             }
         }
-        
+
         public void put(int key, int value) {
             if (map.containsKey(key)) {
                 Node node = map.get(key);
@@ -493,12 +493,12 @@ The functions get and put must each run in O(1) average time complexity.
                     count--;
                 }
         }
-        
+
         private void update(Node node) {
             remove(node);
             add(node);
         }
-        
+
         private void add(Node node) {
             Node temp = head.next;
             head.next = node;
@@ -506,7 +506,7 @@ The functions get and put must each run in O(1) average time complexity.
             node.next = temp;
             temp.prev = node;
         }
-        
+
         private void remove(Node node) {
             Node before = node.prev;
             Node after = node.next;
@@ -514,3 +514,87 @@ The functions get and put must each run in O(1) average time complexity.
             after.prev = before;
         }
     }
+
+---------------------------------------------------
+1657. Determine if Two Strings Are Close (Medium)
+---------------------------------------------------
+
+Two strings are considered close if you can attain one from the other using the following operations:
+
+    Operation 1: Swap any two existing characters.
+        For example, abcde -> aecdb
+    Operation 2: Transform every occurrence of one existing character into another existing character, and do the same with the other character.
+        For example, aacabb -> bbcbaa (all a's turn into b's, and all b's turn into a's)
+
+You can use the operations on either string as many times as necessary.
+
+Given two strings, word1 and word2, return true if word1 and word2 are close, and false otherwise.
+
+.. topic:: Example 1
+
+  Input: word1 = "abc", word2 = "bca"
+  Output: true
+  Explanation: You can attain word2 from word1 in 2 operations.
+  Apply Operation 1: "abc" -> "acb"
+  Apply Operation 1: "acb" -> "bca"
+
+.. topic:: Example 2
+
+  Input: word1 = "a", word2 = "aa"
+  Output: false
+  Explanation: It is impossible to attain word2 from word1, or vice versa, in any number of operations.
+
+.. topic:: Example 3
+
+  Input: word1 = "cabbba", word2 = "abbccc"
+  Output: true
+  Explanation: You can attain word2 from word1 in 3 operations.
+  Apply Operation 1: "cabbba" -> "caabbb"
+  Apply Operation 2: "caabbb" -> "baaccc"
+  Apply Operation 2: "baaccc" -> "abbccc"
+
+.. topic:: Constraints
+
+  1 <= word1.length, word2.length <= 105
+  word1 and word2 contain only lowercase English letters.
+
+.. code-block:: java
+
+  class Solution {
+    public boolean closeStrings(String word1, String word2) {
+        if (word1.length() != word2.length()) {
+            return false;
+        }
+
+        Map<String, Integer> counts1 = getCounts(word1);
+        Map<String, Integer> counts2 = getCounts(word2);
+
+        List<Integer> values1 = new ArrayList<>(counts1.values());
+        Collections.sort(values1);
+        List<Integer> values2 = new ArrayList<>(counts2.values());
+        Collections.sort(values2);
+
+        Set<String> keys1 = counts1.keySet();
+        Set<String> keys2 = counts2.keySet();
+
+        if (values1.equals(values2) && keys1.equals(keys2)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private Map<String, Integer> getCounts(String word) {
+        Map<String, Integer> dict = new HashMap<>();
+
+        for (int i = 0; i < word.length(); i++) {
+            String key = String.valueOf(word.charAt(i));
+            if (dict.containsKey(key)) {
+                dict.put(key, dict.get(key) + 1);
+            } else {
+                dict.put(key, 1);
+            }
+        }
+        return dict;
+    }
+  }
