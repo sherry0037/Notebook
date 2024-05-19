@@ -39,6 +39,10 @@
     <h3><a href="../index.html">Table of Contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#">Linked List</a><ul>
+<li><a class="reference internal" href="#useful-method">Useful Method</a><ul>
+<li><a class="reference internal" href="#java-linkedlist">Java LinkedList</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#remove-linked-list-elements">203. Remove Linked List Elements</a></li>
 <li><a class="reference internal" href="#design-linked-list">707. Design Linked List</a></li>
@@ -46,6 +50,7 @@
 <li><a class="reference internal" href="#swap-nodes-in-pairs">24. Swap Nodes in Pairs</a></li>
 <li><a class="reference internal" href="#intersection-of-two-linked-lists">160. Intersection of Two Linked Lists</a></li>
 <li><a class="reference internal" href="#remove-nth-node-from-end-of-list">19. Remove Nth Node From End of List</a></li>
+<li><a class="reference internal" href="#removing-stars-from-a-string-medium">2390. Removing Stars From a String (Medium)</a></li>
 </ul>
 </li>
 </ul>
@@ -93,19 +98,50 @@
 <ul class="simple">
 <li><p><a class="reference internal" href="#linked-list" id="id1">Linked List</a></p>
 <ul>
-<li><p><a class="reference internal" href="#overview" id="id2">Overview</a></p></li>
-<li><p><a class="reference internal" href="#remove-linked-list-elements" id="id3">203. Remove Linked List Elements</a></p></li>
-<li><p><a class="reference internal" href="#design-linked-list" id="id4">707. Design Linked List</a></p></li>
-<li><p><a class="reference internal" href="#reverse-linked-list" id="id5">206. Reverse Linked List</a></p></li>
-<li><p><a class="reference internal" href="#swap-nodes-in-pairs" id="id6">24. Swap Nodes in Pairs</a></p></li>
-<li><p><a class="reference internal" href="#intersection-of-two-linked-lists" id="id7">160. Intersection of Two Linked Lists</a></p></li>
-<li><p><a class="reference internal" href="#remove-nth-node-from-end-of-list" id="id8">19. Remove Nth Node From End of List</a></p></li>
+<li><p><a class="reference internal" href="#useful-method" id="id2">Useful Method</a></p></li>
+<li><p><a class="reference internal" href="#overview" id="id3">Overview</a></p></li>
+<li><p><a class="reference internal" href="#remove-linked-list-elements" id="id4">203. Remove Linked List Elements</a></p></li>
+<li><p><a class="reference internal" href="#design-linked-list" id="id5">707. Design Linked List</a></p></li>
+<li><p><a class="reference internal" href="#reverse-linked-list" id="id6">206. Reverse Linked List</a></p></li>
+<li><p><a class="reference internal" href="#swap-nodes-in-pairs" id="id7">24. Swap Nodes in Pairs</a></p></li>
+<li><p><a class="reference internal" href="#intersection-of-two-linked-lists" id="id8">160. Intersection of Two Linked Lists</a></p></li>
+<li><p><a class="reference internal" href="#remove-nth-node-from-end-of-list" id="id9">19. Remove Nth Node From End of List</a></p></li>
+<li><p><a class="reference internal" href="#removing-stars-from-a-string-medium" id="id10">2390. Removing Stars From a String (Medium)</a></p></li>
 </ul>
 </li>
 </ul>
 </nav>
+<section id="useful-method">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Useful Method</a><a class="headerlink" href="#useful-method" title="Link to this heading">¶</a></h2>
+<section id="java-linkedlist">
+<h3>Java LinkedList<a class="headerlink" href="#java-linkedlist" title="Link to this heading">¶</a></h3>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// add() add an element to the end of the list</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span>
+<span class="c1">// result: [1, 2, 3]</span>
+
+<span class="c1">// addFirst() add an element to the first of the list</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">);</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="s">&quot;2&quot;</span><span class="p">);</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="s">&quot;3&quot;</span><span class="p">);</span>
+<span class="c1">// result: [3, 2, 1]</span>
+
+<span class="c1">// pop() or poll() remove and return the first element</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="c1">// result: [2, 1]</span>
+
+<span class="c1">// pollLast() remove and return the last element</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">pollLast</span><span class="p">();</span>
+
+<span class="c1">// peek() look at the first element</span>
+<span class="n">queue</span><span class="p">.</span><span class="na">peek</span><span class="p">();</span><span class="w"> </span><span class="c1">// == 3</span>
+</pre></div>
+</div>
+</section>
+</section>
 <section id="overview">
-<h2><a class="toc-backref" href="#id2" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
 <p>Definition</p>
 <div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">ListNode</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="c1">// 结点的值</span>
@@ -144,7 +180,7 @@
 </div>
 </section>
 <section id="remove-linked-list-elements">
-<h2><a class="toc-backref" href="#id3" role="doc-backlink">203. Remove Linked List Elements</a><a class="headerlink" href="#remove-linked-list-elements" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">203. Remove Linked List Elements</a><a class="headerlink" href="#remove-linked-list-elements" title="Link to this heading">¶</a></h2>
 <p>Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.</p>
 <aside class="topic">
 <p class="topic-title">Example 1</p>
@@ -220,7 +256,7 @@
 </div>
 </section>
 <section id="design-linked-list">
-<h2><a class="toc-backref" href="#id4" role="doc-backlink">707. Design Linked List</a><a class="headerlink" href="#design-linked-list" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id5" role="doc-backlink">707. Design Linked List</a><a class="headerlink" href="#design-linked-list" title="Link to this heading">¶</a></h2>
 <p>Design your implementation of the linked list. You can choose to use a singly or doubly linked list.
 A node in a singly linked list should have two attributes: val and next. val is the value of the current node, and next is a pointer/reference to the next node.
 If you want to use the doubly linked list, you will need one more attribute prev to indicate the previous node in the linked list. Assume all nodes in the linked list are 0-indexed.</p>
@@ -440,7 +476,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 </div>
 </section>
 <section id="reverse-linked-list">
-<h2><a class="toc-backref" href="#id5" role="doc-backlink">206. Reverse Linked List</a><a class="headerlink" href="#reverse-linked-list" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">206. Reverse Linked List</a><a class="headerlink" href="#reverse-linked-list" title="Link to this heading">¶</a></h2>
 <p>Given the head of a singly linked list, reverse the list, and return the reversed list.</p>
 <aside class="topic">
 <p class="topic-title">Example 1</p>
@@ -501,7 +537,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 </div>
 </section>
 <section id="swap-nodes-in-pairs">
-<h2><a class="toc-backref" href="#id6" role="doc-backlink">24. Swap Nodes in Pairs</a><a class="headerlink" href="#swap-nodes-in-pairs" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">24. Swap Nodes in Pairs</a><a class="headerlink" href="#swap-nodes-in-pairs" title="Link to this heading">¶</a></h2>
 <p>Given a linked list, swap every two adjacent nodes and return its head. You must solve the problem without modifying the values in the list’s nodes (i.e., only nodes themselves may be changed.)</p>
 <aside class="topic">
 <p class="topic-title">Example 1</p>
@@ -556,7 +592,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 </div>
 </section>
 <section id="intersection-of-two-linked-lists">
-<h2><a class="toc-backref" href="#id7" role="doc-backlink">160. Intersection of Two Linked Lists</a><a class="headerlink" href="#intersection-of-two-linked-lists" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id8" role="doc-backlink">160. Intersection of Two Linked Lists</a><a class="headerlink" href="#intersection-of-two-linked-lists" title="Link to this heading">¶</a></h2>
 <p>Given the heads of two singly linked-lists headA and headB, return the node at which the two lists intersect. If the two linked lists have no intersection at all, return null.</p>
 <p>For example, the following two linked lists begin to intersect at node c1:</p>
 <p>The test cases are generated such that there are no cycles anywhere in the entire linked structure.</p>
@@ -593,7 +629,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 </div>
 </section>
 <section id="remove-nth-node-from-end-of-list">
-<h2><a class="toc-backref" href="#id8" role="doc-backlink">19. Remove Nth Node From End of List</a><a class="headerlink" href="#remove-nth-node-from-end-of-list" title="Link to this heading">¶</a></h2>
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">19. Remove Nth Node From End of List</a><a class="headerlink" href="#remove-nth-node-from-end-of-list" title="Link to this heading">¶</a></h2>
 <p>Given the head of a linked list, remove the nth node from the end of the list and return its head.</p>
 <aside class="topic">
 <p class="topic-title">Example 1</p>
@@ -668,6 +704,67 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 <span class="w">    </span><span class="n">slow</span><span class="p">.</span><span class="na">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">slow</span><span class="p">.</span><span class="na">next</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">first</span><span class="p">.</span><span class="na">next</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="removing-stars-from-a-string-medium">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">2390. Removing Stars From a String (Medium)</a><a class="headerlink" href="#removing-stars-from-a-string-medium" title="Link to this heading">¶</a></h2>
+<p>You are given a string s, which contains stars *.</p>
+<p>In one operation, you can:</p>
+<blockquote>
+<div><p>Choose a star in s.
+Remove the closest non-star character to its left, as well as remove the star itself.</p>
+</div></blockquote>
+<p>Return the string after all stars have been removed.</p>
+<p>Note:</p>
+<blockquote>
+<div><p>The input will be generated such that the operation is always possible.
+It can be shown that the resulting string will always be unique.</p>
+</div></blockquote>
+<aside class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: s = “leet**cod*e”
+Output: “lecoe”
+Explanation: Performing the removals from left to right:
+- The closest character to the 1st star is ‘t’ in “leet**cod*e”. s becomes “lee*cod*e”.
+- The closest character to the 2nd star is ‘e’ in “lee*cod*e”. s becomes “lecod*e”.
+- The closest character to the 3rd star is ‘d’ in “lecod*e”. s becomes “lecoe”.
+There are no more stars, so we return “lecoe”.</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: s = “erase*****”
+Output: “”
+Explanation: The entire string is removed, so we return an empty string.</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= s.length &lt;= 105
+s consists of lowercase English letters and stars *.
+The operation above can be performed on s.</p>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">removeStars</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">s</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">s</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="sc">&#39;*&#39;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">queue</span><span class="p">.</span><span class="na">peek</span><span class="p">()</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="s">&quot;*&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">queue</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">s</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">)));</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">String</span><span class="w"> </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;&quot;</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">queue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">rst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">pop</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">rst</span><span class="p">;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>

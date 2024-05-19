@@ -6,6 +6,39 @@ Linked List
     :depth: 2
 
 ----------------------------
+Useful Method
+----------------------------
+
+^^^^^^^^^^^^^^^^
+Java LinkedList
+^^^^^^^^^^^^^^^^
+
+.. code-block:: java
+
+  // add() add an element to the end of the list
+  queue.add("1");
+  queue.add("2");
+  queue.add("3");
+  // result: [1, 2, 3]
+
+  // addFirst() add an element to the first of the list
+  queue.addFirst("1");
+  queue.addFirst("2");
+  queue.addFirst("3");
+  // result: [3, 2, 1]
+
+  // pop() or poll() remove and return the first element
+  queue.pop();
+  // result: [2, 1]
+
+  // pollLast() remove and return the last element
+  queue.pollLast();
+
+  // peek() look at the first element
+  queue.peek(); // == 3
+
+
+----------------------------
 Overview
 ----------------------------
 
@@ -36,7 +69,7 @@ Definition
         }
     }
 
-Printing 
+Printing
 
 .. code-block:: java
 
@@ -89,14 +122,14 @@ Given the head of a linked list and an integer val, remove all the nodes of the 
         if (head == null) {
             return head;
         }
-        
+
         while (head.val == val) {
             head = head.next;
             if (head == null) {
                 return head;
             }
         }
-        
+
         ListNode prev = head;
         ListNode curr = head.next;
         while (curr != null) {
@@ -107,7 +140,7 @@ Given the head of a linked list and an integer val, remove all the nodes of the 
             }
             curr = curr.next;
         }
-        
+
         return head;
     }
 
@@ -130,7 +163,7 @@ Given the head of a linked list and an integer val, remove all the nodes of the 
             }
             curr = curr.next;
         }
-        
+
         return first.next;
     }
 
@@ -178,7 +211,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
     myLinkedList.deleteAtIndex(1);    // now the linked list is 1->3
 
     myLinkedList.get(1);              // return 3
- 
+
 .. topic:: Constraints
 
     0 <= index, val <= 1000
@@ -197,7 +230,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
      * obj.addAtTail(val);
      * obj.addAtIndex(index,val);
      * obj.deleteAtIndex(index);
-     */ 
+     */
 
 
 **Approach 1: singly linked list**
@@ -207,7 +240,7 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
     class ListNode {
         int val;
         ListNode next;
-    
+
         public ListNode(int val) {
             this.val = val;
         }
@@ -221,56 +254,56 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
             this.size = 0;
             this.head = new ListNode(-1);
         }
-        
+
         public int get(int index) {
             if (index >= size || index < 0) {
                 return -1;
             }
-            
+
             ListNode curr = head;
             for (int i=0; i<=index; i++) {
                 curr = curr.next;
             }
-            
+
             return curr.val;
         }
-        
+
         public void addAtHead(int val) {
             addAtIndex(0, val);
         }
-        
+
         public void addAtTail(int val) {
             addAtIndex(this.size, val);
         }
-        
+
         public void addAtIndex(int index, int val) {
             if (index > size || index < 0) {
                 return;
             }
-            
+
             ListNode prev = head;
             ListNode newNode = new ListNode(val);
-            
+
             for (int i=0; i<index; i++) {
                 prev = prev.next;
             }
-            
+
             newNode.next = prev.next;
             prev.next = newNode;
             size++;
         }
-        
+
         public void deleteAtIndex(int index) {
             if (index >= size || index < 0) {
                 return;
             }
-            
+
             ListNode prev = head;
-            
+
             for (int i=0; i<index; i++) {
                 prev = prev.next;
             }
-            
+
             size--;
             prev.next = prev.next.next;
         }
@@ -279,12 +312,12 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
 **Approach 2: doubly linked list**
 
 .. code-block:: java
-      
+
     class ListNode {
         int val;
         ListNode next;
-        ListNode prev;  
-    
+        ListNode prev;
+
         public ListNode(int val) {
             this.val = val;
         }
@@ -302,12 +335,12 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
             this.head.next = this.tail;
             this.tail.prev = this.head;
         }
-        
+
         public int get(int index) {
             if (index < 0 || index >= this.size) {
                 return -1;
             }
-            
+
             if (index < size/2) {
                 ListNode curr = head;
                 for (int i=0; i<=index; i++) {
@@ -321,63 +354,63 @@ void deleteAtIndex(int index) Delete the indexth node in the linked list, if the
                 }
                 return curr.val;
             }
-            
+
         }
-        
+
         public void addAtHead(int val) {
             addAtIndex(0, val);
         }
-        
+
         public void addAtTail(int val) {
             addAtIndex(this.size, val);
         }
-        
+
         public void addAtIndex(int index, int val) {
             if (index < 0 || index > this.size) {
                 return;
             }
-            
+
             ListNode curr = head;
             for (int i=0; i<index; i++) {
                 curr = curr.next;
             }
-            
+
             ListNode newNode = new ListNode(val);
             newNode.next = curr.next;
             if (newNode.next != null) {
                 newNode.next.prev = newNode;
             }
-            
+
             curr.next = newNode;
             newNode.prev = curr;
-            
+
             size++;
-            
+
             //print();
         }
-        
+
         public void deleteAtIndex(int index) {
             if (index < 0 || index >= this.size) {
                 return;
             }
-            
+
             ListNode curr = head;
             for (int i=0; i<index; i++) {
                 curr = curr.next;
             }
-            
+
             curr.next = curr.next.next;
             if (curr.next != null) {
                 curr.next.prev = curr;
             }
-            
+
             size--;
             //print();
         }
-        
-       
+
+
     }
-    
+
 ------------------------------------------------
 206. Reverse Linked List
 ------------------------------------------------
@@ -407,9 +440,9 @@ Given the head of a singly linked list, reverse the list, and return the reverse
     The number of nodes in the list is the range [0, 5000].
 
     -5000 <= Node.val <= 5000
- 
+
 .. topic:: Follow up
-    
+
     A linked list can be reversed either iteratively or recursively. Could you implement both?
 
 .. code-block:: java
@@ -435,7 +468,7 @@ Given the head of a singly linked list, reverse the list, and return the reverse
         public ListNode reverseList(ListNode head) {
             return _reverse(null, head);
         }
-        
+
         public ListNode _reverse(ListNode prev, ListNode curr) {
             if (curr == null) {
                 return prev;
@@ -482,31 +515,31 @@ Given a linked list, swap every two adjacent nodes and return its head. You must
         if (head == null) {
             return head;
         }
-        
+
         ListNode first = new ListNode(-1, head);
-        
+
         ListNode prevprev = first;
         ListNode prev = head;
         ListNode curr = head.next;
         ListNode temp;
-        
-        while (curr != null) {       
+
+        while (curr != null) {
             temp = curr.next;
-            
+
             prevprev.next = curr;
             prev.next = curr.next;
             curr.next = prev;
-            
+
             if (temp == null) {
                 break;
             }
-            
+
             prevprev = prev;
             curr = temp.next;
             prev = temp;
         }
         return first.next;
-    }    
+    }
 
 ------------------------------------------------
 160. Intersection of Two Linked Lists
@@ -525,30 +558,30 @@ Note that the linked lists must retain their original structure after the functi
 
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         HashSet<ListNode> visited = new HashSet<>();
-        
+
         ListNode currA = headA;
         ListNode currB = headB;
-        
+
         while (currA != null || currB != null) {
             if (currA != null) {
                 if (visited.contains(currA)) {
                     return currA;
                 }
-                
+
                 visited.add(currA);
                 currA = currA.next;
             }
-            
+
             if (currB != null) {
                 if (visited.contains(currB)) {
                     return currB;
                 }
-                
+
                 visited.add(currB);
                 currB = currB.next;
             }
         }
-        
+
         return null;
     }
 
@@ -585,36 +618,36 @@ Given the head of a linked list, remove the nth node from the end of the list an
     0 <= Node.val <= 100
 
     1 <= n <= sz
- 
+
 .. topic:: Follow up
-    
+
     Could you do this in one pass?
 
 **Approach 1**: calculate the total length of the list, then find the previous node of the nth node from the end and do the deletion.
 
 .. code-block:: java
 
-    
+
     public ListNode removeNthFromEnd(ListNode head, int n) {
         if (head == null) {
             return null;
         }
-        
+
         int size = 0;
-        
+
         ListNode curr = head;
         while (curr != null) {
             curr = curr.next;
             size++;
         }
-        
+
         ListNode first = new ListNode(-1, head);
         curr = first;
         for (int i=0; i<size-n; i++) {
             curr = curr.next;
         }
         curr.next = curr.next.next;
-        
+
         return first.next;
     }
 
@@ -626,22 +659,86 @@ Given the head of a linked list, remove the nth node from the end of the list an
         if (head == null) {
             return null;
         }
-        
+
         ListNode first = new ListNode(-1, head);
         ListNode fast = first;
         ListNode slow = first;
-        
+
         for (int i=0; i<=n; i++) {
             fast = fast.next;
         }
-        
+
         while (fast != null) {
             slow = slow.next;
             fast = fast.next;
         }
-        
+
         slow.next = slow.next.next;
-        
+
         return first.next;
     }
 
+------------------------------------------------
+2390. Removing Stars From a String (Medium)
+------------------------------------------------
+
+You are given a string s, which contains stars \*.
+
+In one operation, you can:
+
+    Choose a star in s.
+    Remove the closest non-star character to its left, as well as remove the star itself.
+
+Return the string after all stars have been removed.
+
+Note:
+
+    The input will be generated such that the operation is always possible.
+    It can be shown that the resulting string will always be unique.
+
+.. topic:: Example 1
+
+  Input: s = "leet\*\*cod\*e"
+  Output: "lecoe"
+  Explanation: Performing the removals from left to right:
+  - The closest character to the 1st star is 't' in "leet\*\*cod\*e". s becomes "lee\*cod\*e".
+  - The closest character to the 2nd star is 'e' in "lee\*cod\*e". s becomes "lecod\*e".
+  - The closest character to the 3rd star is 'd' in "lecod\*e". s becomes "lecoe".
+  There are no more stars, so we return "lecoe".
+
+.. topic:: Example 2
+
+  Input: s = "erase\*\*\*\*\*"
+  Output: ""
+  Explanation: The entire string is removed, so we return an empty string.
+
+.. topic:: Constraints
+
+    1 <= s.length <= 105
+    s consists of lowercase English letters and stars \*.
+    The operation above can be performed on s.
+
+.. code-block:: java
+
+  class Solution {
+    public String removeStars(String s) {
+      LinkedList<String> queue = new LinkedList<>();
+
+      for (int i = 0; i < s.length(); i++) {
+          if (s.charAt(i) == '*') {
+              if (queue.peek() != "*") {
+                  queue.pop();
+              }
+          } else {
+              queue.addFirst(String.valueOf(s.charAt(i)));
+          }
+      }
+
+      String rst = "";
+      while (!queue.isEmpty()) {
+          rst = queue.pop() + rst;
+      }
+
+      return rst;
+    }
+  }
