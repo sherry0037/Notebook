@@ -35,19 +35,19 @@ Overview
             if (root == null) {
                 return rst;
             }
-            
+
             // Set nextXX for the left iteration and right iteration according to the question
-            
+
             // Change rst when constraints are met
             if (constraints_are_met) {
                 rst += root.val;
             }
-            
+
             rst = getResult(root.left, nextXX, rst);
             rst = getResult(root.right, nextXX, rst);
-        
+
             return rst;
-            
+
         }
 
 ===================================================
@@ -57,15 +57,15 @@ Tree Traversals (Inorder, Preorder and Postorder)
 .. figure:: tree_traversal.png
     :scale: 100 %
 
-Depth First Traversals: 
+Depth First Traversals:
 
-(a) Inorder (Left, Root, Right) : 4 2 5 1 3 
+(a) Inorder (Left, Root, Right) : 4 2 5 1 3
 
-(b) Preorder (Root, Left, Right) : 1 2 4 5 3 
+(b) Preorder (Root, Left, Right) : 1 2 4 5 3
 
 (c) Postorder (Left, Right, Root) : 4 5 2 3 1
 
-Breadth-First or Level Order Traversal: 1 2 3 4 5 
+Breadth-First or Level Order Traversal: 1 2 3 4 5
 
 ---------------------------------------
 784. Letter Case Permutation
@@ -88,7 +88,7 @@ Given the root of a binary tree, return the sum of values of its deepest leaves.
     Output: 7 + 8 = 15
 
 
-Approach: first traverse the tree to get the maximum depth. Then traverse again, if the depth is equal to the 
+Approach: first traverse the tree to get the maximum depth. Then traverse again, if the depth is equal to the
 maximum depth, return that value.
 
 Note:
@@ -119,39 +119,39 @@ Note:
             int maxDepth = getMaxDepth(root, 0);
             System.out.println("maxD: "+maxDepth);
             return getLeavesSum(root, 0, maxDepth);
-            
+
         }
-        
+
         private int getMaxDepth(TreeNode root, int depth) {
             if (root == null) {
                 return depth;
             }
-            
+
             depth = depth + 1;
-            
+
             System.out.println("root: "+root.val+ " currentD: "+ depth);
-            
+
             return Math.max(getMaxDepth(root.left, depth), getMaxDepth(root.right, depth));
         }
-        
+
         private int getLeavesSum(TreeNode root, int currentDepth, int maxDepth) {
             if (root == null) {
                 return 0;
             }
-            
+
             currentDepth += 1;
-            
+
             System.out.println("root: "+root.val+ " currentD: "+currentDepth);
 
-            
+
             if (currentDepth == maxDepth) {
                 return root.val;
             }
-            
-            return getLeavesSum(root.left, currentDepth, maxDepth) + 
+
+            return getLeavesSum(root.left, currentDepth, maxDepth) +
                 getLeavesSum(root.right, currentDepth, maxDepth);
         }
-            
+
     }
 
 .. topic::  Running result
@@ -214,11 +214,11 @@ target node is a node from the original tree and is not null.
             if (cloned == null) {
                 return null;
             }
-            
+
             if (cloned.val == target.val) {
                 return cloned;
             }
-            
+
             TreeNode left = getTargetCopy(original.left, cloned.left, target);
             if (left != null) {
                 return left;
@@ -227,7 +227,7 @@ target node is a node from the original tree and is not null.
             if (right != null) {
                 return right;
             }
-            
+
             return null;
         }
     }
@@ -250,35 +250,35 @@ If there are no nodes with an even-valued grandparent, return 0.
         public int sumEvenGrandparent(TreeNode root) {
             return getResult(root, false, false, 0);
         }
-        
+
         private int getResult(TreeNode root, boolean parent, boolean grandparent, int rst) {
             if (root == null) {
                 return rst;
             }
-            
+
             // System.out.println("root: " + root.val + ", parent: " + parent + ", grandparent: " + grandparent + ", rst: "+ rst);
-            
+
             boolean nextParent = false;
             if (root.val%2 == 0) {
                 nextParent = true;
             }
-            
+
             boolean nextGrandParent = false;
             if (parent) {
                 nextGrandParent = true;
             }
-            
+
             // Grandparent is even
             if (grandparent) {
                 rst += root.val;
             }
-            
+
             rst = getResult(root.left, nextParent, nextGrandParent, rst);
             rst = getResult(root.right, nextParent, nextGrandParent, rst);
-        
+
             return rst;
-            
-            
+
+
         }
     }
 
@@ -336,11 +336,11 @@ First Approach - In Order Traversal
             if (root == null) {
                 return new ArrayList<Integer>();
             }
-            
+
             ArrayList<Integer> rst = (inOrderTraversal(root.left));
             rst.add(root.val);
             rst.addAll(inOrderTraversal(root.right));
-            
+
             return rst;
         }
 
@@ -350,7 +350,7 @@ First Approach - In Order Traversal
             if (root == null) {
                 return;
             }
-            
+
             inOrderTraversal(root.left, rst);
             rst.add(root.val);
             inOrderTraversal(root.right);
@@ -362,12 +362,12 @@ First Approach - In Order Traversal
     class Solution {
         public void recoverTree(TreeNode root) {
             ArrayList<Integer> iot = inOrderTraversal(root);
-            
+
             Integer first = null;
             Integer second = null;
-            
+
             Integer prev = iot.get(0);
-            
+
             for (Integer current : iot) {
                 if (prev > current) {
                     if (first == null) {
@@ -377,25 +377,25 @@ First Approach - In Order Traversal
                         second = current;
                     }
                 }
-                
+
                 prev = current;
-            }   
-            
+            }
+
             //System.out.println("first: "+first + " second: "+second);
-            
+
             swap(root, first, second);
         }
-        
-        
-        
+
+
+
         private void swap(TreeNode root, int first, int second) {
             // first > second
             if (root == null) {
                 return;
             }
-            
+
             swap(root.left, first, second);
-            
+
             if (root.val == first) {
                 //System.out.println("Swap to " + second + ": " + root.val);
                 root.val = second;
@@ -403,7 +403,7 @@ First Approach - In Order Traversal
                 //System.out.println("Swap to " + first + ": " + root.val);
                 root.val = first;
             }
-            
+
             swap(root.right, first, second);
         }
     }
@@ -419,40 +419,40 @@ Same idea as the first approach, just do the swap while doing in order traversal
         TreeNode first = null;
         TreeNode second = null;
         TreeNode prev = null;
-        
+
         public void recoverTree(TreeNode root) {
-            
+
             inOrderTraversal(root);
-            
+
             //System.out.println("fisrt: "+first.val + " second: "+second.val);
-            
+
             if (first != null && second != null) {
-               
+
                 int temp = second.val;
                 second.val = first.val;
                 first.val = temp;
             }
         }
-        
+
         private void inOrderTraversal(TreeNode root) {
             if (root == null) {
                 return;
             }
-            
+
             inOrderTraversal(root.left);
-            
+
             if (prev != null && prev.val > root.val) {
                 if (first == null) {
                     first = prev;
                 }
-                
+
                 if (first != null) {
                     second = root;
                 }
             }
-            
+
             prev = root;
-            
+
             inOrderTraversal(root.right);
         }
 
@@ -476,16 +476,16 @@ Approach: Keep a depth when traverse the tree. Keep an array list rst to store t
             traverseTree(root, rst, 1);
             return rst;
         }
-        
+
         private void traverseTree(TreeNode root, List<Integer> rst, int d) {
             if (root == null) {
                 return;
             }
-            
+
             if (rst.size() < d) {
                 rst.add(root.val);
             }
-            
+
             traverseTree(root.right, rst, d+1);
             traverseTree(root.left, rst, d+1);
         }
@@ -509,12 +509,12 @@ Tip: using array instead of ArrayList will be much faster (54.95% -> 100%) and s
 .. code-block:: java
 
     class Solution {
-        
+
         public int rob(TreeNode root) {
             List<Integer> rst = _rob(root);
             return Math.max(rst.get(0), rst.get(1));
         }
-        
+
         private List<Integer> _rob(TreeNode root) {
             // 0 = choose, 1 = not choose
             List<Integer> rst = new ArrayList<Integer>();
@@ -523,23 +523,23 @@ Tip: using array instead of ArrayList will be much faster (54.95% -> 100%) and s
             if (root == null) {
                 return rst;
             }
-            
+
             List<Integer> rstLeft = _rob(root.left);
             List<Integer> rstRight = _rob(root.right);
             int robLeft = rstLeft.get(0);
             int robRight = rstRight.get(0);
             int robLeftNo = rstLeft.get(1);
             int robRightNo = rstRight.get(1);
-            
+
             // If choose root, do not choose left or right
             rst.set(0, root.val + robLeftNo + robRightNo);
-            
+
             // If don't choose root, either choose/not left or choose/not right
             rst.set(1, Math.max(Math.max(Math.max(robLeft + robRight, robLeft + robRightNo), robLeftNo + robRight), robLeftNo + robRightNo));
-            
+
             //System.out.println("root: " + root.val + " choose: "+ rst.get(0) + " not choose: " + rst.get(1));
             return rst;
-            
+
         }
 
 ----------------------------------------
@@ -565,7 +565,7 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
     Input: root = []
 
     Output: []
- 
+
 .. topic::  Constraints
 
     The number of nodes in the tree is in the range [0, 2000].
@@ -581,17 +581,17 @@ Given the root of a binary tree, return the level order traversal of its nodes' 
         traverse(root, 0, rst);
         return rst;
     }
-    
+
     private void traverse(TreeNode root, int level, List<List<Integer>> rst) {
         if (root == null) {
             return;
         }
-        
+
         if (rst.size() <= level) {
             rst.add(new ArrayList<>());
         }
         rst.get(level).add(root.val);
-        
+
         traverse(root.left, level+1, rst);
         traverse(root.right, level+1, rst);
     }
@@ -619,7 +619,7 @@ Given the root of a binary tree, return the bottom-up level order traversal of i
     Input: root = []
 
     Output: []
- 
+
 .. topic::  Constraints
 
     The number of nodes in the tree is in the range [0, 2000].
@@ -630,27 +630,27 @@ Given the root of a binary tree, return the bottom-up level order traversal of i
 
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> rst = new ArrayList<>();
-        
+
         traverse(root, rst, 0);
-        
+
         Collections.reverse(rst);
-        
+
         return rst;
     }
-    
+
     private void traverse(TreeNode root, List<List<Integer>> rst, int depth) {
         if (root == null) {
             return;
         }
-        
+
         traverse(root.left, rst, depth+1);
-        
+
         while (rst.size() <= depth) {
             rst.add(new ArrayList<Integer>());
         }
-        
+
         rst.get(depth).add(root.val);
-       
+
         traverse(root.right, rst, depth+1);
     }
 
@@ -675,7 +675,7 @@ Given the root of a binary tree, return the average value of the nodes on each l
     Input: root = [3,9,20,15,7]
 
     Output: [3.00000,14.50000,11.00000]
-     
+
 .. topic::  Constraints
 
     The number of nodes in the tree is in the range [1, 104].
@@ -690,15 +690,15 @@ Given the root of a binary tree, return the average value of the nodes on each l
         List<Double> avgs = new ArrayList<>();
         List<Integer> nNodes = new ArrayList<>();
         traverse(root, 0, avgs, nNodes);
-        
+
         return avgs;
     }
-    
+
     private void traverse(TreeNode root, int depth, List<Double> avgs, List<Integer> nNodes) {
         if (root == null) {
             return;
         }
-        
+
         if (avgs.size() <= depth) {
             avgs.add((double)root.val); // we get to a new level
             nNodes.add(1);
@@ -708,7 +708,7 @@ Given the root of a binary tree, return the average value of the nodes on each l
             avgs.set(depth, (a*n + root.val) / (n+1));
             nNodes.set(depth, n+1);
         }
-        
+
         traverse(root.left, depth + 1, avgs, nNodes);
         traverse(root.right, depth + 1, avgs, nNodes);
     }
@@ -732,7 +732,7 @@ Nary-Tree input serialization is represented in their level order traversal, eac
     Input: root = [1,null,2,3,4,5,null,null,6,7,null,8,null,9,10,null,null,11,null,12,null,13,null,null,14]
 
     Output: [[1],[2,3,4,5],[6,7,8,9,10],[11,12,13],[14]]
- 
+
 .. topic::  Constraints
 
     The height of the n-ary tree is less than or equal to 1000
@@ -764,25 +764,25 @@ Nary-Tree input serialization is represented in their level order traversal, eac
         public List<List<Integer>> levelOrder(Node root) {
             List<List<Integer>> rst = new ArrayList<>();
             traverse(root, rst, 0);
-            
+
             return rst;
         }
-        
+
         private void traverse(Node root, List<List<Integer>> rst, int depth) {
             if (root == null) {
                 return;
             }
-            
+
             for (Node child : root.children) {
                 traverse(child, rst, depth+1);
             }
-            
+
             while (rst.size() <= depth) {
                 rst.add(new ArrayList<Integer>());
             }
-            
+
             rst.get(depth).add(root.val);
-                
+
         }
     }
 
@@ -821,7 +821,7 @@ Given the root of a binary tree, return an array of the largest value in each ro
     Input: root = []
 
     Output: []
- 
+
 .. topic::  Constraints
 
     The number of nodes in the tree will be in the range [0, 104].
@@ -832,26 +832,26 @@ Given the root of a binary tree, return an array of the largest value in each ro
 
     public List<Integer> largestValues(TreeNode root) {
         List<Integer> maxes = new ArrayList<Integer>();
-        
+
         traverse(root, maxes, 0);
         return maxes;
     }
-    
+
     private void traverse(TreeNode root, List<Integer> maxes, int depth) {
         if (root == null) {
             return;
         }
-        
+
         traverse(root.left, maxes, depth+1);
-        
+
         while (maxes.size() <= depth) {
             maxes.add(Integer.MIN_VALUE);
         }
-        
-        maxes.set(depth, Math.max(maxes.get(depth), root.val));        
-        
+
+        maxes.set(depth, Math.max(maxes.get(depth), root.val));
+
         traverse(root.right, maxes, depth+1);
-        
+
     }
 
 --------------------------------------------------
@@ -892,7 +892,7 @@ Initially, all next pointers are set to NULL.
     The number of nodes in the tree is in the range [0, 212 - 1].
 
     -1000 <= Node.val <= 1000
- 
+
 .. topic::  Follow-up
 
     You may only use constant extra space.
@@ -903,9 +903,9 @@ Initially, all next pointers are set to NULL.
 
 - For its left child, the pointer should points to the right child of the root node.
 
-- For its right child, the pointer should points to either null or the left child of root's next node. 
+- For its right child, the pointer should points to either null or the left child of root's next node.
 
-- For example, given 
+- For example, given
 
 1
 
@@ -913,27 +913,27 @@ Initially, all next pointers are set to NULL.
 
 4 5 6 7
 
-Suppose current node is 2, its left child is 4, which should point to its right child (5). Its right child is 5, which should point to the left child of 5's next node(3)'s child (6). 
+Suppose current node is 2, its left child is 4, which should point to its right child (5). Its right child is 5, which should point to the left child of 5's next node(3)'s child (6).
 
 .. code-block:: java
 
     public Node connect(Node root) {
         traverse(root, null);
-        
+
         return root;
     }
-    
+
     private void traverse(Node root, Node right) {
         if (root == null) {
             return;
         }
-        
+
         root.next = right;
-        
+
         if (right != null) {
             right = right.left;
         }
-        
+
         traverse(root.right, right);
         traverse(root.left, root.right);
     }
@@ -970,7 +970,7 @@ Initially, all next pointers are set to NULL.
     Input: root = []
 
     Output: []
-     
+
 .. topic::  Constraints
 
     The number of nodes in the tree is in the range [0, 6000].
@@ -988,15 +988,15 @@ Initially, all next pointers are set to NULL.
     public Node connect(Node root) {
         List<Node> pointers = new ArrayList<>();
         traverse(root, pointers, 0);
-        
+
         return root;
     }
-    
+
     private void traverse(Node root, List<Node> pointers, int depth) {
         if (root == null) {
             return;
         }
-        
+
         if (pointers.size() <= depth) {
             pointers.add(root);
             root.next = null;
@@ -1004,7 +1004,7 @@ Initially, all next pointers are set to NULL.
             root.next = pointers.get(depth);
             pointers.set(depth, root);
         }
-        
+
         traverse(root.right, pointers, depth+1);
         traverse(root.left, pointers, depth+1);
     }
@@ -1032,7 +1032,7 @@ Given the root of a binary tree, invert the tree, and return its root.
     Input: root = []
 
     Output: []
- 
+
 .. topic::  Constraints
 
     The number of nodes in the tree is in the range [0, 100].
@@ -1045,15 +1045,15 @@ Given the root of a binary tree, invert the tree, and return its root.
             traverse(root);
             return root;
         }
-        
+
     private void traverse(TreeNode root) {
         if (root == null) {
             return;
         }
-        
+
         traverse(root.left);
         traverse(root.right);
-        
+
         TreeNode temp = root.left;
         root.left = root.right;
         root.right = temp;
@@ -1088,7 +1088,7 @@ Given the root of a binary tree, check whether it is a mirror of itself (i.e., s
     public boolean isSymmetric(TreeNode root) {
         return compare(root.left, root.right);
     }
-    
+
     private boolean compare(TreeNode left, TreeNode right) {
         if (left == null && right != null ||
            right == null && left != null ) {
@@ -1096,14 +1096,14 @@ Given the root of a binary tree, check whether it is a mirror of itself (i.e., s
         } else if (left == null && right == null) {
             return true;
         }
-        
+
         if (left.val != right.val) {
             return false;
         }
-        
+
         return compare(left.left, right.right) && compare(left.right, right.left);
     }
- 
+
 ------------------------------------
  111. Minimum Depth of Binary Tree
 ------------------------------------
@@ -1125,7 +1125,7 @@ Note: A leaf is a node with no children.
     Input: root = [2,null,3,null,4,null,5,null,6]
 
     Output: 5
- 
+
 .. topic::  Constraints:
 
     The number of nodes in the tree is in the range [0, 105].
@@ -1136,34 +1136,34 @@ Note: A leaf is a node with no children.
 
     class Solution {
         int minDepth = Integer.MAX_VALUE;
-        
-        public int minDepth(TreeNode root) {     
+
+        public int minDepth(TreeNode root) {
             if (root == null) {
                 return 0;
             }
             traverse(root, 1);
             return this.minDepth;
         }
-        
+
         private void traverse(TreeNode root, int depth) {
             if (root == null) {
                 return;
             }
-            
+
             if (depth == this.minDepth) {
                 return;
             }
-            
+
             traverse(root.left, depth+1);
-            
+
             if (root.left == null && root.right == null) {
                 if (depth < this.minDepth) {
                     this.minDepth = depth;
                 }
             }
-            
+
             traverse(root.right, depth+1);
-            
+
         }
     }
 
@@ -1206,7 +1206,7 @@ a binary tree in which the left and right subtrees of every node differ in heigh
     public boolean isBalanced(TreeNode root) {
         return getDepth(root) != -1;
     }
-    
+
     private int getDepth(TreeNode node) {
         if (node == null) {
             return 0;
@@ -1280,19 +1280,19 @@ Return the number of good nodes in the binary tree.
     public int goodNodes(TreeNode root) {
         return traverse(root, Integer.MIN_VALUE);
     }
-    
+
     private int traverse(TreeNode root, int max) {
         if (root == null) {
             return 0;
         }
-        
+
         max = Math.max(max, root.val);
-        
+
         int count = traverse(root.left, max);
         count += traverse(root.right, max);
-        
+
         count += (root.val >= max)?1:0;
-        
+
         return count;
     }
 
@@ -1331,25 +1331,25 @@ A leaf is a node with no children.
         traverse(root, new ArrayList<>(), rst);
         return rst;
     }
-    
-    private void traverse(TreeNode node, List<String> temp, List<String> rst) { 
+
+    private void traverse(TreeNode node, List<String> temp, List<String> rst) {
         temp.add("" + node.val);
         if (node.left == null && node.right == null) {
             String s = String.join("->", temp);
             rst.add(s);
             return;
         }
-        
+
         if (node.left != null) {
             traverse(node.left, temp, rst);
             temp.remove(temp.size()-1);
         }
-        
+
         if (node.right != null) {
             traverse(node.right, temp, rst);
             temp.remove(temp.size()-1);
         }
-            
+
     }
 
 ------------------------------------------------
@@ -1383,16 +1383,16 @@ Given the root of a binary tree, return the sum of all left leaves.
     public int sumOfLeftLeaves(TreeNode root) {
         return traverse(root, false);
     }
-    
+
     private int traverse(TreeNode node, boolean isLeft) {
         if (node == null) {
             return 0;
         }
-        
+
         if (node.left == null && node.right == null && isLeft) {
             return node.val;
         }
-        
+
         return traverse(node.left, true) + traverse(node.right, false);
     }
 
@@ -1413,7 +1413,7 @@ Given the root of a binary tree, return the leftmost value in the last row of th
     Input: root = [1,2,3,4,null,5,6,null,null,7]
 
     Output: 7
- 
+
 .. topic:: Constraints
 
     The number of nodes in the tree is in the range [1, 104].
@@ -1426,26 +1426,26 @@ Given the root of a binary tree, return the leftmost value in the last row of th
         List<Integer> rst = traverse(root, new ArrayList<Integer>(), 1);
         return rst.get(rst.size()-1);
     }
-    
+
     private List<Integer> traverse(TreeNode node, List<Integer> rst, int depth) {
         if (node == null) {
             return rst;
         }
-        
+
         if (rst.size() < depth) {
             rst.add(node.val);
         }
-        
+
         if (node.left != null) {
             rst = traverse(node.left, rst, depth+1);
         }
-        
+
         if (node.right != null) {
             rst = traverse(node.right, rst, depth+1);
         }
-        
+
         return rst;
-        
+
     }
 
 .. code-block:: java
@@ -1459,24 +1459,140 @@ Given the root of a binary tree, return the leftmost value in the last row of th
             traverse(root, 0);
             return maxLeft;
         }
-    
+
         private void traverse(TreeNode node, int depth) {
             if (node == null) {
                 return;
             }
-            
+
             if (node.left == null && node.right == null && depth > maxDepth) {
                 maxLeft = node.val;
                 maxDepth = depth;
             }
-            
+
             if (node.left != null) {
                 traverse(node.left, depth+1);
             }
-            
+
             if (node.right != null) {
                 traverse(node.right, depth+1);
             }
-            
+
         }
     }
+
+------------------------------------------------------
+236. Lowest Common Ancestor of a Binary Tree (Medium)
+------------------------------------------------------
+Given a binary tree, find the lowest common ancestor (LCA) of two given nodes in the tree.
+
+According to the definition of LCA on Wikipedia: “The lowest common ancestor is defined between two nodes p and q as the lowest node in T that has both p and q as descendants (where we allow a node to be a descendant of itself).”
+
+
+.. topic:: Example 1
+
+  Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1
+  Output: 3
+  Explanation: The LCA of nodes 5 and 1 is 3.
+
+.. topic:: Example 2
+
+  Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
+  Output: 5
+  Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+
+.. topic:: Example 3
+
+  Input: root = [1,2], p = 1, q = 2
+  Output: 1
+
+.. topic:: Constraints
+
+    The number of nodes in the tree is in the range [2, 105].
+    -109 <= Node.val <= 109
+    All Node.val are unique.
+    p != q
+    p and q will exist in the tree.
+
+.. code-block:: java
+
+  class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        List<TreeNode> path1 = new ArrayList<>();
+        List<TreeNode> path2 = new ArrayList<>();
+
+        findPath(root, p.val, path1);
+        findPath(root, q.val, path2);
+
+        // printTreeNodeList(path1);
+        // printTreeNodeList(path2);
+
+        TreeNode lca = null;
+        int minListSize = Math.min(path1.size(), path2.size());
+        for (int i = 0; i < minListSize; i++) {
+            // System.out.println("p1=" + path1.get(i).val + " p2=" + path2.get(i).val);
+            if (path1.get(i).val != path2.get(i).val) {
+                return lca;
+            } else {
+                lca = path1.get(i);
+            }
+        }
+        return lca;
+    }
+
+    private void printTreeNodeList(List<TreeNode> l) {
+        System.out.print("[");
+        for (TreeNode n : l) {
+            System.out.print(n.val + ", ");
+        }
+        System.out.println("]");
+    }
+
+    private boolean findPath(TreeNode root, int target, List<TreeNode> path) {
+        if (root == null) {
+            return false;
+        }
+
+        path.add(root);
+
+        if (root.val == target) {
+            return true;
+        }
+
+        if (findPath(root.left, target, path) || findPath(root.right, target, path)) {
+            return true;
+        }
+
+        // target is not found
+        path.remove(path.size() - 1);
+        return false;
+    }
+  }
+
+.. code-block:: java
+
+  class Solution {
+    public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+        // if p is left and q is right, this is the lowest common ancestor
+        if (root == null) {
+            return null;
+        }
+
+        if (root.val == p.val || root.val == q.val) {
+            return root;
+        }
+
+        TreeNode leftAnc = lowestCommonAncestor(root.left, p, q);
+        TreeNode rightAnc = lowestCommonAncestor(root.right, p, q);
+
+        if (leftAnc != null && rightAnc != null) {
+            return root;
+        }
+
+        if (leftAnc == null) {
+            return rightAnc;
+        } else {
+            return leftAnc;
+        }
+    }
+  }
