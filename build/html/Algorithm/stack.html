@@ -14,7 +14,7 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Tree" href="tree.html" />
+    <link rel="next" title="String" href="string.html" />
     <link rel="prev" title="Sliding Windows" href="sliding_windows.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
@@ -24,7 +24,7 @@
           <a href="../genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="tree.html" title="Tree"
+          <a href="string.html" title="String"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="sliding_windows.html" title="Sliding Windows"
@@ -45,6 +45,7 @@
 <li><a class="reference internal" href="#daily-temperatures">739. Daily Temperatures</a></li>
 <li><a class="reference internal" href="#trapping-rain-water">42. Trapping Rain Water</a></li>
 <li><a class="reference internal" href="#asteroid-collision">735. Asteroid Collision</a></li>
+<li><a class="reference internal" href="#decode-string-medium">394. Decode String (Medium)</a></li>
 </ul>
 </li>
 </ul>
@@ -57,8 +58,8 @@
   </div>
   <div>
     <h4>Next topic</h4>
-    <p class="topless"><a href="tree.html"
-                          title="next chapter">Tree</a></p>
+    <p class="topless"><a href="string.html"
+                          title="next chapter">String</a></p>
   </div>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
@@ -523,6 +524,93 @@
 </pre></div>
 </div>
 </section>
+<section id="decode-string-medium">
+<h2>394. Decode String (Medium)<a class="headerlink" href="#decode-string-medium" title="Link to this heading">¶</a></h2>
+<p>Given an encoded string, return its decoded string.</p>
+<p>The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.</p>
+<p>You may assume that the input string is always valid; there are no extra white spaces, square brackets are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].</p>
+<p>The test cases are generated so that the length of the output will never exceed 105.</p>
+<aside class="topic">
+<p class="topic-title">Example 1</p>
+<p>Input: s = “3[a]2[bc]”
+Output: “aaabcbc”</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Example 2</p>
+<p>Input: s = “3[a2[c]]”
+Output: “accaccacc”</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Example 3</p>
+<p>Input: s = “2[abc]3[cd]ef”
+Output: “abcabccdcdcdef”</p>
+</aside>
+<aside class="topic">
+<p class="topic-title">Constraints</p>
+<p>1 &lt;= s.length &lt;= 30
+s consists of lowercase English letters, digits, and square brackets ‘[]’.
+s is guaranteed to be a valid input.
+All the integers in s are in the range [1, 300].</p>
+</aside>
+<div class="highlight-java notranslate"><div class="highlight"><pre><span></span><span class="c1">// Note: better to re-implemente this with stack instead of queue.</span>
+
+<span class="w">    </span><span class="kd">class</span> <span class="nc">Solution</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">decodeString</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">input</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">queue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">LinkedList</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">&gt;</span><span class="w"> </span><span class="n">countQueue</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">LinkedList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">storeDigits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">length</span><span class="p">();</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kt">char</span><span class="w"> </span><span class="n">currChar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">curr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="p">));</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">isLetter</span><span class="p">(</span><span class="n">currChar</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="n">curr</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">Character</span><span class="p">.</span><span class="na">isDigit</span><span class="p">(</span><span class="n">currChar</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// Digits could be in the renage [1, 300]</span>
+<span class="w">                </span><span class="n">storeDigits</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">curr</span><span class="p">);</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">input</span><span class="p">.</span><span class="na">length</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="o">!</span><span class="n">Character</span><span class="p">.</span><span class="na">isDigit</span><span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">charAt</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="kt">int</span><span class="w"> </span><span class="n">digitToAdd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">storeDigits</span><span class="p">));</span>
+<span class="w">                    </span><span class="n">countQueue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">digitToAdd</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">storeDigits</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="c1">// curr.equals(&quot;]&quot;)</span>
+<span class="w">                </span><span class="c1">// example: 2[bc]</span>
+<span class="w">                </span><span class="c1">// queue = (c,b,[)</span>
+<span class="w">                </span><span class="n">String</span><span class="w"> </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+<span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">next</span><span class="p">.</span><span class="na">equals</span><span class="p">(</span><span class="s">&quot;[&quot;</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">strList</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">next</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">next</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">poll</span><span class="p">();</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">                </span><span class="c1">// strList = [c, b]</span>
+<span class="w">                </span><span class="n">Collections</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">strList</span><span class="p">);</span>
+<span class="w">                </span><span class="c1">// strList = [b, c]</span>
+<span class="w">                </span><span class="kt">int</span><span class="w"> </span><span class="n">count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Integer</span><span class="p">.</span><span class="na">valueOf</span><span class="p">(</span><span class="n">countQueue</span><span class="p">.</span><span class="na">pop</span><span class="p">());</span><span class="w"> </span><span class="c1">// count = 2;</span>
+<span class="w">                </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strLocalList</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">                </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="n">count</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">strLocalList</span><span class="p">.</span><span class="na">addAll</span><span class="p">(</span><span class="n">strList</span><span class="p">);</span>
+<span class="w">                    </span><span class="n">count</span><span class="o">--</span><span class="p">;</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="c1">// strLocalList = [b, c, b, c];</span>
+<span class="w">                </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">j</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">strLocalList</span><span class="p">.</span><span class="na">size</span><span class="p">();</span><span class="w"> </span><span class="n">j</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="n">queue</span><span class="p">.</span><span class="na">addFirst</span><span class="p">(</span><span class="n">strLocalList</span><span class="p">.</span><span class="na">get</span><span class="p">(</span><span class="n">j</span><span class="p">));</span>
+<span class="w">                </span><span class="p">}</span><span class="w"> </span><span class="c1">// // queue = (c, b, c, b)</span>
+<span class="w">                </span><span class="n">strList</span><span class="p">.</span><span class="na">clear</span><span class="p">();</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="c1">// System.out.println(queue);</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span><span class="w"> </span><span class="n">strRst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">ArrayList</span><span class="o">&lt;&gt;</span><span class="p">();</span>
+<span class="w">        </span><span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">queue</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">String</span><span class="w"> </span><span class="n">currStr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">queue</span><span class="p">.</span><span class="na">pop</span><span class="p">();</span>
+<span class="w">            </span><span class="n">strRst</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">currStr</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">Collections</span><span class="p">.</span><span class="na">reverse</span><span class="p">(</span><span class="n">strRst</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">join</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">strRst</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -539,7 +627,7 @@
           <a href="../genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="tree.html" title="Tree"
+          <a href="string.html" title="String"
              >next</a> |</li>
         <li class="right" >
           <a href="sliding_windows.html" title="Sliding Windows"

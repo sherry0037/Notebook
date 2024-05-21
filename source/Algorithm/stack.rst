@@ -1,6 +1,6 @@
-=======
+=============
 Stack
-=======
+=============
 
 -----------------------------
 496. Next Greater Element I
@@ -507,3 +507,98 @@ Find out the state of the asteroids after all collisions. If two asteroids meet,
         
         return rst;
     }
+
+-----------------------------
+394. Decode String (Medium)
+-----------------------------
+
+Given an encoded string, return its decoded string.
+
+The encoding rule is: k[encoded_string], where the encoded_string inside the square brackets is being repeated exactly k times. Note that k is guaranteed to be a positive integer.
+
+You may assume that the input string is always valid; there are no extra white spaces, square brackets are well-formed, etc. Furthermore, you may assume that the original data does not contain any digits and that digits are only for those repeat numbers, k. For example, there will not be input like 3a or 2[4].
+
+The test cases are generated so that the length of the output will never exceed 105.
+
+
+.. topic:: Example 1
+
+    Input: s = "3[a]2[bc]"
+    Output: "aaabcbc"
+
+.. topic:: Example 2
+
+    Input: s = "3[a2[c]]"
+    Output: "accaccacc"
+
+.. topic:: Example 3
+
+    Input: s = "2[abc]3[cd]ef"
+    Output: "abcabccdcdcdef"
+
+.. topic:: Constraints
+
+    1 <= s.length <= 30
+    s consists of lowercase English letters, digits, and square brackets '[]'.
+    s is guaranteed to be a valid input.
+    All the integers in s are in the range [1, 300].
+
+.. code-block:: java
+
+    // Note: better to re-implemente this with stack instead of queue.
+
+	class Solution {
+        public String decodeString(String input) {
+            LinkedList<String> queue = new LinkedList<>();
+            LinkedList<Integer> countQueue = new LinkedList<>();
+            List<String> strList = new ArrayList<>();
+            List<String> storeDigits = new ArrayList<>();
+            for (int i = 0; i < input.length(); i++) {
+                char currChar = input.charAt(i);
+                String curr = String.valueOf(input.charAt(i));
+                if (Character.isLetter(currChar) || curr.equals("[")) {
+                    queue.addFirst(curr);
+                } else if (Character.isDigit(currChar)) { 
+                    // Digits could be in the renage [1, 300]
+                    storeDigits.add(curr);
+                    if (i+1 < input.length() && !Character.isDigit(input.charAt(i+1))) {
+                        int digitToAdd = Integer.valueOf(String.join("", storeDigits));
+                        countQueue.addFirst(digitToAdd);
+                        storeDigits.clear();
+                    }
+                } else {
+                    // curr.equals("]") 
+                    // example: 2[bc]
+                    // queue = (c,b,[)
+                    String next = queue.poll();
+                    while (!next.equals("[")) {
+                        strList.add(next);
+                        next = queue.poll();
+                    }
+                    // strList = [c, b]
+                    Collections.reverse(strList);
+                    // strList = [b, c]
+                    int count = Integer.valueOf(countQueue.pop()); // count = 2;
+                    List<String> strLocalList = new ArrayList<>();
+                    while (count > 0) {
+                        strLocalList.addAll(strList);
+                        count--;
+                    } // strLocalList = [b, c, b, c];
+                    for (int j = 0; j < strLocalList.size(); j++) {
+                        queue.addFirst(strLocalList.get(j));
+                    } // // queue = (c, b, c, b)
+                    strList.clear();
+                }
+                // System.out.println(queue);
+            }
+
+            List<String> strRst = new ArrayList<>();
+            while (!queue.isEmpty()) {
+                String currStr = queue.pop();
+                strRst.add(currStr);
+            }
+            Collections.reverse(strRst);
+            return String.join("", strRst);
+        }   
+    }
+

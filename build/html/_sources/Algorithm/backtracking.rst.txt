@@ -41,7 +41,7 @@ See *Approach #1: Recursion* in Solution for different implementation using Stri
             }
             return inputList;
         }
-        
+
         private List<String> helper(char c, List<String> inputList){
             List<Character> toAdd = new ArrayList<>();
             if (Character.isLetter(c)){
@@ -129,7 +129,7 @@ Things to do next time:
             }
             return rst;
         }
-        
+
         private List<List<Integer>> choose(List<Integer> inputList, int K){
             List<List<Integer>> rst = new ArrayList<>();
             if (K == 0 || inputList.size() == 0){
@@ -155,7 +155,7 @@ Things to do next time:
             }
             return rst;
         }
-        
+
         private List<Integer> getSums(List<List<Integer>> inputList, int maxSum){
             List<Integer> rst = new ArrayList<>();
             for (List<Integer> intList : inputList){
@@ -193,14 +193,14 @@ head    stack
 ======  ==================================================================
 null    [[1], [2], [3]]
 [1]     [[2], [3], [1, 2], [1, 3]]
-[2]     [[3], [1, 2], [1, 3], [2, 1], [2, 3]]   
+[2]     [[3], [1, 2], [1, 3], [2, 1], [2, 3]]
 [3]     [[1, 2], [1, 3], [2, 1], [2, 3], [3, 1], [3, 2]]
-[1, 2]  [[1, 3], [2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3]] 
-[1, 3]  [[2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2]] 
-[2, 1]  [[2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3]] 
-[2, 3]  [[3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1]] 
-[3, 1]  [[3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2]] 
-[3, 2]  [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]] 
+[1, 2]  [[1, 3], [2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3]]
+[1, 3]  [[2, 1], [2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2]]
+[2, 1]  [[2, 3], [3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3]]
+[2, 3]  [[3, 1], [3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1]]
+[3, 1]  [[3, 2], [1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2]]
+[3, 2]  [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
 ======  ==================================================================
 
 When the size of the head is same as the input length, this List is finished and can be added to the final result.
@@ -217,7 +217,7 @@ When the size of the head is same as the input length, this List is finished and
                 l.add(i);
                 stack.add(l);
             }
-            
+
             while (stack.size()>0){
                 List<Integer> current = stack.pop();
                 if (current.size() == nums.length){
@@ -236,16 +236,16 @@ When the size of the head is same as the input length, this List is finished and
                 }
             }
             return rst;
-                
+
         }
     }
 
 Things to do:
     - check how to use stream: ``stack = Arrays.stream( nums ).boxed().collect( Collectors.toCollection(LinkedList::new) );``
 
-========================
+------------------------
 257. Binary Tree Paths
-========================
+------------------------
 
 Given the root of a binary tree, return all root-to-leaf paths in any order.
 
@@ -278,23 +278,23 @@ A leaf is a node with no children.
         traverse(root, new ArrayList<>(), rst);
         return rst;
     }
-    
-    private void traverse(TreeNode node, List<String> temp, List<String> rst) { 
+
+    private void traverse(TreeNode node, List<String> temp, List<String> rst) {
         temp.add("" + node.val);
         if (node.left == null && node.right == null) {
             String s = String.join("->", temp);
             rst.add(s);
             return;
         }
-        
+
         if (node.left != null) {
             traverse(node.left, temp, rst);
             temp.remove(temp.size()-1);
         }
-        
+
         if (node.right != null) {
             traverse(node.right, temp, rst);
             temp.remove(temp.size()-1);
         }
-            
+
     }
